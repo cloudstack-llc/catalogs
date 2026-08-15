@@ -69,5 +69,11 @@ jobs:
           git config user.name "model-prices[bot]"
           git config user.email "noreply@cloudstack.llc"
           git add -A
-          git commit -m "chore: refresh prices from models.dev"
+          # A keepalive-only run must not claim prices moved; the history is
+          # read as a price-change log.
+          if git diff --cached --quiet -- v1; then
+            git commit -m "chore: keep the refresh schedule alive"
+          else
+            git commit -m "chore: refresh prices from models.dev"
+          fi
           git push

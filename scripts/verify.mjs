@@ -12,6 +12,31 @@ import { COST_UNIT, MAX_RATE, SCHEMA_VERSION, serialize } from "./transform.mjs"
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const path = resolve(repoRoot, process.argv[2] ?? "v1/prices.json");
 
+
+// Token limits are counts, not rates, and are excluded from the rate ceiling.
+const LIMIT_FIELDS = new Set(["context", "max_output", "above_context"]);
+
+// Tiers hold their own copy of every rate field. Checking only the top level
+// would let a long-context rate carry any value at all.
+function rateProblems(model, label) {
+  const problems = [];
+  for (const [field, value] of Object.entries(model)) {
+    if (field === "tiers" && Array.isArray(value)) {
+      value.forEach((tier, index) => {
+        problems.push(...rateProblems(tier, `${label}.tiers[${index}]`));
+      });
+      continue;
+    }
+    if (LIMIT_FIELDS.has(field) || typeof value !== "number") {
+      continue;
+    }
+    if (value < 0 || value > MAX_RATE) {
+      problems.push(`${label}.${field} is out of range: ${value}`);
+    }
+  }
+  return problems;
+}
+
 const text = await readFile(path, "utf8");
 const artifact = JSON.parse(text);
 const problems = [];
@@ -35,10 +60,8 @@ for (const [providerId, entries] of Object.entries(artifact.providers ?? {})) {
       problems.push(`${providerId}/${modelId} is missing input or output`);
       continue;
     }
-    for (const [field, value] of Object.entries(model)) {
-      if (typeof value === "number" && (value < 0 || value > MAX_RATE) && field !== "context" && field !== "max_output") {
-        problems.push(`${providerId}/${modelId}.${field} is out of range: ${value}`);
-      }
+    for (const problem of rateProblems(model, `${providerId}/${modelId}`)) {
+      problems.push(problem);
     }
   }
 }
