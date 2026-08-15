@@ -1,11 +1,12 @@
 {
-  "name": "model-prices",
+  "name": "model-catalog",
   "private": true,
-  "description": "LLM token pricing as one JSON file",
+  "description": "LLM model catalog data as JSON files",
   "license": "MIT",
   "scripts": {
     "test": "node --test scripts/*.test.mjs",
-    "verify": "node scripts/verify.mjs",
-    "generate": "node scripts/generate.mjs"
+    "verify": "node scripts/verify.mjs && node scripts/ollama-verify.mjs",
+    "generate": "node scripts/generate.mjs",
+    "generate:ollama": "node scripts/ollama-generate.mjs"
   }
 }

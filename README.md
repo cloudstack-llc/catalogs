@@ -1,11 +1,18 @@
-# model-prices
+# model-catalog
 
-LLM token pricing as one JSON file, refreshed from [models.dev](https://models.dev) every
-six hours.
+Model catalog data as JSON files, refreshed on a schedule.
 
 ```
-https://raw.githubusercontent.com/cloudstack-llc/model-prices/main/v1/prices.json
+https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/prices.json
+https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/ollama-models.json
 ```
+
+| File | Contents | Source | Cadence |
+| --- | --- | --- | --- |
+| `v1/prices.json` | Token pricing for hosted models | [models.dev](https://models.dev) | 6 hours |
+| `v1/ollama-models.json` | The Ollama library: models, tags, sizes, context windows | [ollama.com](https://ollama.com/library) | 12 hours |
+
+# Token pricing
 
 ## Format
 
@@ -63,3 +70,68 @@ and pushes made with the default `GITHUB_TOKEN` do not reset that clock.
 ## License
 
 MIT (see `LICENSE`). Data derives from models.dev, also MIT — see `NOTICE`.
+
+# Ollama library
+
+`v1/ollama-models.json` — every model in the Ollama library, with its tags,
+download sizes, context windows, and per-tag parameter counts and quantization.
+
+```json
+{
+  "name": "gpt-oss",
+  "description": "OpenAI's open-weight models ...",
+  "tags": [
+    {"tag":"20b","size":"14GB","digest":"17052f91a42e",
+     "model_info":{"contextWindow":"128K","parameters":"20.9b","quantization":"MXFP4","arch":"gptoss"}}
+  ],
+  "params": ["tools","thinking","cloud","20b","120b"],
+  "pulls": "11.8M",
+  "pulls_approx": 11800000,
+  "updated": "1 month ago",
+  "updated_at": "2026-07-15T18:02:00Z"
+}
+```
+
+`name`, `description`, `tags`, `params`, `pulls`, and `updated` are present on every
+model. `digest`, `arch`, `pulls_approx`, `updated_at`, `cloud`, `cloud_tags`, and
+`model_info.projector` are additions.
+
+**`pulls` and `updated` are true only at `generated_at`.** They are the strings the
+site renders, so a file written at midnight still says "1 month ago" the next evening.
+`updated_at` carries the absolute timestamp the relative string is derived from, and
+`pulls_approx` decodes the display value so it can be sorted — it is a decoded
+approximation, not a true count, because no absolute pull count is published anywhere.
+Change detection ignores all four.
+
+An unknown context window is `"N/A"`, never an empty string.
+
+Some tags carry an empty `parameters` and `quantization`. Ollama renders no metadata
+block at all for certain variants (`-mlx`, `-mxfp8`, `-nvfp4`), so the values do not
+exist to be scraped; those tags still carry a real `size` and `contextWindow`. The
+count is declared in `counts.missing_model_info` and checked in CI, so a parser
+regression cannot hide among them.
+
+**Cloud tags are excluded from `tags[]`.** They host no weights, so they have no size,
+parameters, or quantization. A model serving them carries `"cloud": true` and lists them
+in `cloud_tags`.
+
+**Vision models keep their projector separate.** The library renders two metadata blocks
+for them — the model and its CLIP projector. `model_info` holds the model; the projector
+is under `model_info.projector`.
+
+## Source
+
+Ollama publishes no API. Every API-shaped path returns 404, content negotiation is
+ignored, and `ollama.com/api/tags` returns hosted cloud models rather than the library.
+The catalog is therefore built from server-rendered HTML: one request for the library
+index, one per model for its tags, and one per distinct layer digest for the fields that
+appear nowhere else.
+
+Parameter counts and quantization are immutable for a layer digest, so they are cached in
+`v1/ollama-model-info-cache.json`. A cold run is ~6,500 requests; a warm one is a few
+hundred. The crawl runs 8 concurrent with a truthful, contactable user agent.
+
+Because this rests on presentation markup, the generator refuses to publish when a field
+drops below 95% coverage, when the catalog shrinks by more than 10%, or when tag names
+and scraped parameter counts start disagreeing. On refusal the job fails and the previous
+file stands.

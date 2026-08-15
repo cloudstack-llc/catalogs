@@ -14,5 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - run: node --test scripts/*.test.mjs
-      - name: Published artifact parses and matches its own counts
-        run: node scripts/verify.mjs
+      - name: Published artifacts parse and match their own counts
+        run: |
+          node scripts/verify.mjs
+          node scripts/ollama-verify.mjs

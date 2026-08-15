@@ -1,0 +1,65 @@
+name: refresh-ollama
+
+# Publishes the Ollama library catalog. Ollama offers no API, so this scrapes
+# server-rendered HTML — pinned by commit SHA, holding no permission beyond
+# writing this repository.
+on:
+  schedule:
+    # Every twelve hours. GitHub runs scheduled workflows on a best-effort basis
+    # and delays them under load; nothing here depends on the exact minute.
+    - cron: "41 */12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-ollama
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # A cold run with an empty cache crawls ~6,500 pages; a warm one is a few
+    # hundred. The ceiling is generous so a cold run cannot be cut in half and
+    # leave a partial catalog.
+    timeout-minutes: 45
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # See refresh.yml: pushes made with the default token do not reset
+          # GitHub's 60-day scheduled-workflow cutoff.
+          token: ${{ secrets.REFRESH_TOKEN || github.token }}
+          fetch-depth: 0
+
+      - name: Show tool versions
+        run: node --version
+
+      - name: Test the parsers
+        run: node --test scripts/ollama.test.mjs
+
+      - name: Generate
+        run: node scripts/ollama-generate.mjs
+
+      - name: Verify the artifact
+        run: node scripts/ollama-verify.mjs
+
+      - name: Commit
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "nothing to publish"
+            exit 0
+          fi
+          git config user.name "model-catalog[bot]"
+          git config user.email "noreply@cloudstack.llc"
+          git add -A
+          # The digest cache moves whenever a new tag appears, even when no
+          # published model changed; the history is read as a log of the
+          # library, so say which happened.
+          if git diff --cached --quiet -- v1/ollama-models.json; then
+            git commit -m "chore: refresh the ollama model-info cache"
+          else
+            git commit -m "chore: refresh the ollama model catalog"
+          fi
+          git push
