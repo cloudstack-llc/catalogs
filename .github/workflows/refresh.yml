@@ -1,0 +1,73 @@
+name: refresh
+
+# This job publishes the file everything else reads, so it is pinned by commit
+# SHA and holds no permission beyond writing this repository.
+on:
+  schedule:
+    # Every six hours. GitHub runs scheduled workflows on a best-effort basis
+    # and delays them under load; nothing here depends on the exact minute.
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # A push authenticated with GITHUB_TOKEN does not count as repository
+          # activity for the 60-day scheduled-workflow cutoff, so the schedule
+          # would eventually switch itself off. REFRESH_TOKEN is a fine-grained
+          # PAT with contents:write on this repository only; without it the job
+          # still works and the keepalive step below warns.
+          token: ${{ secrets.REFRESH_TOKEN || github.token }}
+          fetch-depth: 0
+
+      - name: Show tool versions
+        run: node --version
+
+      - name: Test the transform
+        run: node --test scripts/*.test.mjs
+
+      - name: Generate
+        run: node scripts/generate.mjs
+
+      - name: Keep the schedule alive
+        # GitHub disables scheduled workflows after 60 days without repository
+        # activity. Prices can plausibly sit unchanged for longer than that, so
+        # a commit-free stretch is refreshed deliberately rather than left to
+        # chance.
+        env:
+          # Only whether the secret is set crosses into the shell, never its
+          # value.
+          HAS_REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN != '' }}
+        run: |
+          if [ "$HAS_REFRESH_TOKEN" != "true" ]; then
+            echo "::warning::REFRESH_TOKEN is unset; pushes will not reset the 60-day scheduled-workflow cutoff"
+          fi
+          last=$(git log -1 --format=%ct)
+          age=$(( ( $(date +%s) - last ) / 86400 ))
+          echo "days since last commit: $age"
+          if [ "$age" -ge 20 ]; then
+            date -u +%Y-%m-%dT%H:%M:%SZ > .keepalive
+          fi
+
+      - name: Commit
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "nothing to publish"
+            exit 0
+          fi
+          git config user.name "model-prices[bot]"
+          git config user.email "noreply@cloudstack.llc"
+          git add -A
+          git commit -m "chore: refresh prices from models.dev"
+          git push
