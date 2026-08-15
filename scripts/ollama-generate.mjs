@@ -25,6 +25,10 @@ import {
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CACHE_PATH = resolve(repoRoot, "v1/ollama-model-info-cache.json");
+const CACHE_VERSION = 1;
+// Marks a page that genuinely renders no metadata block, so it is not refetched
+// on every run and is never mistaken for a fetch failure.
+const ABSENT = Symbol("absent");
 
 // ollama.com publishes no robots.txt and no crawl policy. Absence of a policy
 // is not permission, so the crawl stays deliberately gentle: the job has twelve
@@ -38,6 +42,9 @@ const MAX_RATE_LIMITED = 5;
 
 let rateLimited = 0;
 
+// A fetch has three outcomes, and collapsing them is how a failed crawl gets
+// published as a smaller catalog: "ok" has a body, "missing" means the server
+// said it does not exist, and "failed" means we never found out.
 async function fetchText(url) {
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
     try {
@@ -58,20 +65,23 @@ async function fetchText(url) {
         continue;
       }
       if (response.status === 404) {
-        return undefined;
+        return { status: "missing" };
       }
       if (!response.ok) {
         throw new Error(`${url} responded ${response.status}`);
       }
-      return await response.text();
+      return { status: "ok", body: await response.text() };
     } catch (error) {
-      if (attempt === MAX_ATTEMPTS || String(error).includes("aborting the run")) {
+      if (String(error).includes("aborting the run")) {
         throw error;
+      }
+      if (attempt === MAX_ATTEMPTS) {
+        return { status: "failed", error: String(error) };
       }
       await new Promise((done) => setTimeout(done, 1000 * attempt));
     }
   }
-  return undefined;
+  return { status: "failed", error: `${url} did not respond after ${MAX_ATTEMPTS} attempts` };
 }
 
 /** Runs tasks with a fixed number of workers, preserving input order. */
@@ -114,13 +124,21 @@ async function main() {
   const limit = Number.parseInt(argValue(argv, "--limit") ?? "", 10);
 
   const previous = await readJSON(outputPath);
-  const cache = (await readJSON(CACHE_PATH)) ?? { entries: {} };
-
-  const libraryHTML = await fetchText(LIBRARY_URL);
-  if (libraryHTML === undefined) {
-    throw new Error("library index did not respond");
+  const stored = await readJSON(CACHE_PATH);
+  // The cache holds values derived by a specific parser. Bumping the version
+  // when the parsers change is what stops a fixed bug from being served out of
+  // yesterday's cache.
+  const cache =
+    stored?.version === CACHE_VERSION ? stored : { version: CACHE_VERSION, entries: {} };
+  if (stored !== undefined && stored.version !== CACHE_VERSION) {
+    console.log("model_info cache version changed; refetching");
   }
-  let models = parseLibrary(libraryHTML);
+
+  const libraryResult = await fetchText(LIBRARY_URL);
+  if (libraryResult.status !== "ok") {
+    throw new Error(`library index did not respond (${libraryResult.status})`);
+  }
+  let models = parseLibrary(libraryResult.body);
   if (models.length === 0) {
     throw new Error("library index parsed to zero models; the markup has changed");
   }
@@ -132,9 +150,24 @@ async function main() {
   const tagPages = await mapLimited(models, (model) =>
     fetchText(`${LIBRARY_URL}/${model.name}/tags`));
   const tagsByModel = new Map();
+  const unreadable = [];
   for (const [index, model] of models.entries()) {
-    const html = tagPages[index];
-    tagsByModel.set(model.name, html === undefined ? { tags: [], cloudTags: [] } : parseTags(html, model.name));
+    const result = tagPages[index];
+    if (result.status !== "ok") {
+      // Publishing this model with an empty tag list would be indistinguishable
+      // from a cloud-only model that genuinely has none, and the shrunken
+      // catalog would become the next run's baseline.
+      unreadable.push(`${model.name} (${result.status})`);
+      continue;
+    }
+    tagsByModel.set(model.name, parseTags(result.body, model.name));
+  }
+  if (unreadable.length > 0) {
+    console.error(`refusing to publish: ${unreadable.length} tag pages could not be read`);
+    for (const entry of unreadable.slice(0, 10)) {
+      console.error(`  ${entry}`);
+    }
+    process.exit(1);
   }
   const allTags = models.flatMap((model) => {
     const parsed = tagsByModel.get(model.name);
@@ -157,7 +190,7 @@ async function main() {
     const cached = cache.entries[key];
     if (cached === undefined) {
       missing.push([key, tag]);
-    } else {
+    } else if (cached.absent !== true) {
       detail.set(key, cached);
     }
   }
@@ -165,21 +198,39 @@ async function main() {
 
   let failed = 0;
   const fetched = await mapLimited(missing, async ([key, tag]) => {
-    const html = await fetchText(`${LIBRARY_URL}/${tag.model}:${tag.tag}`);
-    if (html === undefined) {
+    const result = await fetchText(`${LIBRARY_URL}/${tag.model}:${tag.tag}`);
+    if (result.status === "failed") {
       failed += 1;
       return [key, undefined];
     }
-    return [key, parseDetail(html)];
+    if (result.status === "missing") {
+      return [key, ABSENT];
+    }
+    return [key, parseDetail(result.body) ?? ABSENT];
   });
   for (const [key, info] of fetched) {
-    if (info !== undefined) {
+    if (info === undefined) {
+      continue;
+    }
+    if (info !== ABSENT) {
       detail.set(key, info);
+    }
+    // Only a complete parse is remembered. A page that renders no metadata
+    // block at all is remembered as absent so it is not refetched forever, but
+    // a partial parse is never cached: a markup change that empties one field
+    // would otherwise be baked in and outlive the fix.
+    if (info === ABSENT) {
+      cache.entries[key] = { absent: true };
+    } else if (info.parameters !== "" && info.quantization !== "") {
       cache.entries[key] = info;
     }
   }
   if (failed > 0) {
-    console.log(`model_info: ${failed} detail pages unavailable`);
+    console.error(`model_info: ${failed} detail pages could not be read`);
+  }
+  if (failed > Math.max(5, missing.length * 0.01)) {
+    console.error("refusing to publish: too many detail pages failed");
+    process.exit(1);
   }
 
   const generatedAt = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");

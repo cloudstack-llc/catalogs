@@ -300,7 +300,15 @@ export function stableView(artifact) {
  * hollows the file out while every request still returns 200. Coverage gates
  * catch that; nothing else does.
  */
-export function checkGates({ candidate, previous, minPopulated = 0.95, minCorpus = 0.9 }) {
+export function checkGates({
+  candidate,
+  previous,
+  minPopulated = 0.95,
+  minCorpus = 0.9,
+  // Looser than the rest: some tags genuinely publish no context window, and
+  // Ollama could legitimately stop publishing more of them.
+  minContext = 0.8,
+} = {}) {
   const problems = [];
   const models = candidate.models;
   if (models.length === 0) {
@@ -324,17 +332,40 @@ export function checkGates({ candidate, previous, minPopulated = 0.95, minCorpus
     }
   }
 
+  // A model with no tags is legitimate only when it serves cloud tags instead.
+  // Otherwise it is a tags page that failed to parse, which looks identical in
+  // the published file and would quietly shrink the catalog.
+  const hollow = models.filter((model) => model.tags.length === 0 && model.cloud !== true);
+  if (hollow.length > 0) {
+    problems.push(
+      `${hollow.length} models have no tags and are not cloud-only: ${hollow.slice(0, 5).map((model) => model.name).join(", ")}`,
+    );
+  }
+
   const tags = models.flatMap((model) => model.tags);
   if (tags.length === 0) {
     problems.push("candidate has no tags");
   } else {
-    const sized = tags.filter((tag) => tag.size !== "").length / tags.length;
-    if (sized < minPopulated) {
-      problems.push(`size populated on ${(sized * 100).toFixed(1)}% of tags`);
-    }
-    const priced = tags.filter((tag) => tag.model_info.parameters !== "").length / tags.length;
-    if (priced < minPopulated) {
-      problems.push(`parameters populated on ${(priced * 100).toFixed(1)}% of tags`);
+    // Every field a consumer reads gets a floor. A markup change usually breaks
+    // one capture, not all of them, so a gate that scores only some of the
+    // fields is a gate the next change walks past.
+    const coverage = [
+      ["size", (tag) => tag.size !== ""],
+      ["parameters", (tag) => tag.model_info.parameters !== ""],
+      ["quantization", (tag) => tag.model_info.quantization !== ""],
+      // "N/A" is a legitimate value, but a selector break turns every tag into
+      // one, so the floor here is loose enough for real gaps and tight enough
+      // to catch a wholesale failure.
+      ["contextWindow", (tag) => tag.model_info.contextWindow !== UNKNOWN_CONTEXT],
+    ];
+    for (const [name, predicate] of coverage) {
+      const floor = name === "contextWindow" ? minContext : minPopulated;
+      const populated = tags.filter(predicate).length / tags.length;
+      if (populated < floor) {
+        problems.push(
+          `${name} populated on ${(populated * 100).toFixed(1)}% of tags, floor ${(floor * 100).toFixed(0)}%`,
+        );
+      }
     }
   }
 

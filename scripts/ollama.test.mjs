@@ -261,3 +261,57 @@ test("the derivation canary agrees with correctly scraped values", () => {
   drifted.models[0].tags[0].model_info.parameters = "312m";
   assert.equal(derivationMismatches(drifted).mismatched, 1);
 });
+
+test("a model with no tags is only allowed when it is cloud-only", () => {
+  // A tags page that failed to parse and a genuinely cloud-only model produce
+  // the same empty list in the file. Only the cloud flag tells them apart.
+  const artifact = sampleArtifact();
+  artifact.models[1].tags = [];
+  const problems = checkGates({ candidate: artifact });
+  assert.equal(problems.some((problem) => problem.includes("no tags and are not cloud-only")), true);
+  assert.equal(problems.some((problem) => problem.includes("llava")), true);
+
+  artifact.models[1].cloud = true;
+  assert.equal(
+    checkGates({ candidate: artifact }).some((problem) => problem.includes("no tags")),
+    false,
+    "a cloud-only model legitimately has none",
+  );
+});
+
+test("every consumed model_info field has a coverage floor", () => {
+  // A markup change usually breaks one capture, not all of them.
+  for (const field of ["parameters", "quantization"]) {
+    const artifact = sampleArtifact();
+    for (const model of artifact.models) {
+      for (const tag of model.tags) {
+        tag.model_info[field] = "";
+      }
+    }
+    assert.equal(
+      checkGates({ candidate: artifact }).some((problem) => problem.startsWith(field)),
+      true,
+      `${field} has no gate`,
+    );
+  }
+});
+
+test("a context window that goes wholesale unknown is caught", () => {
+  const artifact = sampleArtifact();
+  for (const model of artifact.models) {
+    for (const tag of model.tags) {
+      tag.model_info.contextWindow = "N/A";
+    }
+  }
+  assert.equal(
+    checkGates({ candidate: artifact }).some((problem) => problem.startsWith("contextWindow")),
+    true,
+  );
+  // A handful of genuine gaps must not fail the run.
+  const mostly = sampleArtifact();
+  mostly.models[1].tags[0].model_info.contextWindow = "N/A";
+  assert.equal(
+    checkGates({ candidate: mostly, minContext: 0.4 }).some((problem) => problem.startsWith("contextWindow")),
+    false,
+  );
+});
