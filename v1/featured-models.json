@@ -1,0 +1,1082 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-15T22:58:28Z",
+  "collections": [
+    {
+      "id": "start-here",
+      "title": "Start here",
+      "description": "If you have never run a model locally, one of these.",
+      "models": [
+        "qwen3.5-9b",
+        "gemma4-12b",
+        "lfm2.5-8b",
+        "ministral-3-8b"
+      ]
+    },
+    {
+      "id": "everyday",
+      "title": "Everyday chat",
+      "description": "General assistants for writing, summarising, and answering questions.",
+      "models": [
+        "qwen3.8-27b",
+        "qwen3.6-35b",
+        "glm-4.7-flash",
+        "nemotron-3.5-lightning",
+        "gpt-oss-20b",
+        "muse-glimmer-30b"
+      ]
+    },
+    {
+      "id": "coding",
+      "title": "For writing code",
+      "description": "Tuned for completion, refactoring, and working inside a codebase.",
+      "models": [
+        "ornith-9b",
+        "ornith-35b",
+        "north-mini-code",
+        "laguna-xs-2.1",
+        "qwen3-coder-next"
+      ]
+    },
+    {
+      "id": "reasoning",
+      "title": "Thinks before it answers",
+      "description": "Slower, and better at maths, logic, and multi-step problems.",
+      "models": [
+        "lfm2.5-thinking",
+        "olmo-3.1-think",
+        "nemotron-3-nano"
+      ]
+    },
+    {
+      "id": "vision",
+      "title": "Reads images",
+      "description": "Answers questions about screenshots, documents, and photographs.",
+      "models": [
+        "qwen3-vl-8b",
+        "minicpm-v4.6",
+        "glm-ocr",
+        "deepseek-ocr"
+      ]
+    },
+    {
+      "id": "small",
+      "title": "Runs on almost anything",
+      "description": "A few billion parameters at most, for older machines and small devices.",
+      "models": [
+        "qwen3.5-0.8b",
+        "qwen3.5-2b",
+        "granite4.1-3b"
+      ]
+    },
+    {
+      "id": "embeddings",
+      "title": "Search and retrieval",
+      "description": "Turn documents into vectors. Pair one with a chat model for RAG.",
+      "models": [
+        "qwen3-embedding-0.6b",
+        "embeddinggemma-300m",
+        "bge-m3"
+      ]
+    },
+    {
+      "id": "big-machines",
+      "title": "If you have the memory",
+      "description": "Large models for workstations. Check the fit before downloading.",
+      "models": [
+        "gpt-oss-120b",
+        "qwen3.5-122b"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "id": "qwen3.5-9b",
+      "name": "Qwen3.5 9B",
+      "publisher": "Qwen",
+      "summary": "Strong all-round chat with a very long context. A good first model.",
+      "parameters": "9.7B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning",
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "qwen3.5:9b",
+          "size_bytes": 6600000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "unsloth/Qwen3.5-9B-GGUF",
+          "file": "Qwen3.5-9B-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 7504584480,
+          "projector": "mmproj-F32.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3.5-9B-MLX-4bit",
+          "size_bytes": 5977074591
+        }
+      ]
+    },
+    {
+      "id": "gemma4-12b",
+      "name": "Gemma 4 12B",
+      "publisher": "Google",
+      "summary": "Frontier-level quality at a size a laptop can hold.",
+      "parameters": "12B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "tools",
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "gemma4:12b",
+          "size_bytes": 7600000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "unsloth/gemma-4-12b-it-GGUF",
+          "file": "gemma-4-12b-it-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 7331383680,
+          "projector": "mmproj-F32.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/gemma-4-12B-it-qat-4bit",
+          "size_bytes": 11020140534
+        }
+      ]
+    },
+    {
+      "id": "lfm2.5-8b",
+      "name": "LFM2.5 8B",
+      "publisher": "Liquid AI",
+      "summary": "Built for fast, reliable tool calling on consumer hardware.",
+      "parameters": "8.5B",
+      "context": 128000,
+      "capabilities": [
+        "chat",
+        "tools"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "lfm2.5:8b",
+          "size_bytes": 5200000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "LiquidAI/LFM2.5-8B-A1B-GGUF",
+          "file": "LFM2.5-8B-A1B-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 5155564768
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/LFM2.5-8B-A1B-MLX-4bit",
+          "size_bytes": 4782228614
+        }
+      ]
+    },
+    {
+      "id": "ministral-3-8b",
+      "name": "Ministral 3 8B",
+      "publisher": "Mistral AI",
+      "summary": "Mistral's edge family, sized to run on a single machine.",
+      "parameters": "8.9B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "tools"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "ministral-3:8b",
+          "size_bytes": 6000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "mistralai/Ministral-3-8B-Instruct-2512-GGUF",
+          "file": "Ministral-3-8B-Instruct-2512-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 5198911904
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Ministral-3-8B-Instruct-2512-4bit",
+          "size_bytes": 5630654690
+        }
+      ]
+    },
+    {
+      "id": "qwen3.8-27b",
+      "name": "Qwen3.8 27B",
+      "publisher": "Qwen",
+      "summary": "Qwen's flagship open model, strong on coding and research.",
+      "parameters": "27B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning",
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "qwen3.8:27b",
+          "size_bytes": 18000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ggml-org/Qwen3.8-27B-GGUF",
+          "file": "Qwen3.8-27B-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 19905016320,
+          "projector": "mmproj-Qwen3.8-27B-BF16.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3.8-27B-4bit",
+          "size_bytes": 16081490933
+        }
+      ]
+    },
+    {
+      "id": "qwen3.6-35b",
+      "name": "Qwen3.6 35B",
+      "publisher": "Qwen",
+      "summary": "A mixture-of-experts model tuned for agentic coding and long thinking.",
+      "parameters": "36B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning",
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "qwen3.6:35b",
+          "size_bytes": 24000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "unsloth/Qwen3.6-35B-A3B-GGUF",
+          "file": "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 23920834240,
+          "projector": "mmproj-F32.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3.6-35B-A3B-4bit",
+          "size_bytes": 20429169263
+        }
+      ]
+    },
+    {
+      "id": "glm-4.7-flash",
+      "name": "GLM-4.7 Flash",
+      "publisher": "Z.ai",
+      "summary": "The strongest of the 30B class, with a 198K context window.",
+      "parameters": "30B",
+      "context": 202752,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "glm-4.7-flash",
+          "size_bytes": 19000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ggml-org/GLM-4.7-Flash-GGUF",
+          "file": "GLM-4.7-Flash-Q4_K.gguf",
+          "quantization": "Q4_K",
+          "size_bytes": 18244193920
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/GLM-4.7-Flash-4bit",
+          "size_bytes": 16872850407
+        }
+      ]
+    },
+    {
+      "id": "nemotron-3.5-lightning",
+      "name": "Nemotron 3.5 Lightning 30B",
+      "publisher": "NVIDIA",
+      "summary": "A 30B mixture-of-experts model with a one-million-token context.",
+      "parameters": "33B",
+      "context": 1048576,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "nemotron-3.5-lightning:30b",
+          "size_bytes": 25000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF",
+          "file": "NVIDIA-Nemotron-3.5-Lightning-30B-A3B-Q4_0.gguf",
+          "quantization": "Q4_0",
+          "size_bytes": 18898091584
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-4bit",
+          "size_bytes": 17792584702
+        }
+      ]
+    },
+    {
+      "id": "gpt-oss-20b",
+      "name": "gpt-oss 20B",
+      "publisher": "OpenAI",
+      "summary": "OpenAI's open-weight model for reasoning and agentic work.",
+      "parameters": "21B",
+      "context": 131072,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "gpt-oss:20b",
+          "size_bytes": 14000000000,
+          "quantization": "MXFP4"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ggml-org/gpt-oss-20b-GGUF",
+          "file": "gpt-oss-20b-MXFP4.gguf",
+          "quantization": "MXFP4",
+          "size_bytes": 12109566624
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/gpt-oss-20b-MXFP4-Q8",
+          "size_bytes": 12104218243
+        }
+      ]
+    },
+    {
+      "id": "muse-glimmer-30b",
+      "name": "Muse Glimmer 30B",
+      "publisher": "Meta",
+      "summary": "Meta's open model for always-on local agents.",
+      "parameters": "28B",
+      "context": 131072,
+      "capabilities": [
+        "chat",
+        "tools",
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "muse-glimmer:30b",
+          "size_bytes": 18000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "meta-models/Muse-Glimmer-30B-GGUF",
+          "file": "Muse-Glimmer-30B-KQuant-17GB-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 18157012832,
+          "projector": "mmproj-Muse-Glimmer-30B-Q4_K_M.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Muse-Glimmer-30B-4bit",
+          "size_bytes": 19443248945
+        }
+      ]
+    },
+    {
+      "id": "ornith-9b",
+      "name": "Ornith 1.0 9B",
+      "publisher": "Ornith",
+      "summary": "A self-improving model for agentic coding, small enough for a laptop.",
+      "parameters": "8.9B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "code",
+        "tools"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "ornith:9b",
+          "size_bytes": 5600000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ornith-ai/Ornith-1.0-9B-GGUF",
+          "file": "ornith-1.0-9b-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 5629108704
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Ornith-1.0-9B-4bit",
+          "size_bytes": 5977072107
+        }
+      ]
+    },
+    {
+      "id": "ornith-35b",
+      "name": "Ornith 1.0 35B",
+      "publisher": "Ornith",
+      "summary": "The larger Ornith, for coding work that needs the headroom.",
+      "parameters": "35B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "code",
+        "tools"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "ornith:35b",
+          "size_bytes": 21000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ornith-ai/Ornith-1.0-35B-GGUF",
+          "file": "ornith-1.0-35b-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 21166757760
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Ornith-1.0-35B-4bit",
+          "size_bytes": 20430728020
+        }
+      ]
+    },
+    {
+      "id": "north-mini-code",
+      "name": "North Mini Code 1.0",
+      "publisher": "Cohere",
+      "summary": "Cohere's developer model: 30B mixture-of-experts, 488K context.",
+      "parameters": "30B",
+      "context": 499712,
+      "capabilities": [
+        "chat",
+        "code",
+        "tools"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "north-mini-code-1.0",
+          "size_bytes": 19000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "unsloth/North-Mini-Code-1.0-GGUF",
+          "file": "North-Mini-Code-1.0-UD-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 19203186784
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/North-Mini-Code-1.0-4bit",
+          "size_bytes": 18514868006
+        }
+      ]
+    },
+    {
+      "id": "laguna-xs-2.1",
+      "name": "Laguna XS 2.1",
+      "publisher": "poolside",
+      "summary": "A 33B mixture-of-experts model with 3B active, built for long-horizon work.",
+      "parameters": "33B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "code",
+        "tools"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "laguna-xs-2.1",
+          "size_bytes": 20000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "poolside/Laguna-XS-2.1-GGUF",
+          "file": "Laguna-XS-2.1-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 20274300032
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Laguna-XS-2.1-4bit",
+          "size_bytes": 18829722378
+        }
+      ]
+    },
+    {
+      "id": "qwen3-coder-next",
+      "name": "Qwen3 Coder Next",
+      "publisher": "Qwen",
+      "summary": "Qwen's coding-focused model for agentic editing across a codebase.",
+      "parameters": "80B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "code",
+        "tools"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "qwen3-coder-next",
+          "size_bytes": 52000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "unsloth/Qwen3-Coder-Next-GGUF",
+          "file": "Qwen3-Coder-Next-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 48528320544
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3-Coder-Next-4bit",
+          "size_bytes": 44855965826
+        }
+      ]
+    },
+    {
+      "id": "lfm2.5-thinking",
+      "name": "LFM2.5 Thinking 1.2B",
+      "publisher": "Liquid AI",
+      "summary": "Shows its working, and still fits in under a gigabyte.",
+      "parameters": "1.2B",
+      "context": 128000,
+      "capabilities": [
+        "chat",
+        "reasoning"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "lfm2.5-thinking:1.2b",
+          "size_bytes": 731000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "LiquidAI/LFM2.5-1.2B-Thinking-GGUF",
+          "file": "LFM2.5-1.2B-Thinking-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 730895360
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/LFM2.5-1.2B-Thinking-4bit",
+          "size_bytes": 663303688
+        }
+      ]
+    },
+    {
+      "id": "olmo-3.1-think",
+      "name": "Olmo 3.1 32B Think",
+      "publisher": "Ai2",
+      "summary": "A fully open model \u2014 weights, data, and training \u2014 tuned to reason.",
+      "parameters": "32B",
+      "context": 65536,
+      "capabilities": [
+        "chat",
+        "reasoning"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "olmo-3.1:32b-think",
+          "size_bytes": 19000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "bartowski/allenai_Olmo-3.1-32B-Think-GGUF",
+          "file": "allenai_Olmo-3.1-32B-Think-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 19482034656
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Olmo-3.1-32B-Think-4bit",
+          "size_bytes": 18140338809
+        }
+      ]
+    },
+    {
+      "id": "nemotron-3-nano",
+      "name": "Nemotron 3 Nano 30B",
+      "publisher": "NVIDIA",
+      "summary": "Efficient agentic reasoning with a one-million-token context.",
+      "parameters": "32B",
+      "context": 1048576,
+      "capabilities": [
+        "chat",
+        "reasoning",
+        "tools"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "nemotron-3-nano:30b",
+          "size_bytes": 24000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "unsloth/Nemotron-3-Nano-30B-A3B-GGUF",
+          "file": "Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 24574373664
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/NVIDIA-Nemotron-3-Nano-30B-A3B-4bit",
+          "size_bytes": 17792685248
+        }
+      ]
+    },
+    {
+      "id": "qwen3-vl-8b",
+      "name": "Qwen3-VL 8B",
+      "publisher": "Qwen",
+      "summary": "Reads screenshots, documents, and charts, and answers questions about them.",
+      "parameters": "8.8B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "qwen3-vl:8b",
+          "size_bytes": 6100000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "unsloth/Qwen3-VL-8B-Instruct-GGUF",
+          "file": "Qwen3-VL-8B-Instruct-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 7333360032,
+          "projector": "mmproj-F32.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3-VL-8B-Instruct-4bit",
+          "size_bytes": 5776633051
+        }
+      ]
+    },
+    {
+      "id": "minicpm-v4.6",
+      "name": "MiniCPM-V 4.6",
+      "publisher": "OpenBMB",
+      "summary": "A pocket-sized vision model for image and video understanding.",
+      "parameters": "752M",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "minicpm-v4.6:1b",
+          "size_bytes": 1600000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "openbmb/MiniCPM-V-4.6-gguf",
+          "file": "MiniCPM-V-4_6-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 1637848448,
+          "projector": "mmproj-model-f16.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/MiniCPM-V-4.6-4bit",
+          "size_bytes": 2177912787
+        }
+      ]
+    },
+    {
+      "id": "glm-ocr",
+      "name": "GLM-OCR",
+      "publisher": "Z.ai",
+      "summary": "Turns complex documents into text. Small enough to keep loaded.",
+      "parameters": "1.1B",
+      "context": 131072,
+      "capabilities": [
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "glm-ocr",
+          "size_bytes": 2200000000,
+          "quantization": "F16"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ggml-org/GLM-OCR-GGUF",
+          "file": "GLM-OCR-Q8_0.gguf",
+          "quantization": "Q8_0",
+          "size_bytes": 1434837056,
+          "projector": "mmproj-GLM-OCR-Q8_0.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/GLM-OCR-4bit",
+          "size_bytes": 1254097532
+        }
+      ]
+    },
+    {
+      "id": "deepseek-ocr",
+      "name": "DeepSeek-OCR",
+      "publisher": "DeepSeek",
+      "summary": "Token-efficient OCR, for putting scanned pages into a pipeline.",
+      "parameters": "3.3B",
+      "context": 8192,
+      "capabilities": [
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "deepseek-ocr:3b",
+          "size_bytes": 6700000000,
+          "quantization": "F16"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ggml-org/DeepSeek-OCR-GGUF",
+          "file": "DeepSeek-OCR-Q8_0.gguf",
+          "quantization": "Q8_0",
+          "size_bytes": 3573996480,
+          "projector": "mmproj-DeepSeek-OCR-Q8_0.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/DeepSeek-OCR-8bit",
+          "size_bytes": 3929666662
+        }
+      ]
+    },
+    {
+      "id": "qwen3.5-0.8b",
+      "name": "Qwen3.5 0.8B",
+      "publisher": "Qwen",
+      "summary": "Under a gigabyte, and still holds a conversation.",
+      "parameters": "873M",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "qwen3.5:0.8b",
+          "size_bytes": 1000000000,
+          "quantization": "Q8_0"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "unsloth/Qwen3.5-0.8B-GGUF",
+          "file": "Qwen3.5-0.8B-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 934898784,
+          "projector": "mmproj-F32.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3.5-0.8B-4bit",
+          "size_bytes": 652029391
+        }
+      ]
+    },
+    {
+      "id": "qwen3.5-2b",
+      "name": "Qwen3.5 2B",
+      "publisher": "Qwen",
+      "summary": "The smallest Qwen3.5 that still does tool calling well.",
+      "parameters": "2.3B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "tools",
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "qwen3.5:2b",
+          "size_bytes": 2700000000,
+          "quantization": "Q8_0"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "bartowski/Qwen_Qwen3.5-2B-GGUF",
+          "file": "Qwen_Qwen3.5-2B-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 2067571360,
+          "projector": "mmproj-Qwen_Qwen3.5-2B-bf16.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3.5-2B-MLX-8bit",
+          "size_bytes": 2689721967
+        }
+      ]
+    },
+    {
+      "id": "granite4.1-3b",
+      "name": "Granite 4.1 3B",
+      "publisher": "IBM",
+      "summary": "An enterprise-ready small model with a 128K context.",
+      "parameters": "3.4B",
+      "context": 131072,
+      "capabilities": [
+        "chat",
+        "tools"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "granite4.1:3b",
+          "size_bytes": 2100000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ibm-granite/granite-4.1-3b-GGUF",
+          "file": "granite-4.1-3b-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 2099501664
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/granite-4.1-3b-4bit",
+          "size_bytes": 2134391329
+        }
+      ]
+    },
+    {
+      "id": "qwen3-embedding-0.6b",
+      "name": "Qwen3 Embedding 0.6B",
+      "publisher": "Qwen",
+      "summary": "Turns text into vectors for search. Small enough to run beside a chat model.",
+      "parameters": "596M",
+      "context": 32768,
+      "capabilities": [
+        "embeddings"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "qwen3-embedding:0.6b",
+          "size_bytes": 639000000,
+          "quantization": "Q8_0"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "Qwen/Qwen3-Embedding-0.6B-GGUF",
+          "file": "Qwen3-Embedding-0.6B-Q8_0.gguf",
+          "quantization": "Q8_0",
+          "size_bytes": 639150592
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3-Embedding-0.6B-8bit",
+          "size_bytes": 649088604
+        }
+      ]
+    },
+    {
+      "id": "embeddinggemma-300m",
+      "name": "EmbeddingGemma 300M",
+      "publisher": "Google",
+      "summary": "A 300M embedding model, quantization-aware trained.",
+      "parameters": "308M",
+      "context": 2048,
+      "capabilities": [
+        "embeddings"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "embeddinggemma:300m",
+          "size_bytes": 622000000,
+          "quantization": "BF16"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ggml-org/embeddinggemma-300M-GGUF",
+          "file": "embeddinggemma-300M-Q8_0.gguf",
+          "quantization": "Q8_0",
+          "size_bytes": 333590944
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/embeddinggemma-300m-4bit",
+          "size_bytes": 212495313
+        }
+      ]
+    },
+    {
+      "id": "bge-m3",
+      "name": "BGE-M3",
+      "publisher": "BAAI",
+      "summary": "Multilingual embeddings for search across many languages at once.",
+      "parameters": "567M",
+      "context": 8192,
+      "capabilities": [
+        "embeddings"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "bge-m3:567m",
+          "size_bytes": 1200000000,
+          "quantization": "F16"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "gpustack/bge-m3-GGUF",
+          "file": "bge-m3-Q4_K_M.gguf",
+          "quantization": "Q4_K_M",
+          "size_bytes": 437778496
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/bge-m3-mlx-4bit",
+          "size_bytes": 337060275
+        }
+      ]
+    },
+    {
+      "id": "gpt-oss-120b",
+      "name": "gpt-oss 120B",
+      "publisher": "OpenAI",
+      "summary": "The larger open-weight OpenAI model, for workstations with real memory.",
+      "parameters": "117B",
+      "context": 131072,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "gpt-oss:120b",
+          "size_bytes": 65000000000,
+          "quantization": "MXFP4"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "ggml-org/gpt-oss-120b-GGUF",
+          "file": "gpt-oss-120b-MXFP4.gguf",
+          "quantization": "MXFP4",
+          "size_bytes": 63387346208
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/gpt-oss-120b-MXFP4-Q8",
+          "size_bytes": 63414991226
+        }
+      ]
+    },
+    {
+      "id": "qwen3.5-122b",
+      "name": "Qwen3.5 122B",
+      "publisher": "Qwen",
+      "summary": "The full Qwen3.5. Needs a workstation, and rewards one.",
+      "parameters": "125B",
+      "context": 262144,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning",
+        "vision"
+      ],
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "qwen3.5:122b",
+          "size_bytes": 81000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "llamacpp",
+          "repository": "unsloth/Qwen3.5-122B-A10B-GGUF",
+          "file": "Qwen3.5-122B-A10B-UD-IQ3_XXS.gguf",
+          "quantization": "IQ3_XXS",
+          "size_bytes": 46550204320,
+          "projector": "mmproj-F32.gguf"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3.5-122B-A10B-4bit",
+          "size_bytes": 69620619709
+        }
+      ]
+    }
+  ]
+}
