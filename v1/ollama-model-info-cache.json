@@ -32381,6 +32381,39 @@
    "parameters": "8.38b",
    "quantization": "BF16",
    "arch": "granite"
+  },
+  "laguna-xs-2.1@989474a733e8": {
+   "absent": true
+  },
+  "ornith-1.5@e5df7dcdd8a2": {
+   "parameters": "8.95b",
+   "quantization": "Q4_K_M",
+   "arch": "qwen35",
+   "projector": {
+    "arch": "clip",
+    "parameters": "456m",
+    "quantization": "BF16"
+   }
+  },
+  "ornith-1.5@9f3b89b25219": {
+   "parameters": "35.5b",
+   "quantization": "Q4_K_M",
+   "arch": "qwen35moe",
+   "projector": {
+    "arch": "clip",
+    "parameters": "447m",
+    "quantization": "BF16"
+   }
+  },
+  "ornith-1.5@337c6db6be12": {
+   "parameters": "396b",
+   "quantization": "Q4_K_M",
+   "arch": "qwen35moe",
+   "projector": {
+    "arch": "clip",
+    "parameters": "456m",
+    "quantization": "BF16"
+   }
   }
  }
 }
