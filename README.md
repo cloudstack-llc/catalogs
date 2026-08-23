@@ -82,6 +82,26 @@ never changed by a catalog update.
 Displayed copy describes each starter and lane directly. Lane descriptions are
 capped at 512 bytes because that is the classifier input limit.
 
+## Writing lane descriptions
+
+Arch-Router matches the latest request against every lane as a natural-language
+route policy. Its training uses a domain-action taxonomy: the starter supplies
+the domain, while each lane should name a distinct action within that domain.
+See the [model card](https://huggingface.co/katanemo/Arch-Router-1.5B) and
+[paper](https://arxiv.org/html/2506.16655).
+
+- Separate lanes by requested action, not by vague model qualities such as
+  "easy" and "strong."
+- Include concrete request signals, source material, and expected artifacts.
+- State a boundary when two neighboring lanes could plausibly match the same
+  opening request.
+- Write each description for its actual job. Do not force every lane through
+  one sentence template.
+- Review the five lanes as a set and test short, ambiguous, and follow-up
+  requests before publishing.
+
+The fallback handles requests that do not clearly match a lane.
+
 Validate a catalog edit before committing it:
 
 ```bash
