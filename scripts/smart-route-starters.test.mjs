@@ -13,7 +13,7 @@ function artifact() {
       {
         id: "featured",
         title: "Featured starters",
-        description: "I want a useful starting point.",
+        description: "Useful starting points for daily work.",
         starters: ["daily-work"],
       },
     ],
@@ -22,30 +22,30 @@ function artifact() {
         id: "daily-work",
         revision: 1,
         name: "Daily Work",
-        summary: "I want one route for daily work.",
+        summary: "Routes common daily work.",
         tags: ["general"],
         endpoint_families: ["openai.responses"],
         lanes: [
           {
             id: "quick-help",
             name: "Quick help",
-            description: "I need a short answer.",
-            target_hint: "I want a fast target.",
+            description: "Short answers and simple questions.",
+            target_hint: "Best with a fast target.",
           },
           {
             id: "deep-work",
             name: "Deep work",
-            description: "I need a difficult problem worked through.",
-            target_hint: "I want a reasoning target.",
+            description: "Difficult problems and multi-step reasoning.",
+            target_hint: "Best with a reasoning target.",
           },
         ],
-        fallback: { target_hint: "I want a dependable target." },
+        fallback: { target_hint: "Best with a dependable target." },
       },
     ],
   };
 }
 
-test("accepts a model-neutral first-person starter catalog", () => {
+test("accepts a model-neutral starter catalog with direct copy", () => {
   assert.deepEqual(validateSmartRouteStarters(artifact()), []);
 });
 
@@ -66,12 +66,12 @@ test("rejects model bindings and unsupported endpoints", () => {
   assert.ok(problems.some((problem) => problem.includes("unsupported endpoint")));
 });
 
-test("rejects non-first-person and oversized classifier copy", () => {
+test("rejects first-person and oversized classifier copy", () => {
   const input = artifact();
-  input.starters[0].summary = "Routes daily work.";
-  input.starters[0].lanes[0].description = `I ${"x".repeat(512)}`;
+  input.starters[0].summary = "I want a route for daily work.";
+  input.starters[0].lanes[0].description = `A ${"x".repeat(512)}`;
   const problems = validateSmartRouteStarters(input);
-  assert.ok(problems.some((problem) => problem.includes("must use first-person copy")));
+  assert.ok(problems.some((problem) => problem.includes("must describe the item directly")));
   assert.ok(problems.some((problem) => problem.includes("longer than 512 bytes")));
 });
 
