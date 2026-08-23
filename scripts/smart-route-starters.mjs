@@ -23,7 +23,7 @@ function byteLength(value) {
   return Buffer.byteLength(value, "utf8");
 }
 
-function cleanText(problems, value, label, maxBytes, firstPerson = false) {
+function cleanText(problems, value, label, maxBytes, direct = false) {
   if (typeof value !== "string" || value.trim() !== value || value === "") {
     problems.push(`${label} must be a non-empty trimmed string`);
     return "";
@@ -37,8 +37,8 @@ function cleanText(problems, value, label, maxBytes, firstPerson = false) {
   if (value.includes("—")) {
     problems.push(`${label} uses an em dash`);
   }
-  if (firstPerson && !/^I(?:\b|['’])/.test(value)) {
-    problems.push(`${label} must use first-person copy`);
+  if (direct && /^I(?:\b|['’])/.test(value)) {
+    problems.push(`${label} must describe the item directly`);
   }
   const words = value.toLowerCase().match(/[a-z]+/g) ?? [];
   for (const word of words) {
@@ -253,4 +253,3 @@ export function validateSmartRouteStarters(artifact) {
   findForbiddenTargetFields(artifact, "artifact", problems);
   return problems;
 }
-

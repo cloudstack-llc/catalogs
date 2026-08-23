@@ -79,8 +79,8 @@ one part of the catalog without being copied. `revision` changes when the
 curated starter changes. Existing Smart Routes are independent copies and are
 never changed by a catalog update.
 
-All displayed descriptions use first-person copy. Lane descriptions are capped
-at 512 bytes because that is the classifier input limit.
+Displayed copy describes each starter and lane directly. Lane descriptions are
+capped at 512 bytes because that is the classifier input limit.
 
 Validate a catalog edit before committing it:
 

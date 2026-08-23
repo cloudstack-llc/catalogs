@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T19:20:39Z",
+  "generated_at": "2026-08-23T20:32:54Z",
   "locale": "en",
   "collections": [
     {
       "id": "featured",
       "title": "Featured starters",
-      "description": "I want a useful route without starting from an empty form.",
+      "description": "Useful starting points for common work.",
       "starters": [
         "everyday-assistant",
         "writing-editing-studio",
@@ -21,7 +21,7 @@
     {
       "id": "everyday-work",
       "title": "Everyday work",
-      "description": "I want help with daily thinking, writing, research, and data.",
+      "description": "Daily thinking, writing, research, coding, and data.",
       "starters": [
         "everyday-assistant",
         "writing-editing-studio",
@@ -33,7 +33,7 @@
     {
       "id": "communication-creation",
       "title": "Communication and creation",
-      "description": "I want to turn ideas into clear messages and useful visuals.",
+      "description": "Writing, localization, presentations, and visual content.",
       "starters": [
         "meetings-follow-ups",
         "marketing-campaign-studio",
@@ -45,7 +45,7 @@
     {
       "id": "business-operations",
       "title": "Business operations",
-      "description": "I want help with customers, sales, products, projects, and people.",
+      "description": "Customer, sales, product, project, and people operations.",
       "starters": [
         "customer-support-triage",
         "sales-proposal-desk",
@@ -57,7 +57,7 @@
     {
       "id": "technical-specialist",
       "title": "Technical and specialist work",
-      "description": "I want focused help with systems, security, finance, and contracts.",
+      "description": "IT, security, reliability, finance, and policy work.",
       "starters": [
         "it-help-desk",
         "security-operations-desk",
@@ -69,7 +69,7 @@
     {
       "id": "learning-daily-life",
       "title": "Learning and daily life",
-      "description": "I want help learning, teaching, planning, and running everyday work.",
+      "description": "Learning, training, healthcare operations, commerce, and daily planning.",
       "starters": [
         "learning-tutor",
         "course-training-designer",
@@ -82,9 +82,9 @@
   "starters": [
     {
       "id": "everyday-assistant",
-      "revision": 1,
+      "revision": 3,
       "name": "Everyday Assistant",
-      "summary": "I want one route for everyday questions, writing, analysis, and documents.",
+      "summary": "Routes everyday questions, writing, analysis, and documents.",
       "tags": [
         "general",
         "writing",
@@ -100,43 +100,43 @@
         {
           "id": "quick-help",
           "name": "Quick help",
-          "description": "I need a direct answer, definition, short summary, or simple formatting.",
-          "target_hint": "I want a fast, low-cost target."
+          "description": "Brief, self-contained requests: definitions, factual questions, short summaries, formatting, and small text transformations. Excludes multi-step decisions and long source material.",
+          "target_hint": "Best with a fast, low-cost target."
         },
         {
           "id": "deep-analysis",
           "name": "Deep analysis",
-          "description": "I need multi-step reasoning, a careful comparison, or a difficult trade-off worked through.",
-          "target_hint": "I want a strong reasoning target."
+          "description": "Problems that require several reasoning steps, trade-off analysis, scenario comparison, root-cause thinking, or a recommendation backed by an explicit rationale.",
+          "target_hint": "Best with a strong reasoning target."
         },
         {
           "id": "draft-rewrite",
           "name": "Draft and rewrite",
-          "description": "I need to draft, rewrite, proofread, or change the tone of a message or document.",
-          "target_hint": "I want a strong writing target."
+          "description": "Creating or revising messages, emails, notes, and short documents. Includes tone changes, proofreading, clarity edits, and audience-specific rewrites.",
+          "target_hint": "Best with a strong writing target."
         },
         {
           "id": "long-documents",
           "name": "Long documents",
-          "description": "I need to summarize, compare, or answer questions about long material.",
-          "target_hint": "I want a target with a long context window."
+          "description": "Requests centered on long reports, transcripts, manuals, or several supplied documents, including summarization, comparison, and question answering across the material.",
+          "target_hint": "Best with a long-context target."
         },
         {
           "id": "structured-extraction",
           "name": "Structured extraction",
-          "description": "I need to turn text into a table, checklist, fields, or valid structured data.",
-          "target_hint": "I want a target that follows output formats well."
+          "description": "Extracting named fields, entities, dates, requirements, or action items from text and returning tables, checklists, schemas, or valid JSON.",
+          "target_hint": "Best with reliable structured output."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable general-purpose target."
+        "target_hint": "Best with a dependable general-purpose target."
       }
     },
     {
       "id": "writing-editing-studio",
-      "revision": 1,
+      "revision": 3,
       "name": "Writing and Editing Studio",
-      "summary": "I want one route for editing, rewriting, long-form work, and persuasive copy.",
+      "summary": "Routes editing, rewriting, long-form work, and persuasive copy.",
       "tags": [
         "writing",
         "editing",
@@ -152,43 +152,43 @@
         {
           "id": "correct-tighten",
           "name": "Correct and tighten",
-          "description": "I need to fix grammar, clarity, repetition, or awkward wording without changing the meaning.",
-          "target_hint": "I want a fast writing target."
+          "description": "Line editing existing text for grammar, spelling, clarity, repetition, concision, and sentence flow while preserving the original voice and meaning.",
+          "target_hint": "Best with a fast writing target."
         },
         {
           "id": "rewrite-voice",
           "name": "Rewrite voice",
-          "description": "I need to change the tone, reading level, audience, or format of existing writing.",
-          "target_hint": "I want a target that handles voice and tone well."
+          "description": "Recasting supplied text for a different tone, reading level, audience, point of view, or format without changing the underlying message.",
+          "target_hint": "Best with strong voice and tone control."
         },
         {
           "id": "long-form",
           "name": "Long-form drafting",
-          "description": "I need to draft an article, guide, report, newsletter, or documentation from a brief.",
-          "target_hint": "I want a strong long-form writing target."
+          "description": "Developing new articles, reports, guides, newsletters, documentation, or other multi-section pieces from a brief, notes, or an outline.",
+          "target_hint": "Best with a strong long-form writing target."
         },
         {
           "id": "persuasive-writing",
           "name": "Persuasive writing",
-          "description": "I need a proposal, landing page, call to action, argument, or other persuasive copy.",
-          "target_hint": "I want a persuasive writing target."
+          "description": "Copy intended to influence a decision or action, such as proposals, opinion pieces, fundraising appeals, landing pages, and calls to action.",
+          "target_hint": "Best with a persuasive writing target."
         },
         {
           "id": "summarize-adapt",
           "name": "Summarize and adapt",
-          "description": "I need to condense material or reshape it for another channel or audience.",
-          "target_hint": "I want a target that handles long source material well."
+          "description": "Condensing existing material or adapting it for another channel, length, or audience, such as turning a report into an executive brief or a talk into a post.",
+          "target_hint": "Best with strong long-context handling."
         }
       ],
       "fallback": {
-        "target_hint": "I want a balanced writing target."
+        "target_hint": "Best with a balanced writing target."
       }
     },
     {
       "id": "research-evidence-desk",
-      "revision": 1,
+      "revision": 3,
       "name": "Research and Evidence Desk",
-      "summary": "I want one route for orientation, evidence, criticism, methods, and source analysis.",
+      "summary": "Routes orientation, evidence, criticism, methods, and source analysis.",
       "tags": [
         "research",
         "evidence",
@@ -204,43 +204,43 @@
         {
           "id": "quick-orientation",
           "name": "Quick orientation",
-          "description": "I need a topic defined, its main concepts explained, or useful starting questions.",
-          "target_hint": "I want a fast general target."
+          "description": "Early-stage research that needs definitions, key concepts, major viewpoints, search terms, or a map of questions before deeper investigation begins.",
+          "target_hint": "Best with a fast general target."
         },
         {
           "id": "evidence-synthesis",
           "name": "Evidence synthesis",
-          "description": "I need findings combined, areas of agreement identified, and uncertainty preserved.",
-          "target_hint": "I want a strong research target."
+          "description": "Combining findings from multiple sources to identify consensus, disagreements, recurring themes, evidence strength, and unresolved uncertainty.",
+          "target_hint": "Best with a strong research target."
         },
         {
           "id": "critical-review",
           "name": "Critical review",
-          "description": "I need a claim challenged, its assumptions found, or missing evidence identified.",
-          "target_hint": "I want a careful reasoning target."
+          "description": "Stress-testing a claim, argument, paper, or proposal for hidden assumptions, weak evidence, alternative explanations, contradictions, and missing perspectives.",
+          "target_hint": "Best with a careful reasoning target."
         },
         {
           "id": "methods-numbers",
           "name": "Methods and numbers",
-          "description": "I need help with research design, statistics, calculations, or interpretation.",
-          "target_hint": "I want a quantitative reasoning target."
+          "description": "Research design and quantitative work: sampling, controls, measurement, statistical tests, calculations, uncertainty, and interpretation of numerical results.",
+          "target_hint": "Best with a quantitative reasoning target."
         },
         {
           "id": "source-analysis",
           "name": "Source analysis",
-          "description": "I need to compare long papers, reports, transcripts, or a supplied set of sources.",
-          "target_hint": "I want a target with a long context window."
+          "description": "Close reading of supplied papers, reports, transcripts, or document sets to compare methods, claims, quotations, evidence, and conclusions across sources.",
+          "target_hint": "Best with a long-context target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable research target."
+        "target_hint": "Best with a dependable research target."
       }
     },
     {
       "id": "software-delivery-copilot",
-      "revision": 1,
+      "revision": 3,
       "name": "Software Delivery Copilot",
-      "summary": "I want one route for coding, debugging, design, review, tests, and documentation.",
+      "summary": "Routes coding, debugging, design, review, tests, and documentation.",
       "tags": [
         "code",
         "debugging",
@@ -256,43 +256,43 @@
         {
           "id": "code-help",
           "name": "Code help",
-          "description": "I need code explained, an API question answered, or a small contained change made.",
-          "target_hint": "I want a fast coding target."
+          "description": "Contained programming work such as generating a function, explaining a code block, using an API, translating between languages, or answering a focused implementation question.",
+          "target_hint": "Best with a fast coding target."
         },
         {
           "id": "debugging",
           "name": "Debugging",
-          "description": "I need to diagnose an error, stack trace, failing test, or unexpected behavior.",
-          "target_hint": "I want a coding target with strong reasoning."
+          "description": "Broken or unexpected behavior: exceptions, stack traces, failing tests, regressions, incorrect output, environment conflicts, and requests to find and fix the cause.",
+          "target_hint": "Best with a coding target with strong reasoning."
         },
         {
           "id": "architecture",
           "name": "Architecture",
-          "description": "I need to design a system, interface, migration, or change that crosses modules.",
-          "target_hint": "I want a deep reasoning target."
+          "description": "System-level design involving components, interfaces, data flow, persistence, scaling, migrations, deployment boundaries, or trade-offs that span multiple modules.",
+          "target_hint": "Best with a deep reasoning target."
         },
         {
           "id": "review-security",
           "name": "Review and security",
-          "description": "I need code reviewed for correctness, reliability, performance, or security problems.",
-          "target_hint": "I want a careful code review target."
+          "description": "Reviewing existing code or configuration for correctness, security flaws, performance risks, concurrency problems, unsafe assumptions, and maintainability issues.",
+          "target_hint": "Best with a careful code review target."
         },
         {
           "id": "tests-docs",
           "name": "Tests and documentation",
-          "description": "I need test cases, examples, comments, or technical documentation written.",
-          "target_hint": "I want a dependable coding target."
+          "description": "Producing unit or integration tests, test plans, examples, API documentation, README content, code comments, release notes, and developer handoff material.",
+          "target_hint": "Best with a dependable coding target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable coding target."
+        "target_hint": "Best with a dependable coding target."
       }
     },
     {
       "id": "data-spreadsheet-analyst",
-      "revision": 1,
+      "revision": 3,
       "name": "Data and Spreadsheet Analyst",
-      "summary": "I want one route for spreadsheets, SQL, statistics, charts, and forecasts.",
+      "summary": "Routes spreadsheets, SQL, statistics, charts, and forecasts.",
       "tags": [
         "data",
         "spreadsheets",
@@ -308,43 +308,43 @@
         {
           "id": "spreadsheet-work",
           "name": "Spreadsheet work",
-          "description": "I need formulas, cleanup, joins, pivots, validation, or workbook organization.",
-          "target_hint": "I want a target that handles structured data well."
+          "description": "Workbook tasks involving formulas, lookups, pivots, sorting, cleanup, deduplication, validation, joins, and organizing data across sheets.",
+          "target_hint": "Best with strong structured-data handling."
         },
         {
           "id": "sql-transformation",
           "name": "SQL and transformation",
-          "description": "I need a query, schema, data transformation, or validation rule.",
-          "target_hint": "I want a coding and data target."
+          "description": "Database and pipeline work: writing SQL, shaping tables, defining schemas, joining datasets, building transformations, and checking data quality rules.",
+          "target_hint": "Best with a coding and data target."
         },
         {
           "id": "statistical-analysis",
           "name": "Statistical analysis",
-          "description": "I need help with experiments, distributions, confidence, significance, or interpretation.",
-          "target_hint": "I want a quantitative reasoning target."
+          "description": "Questions about distributions, experiments, confidence intervals, significance, correlation, regression, sampling bias, and what results do or do not support.",
+          "target_hint": "Best with a quantitative reasoning target."
         },
         {
           "id": "visualization",
           "name": "Visualization",
-          "description": "I need to choose a chart or explain patterns, anomalies, and limits in data.",
-          "target_hint": "I want an analytical writing target."
+          "description": "Choosing charts, designing dashboards, explaining trends and anomalies, and turning observed data into a clear visual or written narrative.",
+          "target_hint": "Best with an analytical writing target."
         },
         {
           "id": "forecasting",
           "name": "Forecasting",
-          "description": "I need scenarios, projections, sensitivity analysis, or assumptions worked through.",
-          "target_hint": "I want a strong reasoning target."
+          "description": "Future-looking estimates based on assumptions, scenarios, trends, sensitivities, ranges, and uncertainty, including what changes under best- and worst-case conditions.",
+          "target_hint": "Best with a strong reasoning target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable analytical target."
+        "target_hint": "Best with a dependable analytical target."
       }
     },
     {
       "id": "meetings-follow-ups",
-      "revision": 1,
+      "revision": 3,
       "name": "Meetings and Follow-ups",
-      "summary": "I want one route for meeting preparation, notes, actions, and follow-up messages.",
+      "summary": "Routes meeting preparation, notes, actions, and follow-up messages.",
       "tags": [
         "meetings",
         "notes",
@@ -360,43 +360,43 @@
         {
           "id": "meeting-prep",
           "name": "Meeting preparation",
-          "description": "I need an agenda, briefing, questions, or talking points before a meeting.",
-          "target_hint": "I want a fast planning target."
+          "description": "Work done before a meeting: agendas, objectives, participant briefs, discovery questions, decision points, pre-reads, and talking points.",
+          "target_hint": "Best with a fast planning target."
         },
         {
           "id": "transcript-summary",
           "name": "Transcript summary",
-          "description": "I need themes, decisions, disagreements, and open questions pulled from meeting notes or a transcript.",
-          "target_hint": "I want a target with a long context window."
+          "description": "Turning meeting notes or transcripts into a faithful recap of themes, decisions, disagreements, open questions, and important context.",
+          "target_hint": "Best with a long-context target."
         },
         {
           "id": "actions-owners",
           "name": "Actions and owners",
-          "description": "I need tasks, owners, dates, dependencies, and follow-ups extracted clearly.",
-          "target_hint": "I want a target that follows structured formats well."
+          "description": "Pulling commitments from meeting material and listing each task with its owner, due date, dependency, status, and required follow-up.",
+          "target_hint": "Best with reliable structured output."
         },
         {
           "id": "follow-up-writing",
           "name": "Follow-up writing",
-          "description": "I need a recap, email, announcement, or stakeholder update after a meeting.",
-          "target_hint": "I want a strong communication target."
+          "description": "Post-meeting communication, including recap emails, stakeholder updates, announcements, decision confirmations, and requests for missing information.",
+          "target_hint": "Best with a strong communication target."
         },
         {
           "id": "difficult-conversations",
           "name": "Difficult conversations",
-          "description": "I need a calm message for feedback, conflict, negotiation, or a sensitive discussion.",
-          "target_hint": "I want a careful writing target."
+          "description": "Messages for conflict, corrective feedback, negotiation, refusal, apology, or other sensitive situations where wording and emotional tone matter.",
+          "target_hint": "Best with a careful writing target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable communication target."
+        "target_hint": "Best with a dependable communication target."
       }
     },
     {
       "id": "marketing-campaign-studio",
-      "revision": 1,
+      "revision": 3,
       "name": "Marketing Campaign Studio",
-      "summary": "I want one route for campaign planning, content, social posts, email, and conversion copy.",
+      "summary": "Routes campaign planning, content, social posts, email, and conversion copy.",
       "tags": [
         "marketing",
         "campaigns",
@@ -412,43 +412,43 @@
         {
           "id": "campaign-strategy",
           "name": "Campaign strategy",
-          "description": "I need an audience, position, channel plan, offer, or campaign structure.",
-          "target_hint": "I want a strong marketing reasoning target."
+          "description": "High-level campaign decisions about audience, positioning, offer, message, channels, sequence, budget, objectives, and how success will be measured.",
+          "target_hint": "Best with a strong marketing reasoning target."
         },
         {
           "id": "content-seo",
           "name": "Content and SEO",
-          "description": "I need an article, brief, search-led outline, or educational content.",
-          "target_hint": "I want a long-form content target."
+          "description": "Search-oriented content such as keyword briefs, article outlines, educational pages, topic clusters, metadata, and long-form pieces built around reader intent.",
+          "target_hint": "Best with a long-form content target."
         },
         {
           "id": "social-content",
           "name": "Social content",
-          "description": "I need platform-specific posts, threads, calendars, or variations.",
-          "target_hint": "I want a fast creative writing target."
+          "description": "Platform-specific posts, threads, captions, content calendars, hooks, and short variations designed for social feeds and community engagement.",
+          "target_hint": "Best with a fast creative writing target."
         },
         {
           "id": "email-lifecycle",
           "name": "Email lifecycle",
-          "description": "I need a welcome, nurture, launch, retention, or re-engagement email sequence.",
-          "target_hint": "I want a persuasive writing target."
+          "description": "Email sequences tied to a customer stage or event: welcome, nurture, onboarding, launch, retention, renewal, win-back, and re-engagement.",
+          "target_hint": "Best with a persuasive writing target."
         },
         {
           "id": "conversion-copy",
           "name": "Conversion copy",
-          "description": "I need an ad, landing page, headline, call to action, or copy test.",
-          "target_hint": "I want a concise persuasive target."
+          "description": "Performance copy for ads, landing pages, product pages, headlines, offers, forms, and calls to action where the goal is a measurable response.",
+          "target_hint": "Best with a concise persuasive target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a brand-aware marketing target."
+        "target_hint": "Best with a brand-aware marketing target."
       }
     },
     {
       "id": "visual-content-studio",
-      "revision": 1,
+      "revision": 3,
       "name": "Visual Content Studio",
-      "summary": "I want one route for photos, illustrations, mockups, diagrams, and image edits.",
+      "summary": "Routes photos, illustrations, mockups, diagrams, and image edits.",
       "tags": [
         "images",
         "photography",
@@ -462,43 +462,43 @@
         {
           "id": "photography",
           "name": "Photography",
-          "description": "I need a realistic person, place, product, lighting setup, or editorial scene.",
-          "target_hint": "I want a strong photorealistic image target."
+          "description": "Image requests seeking photographic realism, believable people or products, natural materials, camera-like composition, lighting, depth of field, and editorial scenes.",
+          "target_hint": "Best with a strong photorealistic image target."
         },
         {
           "id": "illustration",
           "name": "Illustration",
-          "description": "I need editorial art, a character, poster, icon, or stylized scene.",
-          "target_hint": "I want a strong illustration target."
+          "description": "Drawn or stylized artwork such as characters, posters, editorial graphics, icons, comics, storybook scenes, flat art, or painterly compositions.",
+          "target_hint": "Best with a strong illustration target."
         },
         {
           "id": "product-mockups",
           "name": "Product mockups",
-          "description": "I need packaging, a device screen, merchandise, or a product presentation scene.",
-          "target_hint": "I want an image target that handles product details well."
+          "description": "Presentation images for packaging, merchandise, devices, app screens, signage, and products placed in realistic branded or commercial settings.",
+          "target_hint": "Best with an image target that handles product details well."
         },
         {
           "id": "diagrams-infographics",
           "name": "Diagrams and infographics",
-          "description": "I need a visual explanation, labeled system, process, or data story.",
-          "target_hint": "I want an image target that handles text and layout well."
+          "description": "Visual explanations that depend on labeled structure: processes, systems, timelines, comparisons, maps, charts, technical diagrams, and infographics.",
+          "target_hint": "Best with an image target that handles text and layout well."
         },
         {
           "id": "edits-variations",
           "name": "Edits and variations",
-          "description": "I need an image restyled, extended, cleaned up, or turned into alternatives.",
-          "target_hint": "I want an image target that supports editing."
+          "description": "Changes to an existing image, including removing or replacing elements, extending the canvas, restyling, recoloring, cleanup, and generating close alternatives.",
+          "target_hint": "Best with an image target that supports editing."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable general image target."
+        "target_hint": "Best with a dependable general image target."
       }
     },
     {
       "id": "translation-localization-desk",
-      "revision": 1,
+      "revision": 3,
       "name": "Translation and Localization Desk",
-      "summary": "I want one route for translation, product localization, transcreation, terminology, and language review.",
+      "summary": "Routes translation, product localization, transcreation, terminology, and language review.",
       "tags": [
         "translation",
         "localization",
@@ -514,43 +514,43 @@
         {
           "id": "direct-translation",
           "name": "Direct translation",
-          "description": "I need meaning, facts, structure, and terminology preserved in another language.",
-          "target_hint": "I want a strong multilingual target."
+          "description": "Faithful translation between named languages with meaning, facts, structure, and established terminology preserved as closely as the target language allows.",
+          "target_hint": "Best with a strong multilingual target."
         },
         {
           "id": "product-localization",
           "name": "Product localization",
-          "description": "I need interface copy, help content, or product messages adapted for a locale.",
-          "target_hint": "I want a multilingual product-writing target."
+          "description": "Adapting interface copy, help text, notifications, onboarding, and product messages to local conventions, space limits, and expected terminology.",
+          "target_hint": "Best with a multilingual product-writing target."
         },
         {
           "id": "transcreation",
           "name": "Transcreation",
-          "description": "I need marketing intent, emotion, and persuasion recreated for another locale.",
-          "target_hint": "I want a creative multilingual target."
+          "description": "Recreating slogans, campaign copy, humor, emotion, and persuasive intent for another culture when a literal translation would lose the effect.",
+          "target_hint": "Best with a creative multilingual target."
         },
         {
           "id": "terminology",
           "name": "Terminology work",
-          "description": "I need a glossary built or approved terms applied consistently.",
-          "target_hint": "I want a precise multilingual target."
+          "description": "Building, cleaning, or applying a glossary; resolving term choices; enforcing approved product, legal, or technical vocabulary across content.",
+          "target_hint": "Best with a precise multilingual target."
         },
         {
           "id": "language-qa",
           "name": "Language review",
-          "description": "I need mistranslations, unnatural wording, formatting, or locale problems found.",
-          "target_hint": "I want a careful multilingual review target."
+          "description": "Reviewing translated content for mistranslations, omissions, grammar, unnatural phrasing, inconsistent terms, locale formatting, and text left in the source language.",
+          "target_hint": "Best with a careful multilingual review target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable multilingual target."
+        "target_hint": "Best with a dependable multilingual target."
       }
     },
     {
       "id": "presentation-builder",
-      "revision": 1,
+      "revision": 3,
       "name": "Presentation Builder",
-      "summary": "I want one route for presentation structure, slide copy, data stories, notes, and rehearsal.",
+      "summary": "Routes presentation structure, slide copy, data stories, notes, and rehearsal.",
       "tags": [
         "presentations",
         "slides",
@@ -566,43 +566,43 @@
         {
           "id": "narrative-outline",
           "name": "Narrative and outline",
-          "description": "I need the audience journey, argument, or slide sequence shaped before I write slides.",
-          "target_hint": "I want a strong planning target."
+          "description": "Shaping the presentation before slide writing: audience, objective, argument, story arc, section order, evidence, and the decision or action at the end.",
+          "target_hint": "Best with a strong planning target."
         },
         {
           "id": "slide-copy",
           "name": "Slide copy",
-          "description": "I need concise titles, supporting points, labels, or calls to action for slides.",
-          "target_hint": "I want a concise writing target."
+          "description": "Writing concise slide titles, bullets, labels, captions, and calls to action that can be understood quickly without dense paragraph text.",
+          "target_hint": "Best with a concise writing target."
         },
         {
           "id": "data-storytelling",
           "name": "Data storytelling",
-          "description": "I need findings or metrics turned into a clear presentation narrative.",
-          "target_hint": "I want an analytical writing target."
+          "description": "Selecting and sequencing findings, charts, and metrics so the audience understands what changed, why it matters, and what conclusion the data supports.",
+          "target_hint": "Best with an analytical writing target."
         },
         {
           "id": "speaker-notes",
           "name": "Speaker notes",
-          "description": "I need explanations, transitions, timing, or delivery cues for a presentation.",
-          "target_hint": "I want a natural long-form writing target."
+          "description": "Expanding slides into spoken explanations, transitions, examples, timing cues, and reminders that support delivery without duplicating the slide text.",
+          "target_hint": "Best with a natural long-form writing target."
         },
         {
           "id": "review-rehearsal",
           "name": "Review and rehearsal",
-          "description": "I need a deck criticized or likely audience questions and answers prepared.",
-          "target_hint": "I want a critical reasoning target."
+          "description": "Critiquing a deck for logic, clarity, pacing, evidence, and visual overload, then preparing likely audience questions, objections, and concise answers.",
+          "target_hint": "Best with a critical reasoning target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable presentation target."
+        "target_hint": "Best with a dependable presentation target."
       }
     },
     {
       "id": "customer-support-triage",
-      "revision": 1,
+      "revision": 3,
       "name": "Customer Support Triage",
-      "summary": "I want one route for quick answers, troubleshooting, billing, complaints, and escalations.",
+      "summary": "Routes quick answers, troubleshooting, billing, complaints, and escalations.",
       "tags": [
         "support",
         "customers",
@@ -618,43 +618,43 @@
         {
           "id": "quick-answers",
           "name": "Quick answers",
-          "description": "I need a FAQ answered, product guidance, or a routine how-to response.",
-          "target_hint": "I want a fast, low-cost support target."
+          "description": "Routine product questions, known FAQs, setup guidance, feature explanations, and simple how-to requests that have a direct documented answer.",
+          "target_hint": "Best with a fast, low-cost support target."
         },
         {
           "id": "technical-troubleshooting",
           "name": "Technical troubleshooting",
-          "description": "I need reproduction steps, diagnostics, or recovery instructions for a technical problem.",
-          "target_hint": "I want a technical reasoning target."
+          "description": "Reports of errors, broken behavior, failed integrations, connectivity problems, or incorrect results that require diagnostic questions and recovery steps.",
+          "target_hint": "Best with a technical reasoning target."
         },
         {
           "id": "account-billing",
           "name": "Account and billing",
-          "description": "I need help with a plan, invoice, access issue, refund, or account question.",
-          "target_hint": "I want a precise support target."
+          "description": "Requests about login access, plans, subscriptions, invoices, charges, refunds, account ownership, entitlements, and changes to customer records.",
+          "target_hint": "Best with a precise support target."
         },
         {
           "id": "complaints-recovery",
           "name": "Complaints and recovery",
-          "description": "I need a calm response to frustration, a complaint, or a service failure.",
-          "target_hint": "I want a careful communication target."
+          "description": "Frustrated or dissatisfied customer messages that call for acknowledgment, de-escalation, ownership, apology, and a clear path to resolution.",
+          "target_hint": "Best with a careful communication target."
         },
         {
           "id": "escalation-handoff",
           "name": "Escalation handoff",
-          "description": "I need context, evidence, attempts, impact, and the next owner summarized for escalation.",
-          "target_hint": "I want a target that follows structured formats well."
+          "description": "Preparing an internal escalation with customer impact, timeline, evidence, reproduction steps, attempted fixes, current status, urgency, and the next responsible team.",
+          "target_hint": "Best with reliable structured output."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable customer support target."
+        "target_hint": "Best with a dependable customer support target."
       }
     },
     {
       "id": "sales-proposal-desk",
-      "revision": 1,
+      "revision": 3,
       "name": "Sales and Proposal Desk",
-      "summary": "I want one route for account research, outreach, discovery, objections, and proposals.",
+      "summary": "Routes account research, outreach, discovery, objections, and proposals.",
       "tags": [
         "sales",
         "proposals",
@@ -670,43 +670,43 @@
         {
           "id": "account-research",
           "name": "Account research",
-          "description": "I need an organization, role, need, or likely priority summarized from supplied information.",
-          "target_hint": "I want a strong research target."
+          "description": "Building an account brief from supplied material: organization, market, people, current tools, likely priorities, recent changes, and relevant risks or opportunities.",
+          "target_hint": "Best with a strong research target."
         },
         {
           "id": "outreach",
           "name": "Outreach",
-          "description": "I need a personalized email, follow-up, or connection message.",
-          "target_hint": "I want a concise persuasive writing target."
+          "description": "Writing personalized prospecting emails, connection notes, follow-ups, and meeting requests intended to start or reopen a sales conversation.",
+          "target_hint": "Best with a concise persuasive writing target."
         },
         {
           "id": "discovery",
           "name": "Discovery",
-          "description": "I need discovery questions, call preparation, pain points, or qualification help.",
-          "target_hint": "I want a thoughtful sales target."
+          "description": "Preparing discovery calls, qualification questions, pain-point hypotheses, stakeholder maps, and notes that uncover needs, authority, urgency, and decision criteria.",
+          "target_hint": "Best with a thoughtful sales target."
         },
         {
           "id": "objection-handling",
           "name": "Objection handling",
-          "description": "I need a clear response to concerns about price, timing, trust, or competitors.",
-          "target_hint": "I want a persuasive reasoning target."
+          "description": "Responding to concerns about price, timing, implementation, trust, competition, procurement, or fit without turning the answer into a full proposal.",
+          "target_hint": "Best with a persuasive reasoning target."
         },
         {
           "id": "proposals-rfps",
           "name": "Proposals and RFPs",
-          "description": "I need a structured response, scope, value case, or executive summary.",
-          "target_hint": "I want a target with a long context window."
+          "description": "Longer formal sales documents such as proposals, scopes, value cases, executive summaries, security responses, and structured RFP or RFI answers.",
+          "target_hint": "Best with a long-context target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable sales writing target."
+        "target_hint": "Best with a dependable sales writing target."
       }
     },
     {
       "id": "product-management-hub",
-      "revision": 1,
+      "revision": 3,
       "name": "Product Management Hub",
-      "summary": "I want one route for feedback, product definition, priorities, experiments, and launches.",
+      "summary": "Routes feedback, product definition, priorities, experiments, and launches.",
       "tags": [
         "product",
         "feedback",
@@ -722,43 +722,43 @@
         {
           "id": "feedback-synthesis",
           "name": "Feedback synthesis",
-          "description": "I need requests, complaints, themes, or unmet needs grouped from supplied feedback.",
-          "target_hint": "I want a target with a long context window."
+          "description": "Clustering interviews, tickets, reviews, and requests into themes, user problems, frequency, severity, unmet needs, and supporting evidence.",
+          "target_hint": "Best with a long-context target."
         },
         {
           "id": "product-definition",
           "name": "Product definition",
-          "description": "I need a problem statement, requirement, user story, or acceptance criteria.",
-          "target_hint": "I want a precise product-writing target."
+          "description": "Defining a problem and intended behavior through briefs, requirements, user stories, flows, constraints, edge cases, and acceptance criteria.",
+          "target_hint": "Best with a precise product-writing target."
         },
         {
           "id": "prioritization",
           "name": "Prioritization",
-          "description": "I need impact, cost, risk, confidence, and dependencies compared.",
-          "target_hint": "I want a strong reasoning target."
+          "description": "Comparing candidate work by user impact, strategic fit, effort, risk, confidence, urgency, dependencies, and the cost of delay.",
+          "target_hint": "Best with a strong reasoning target."
         },
         {
           "id": "metrics-experiments",
           "name": "Metrics and experiments",
-          "description": "I need success measures, hypotheses, events, or an experiment designed.",
-          "target_hint": "I want an analytical reasoning target."
+          "description": "Designing hypotheses, success metrics, event definitions, baselines, experiments, guardrails, sample considerations, and decision rules.",
+          "target_hint": "Best with an analytical reasoning target."
         },
         {
           "id": "launch-release",
           "name": "Launch and release",
-          "description": "I need a rollout plan, release note, enablement material, or feedback loop.",
-          "target_hint": "I want a structured planning target."
+          "description": "Planning rollout stages, readiness checks, release notes, enablement, communication, monitoring, feedback collection, and rollback conditions.",
+          "target_hint": "Best with a structured planning target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable product reasoning target."
+        "target_hint": "Best with a dependable product reasoning target."
       }
     },
     {
       "id": "project-delivery-office",
-      "revision": 1,
+      "revision": 3,
       "name": "Project Delivery Office",
-      "summary": "I want one route for plans, status, risks, decisions, and retrospectives.",
+      "summary": "Routes plans, status, risks, decisions, and retrospectives.",
       "tags": [
         "projects",
         "planning",
@@ -774,44 +774,44 @@
         {
           "id": "planning",
           "name": "Planning",
-          "description": "I need scope, milestones, a work breakdown, estimates, or responsibilities defined.",
-          "target_hint": "I want a strong planning target."
+          "description": "Turning an objective into scope, milestones, work packages, estimates, owners, sequencing, dependencies, and a delivery schedule.",
+          "target_hint": "Best with a strong planning target."
         },
         {
           "id": "status-reporting",
           "name": "Status reporting",
-          "description": "I need progress, changes, blockers, decisions, and next steps summarized.",
-          "target_hint": "I want a concise structured writing target."
+          "description": "Communicating current progress, completed work, changes, blockers, decisions, confidence, and the next reporting period in a concise update.",
+          "target_hint": "Best with a concise structured writing target."
         },
         {
           "id": "risks-dependencies",
           "name": "Risks and dependencies",
-          "description": "I need exposure, triggers, mitigations, dependencies, and owners identified.",
-          "target_hint": "I want a careful reasoning target."
+          "description": "Identifying what could derail delivery, including probability, impact, warning signs, mitigations, dependencies, contingencies, and accountable owners.",
+          "target_hint": "Best with a careful reasoning target."
         },
         {
           "id": "decision-support",
           "name": "Decision support",
-          "description": "I need options, trade-offs, a decision record, or a recommendation.",
-          "target_hint": "I want a strong reasoning target."
+          "description": "Framing a project decision with options, constraints, trade-offs, evidence, recommendation, dissent, and a record of what was decided.",
+          "target_hint": "Best with a strong reasoning target."
         },
         {
           "id": "retrospectives",
           "name": "Retrospectives",
-          "description": "I need outcomes, contributing factors, lessons, and follow-up actions captured.",
-          "target_hint": "I want an analytical writing target."
+          "description": "Looking back on delivery outcomes to separate symptoms from contributing factors, capture lessons, and assign concrete improvement actions.",
+          "target_hint": "Best with an analytical writing target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable planning target."
+        "target_hint": "Best with a dependable planning target."
       }
     },
     {
       "id": "people-operations-assistant",
-      "revision": 1,
+      "revision": 3,
       "name": "People Operations Assistant",
-      "summary": "I want one route for policies, hiring, interviews, onboarding, and development.",
-      "notice": "I’ll review decisions about people before I act on them.",
+      "summary": "Routes policies, hiring, interviews, onboarding, and development.",
+      "notice": "Review decisions about people before acting on them.",
       "tags": [
         "people",
         "hiring",
@@ -827,43 +827,43 @@
         {
           "id": "policies-guidance",
           "name": "Policies and guidance",
-          "description": "I need a supplied workplace policy or process explained clearly.",
-          "target_hint": "I want a careful business-writing target."
+          "description": "Explaining supplied workplace policies, benefits, leave rules, procedures, and employee processes in plain language without inventing policy.",
+          "target_hint": "Best with a careful business-writing target."
         },
         {
           "id": "roles-hiring",
           "name": "Roles and hiring",
-          "description": "I need a job description, scorecard, or candidate message.",
-          "target_hint": "I want a clear people-writing target."
+          "description": "Creating job descriptions, role expectations, hiring scorecards, candidate messages, and structured criteria for an open position.",
+          "target_hint": "Best with a clear people-writing target."
         },
         {
           "id": "interview-prep",
           "name": "Interview preparation",
-          "description": "I need structured questions, evaluation criteria, or a debrief format.",
-          "target_hint": "I want a structured reasoning target."
+          "description": "Designing interview plans, behavioral and technical questions, evaluation rubrics, interviewer assignments, and evidence-based debrief prompts.",
+          "target_hint": "Best with a structured reasoning target."
         },
         {
           "id": "onboarding",
           "name": "Onboarding",
-          "description": "I need an onboarding plan, checklist, training material, or manager guide.",
-          "target_hint": "I want a planning and writing target."
+          "description": "Building first-day, first-week, and role ramp-up plans with access, training, introductions, checkpoints, responsibilities, and manager follow-through.",
+          "target_hint": "Best with a planning and writing target."
         },
         {
           "id": "feedback-development",
           "name": "Feedback and development",
-          "description": "I need a review, goal, coaching note, or difficult feedback message.",
-          "target_hint": "I want a careful communication target."
+          "description": "Writing performance feedback, goals, coaching notes, growth plans, recognition, and clear messages for difficult employee conversations.",
+          "target_hint": "Best with a careful communication target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a careful people operations target."
+        "target_hint": "Best with a careful people operations target."
       }
     },
     {
       "id": "it-help-desk",
-      "revision": 1,
+      "revision": 3,
       "name": "IT Help Desk",
-      "summary": "I want one route for user help, devices, networks, access, automation, and documentation.",
+      "summary": "Routes user help, devices, networks, access, automation, and documentation.",
       "tags": [
         "it",
         "support",
@@ -879,44 +879,44 @@
         {
           "id": "user-assistance",
           "name": "User assistance",
-          "description": "I need application setup, a common error fixed, or clear step-by-step guidance.",
-          "target_hint": "I want a fast technical support target."
+          "description": "Everyday application help: installation, configuration, feature use, common error messages, passwordless setup, and step-by-step instructions for end users.",
+          "target_hint": "Best with a fast technical support target."
         },
         {
           "id": "device-network",
           "name": "Device and network troubleshooting",
-          "description": "I need help with connectivity, an operating system, a device, or a peripheral.",
-          "target_hint": "I want a technical reasoning target."
+          "description": "Troubleshooting computers, operating systems, peripherals, Wi-Fi, DNS, VPN, local networks, drivers, and connectivity between devices or services.",
+          "target_hint": "Best with a technical reasoning target."
         },
         {
           "id": "identity-access",
           "name": "Identity and access",
-          "description": "I need help with accounts, permissions, authentication, or an access review.",
-          "target_hint": "I want a precise security-aware target."
+          "description": "Account provisioning, authentication, permissions, group membership, role changes, access reviews, sign-in failures, and least-privilege questions.",
+          "target_hint": "Best with a precise security-aware target."
         },
         {
           "id": "automation",
           "name": "Automation",
-          "description": "I need a shell command, script, repetitive task, or administrative workflow.",
-          "target_hint": "I want a coding target."
+          "description": "Creating shell commands, scripts, scheduled tasks, bulk administration, and repeatable workflows for operating systems or IT tools.",
+          "target_hint": "Best with a coding target."
         },
         {
           "id": "change-documentation",
           "name": "Change documentation",
-          "description": "I need a runbook, maintenance notice, inventory, or technical handoff.",
-          "target_hint": "I want a clear technical writing target."
+          "description": "Writing runbooks, maintenance notices, asset inventories, change records, rollback steps, support handoffs, and operational procedures.",
+          "target_hint": "Best with a clear technical writing target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable technical support target."
+        "target_hint": "Best with a dependable technical support target."
       }
     },
     {
       "id": "security-operations-desk",
-      "revision": 1,
+      "revision": 3,
       "name": "Security Operations Desk",
-      "summary": "I want one route for alerts, threats, secure review, incidents, and compliance evidence.",
-      "notice": "I’ll verify security advice before I apply it.",
+      "summary": "Routes alerts, threats, secure review, incidents, and compliance evidence.",
+      "notice": "Verify security advice before applying it.",
       "tags": [
         "security",
         "incidents",
@@ -932,43 +932,43 @@
         {
           "id": "alert-triage",
           "name": "Alert triage",
-          "description": "I need logs, alerts, indicators, or suspicious behavior interpreted.",
-          "target_hint": "I want a fast security analysis target."
+          "description": "Assessing alerts, logs, indicators, suspicious events, and detections to determine likely cause, affected assets, severity, confidence, and immediate next checks.",
+          "target_hint": "Best with a fast security analysis target."
         },
         {
           "id": "threat-modeling",
           "name": "Threat modeling",
-          "description": "I need assets, boundaries, attack paths, controls, or abuse cases identified.",
-          "target_hint": "I want a strong security reasoning target."
+          "description": "Mapping assets, trust boundaries, actors, entry points, abuse cases, attack paths, existing controls, and recommended mitigations before an incident occurs.",
+          "target_hint": "Best with a strong security reasoning target."
         },
         {
           "id": "secure-review",
           "name": "Secure review",
-          "description": "I need code, configuration, permissions, or a deployment plan reviewed for security problems.",
-          "target_hint": "I want a careful code and configuration target."
+          "description": "Inspecting code, infrastructure, permissions, configurations, and deployment plans for vulnerabilities, unsafe defaults, secret exposure, and control gaps.",
+          "target_hint": "Best with a careful code and configuration target."
         },
         {
           "id": "incident-response",
           "name": "Incident response",
-          "description": "I need containment steps, an investigation plan, a timeline, or an incident update.",
-          "target_hint": "I want a strong incident reasoning target."
+          "description": "Active security events that need containment, evidence preservation, investigation steps, timeline reconstruction, stakeholder updates, recovery, and lessons learned.",
+          "target_hint": "Best with a strong incident reasoning target."
         },
         {
           "id": "compliance-evidence",
           "name": "Compliance evidence",
-          "description": "I need supplied controls, policies, findings, or remediation work mapped and summarized.",
-          "target_hint": "I want a precise long-context target."
+          "description": "Mapping supplied policies, controls, tests, findings, owners, and remediation records to an audit, certification, or governance requirement.",
+          "target_hint": "Best with a precise long-context target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable security reasoning target."
+        "target_hint": "Best with a dependable security reasoning target."
       }
     },
     {
       "id": "devops-reliability",
-      "revision": 1,
+      "revision": 3,
       "name": "DevOps and Reliability",
-      "summary": "I want one route for builds, infrastructure, observability, incidents, and performance.",
+      "summary": "Routes builds, infrastructure, observability, incidents, and performance.",
       "tags": [
         "devops",
         "sre",
@@ -984,44 +984,44 @@
         {
           "id": "build-ci",
           "name": "Build and CI failures",
-          "description": "I need a pipeline, dependency, test, build, or release failure diagnosed.",
-          "target_hint": "I want a coding target with strong debugging."
+          "description": "Failures in builds, tests, dependencies, package resolution, CI jobs, artifacts, signing, or release pipelines where the goal is to restore a passing delivery path.",
+          "target_hint": "Best with a coding target with strong debugging."
         },
         {
           "id": "infrastructure",
           "name": "Infrastructure",
-          "description": "I need help with containers, Kubernetes, cloud resources, networking, or infrastructure as code.",
-          "target_hint": "I want a strong infrastructure target."
+          "description": "Designing or changing containers, Kubernetes, cloud resources, networking, service discovery, infrastructure as code, and deployment topology.",
+          "target_hint": "Best with a strong infrastructure target."
         },
         {
           "id": "observability",
           "name": "Observability",
-          "description": "I need logs, metrics, traces, alerts, dashboards, or service objectives worked through.",
-          "target_hint": "I want an analytical operations target."
+          "description": "Working with logs, metrics, traces, dashboards, alert rules, service objectives, error budgets, and instrumentation needed to understand system behavior.",
+          "target_hint": "Best with an analytical operations target."
         },
         {
           "id": "incident-mitigation",
           "name": "Incident mitigation",
-          "description": "I need production behavior diagnosed and safe recovery steps developed.",
-          "target_hint": "I want a careful operations reasoning target."
+          "description": "Live service degradation or outages that require rapid diagnosis, safe mitigation, rollback, traffic control, communication, and recovery verification.",
+          "target_hint": "Best with a careful operations reasoning target."
         },
         {
           "id": "capacity-performance",
           "name": "Capacity and performance",
-          "description": "I need a bottleneck, scaling plan, load issue, cost problem, or resilience concern analyzed.",
-          "target_hint": "I want a deep technical reasoning target."
+          "description": "Analyzing latency, throughput, saturation, resource use, scaling limits, load tests, capacity forecasts, resilience, and infrastructure cost efficiency.",
+          "target_hint": "Best with a deep technical reasoning target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable operations target."
+        "target_hint": "Best with a dependable operations target."
       }
     },
     {
       "id": "finance-business-analysis",
-      "revision": 1,
+      "revision": 3,
       "name": "Finance and Business Analysis",
-      "summary": "I want one route for reconciliation, budgets, forecasts, pricing, and reports.",
-      "notice": "I’ll review financial work before I rely on it.",
+      "summary": "Routes reconciliation, budgets, forecasts, pricing, and reports.",
+      "notice": "Review financial work before relying on it.",
       "tags": [
         "finance",
         "budgets",
@@ -1037,44 +1037,44 @@
         {
           "id": "transactions-reconciliation",
           "name": "Transactions and reconciliation",
-          "description": "I need transactions categorized, records matched, exceptions found, or controls checked.",
-          "target_hint": "I want a precise structured-data target."
+          "description": "Operational accounting work involving transaction classification, account matching, discrepancies, missing records, exception queues, and reconciliation controls.",
+          "target_hint": "Best with a precise structured-data target."
         },
         {
           "id": "budget-variance",
           "name": "Budget and variance",
-          "description": "I need a plan compared with actuals and material differences explained.",
-          "target_hint": "I want a quantitative analysis target."
+          "description": "Comparing budget or plan with actual results, quantifying material differences, tracing their drivers, and explaining favorable or unfavorable variance.",
+          "target_hint": "Best with a quantitative analysis target."
         },
         {
           "id": "forecast-scenarios",
           "name": "Forecast and scenarios",
-          "description": "I need assumptions, ranges, sensitivities, or cash needs modeled.",
-          "target_hint": "I want a strong quantitative reasoning target."
+          "description": "Projecting revenue, cost, cash, demand, or runway under explicit assumptions, ranges, sensitivities, and best-, base-, and worst-case scenarios.",
+          "target_hint": "Best with a strong quantitative reasoning target."
         },
         {
           "id": "pricing-economics",
           "name": "Pricing and unit economics",
-          "description": "I need margins, acquisition cost, retention, pricing, or break-even analyzed.",
-          "target_hint": "I want a business reasoning target."
+          "description": "Unit economics and commercial decisions involving price, margin, discounts, acquisition cost, retention, contribution, payback, and break-even.",
+          "target_hint": "Best with a business reasoning target."
         },
         {
           "id": "management-reporting",
           "name": "Management reporting",
-          "description": "I need a decision-ready summary, commentary, table, or financial finding.",
-          "target_hint": "I want a clear analytical writing target."
+          "description": "Turning financial or operating results into decision-ready tables, commentary, trends, exceptions, and an executive summary for a reporting period.",
+          "target_hint": "Best with a clear analytical writing target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable quantitative reasoning target."
+        "target_hint": "Best with a dependable quantitative reasoning target."
       }
     },
     {
       "id": "contract-policy-review",
-      "revision": 1,
+      "revision": 3,
       "name": "Contract and Policy Review",
-      "summary": "I want one route for summaries, clauses, comparisons, drafts, and risk checks.",
-      "notice": "I’ll have a qualified person review legal decisions.",
+      "summary": "Routes summaries, clauses, comparisons, drafts, and risk checks.",
+      "notice": "Have a qualified person review legal decisions.",
       "tags": [
         "contracts",
         "policies",
@@ -1090,43 +1090,43 @@
         {
           "id": "plain-summary",
           "name": "Plain-language summary",
-          "description": "I need a supplied contract or policy explained without changing its meaning.",
-          "target_hint": "I want a careful long-context target."
+          "description": "Explaining a supplied contract or policy in plain language, organized around purpose, parties, obligations, dates, money, termination, and practical consequences.",
+          "target_hint": "Best with a careful long-context target."
         },
         {
           "id": "clause-extraction",
           "name": "Clause extraction",
-          "description": "I need duties, dates, renewals, limits, remedies, or exceptions found.",
-          "target_hint": "I want a precise extraction target."
+          "description": "Locating and listing specific terms such as duties, renewal, notice, payment, confidentiality, liability, data use, remedies, exceptions, and governing law.",
+          "target_hint": "Best with a precise extraction target."
         },
         {
           "id": "version-comparison",
           "name": "Version comparison",
-          "description": "I need material additions, removals, or changed obligations identified across versions.",
-          "target_hint": "I want a target with a long context window."
+          "description": "Comparing drafts or policy versions to identify added, removed, or changed language and explain which obligations or rights materially moved.",
+          "target_hint": "Best with a long-context target."
         },
         {
           "id": "routine-drafting",
           "name": "Routine drafting",
-          "description": "I need a clause, policy, notice, or revision suggestion drafted from my instructions.",
-          "target_hint": "I want a careful drafting target."
+          "description": "Drafting or revising a clause, notice, internal policy, amendment, or standard agreement language from supplied business instructions.",
+          "target_hint": "Best with a careful drafting target."
         },
         {
           "id": "risk-checklist",
           "name": "Risk checklist",
-          "description": "I need ambiguity, unusual terms, missing protections, or questions for review surfaced.",
-          "target_hint": "I want a critical reasoning target."
+          "description": "Issue spotting for ambiguity, one-sided terms, missing protections, unusual obligations, conflicting clauses, operational burden, and questions for qualified review.",
+          "target_hint": "Best with a critical reasoning target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a careful long-context target."
+        "target_hint": "Best with a careful long-context target."
       }
     },
     {
       "id": "learning-tutor",
-      "revision": 1,
+      "revision": 3,
       "name": "Learning Tutor",
-      "summary": "I want one route for explanations, worked problems, practice, feedback, and study plans.",
+      "summary": "Routes explanations, worked problems, practice, feedback, and study plans.",
       "tags": [
         "learning",
         "tutoring",
@@ -1142,43 +1142,43 @@
         {
           "id": "explain-concept",
           "name": "Explain a concept",
-          "description": "I need a clear explanation matched to what I already know.",
-          "target_hint": "I want a clear teaching target."
+          "description": "Teaching a topic at the learner's stated level through definitions, intuition, examples, analogies, and checks for understanding rather than solving an assigned problem.",
+          "target_hint": "Best with a clear teaching target."
         },
         {
           "id": "work-problem",
           "name": "Work through a problem",
-          "description": "I need guided steps, hints, calculations, or reasoning for a problem.",
-          "target_hint": "I want a strong reasoning target."
+          "description": "Guiding a specific exercise or calculation with hints, intermediate steps, reasoning, and error correction while keeping the learner engaged in the solution.",
+          "target_hint": "Best with a strong reasoning target."
         },
         {
           "id": "practice-quiz",
           "name": "Practice and quiz",
-          "description": "I need questions, exercises, flashcards, or an answer check.",
-          "target_hint": "I want a fast interactive teaching target."
+          "description": "Generating practice questions, quizzes, flashcards, drills, answer keys, and spaced review prompts for a named topic or exam.",
+          "target_hint": "Best with a fast interactive teaching target."
         },
         {
           "id": "review-work",
           "name": "Review my work",
-          "description": "I need specific feedback, corrections, and ways to improve my work.",
-          "target_hint": "I want a careful review target."
+          "description": "Evaluating the learner's submitted answer, essay, code, or reasoning against criteria and giving specific corrections and next improvements.",
+          "target_hint": "Best with a careful review target."
         },
         {
           "id": "study-planning",
           "name": "Study planning",
-          "description": "I need goals, a learning sequence, a schedule, or review intervals.",
-          "target_hint": "I want a dependable planning target."
+          "description": "Building a learning plan around goals, current level, available time, topic sequence, practice mix, review intervals, milestones, and progress checks.",
+          "target_hint": "Best with a dependable planning target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a supportive teaching target."
+        "target_hint": "Best with a supportive teaching target."
       }
     },
     {
       "id": "course-training-designer",
-      "revision": 1,
+      "revision": 3,
       "name": "Course and Training Designer",
-      "summary": "I want one route for curricula, lessons, assessments, rubrics, and learner needs.",
+      "summary": "Routes curricula, lessons, assessments, rubrics, and learner needs.",
       "tags": [
         "education",
         "training",
@@ -1194,44 +1194,44 @@
         {
           "id": "curriculum-design",
           "name": "Curriculum design",
-          "description": "I need outcomes, modules, prerequisites, or a learning progression designed.",
-          "target_hint": "I want a strong instructional planning target."
+          "description": "Structuring a full course or training program through audience needs, outcomes, prerequisites, modules, sequencing, duration, and evidence of mastery.",
+          "target_hint": "Best with a strong instructional planning target."
         },
         {
           "id": "lesson-creation",
           "name": "Lesson creation",
-          "description": "I need activities, examples, explanations, or facilitator guidance for a lesson.",
-          "target_hint": "I want a clear teaching and writing target."
+          "description": "Creating one lesson or session with an opening, explanation, examples, activities, discussion prompts, timing, materials, and facilitator guidance.",
+          "target_hint": "Best with a clear teaching and writing target."
         },
         {
           "id": "assessments",
           "name": "Assessments",
-          "description": "I need questions, projects, practical exercises, or answer keys.",
-          "target_hint": "I want a precise teaching target."
+          "description": "Designing quizzes, exams, practical tasks, projects, simulations, answer keys, and scoring plans that measure stated learning outcomes.",
+          "target_hint": "Best with a precise teaching target."
         },
         {
           "id": "rubrics-feedback",
           "name": "Rubrics and feedback",
-          "description": "I need evaluation criteria or useful feedback for learners.",
-          "target_hint": "I want a structured review target."
+          "description": "Defining observable evaluation criteria, performance levels, scoring guidance, and reusable feedback tied to the work being assessed.",
+          "target_hint": "Best with a structured review target."
         },
         {
           "id": "adaptation",
           "name": "Adaptation",
-          "description": "I need material adapted for different skill levels, needs, formats, or accessibility.",
-          "target_hint": "I want a flexible instructional target."
+          "description": "Adjusting learning material for different skill levels, accessibility needs, languages, delivery formats, time limits, or individual support requirements.",
+          "target_hint": "Best with a flexible instructional target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable instructional design target."
+        "target_hint": "Best with a dependable instructional design target."
       }
     },
     {
       "id": "healthcare-operations-assistant",
-      "revision": 1,
+      "revision": 3,
       "name": "Healthcare Operations Assistant",
-      "summary": "I want one route for patient administration, approved materials, documentation, policy, and operations.",
-      "notice": "I won’t use this route for diagnosis or treatment decisions.",
+      "summary": "Routes patient administration, approved materials, documentation, policy, and operations.",
+      "notice": "Do not use this route for diagnosis or treatment decisions.",
       "tags": [
         "healthcare",
         "operations",
@@ -1247,43 +1247,43 @@
         {
           "id": "patient-administration",
           "name": "Patient administration",
-          "description": "I need help with scheduling, intake, reminders, or non-clinical instructions.",
-          "target_hint": "I want a clear administrative writing target."
+          "description": "Non-clinical patient operations such as scheduling, intake, reminders, referrals, registration, forms, contact instructions, and service navigation.",
+          "target_hint": "Best with a clear administrative writing target."
         },
         {
           "id": "patient-materials",
           "name": "Patient-friendly materials",
-          "description": "I need approved information rewritten in clear, accessible language.",
-          "target_hint": "I want a careful plain-language target."
+          "description": "Rewriting approved health information for patients using plain language, accessible structure, appropriate reading level, and no new clinical claims.",
+          "target_hint": "Best with a careful plain-language target."
         },
         {
           "id": "documentation-formatting",
           "name": "Documentation formatting",
-          "description": "I need supplied notes organized without adding new medical claims.",
-          "target_hint": "I want a precise structured-writing target."
+          "description": "Organizing supplied notes into a requested structure, template, or summary while preserving facts and avoiding diagnosis, treatment, or invented details.",
+          "target_hint": "Best with a precise structured-writing target."
         },
         {
           "id": "policy-compliance",
           "name": "Policy and compliance",
-          "description": "I need a supplied procedure, requirement, or checklist summarized.",
-          "target_hint": "I want a careful long-context target."
+          "description": "Summarizing supplied healthcare procedures, privacy requirements, checklists, roles, controls, and evidence needed for operational compliance.",
+          "target_hint": "Best with a careful long-context target."
         },
         {
           "id": "operations-analysis",
           "name": "Operations analysis",
-          "description": "I need staffing, workflow, wait time, handoff, or service quality analyzed.",
-          "target_hint": "I want an analytical reasoning target."
+          "description": "Analyzing staffing, appointments, wait times, throughput, handoffs, capacity, service quality, and workflow bottlenecks in healthcare delivery operations.",
+          "target_hint": "Best with an analytical reasoning target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a careful healthcare operations target."
+        "target_hint": "Best with a careful healthcare operations target."
       }
     },
     {
       "id": "ecommerce-operations",
-      "revision": 1,
+      "revision": 3,
       "name": "E-commerce Operations",
-      "summary": "I want one route for catalog data, product content, merchandising, customers, and reviews.",
+      "summary": "Routes catalog data, product content, merchandising, customers, and reviews.",
       "tags": [
         "ecommerce",
         "catalog",
@@ -1299,43 +1299,43 @@
         {
           "id": "catalog-cleanup",
           "name": "Catalog cleanup",
-          "description": "I need titles, attributes, categories, or structured product fields normalized.",
-          "target_hint": "I want a precise structured-data target."
+          "description": "Normalizing product titles, categories, variants, attributes, units, identifiers, and structured fields so catalog records are consistent and complete.",
+          "target_hint": "Best with a precise structured-data target."
         },
         {
           "id": "product-content",
           "name": "Product content",
-          "description": "I need a product description, benefit list, comparison table, or FAQ.",
-          "target_hint": "I want a clear product-writing target."
+          "description": "Writing product descriptions, feature and benefit copy, specifications, comparison tables, buying guidance, and product-specific FAQs.",
+          "target_hint": "Best with a clear product-writing target."
         },
         {
           "id": "merchandising",
           "name": "Merchandising",
-          "description": "I need collections, bundles, promotions, or a seasonal campaign planned.",
-          "target_hint": "I want a creative commerce target."
+          "description": "Planning collections, bundles, cross-sells, promotions, seasonal assortments, placement, and offer structure to improve product discovery and sales.",
+          "target_hint": "Best with a creative commerce target."
         },
         {
           "id": "customer-messages",
           "name": "Customer messages",
-          "description": "I need a response about a product, shipment, return, or review.",
-          "target_hint": "I want a fast customer communication target."
+          "description": "Customer-facing replies about products, orders, shipping, delivery, returns, exchanges, stock, and post-purchase concerns.",
+          "target_hint": "Best with a fast customer communication target."
         },
         {
           "id": "review-analysis",
           "name": "Review analysis",
-          "description": "I need themes, defects, objections, or product opportunities extracted from reviews.",
-          "target_hint": "I want a target with a long context window."
+          "description": "Mining customer reviews for repeated praise, objections, defects, unmet expectations, language customers use, and opportunities for product or content changes.",
+          "target_hint": "Best with a long-context target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable commerce writing target."
+        "target_hint": "Best with a dependable commerce writing target."
       }
     },
     {
       "id": "home-travel-life-planner",
-      "revision": 1,
+      "revision": 3,
       "name": "Home, Travel, and Life Planner",
-      "summary": "I want one route for trips, purchases, home routines, events, and life administration.",
+      "summary": "Routes trips, purchases, home routines, events, and life administration.",
       "tags": [
         "travel",
         "home",
@@ -1351,36 +1351,36 @@
         {
           "id": "travel-planning",
           "name": "Travel planning",
-          "description": "I need an itinerary, packing list, schedule, budget, or travel alternative.",
-          "target_hint": "I want a strong planning target."
+          "description": "Trips and outings involving destinations, routes, schedules, lodging, activities, reservations, packing, budgets, constraints, and backup options.",
+          "target_hint": "Best with a strong planning target."
         },
         {
           "id": "purchase-decisions",
           "name": "Purchase decisions",
-          "description": "I need requirements, comparison criteria, trade-offs, or a shortlist.",
-          "target_hint": "I want a careful comparison target."
+          "description": "Comparing products or services against requirements, budget, trade-offs, ownership costs, compatibility, condition, and a reasoned shortlist.",
+          "target_hint": "Best with a careful comparison target."
         },
         {
           "id": "home-routines",
           "name": "Home routines",
-          "description": "I need help with meals, maintenance, organization, or a recurring home plan.",
-          "target_hint": "I want a fast practical planning target."
+          "description": "Recurring household work such as meal planning, cleaning, maintenance, organization, chores, supplies, and schedules shared across a home.",
+          "target_hint": "Best with a fast practical planning target."
         },
         {
           "id": "events-occasions",
           "name": "Events and occasions",
-          "description": "I need a timeline, invitation, menu, activity plan, or checklist for an event.",
-          "target_hint": "I want a creative planning target."
+          "description": "Planning gatherings, celebrations, and occasions through guest needs, invitations, venue, timeline, menu, activities, responsibilities, budget, and contingency plans.",
+          "target_hint": "Best with a creative planning target."
         },
         {
           "id": "life-administration",
           "name": "Life administration",
-          "description": "I need help organizing forms, correspondence, appointments, or a complex task list.",
-          "target_hint": "I want a dependable structured-planning target."
+          "description": "Coordinating forms, appointments, correspondence, deadlines, records, renewals, and multi-step personal tasks that do not fit travel, shopping, home, or events.",
+          "target_hint": "Best with a dependable structured-planning target."
         }
       ],
       "fallback": {
-        "target_hint": "I want a dependable general planning target."
+        "target_hint": "Best with a dependable general planning target."
       }
     }
   ]
