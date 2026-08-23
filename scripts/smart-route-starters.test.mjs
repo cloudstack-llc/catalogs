@@ -6,7 +6,7 @@ import { validateSmartRouteStarters } from "./smart-route-starters.mjs";
 
 function artifact() {
   return {
-    schema_version: 2,
+    schema_version: 1,
     generated_at: "2026-08-23T00:00:00Z",
     locale: "en",
     collections: [
@@ -49,23 +49,11 @@ test("accepts a model-neutral starter catalog with direct copy", () => {
   assert.deepEqual(validateSmartRouteStarters(artifact()), []);
 });
 
-test("the committed starter catalogs are valid and model-neutral", async () => {
-  for (const version of ["v1", "v2"]) {
-    const committed = JSON.parse(
-      await readFile(
-        new URL(`../${version}/smart-route-starters.json`, import.meta.url),
-        "utf8",
-      ),
-    );
-    assert.deepEqual(validateSmartRouteStarters(committed), []);
-  }
-});
-
-test("keeps the v1 copy contract readable for existing runtimes", () => {
-  const input = artifact();
-  input.schema_version = 1;
-  input.starters[0].summary = "I want a route for daily work.";
-  assert.deepEqual(validateSmartRouteStarters(input), []);
+test("the committed starter catalog is valid and model-neutral", async () => {
+  const committed = JSON.parse(
+    await readFile(new URL("../v1/smart-route-starters.json", import.meta.url), "utf8"),
+  );
+  assert.deepEqual(validateSmartRouteStarters(committed), []);
 });
 
 test("rejects model bindings and unsupported endpoints", () => {

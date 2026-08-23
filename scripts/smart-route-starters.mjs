@@ -95,10 +95,10 @@ export function validateSmartRouteStarters(artifact) {
     new Set(["schema_version", "generated_at", "locale", "collections", "starters"]),
   )) return problems;
 
-  if (artifact.schema_version !== 1 && artifact.schema_version !== 2) {
-    problems.push("schema_version must be 1 or 2");
+  if (artifact.schema_version !== 1) {
+    problems.push("schema_version must be 1");
   }
-  const directCopy = artifact.schema_version === 2;
+  const directCopy = true;
   if (
     typeof artifact.generated_at !== "string" ||
     Number.isNaN(Date.parse(artifact.generated_at))
