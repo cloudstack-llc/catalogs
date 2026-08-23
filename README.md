@@ -6,7 +6,7 @@ Model catalog data as JSON files, refreshed on a schedule.
 https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/prices.json
 https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/ollama-models.json
 https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/featured-models.json
-https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/smart-route-starters.json
+https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v2/smart-route-starters.json
 ```
 
 | File | Contents | Source | Cadence |
@@ -14,7 +14,7 @@ https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/smart-rou
 | `v1/prices.json` | Token pricing for hosted models | [models.dev](https://models.dev) | 6 hours |
 | `v1/ollama-models.json` | The Ollama library: models, tags, sizes, context windows | [ollama.com](https://ollama.com/library) | 12 hours |
 | `v1/featured-models.json` | Curated local models worth downloading, grouped into collections | Curated; resolved against Ollama and Hugging Face | On change |
-| `v1/smart-route-starters.json` | Model-neutral Smart Route starters, grouped by use | Curated | On change |
+| `v2/smart-route-starters.json` | Model-neutral Smart Route starters, grouped by use | Curated | On change |
 
 # Token pricing
 
@@ -69,7 +69,7 @@ No dependencies.
 
 # Smart Route starters
 
-`v1/smart-route-starters.json` gives Msty Nexus a model-neutral starting point
+`v2/smart-route-starters.json` gives Msty Nexus a model-neutral starting point
 for common routing jobs. A starter contains the route name, classifier lanes,
 target guidance, and the endpoint families it expects. It never contains a
 model or pool ID. Nexus asks the person adding it to choose those targets.
@@ -81,6 +81,10 @@ never changed by a catalog update.
 
 Displayed copy describes each starter and lane directly. Lane descriptions are
 capped at 512 bytes because that is the classifier input limit.
+
+`v1/smart-route-starters.json` remains published for Runtime versions that
+shipped with its original copy contract. New curation belongs in `v2`; do not
+rewrite v1 in place.
 
 ## Writing lane descriptions
 

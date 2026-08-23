@@ -1,0 +1,1387 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-08-23T20:32:54Z",
+  "locale": "en",
+  "collections": [
+    {
+      "id": "featured",
+      "title": "Featured starters",
+      "description": "Useful starting points for common work.",
+      "starters": [
+        "everyday-assistant",
+        "writing-editing-studio",
+        "research-evidence-desk",
+        "software-delivery-copilot",
+        "customer-support-triage",
+        "product-management-hub",
+        "learning-tutor",
+        "visual-content-studio"
+      ]
+    },
+    {
+      "id": "everyday-work",
+      "title": "Everyday work",
+      "description": "Daily thinking, writing, research, coding, and data.",
+      "starters": [
+        "everyday-assistant",
+        "writing-editing-studio",
+        "research-evidence-desk",
+        "software-delivery-copilot",
+        "data-spreadsheet-analyst"
+      ]
+    },
+    {
+      "id": "communication-creation",
+      "title": "Communication and creation",
+      "description": "Writing, localization, presentations, and visual content.",
+      "starters": [
+        "meetings-follow-ups",
+        "marketing-campaign-studio",
+        "visual-content-studio",
+        "translation-localization-desk",
+        "presentation-builder"
+      ]
+    },
+    {
+      "id": "business-operations",
+      "title": "Business operations",
+      "description": "Customer, sales, product, project, and people operations.",
+      "starters": [
+        "customer-support-triage",
+        "sales-proposal-desk",
+        "product-management-hub",
+        "project-delivery-office",
+        "people-operations-assistant"
+      ]
+    },
+    {
+      "id": "technical-specialist",
+      "title": "Technical and specialist work",
+      "description": "IT, security, reliability, finance, and policy work.",
+      "starters": [
+        "it-help-desk",
+        "security-operations-desk",
+        "devops-reliability",
+        "finance-business-analysis",
+        "contract-policy-review"
+      ]
+    },
+    {
+      "id": "learning-daily-life",
+      "title": "Learning and daily life",
+      "description": "Learning, training, healthcare operations, commerce, and daily planning.",
+      "starters": [
+        "learning-tutor",
+        "course-training-designer",
+        "healthcare-operations-assistant",
+        "ecommerce-operations",
+        "home-travel-life-planner"
+      ]
+    }
+  ],
+  "starters": [
+    {
+      "id": "everyday-assistant",
+      "revision": 3,
+      "name": "Everyday Assistant",
+      "summary": "Routes everyday questions, writing, analysis, and documents.",
+      "tags": [
+        "general",
+        "writing",
+        "analysis",
+        "documents"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "quick-help",
+          "name": "Quick help",
+          "description": "Brief, self-contained requests: definitions, factual questions, short summaries, formatting, and small text transformations. Excludes multi-step decisions and long source material.",
+          "target_hint": "Best with a fast, low-cost target."
+        },
+        {
+          "id": "deep-analysis",
+          "name": "Deep analysis",
+          "description": "Problems that require several reasoning steps, trade-off analysis, scenario comparison, root-cause thinking, or a recommendation backed by an explicit rationale.",
+          "target_hint": "Best with a strong reasoning target."
+        },
+        {
+          "id": "draft-rewrite",
+          "name": "Draft and rewrite",
+          "description": "Creating or revising messages, emails, notes, and short documents. Includes tone changes, proofreading, clarity edits, and audience-specific rewrites.",
+          "target_hint": "Best with a strong writing target."
+        },
+        {
+          "id": "long-documents",
+          "name": "Long documents",
+          "description": "Requests centered on long reports, transcripts, manuals, or several supplied documents, including summarization, comparison, and question answering across the material.",
+          "target_hint": "Best with a long-context target."
+        },
+        {
+          "id": "structured-extraction",
+          "name": "Structured extraction",
+          "description": "Extracting named fields, entities, dates, requirements, or action items from text and returning tables, checklists, schemas, or valid JSON.",
+          "target_hint": "Best with reliable structured output."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable general-purpose target."
+      }
+    },
+    {
+      "id": "writing-editing-studio",
+      "revision": 3,
+      "name": "Writing and Editing Studio",
+      "summary": "Routes editing, rewriting, long-form work, and persuasive copy.",
+      "tags": [
+        "writing",
+        "editing",
+        "content",
+        "copy"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "correct-tighten",
+          "name": "Correct and tighten",
+          "description": "Line editing existing text for grammar, spelling, clarity, repetition, concision, and sentence flow while preserving the original voice and meaning.",
+          "target_hint": "Best with a fast writing target."
+        },
+        {
+          "id": "rewrite-voice",
+          "name": "Rewrite voice",
+          "description": "Recasting supplied text for a different tone, reading level, audience, point of view, or format without changing the underlying message.",
+          "target_hint": "Best with strong voice and tone control."
+        },
+        {
+          "id": "long-form",
+          "name": "Long-form drafting",
+          "description": "Developing new articles, reports, guides, newsletters, documentation, or other multi-section pieces from a brief, notes, or an outline.",
+          "target_hint": "Best with a strong long-form writing target."
+        },
+        {
+          "id": "persuasive-writing",
+          "name": "Persuasive writing",
+          "description": "Copy intended to influence a decision or action, such as proposals, opinion pieces, fundraising appeals, landing pages, and calls to action.",
+          "target_hint": "Best with a persuasive writing target."
+        },
+        {
+          "id": "summarize-adapt",
+          "name": "Summarize and adapt",
+          "description": "Condensing existing material or adapting it for another channel, length, or audience, such as turning a report into an executive brief or a talk into a post.",
+          "target_hint": "Best with strong long-context handling."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a balanced writing target."
+      }
+    },
+    {
+      "id": "research-evidence-desk",
+      "revision": 3,
+      "name": "Research and Evidence Desk",
+      "summary": "Routes orientation, evidence, criticism, methods, and source analysis.",
+      "tags": [
+        "research",
+        "evidence",
+        "analysis",
+        "sources"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "quick-orientation",
+          "name": "Quick orientation",
+          "description": "Early-stage research that needs definitions, key concepts, major viewpoints, search terms, or a map of questions before deeper investigation begins.",
+          "target_hint": "Best with a fast general target."
+        },
+        {
+          "id": "evidence-synthesis",
+          "name": "Evidence synthesis",
+          "description": "Combining findings from multiple sources to identify consensus, disagreements, recurring themes, evidence strength, and unresolved uncertainty.",
+          "target_hint": "Best with a strong research target."
+        },
+        {
+          "id": "critical-review",
+          "name": "Critical review",
+          "description": "Stress-testing a claim, argument, paper, or proposal for hidden assumptions, weak evidence, alternative explanations, contradictions, and missing perspectives.",
+          "target_hint": "Best with a careful reasoning target."
+        },
+        {
+          "id": "methods-numbers",
+          "name": "Methods and numbers",
+          "description": "Research design and quantitative work: sampling, controls, measurement, statistical tests, calculations, uncertainty, and interpretation of numerical results.",
+          "target_hint": "Best with a quantitative reasoning target."
+        },
+        {
+          "id": "source-analysis",
+          "name": "Source analysis",
+          "description": "Close reading of supplied papers, reports, transcripts, or document sets to compare methods, claims, quotations, evidence, and conclusions across sources.",
+          "target_hint": "Best with a long-context target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable research target."
+      }
+    },
+    {
+      "id": "software-delivery-copilot",
+      "revision": 3,
+      "name": "Software Delivery Copilot",
+      "summary": "Routes coding, debugging, design, review, tests, and documentation.",
+      "tags": [
+        "code",
+        "debugging",
+        "architecture",
+        "testing"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "code-help",
+          "name": "Code help",
+          "description": "Contained programming work such as generating a function, explaining a code block, using an API, translating between languages, or answering a focused implementation question.",
+          "target_hint": "Best with a fast coding target."
+        },
+        {
+          "id": "debugging",
+          "name": "Debugging",
+          "description": "Broken or unexpected behavior: exceptions, stack traces, failing tests, regressions, incorrect output, environment conflicts, and requests to find and fix the cause.",
+          "target_hint": "Best with a coding target with strong reasoning."
+        },
+        {
+          "id": "architecture",
+          "name": "Architecture",
+          "description": "System-level design involving components, interfaces, data flow, persistence, scaling, migrations, deployment boundaries, or trade-offs that span multiple modules.",
+          "target_hint": "Best with a deep reasoning target."
+        },
+        {
+          "id": "review-security",
+          "name": "Review and security",
+          "description": "Reviewing existing code or configuration for correctness, security flaws, performance risks, concurrency problems, unsafe assumptions, and maintainability issues.",
+          "target_hint": "Best with a careful code review target."
+        },
+        {
+          "id": "tests-docs",
+          "name": "Tests and documentation",
+          "description": "Producing unit or integration tests, test plans, examples, API documentation, README content, code comments, release notes, and developer handoff material.",
+          "target_hint": "Best with a dependable coding target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable coding target."
+      }
+    },
+    {
+      "id": "data-spreadsheet-analyst",
+      "revision": 3,
+      "name": "Data and Spreadsheet Analyst",
+      "summary": "Routes spreadsheets, SQL, statistics, charts, and forecasts.",
+      "tags": [
+        "data",
+        "spreadsheets",
+        "sql",
+        "statistics"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "spreadsheet-work",
+          "name": "Spreadsheet work",
+          "description": "Workbook tasks involving formulas, lookups, pivots, sorting, cleanup, deduplication, validation, joins, and organizing data across sheets.",
+          "target_hint": "Best with strong structured-data handling."
+        },
+        {
+          "id": "sql-transformation",
+          "name": "SQL and transformation",
+          "description": "Database and pipeline work: writing SQL, shaping tables, defining schemas, joining datasets, building transformations, and checking data quality rules.",
+          "target_hint": "Best with a coding and data target."
+        },
+        {
+          "id": "statistical-analysis",
+          "name": "Statistical analysis",
+          "description": "Questions about distributions, experiments, confidence intervals, significance, correlation, regression, sampling bias, and what results do or do not support.",
+          "target_hint": "Best with a quantitative reasoning target."
+        },
+        {
+          "id": "visualization",
+          "name": "Visualization",
+          "description": "Choosing charts, designing dashboards, explaining trends and anomalies, and turning observed data into a clear visual or written narrative.",
+          "target_hint": "Best with an analytical writing target."
+        },
+        {
+          "id": "forecasting",
+          "name": "Forecasting",
+          "description": "Future-looking estimates based on assumptions, scenarios, trends, sensitivities, ranges, and uncertainty, including what changes under best- and worst-case conditions.",
+          "target_hint": "Best with a strong reasoning target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable analytical target."
+      }
+    },
+    {
+      "id": "meetings-follow-ups",
+      "revision": 3,
+      "name": "Meetings and Follow-ups",
+      "summary": "Routes meeting preparation, notes, actions, and follow-up messages.",
+      "tags": [
+        "meetings",
+        "notes",
+        "actions",
+        "communication"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "meeting-prep",
+          "name": "Meeting preparation",
+          "description": "Work done before a meeting: agendas, objectives, participant briefs, discovery questions, decision points, pre-reads, and talking points.",
+          "target_hint": "Best with a fast planning target."
+        },
+        {
+          "id": "transcript-summary",
+          "name": "Transcript summary",
+          "description": "Turning meeting notes or transcripts into a faithful recap of themes, decisions, disagreements, open questions, and important context.",
+          "target_hint": "Best with a long-context target."
+        },
+        {
+          "id": "actions-owners",
+          "name": "Actions and owners",
+          "description": "Pulling commitments from meeting material and listing each task with its owner, due date, dependency, status, and required follow-up.",
+          "target_hint": "Best with reliable structured output."
+        },
+        {
+          "id": "follow-up-writing",
+          "name": "Follow-up writing",
+          "description": "Post-meeting communication, including recap emails, stakeholder updates, announcements, decision confirmations, and requests for missing information.",
+          "target_hint": "Best with a strong communication target."
+        },
+        {
+          "id": "difficult-conversations",
+          "name": "Difficult conversations",
+          "description": "Messages for conflict, corrective feedback, negotiation, refusal, apology, or other sensitive situations where wording and emotional tone matter.",
+          "target_hint": "Best with a careful writing target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable communication target."
+      }
+    },
+    {
+      "id": "marketing-campaign-studio",
+      "revision": 3,
+      "name": "Marketing Campaign Studio",
+      "summary": "Routes campaign planning, content, social posts, email, and conversion copy.",
+      "tags": [
+        "marketing",
+        "campaigns",
+        "content",
+        "copy"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "campaign-strategy",
+          "name": "Campaign strategy",
+          "description": "High-level campaign decisions about audience, positioning, offer, message, channels, sequence, budget, objectives, and how success will be measured.",
+          "target_hint": "Best with a strong marketing reasoning target."
+        },
+        {
+          "id": "content-seo",
+          "name": "Content and SEO",
+          "description": "Search-oriented content such as keyword briefs, article outlines, educational pages, topic clusters, metadata, and long-form pieces built around reader intent.",
+          "target_hint": "Best with a long-form content target."
+        },
+        {
+          "id": "social-content",
+          "name": "Social content",
+          "description": "Platform-specific posts, threads, captions, content calendars, hooks, and short variations designed for social feeds and community engagement.",
+          "target_hint": "Best with a fast creative writing target."
+        },
+        {
+          "id": "email-lifecycle",
+          "name": "Email lifecycle",
+          "description": "Email sequences tied to a customer stage or event: welcome, nurture, onboarding, launch, retention, renewal, win-back, and re-engagement.",
+          "target_hint": "Best with a persuasive writing target."
+        },
+        {
+          "id": "conversion-copy",
+          "name": "Conversion copy",
+          "description": "Performance copy for ads, landing pages, product pages, headlines, offers, forms, and calls to action where the goal is a measurable response.",
+          "target_hint": "Best with a concise persuasive target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a brand-aware marketing target."
+      }
+    },
+    {
+      "id": "visual-content-studio",
+      "revision": 3,
+      "name": "Visual Content Studio",
+      "summary": "Routes photos, illustrations, mockups, diagrams, and image edits.",
+      "tags": [
+        "images",
+        "photography",
+        "illustration",
+        "design"
+      ],
+      "endpoint_families": [
+        "openai.images"
+      ],
+      "lanes": [
+        {
+          "id": "photography",
+          "name": "Photography",
+          "description": "Image requests seeking photographic realism, believable people or products, natural materials, camera-like composition, lighting, depth of field, and editorial scenes.",
+          "target_hint": "Best with a strong photorealistic image target."
+        },
+        {
+          "id": "illustration",
+          "name": "Illustration",
+          "description": "Drawn or stylized artwork such as characters, posters, editorial graphics, icons, comics, storybook scenes, flat art, or painterly compositions.",
+          "target_hint": "Best with a strong illustration target."
+        },
+        {
+          "id": "product-mockups",
+          "name": "Product mockups",
+          "description": "Presentation images for packaging, merchandise, devices, app screens, signage, and products placed in realistic branded or commercial settings.",
+          "target_hint": "Best with an image target that handles product details well."
+        },
+        {
+          "id": "diagrams-infographics",
+          "name": "Diagrams and infographics",
+          "description": "Visual explanations that depend on labeled structure: processes, systems, timelines, comparisons, maps, charts, technical diagrams, and infographics.",
+          "target_hint": "Best with an image target that handles text and layout well."
+        },
+        {
+          "id": "edits-variations",
+          "name": "Edits and variations",
+          "description": "Changes to an existing image, including removing or replacing elements, extending the canvas, restyling, recoloring, cleanup, and generating close alternatives.",
+          "target_hint": "Best with an image target that supports editing."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable general image target."
+      }
+    },
+    {
+      "id": "translation-localization-desk",
+      "revision": 3,
+      "name": "Translation and Localization Desk",
+      "summary": "Routes translation, product localization, transcreation, terminology, and language review.",
+      "tags": [
+        "translation",
+        "localization",
+        "language",
+        "qa"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "direct-translation",
+          "name": "Direct translation",
+          "description": "Faithful translation between named languages with meaning, facts, structure, and established terminology preserved as closely as the target language allows.",
+          "target_hint": "Best with a strong multilingual target."
+        },
+        {
+          "id": "product-localization",
+          "name": "Product localization",
+          "description": "Adapting interface copy, help text, notifications, onboarding, and product messages to local conventions, space limits, and expected terminology.",
+          "target_hint": "Best with a multilingual product-writing target."
+        },
+        {
+          "id": "transcreation",
+          "name": "Transcreation",
+          "description": "Recreating slogans, campaign copy, humor, emotion, and persuasive intent for another culture when a literal translation would lose the effect.",
+          "target_hint": "Best with a creative multilingual target."
+        },
+        {
+          "id": "terminology",
+          "name": "Terminology work",
+          "description": "Building, cleaning, or applying a glossary; resolving term choices; enforcing approved product, legal, or technical vocabulary across content.",
+          "target_hint": "Best with a precise multilingual target."
+        },
+        {
+          "id": "language-qa",
+          "name": "Language review",
+          "description": "Reviewing translated content for mistranslations, omissions, grammar, unnatural phrasing, inconsistent terms, locale formatting, and text left in the source language.",
+          "target_hint": "Best with a careful multilingual review target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable multilingual target."
+      }
+    },
+    {
+      "id": "presentation-builder",
+      "revision": 3,
+      "name": "Presentation Builder",
+      "summary": "Routes presentation structure, slide copy, data stories, notes, and rehearsal.",
+      "tags": [
+        "presentations",
+        "slides",
+        "speaking",
+        "story"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "narrative-outline",
+          "name": "Narrative and outline",
+          "description": "Shaping the presentation before slide writing: audience, objective, argument, story arc, section order, evidence, and the decision or action at the end.",
+          "target_hint": "Best with a strong planning target."
+        },
+        {
+          "id": "slide-copy",
+          "name": "Slide copy",
+          "description": "Writing concise slide titles, bullets, labels, captions, and calls to action that can be understood quickly without dense paragraph text.",
+          "target_hint": "Best with a concise writing target."
+        },
+        {
+          "id": "data-storytelling",
+          "name": "Data storytelling",
+          "description": "Selecting and sequencing findings, charts, and metrics so the audience understands what changed, why it matters, and what conclusion the data supports.",
+          "target_hint": "Best with an analytical writing target."
+        },
+        {
+          "id": "speaker-notes",
+          "name": "Speaker notes",
+          "description": "Expanding slides into spoken explanations, transitions, examples, timing cues, and reminders that support delivery without duplicating the slide text.",
+          "target_hint": "Best with a natural long-form writing target."
+        },
+        {
+          "id": "review-rehearsal",
+          "name": "Review and rehearsal",
+          "description": "Critiquing a deck for logic, clarity, pacing, evidence, and visual overload, then preparing likely audience questions, objections, and concise answers.",
+          "target_hint": "Best with a critical reasoning target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable presentation target."
+      }
+    },
+    {
+      "id": "customer-support-triage",
+      "revision": 3,
+      "name": "Customer Support Triage",
+      "summary": "Routes quick answers, troubleshooting, billing, complaints, and escalations.",
+      "tags": [
+        "support",
+        "customers",
+        "troubleshooting",
+        "service"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "quick-answers",
+          "name": "Quick answers",
+          "description": "Routine product questions, known FAQs, setup guidance, feature explanations, and simple how-to requests that have a direct documented answer.",
+          "target_hint": "Best with a fast, low-cost support target."
+        },
+        {
+          "id": "technical-troubleshooting",
+          "name": "Technical troubleshooting",
+          "description": "Reports of errors, broken behavior, failed integrations, connectivity problems, or incorrect results that require diagnostic questions and recovery steps.",
+          "target_hint": "Best with a technical reasoning target."
+        },
+        {
+          "id": "account-billing",
+          "name": "Account and billing",
+          "description": "Requests about login access, plans, subscriptions, invoices, charges, refunds, account ownership, entitlements, and changes to customer records.",
+          "target_hint": "Best with a precise support target."
+        },
+        {
+          "id": "complaints-recovery",
+          "name": "Complaints and recovery",
+          "description": "Frustrated or dissatisfied customer messages that call for acknowledgment, de-escalation, ownership, apology, and a clear path to resolution.",
+          "target_hint": "Best with a careful communication target."
+        },
+        {
+          "id": "escalation-handoff",
+          "name": "Escalation handoff",
+          "description": "Preparing an internal escalation with customer impact, timeline, evidence, reproduction steps, attempted fixes, current status, urgency, and the next responsible team.",
+          "target_hint": "Best with reliable structured output."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable customer support target."
+      }
+    },
+    {
+      "id": "sales-proposal-desk",
+      "revision": 3,
+      "name": "Sales and Proposal Desk",
+      "summary": "Routes account research, outreach, discovery, objections, and proposals.",
+      "tags": [
+        "sales",
+        "proposals",
+        "outreach",
+        "research"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "account-research",
+          "name": "Account research",
+          "description": "Building an account brief from supplied material: organization, market, people, current tools, likely priorities, recent changes, and relevant risks or opportunities.",
+          "target_hint": "Best with a strong research target."
+        },
+        {
+          "id": "outreach",
+          "name": "Outreach",
+          "description": "Writing personalized prospecting emails, connection notes, follow-ups, and meeting requests intended to start or reopen a sales conversation.",
+          "target_hint": "Best with a concise persuasive writing target."
+        },
+        {
+          "id": "discovery",
+          "name": "Discovery",
+          "description": "Preparing discovery calls, qualification questions, pain-point hypotheses, stakeholder maps, and notes that uncover needs, authority, urgency, and decision criteria.",
+          "target_hint": "Best with a thoughtful sales target."
+        },
+        {
+          "id": "objection-handling",
+          "name": "Objection handling",
+          "description": "Responding to concerns about price, timing, implementation, trust, competition, procurement, or fit without turning the answer into a full proposal.",
+          "target_hint": "Best with a persuasive reasoning target."
+        },
+        {
+          "id": "proposals-rfps",
+          "name": "Proposals and RFPs",
+          "description": "Longer formal sales documents such as proposals, scopes, value cases, executive summaries, security responses, and structured RFP or RFI answers.",
+          "target_hint": "Best with a long-context target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable sales writing target."
+      }
+    },
+    {
+      "id": "product-management-hub",
+      "revision": 3,
+      "name": "Product Management Hub",
+      "summary": "Routes feedback, product definition, priorities, experiments, and launches.",
+      "tags": [
+        "product",
+        "feedback",
+        "planning",
+        "launches"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "feedback-synthesis",
+          "name": "Feedback synthesis",
+          "description": "Clustering interviews, tickets, reviews, and requests into themes, user problems, frequency, severity, unmet needs, and supporting evidence.",
+          "target_hint": "Best with a long-context target."
+        },
+        {
+          "id": "product-definition",
+          "name": "Product definition",
+          "description": "Defining a problem and intended behavior through briefs, requirements, user stories, flows, constraints, edge cases, and acceptance criteria.",
+          "target_hint": "Best with a precise product-writing target."
+        },
+        {
+          "id": "prioritization",
+          "name": "Prioritization",
+          "description": "Comparing candidate work by user impact, strategic fit, effort, risk, confidence, urgency, dependencies, and the cost of delay.",
+          "target_hint": "Best with a strong reasoning target."
+        },
+        {
+          "id": "metrics-experiments",
+          "name": "Metrics and experiments",
+          "description": "Designing hypotheses, success metrics, event definitions, baselines, experiments, guardrails, sample considerations, and decision rules.",
+          "target_hint": "Best with an analytical reasoning target."
+        },
+        {
+          "id": "launch-release",
+          "name": "Launch and release",
+          "description": "Planning rollout stages, readiness checks, release notes, enablement, communication, monitoring, feedback collection, and rollback conditions.",
+          "target_hint": "Best with a structured planning target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable product reasoning target."
+      }
+    },
+    {
+      "id": "project-delivery-office",
+      "revision": 3,
+      "name": "Project Delivery Office",
+      "summary": "Routes plans, status, risks, decisions, and retrospectives.",
+      "tags": [
+        "projects",
+        "planning",
+        "risk",
+        "delivery"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "planning",
+          "name": "Planning",
+          "description": "Turning an objective into scope, milestones, work packages, estimates, owners, sequencing, dependencies, and a delivery schedule.",
+          "target_hint": "Best with a strong planning target."
+        },
+        {
+          "id": "status-reporting",
+          "name": "Status reporting",
+          "description": "Communicating current progress, completed work, changes, blockers, decisions, confidence, and the next reporting period in a concise update.",
+          "target_hint": "Best with a concise structured writing target."
+        },
+        {
+          "id": "risks-dependencies",
+          "name": "Risks and dependencies",
+          "description": "Identifying what could derail delivery, including probability, impact, warning signs, mitigations, dependencies, contingencies, and accountable owners.",
+          "target_hint": "Best with a careful reasoning target."
+        },
+        {
+          "id": "decision-support",
+          "name": "Decision support",
+          "description": "Framing a project decision with options, constraints, trade-offs, evidence, recommendation, dissent, and a record of what was decided.",
+          "target_hint": "Best with a strong reasoning target."
+        },
+        {
+          "id": "retrospectives",
+          "name": "Retrospectives",
+          "description": "Looking back on delivery outcomes to separate symptoms from contributing factors, capture lessons, and assign concrete improvement actions.",
+          "target_hint": "Best with an analytical writing target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable planning target."
+      }
+    },
+    {
+      "id": "people-operations-assistant",
+      "revision": 3,
+      "name": "People Operations Assistant",
+      "summary": "Routes policies, hiring, interviews, onboarding, and development.",
+      "notice": "Review decisions about people before acting on them.",
+      "tags": [
+        "people",
+        "hiring",
+        "onboarding",
+        "feedback"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "policies-guidance",
+          "name": "Policies and guidance",
+          "description": "Explaining supplied workplace policies, benefits, leave rules, procedures, and employee processes in plain language without inventing policy.",
+          "target_hint": "Best with a careful business-writing target."
+        },
+        {
+          "id": "roles-hiring",
+          "name": "Roles and hiring",
+          "description": "Creating job descriptions, role expectations, hiring scorecards, candidate messages, and structured criteria for an open position.",
+          "target_hint": "Best with a clear people-writing target."
+        },
+        {
+          "id": "interview-prep",
+          "name": "Interview preparation",
+          "description": "Designing interview plans, behavioral and technical questions, evaluation rubrics, interviewer assignments, and evidence-based debrief prompts.",
+          "target_hint": "Best with a structured reasoning target."
+        },
+        {
+          "id": "onboarding",
+          "name": "Onboarding",
+          "description": "Building first-day, first-week, and role ramp-up plans with access, training, introductions, checkpoints, responsibilities, and manager follow-through.",
+          "target_hint": "Best with a planning and writing target."
+        },
+        {
+          "id": "feedback-development",
+          "name": "Feedback and development",
+          "description": "Writing performance feedback, goals, coaching notes, growth plans, recognition, and clear messages for difficult employee conversations.",
+          "target_hint": "Best with a careful communication target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a careful people operations target."
+      }
+    },
+    {
+      "id": "it-help-desk",
+      "revision": 3,
+      "name": "IT Help Desk",
+      "summary": "Routes user help, devices, networks, access, automation, and documentation.",
+      "tags": [
+        "it",
+        "support",
+        "networks",
+        "automation"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "user-assistance",
+          "name": "User assistance",
+          "description": "Everyday application help: installation, configuration, feature use, common error messages, passwordless setup, and step-by-step instructions for end users.",
+          "target_hint": "Best with a fast technical support target."
+        },
+        {
+          "id": "device-network",
+          "name": "Device and network troubleshooting",
+          "description": "Troubleshooting computers, operating systems, peripherals, Wi-Fi, DNS, VPN, local networks, drivers, and connectivity between devices or services.",
+          "target_hint": "Best with a technical reasoning target."
+        },
+        {
+          "id": "identity-access",
+          "name": "Identity and access",
+          "description": "Account provisioning, authentication, permissions, group membership, role changes, access reviews, sign-in failures, and least-privilege questions.",
+          "target_hint": "Best with a precise security-aware target."
+        },
+        {
+          "id": "automation",
+          "name": "Automation",
+          "description": "Creating shell commands, scripts, scheduled tasks, bulk administration, and repeatable workflows for operating systems or IT tools.",
+          "target_hint": "Best with a coding target."
+        },
+        {
+          "id": "change-documentation",
+          "name": "Change documentation",
+          "description": "Writing runbooks, maintenance notices, asset inventories, change records, rollback steps, support handoffs, and operational procedures.",
+          "target_hint": "Best with a clear technical writing target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable technical support target."
+      }
+    },
+    {
+      "id": "security-operations-desk",
+      "revision": 3,
+      "name": "Security Operations Desk",
+      "summary": "Routes alerts, threats, secure review, incidents, and compliance evidence.",
+      "notice": "Verify security advice before applying it.",
+      "tags": [
+        "security",
+        "incidents",
+        "threats",
+        "compliance"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "alert-triage",
+          "name": "Alert triage",
+          "description": "Assessing alerts, logs, indicators, suspicious events, and detections to determine likely cause, affected assets, severity, confidence, and immediate next checks.",
+          "target_hint": "Best with a fast security analysis target."
+        },
+        {
+          "id": "threat-modeling",
+          "name": "Threat modeling",
+          "description": "Mapping assets, trust boundaries, actors, entry points, abuse cases, attack paths, existing controls, and recommended mitigations before an incident occurs.",
+          "target_hint": "Best with a strong security reasoning target."
+        },
+        {
+          "id": "secure-review",
+          "name": "Secure review",
+          "description": "Inspecting code, infrastructure, permissions, configurations, and deployment plans for vulnerabilities, unsafe defaults, secret exposure, and control gaps.",
+          "target_hint": "Best with a careful code and configuration target."
+        },
+        {
+          "id": "incident-response",
+          "name": "Incident response",
+          "description": "Active security events that need containment, evidence preservation, investigation steps, timeline reconstruction, stakeholder updates, recovery, and lessons learned.",
+          "target_hint": "Best with a strong incident reasoning target."
+        },
+        {
+          "id": "compliance-evidence",
+          "name": "Compliance evidence",
+          "description": "Mapping supplied policies, controls, tests, findings, owners, and remediation records to an audit, certification, or governance requirement.",
+          "target_hint": "Best with a precise long-context target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable security reasoning target."
+      }
+    },
+    {
+      "id": "devops-reliability",
+      "revision": 3,
+      "name": "DevOps and Reliability",
+      "summary": "Routes builds, infrastructure, observability, incidents, and performance.",
+      "tags": [
+        "devops",
+        "sre",
+        "infrastructure",
+        "observability"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "build-ci",
+          "name": "Build and CI failures",
+          "description": "Failures in builds, tests, dependencies, package resolution, CI jobs, artifacts, signing, or release pipelines where the goal is to restore a passing delivery path.",
+          "target_hint": "Best with a coding target with strong debugging."
+        },
+        {
+          "id": "infrastructure",
+          "name": "Infrastructure",
+          "description": "Designing or changing containers, Kubernetes, cloud resources, networking, service discovery, infrastructure as code, and deployment topology.",
+          "target_hint": "Best with a strong infrastructure target."
+        },
+        {
+          "id": "observability",
+          "name": "Observability",
+          "description": "Working with logs, metrics, traces, dashboards, alert rules, service objectives, error budgets, and instrumentation needed to understand system behavior.",
+          "target_hint": "Best with an analytical operations target."
+        },
+        {
+          "id": "incident-mitigation",
+          "name": "Incident mitigation",
+          "description": "Live service degradation or outages that require rapid diagnosis, safe mitigation, rollback, traffic control, communication, and recovery verification.",
+          "target_hint": "Best with a careful operations reasoning target."
+        },
+        {
+          "id": "capacity-performance",
+          "name": "Capacity and performance",
+          "description": "Analyzing latency, throughput, saturation, resource use, scaling limits, load tests, capacity forecasts, resilience, and infrastructure cost efficiency.",
+          "target_hint": "Best with a deep technical reasoning target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable operations target."
+      }
+    },
+    {
+      "id": "finance-business-analysis",
+      "revision": 3,
+      "name": "Finance and Business Analysis",
+      "summary": "Routes reconciliation, budgets, forecasts, pricing, and reports.",
+      "notice": "Review financial work before relying on it.",
+      "tags": [
+        "finance",
+        "budgets",
+        "forecasting",
+        "pricing"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "transactions-reconciliation",
+          "name": "Transactions and reconciliation",
+          "description": "Operational accounting work involving transaction classification, account matching, discrepancies, missing records, exception queues, and reconciliation controls.",
+          "target_hint": "Best with a precise structured-data target."
+        },
+        {
+          "id": "budget-variance",
+          "name": "Budget and variance",
+          "description": "Comparing budget or plan with actual results, quantifying material differences, tracing their drivers, and explaining favorable or unfavorable variance.",
+          "target_hint": "Best with a quantitative analysis target."
+        },
+        {
+          "id": "forecast-scenarios",
+          "name": "Forecast and scenarios",
+          "description": "Projecting revenue, cost, cash, demand, or runway under explicit assumptions, ranges, sensitivities, and best-, base-, and worst-case scenarios.",
+          "target_hint": "Best with a strong quantitative reasoning target."
+        },
+        {
+          "id": "pricing-economics",
+          "name": "Pricing and unit economics",
+          "description": "Unit economics and commercial decisions involving price, margin, discounts, acquisition cost, retention, contribution, payback, and break-even.",
+          "target_hint": "Best with a business reasoning target."
+        },
+        {
+          "id": "management-reporting",
+          "name": "Management reporting",
+          "description": "Turning financial or operating results into decision-ready tables, commentary, trends, exceptions, and an executive summary for a reporting period.",
+          "target_hint": "Best with a clear analytical writing target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable quantitative reasoning target."
+      }
+    },
+    {
+      "id": "contract-policy-review",
+      "revision": 3,
+      "name": "Contract and Policy Review",
+      "summary": "Routes summaries, clauses, comparisons, drafts, and risk checks.",
+      "notice": "Have a qualified person review legal decisions.",
+      "tags": [
+        "contracts",
+        "policies",
+        "review",
+        "risk"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "plain-summary",
+          "name": "Plain-language summary",
+          "description": "Explaining a supplied contract or policy in plain language, organized around purpose, parties, obligations, dates, money, termination, and practical consequences.",
+          "target_hint": "Best with a careful long-context target."
+        },
+        {
+          "id": "clause-extraction",
+          "name": "Clause extraction",
+          "description": "Locating and listing specific terms such as duties, renewal, notice, payment, confidentiality, liability, data use, remedies, exceptions, and governing law.",
+          "target_hint": "Best with a precise extraction target."
+        },
+        {
+          "id": "version-comparison",
+          "name": "Version comparison",
+          "description": "Comparing drafts or policy versions to identify added, removed, or changed language and explain which obligations or rights materially moved.",
+          "target_hint": "Best with a long-context target."
+        },
+        {
+          "id": "routine-drafting",
+          "name": "Routine drafting",
+          "description": "Drafting or revising a clause, notice, internal policy, amendment, or standard agreement language from supplied business instructions.",
+          "target_hint": "Best with a careful drafting target."
+        },
+        {
+          "id": "risk-checklist",
+          "name": "Risk checklist",
+          "description": "Issue spotting for ambiguity, one-sided terms, missing protections, unusual obligations, conflicting clauses, operational burden, and questions for qualified review.",
+          "target_hint": "Best with a critical reasoning target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a careful long-context target."
+      }
+    },
+    {
+      "id": "learning-tutor",
+      "revision": 3,
+      "name": "Learning Tutor",
+      "summary": "Routes explanations, worked problems, practice, feedback, and study plans.",
+      "tags": [
+        "learning",
+        "tutoring",
+        "practice",
+        "study"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "explain-concept",
+          "name": "Explain a concept",
+          "description": "Teaching a topic at the learner's stated level through definitions, intuition, examples, analogies, and checks for understanding rather than solving an assigned problem.",
+          "target_hint": "Best with a clear teaching target."
+        },
+        {
+          "id": "work-problem",
+          "name": "Work through a problem",
+          "description": "Guiding a specific exercise or calculation with hints, intermediate steps, reasoning, and error correction while keeping the learner engaged in the solution.",
+          "target_hint": "Best with a strong reasoning target."
+        },
+        {
+          "id": "practice-quiz",
+          "name": "Practice and quiz",
+          "description": "Generating practice questions, quizzes, flashcards, drills, answer keys, and spaced review prompts for a named topic or exam.",
+          "target_hint": "Best with a fast interactive teaching target."
+        },
+        {
+          "id": "review-work",
+          "name": "Review my work",
+          "description": "Evaluating the learner's submitted answer, essay, code, or reasoning against criteria and giving specific corrections and next improvements.",
+          "target_hint": "Best with a careful review target."
+        },
+        {
+          "id": "study-planning",
+          "name": "Study planning",
+          "description": "Building a learning plan around goals, current level, available time, topic sequence, practice mix, review intervals, milestones, and progress checks.",
+          "target_hint": "Best with a dependable planning target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a supportive teaching target."
+      }
+    },
+    {
+      "id": "course-training-designer",
+      "revision": 3,
+      "name": "Course and Training Designer",
+      "summary": "Routes curricula, lessons, assessments, rubrics, and learner needs.",
+      "tags": [
+        "education",
+        "training",
+        "curriculum",
+        "assessment"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "curriculum-design",
+          "name": "Curriculum design",
+          "description": "Structuring a full course or training program through audience needs, outcomes, prerequisites, modules, sequencing, duration, and evidence of mastery.",
+          "target_hint": "Best with a strong instructional planning target."
+        },
+        {
+          "id": "lesson-creation",
+          "name": "Lesson creation",
+          "description": "Creating one lesson or session with an opening, explanation, examples, activities, discussion prompts, timing, materials, and facilitator guidance.",
+          "target_hint": "Best with a clear teaching and writing target."
+        },
+        {
+          "id": "assessments",
+          "name": "Assessments",
+          "description": "Designing quizzes, exams, practical tasks, projects, simulations, answer keys, and scoring plans that measure stated learning outcomes.",
+          "target_hint": "Best with a precise teaching target."
+        },
+        {
+          "id": "rubrics-feedback",
+          "name": "Rubrics and feedback",
+          "description": "Defining observable evaluation criteria, performance levels, scoring guidance, and reusable feedback tied to the work being assessed.",
+          "target_hint": "Best with a structured review target."
+        },
+        {
+          "id": "adaptation",
+          "name": "Adaptation",
+          "description": "Adjusting learning material for different skill levels, accessibility needs, languages, delivery formats, time limits, or individual support requirements.",
+          "target_hint": "Best with a flexible instructional target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable instructional design target."
+      }
+    },
+    {
+      "id": "healthcare-operations-assistant",
+      "revision": 3,
+      "name": "Healthcare Operations Assistant",
+      "summary": "Routes patient administration, approved materials, documentation, policy, and operations.",
+      "notice": "Do not use this route for diagnosis or treatment decisions.",
+      "tags": [
+        "healthcare",
+        "operations",
+        "documentation",
+        "policy"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "patient-administration",
+          "name": "Patient administration",
+          "description": "Non-clinical patient operations such as scheduling, intake, reminders, referrals, registration, forms, contact instructions, and service navigation.",
+          "target_hint": "Best with a clear administrative writing target."
+        },
+        {
+          "id": "patient-materials",
+          "name": "Patient-friendly materials",
+          "description": "Rewriting approved health information for patients using plain language, accessible structure, appropriate reading level, and no new clinical claims.",
+          "target_hint": "Best with a careful plain-language target."
+        },
+        {
+          "id": "documentation-formatting",
+          "name": "Documentation formatting",
+          "description": "Organizing supplied notes into a requested structure, template, or summary while preserving facts and avoiding diagnosis, treatment, or invented details.",
+          "target_hint": "Best with a precise structured-writing target."
+        },
+        {
+          "id": "policy-compliance",
+          "name": "Policy and compliance",
+          "description": "Summarizing supplied healthcare procedures, privacy requirements, checklists, roles, controls, and evidence needed for operational compliance.",
+          "target_hint": "Best with a careful long-context target."
+        },
+        {
+          "id": "operations-analysis",
+          "name": "Operations analysis",
+          "description": "Analyzing staffing, appointments, wait times, throughput, handoffs, capacity, service quality, and workflow bottlenecks in healthcare delivery operations.",
+          "target_hint": "Best with an analytical reasoning target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a careful healthcare operations target."
+      }
+    },
+    {
+      "id": "ecommerce-operations",
+      "revision": 3,
+      "name": "E-commerce Operations",
+      "summary": "Routes catalog data, product content, merchandising, customers, and reviews.",
+      "tags": [
+        "ecommerce",
+        "catalog",
+        "products",
+        "customers"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "catalog-cleanup",
+          "name": "Catalog cleanup",
+          "description": "Normalizing product titles, categories, variants, attributes, units, identifiers, and structured fields so catalog records are consistent and complete.",
+          "target_hint": "Best with a precise structured-data target."
+        },
+        {
+          "id": "product-content",
+          "name": "Product content",
+          "description": "Writing product descriptions, feature and benefit copy, specifications, comparison tables, buying guidance, and product-specific FAQs.",
+          "target_hint": "Best with a clear product-writing target."
+        },
+        {
+          "id": "merchandising",
+          "name": "Merchandising",
+          "description": "Planning collections, bundles, cross-sells, promotions, seasonal assortments, placement, and offer structure to improve product discovery and sales.",
+          "target_hint": "Best with a creative commerce target."
+        },
+        {
+          "id": "customer-messages",
+          "name": "Customer messages",
+          "description": "Customer-facing replies about products, orders, shipping, delivery, returns, exchanges, stock, and post-purchase concerns.",
+          "target_hint": "Best with a fast customer communication target."
+        },
+        {
+          "id": "review-analysis",
+          "name": "Review analysis",
+          "description": "Mining customer reviews for repeated praise, objections, defects, unmet expectations, language customers use, and opportunities for product or content changes.",
+          "target_hint": "Best with a long-context target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable commerce writing target."
+      }
+    },
+    {
+      "id": "home-travel-life-planner",
+      "revision": 3,
+      "name": "Home, Travel, and Life Planner",
+      "summary": "Routes trips, purchases, home routines, events, and life administration.",
+      "tags": [
+        "travel",
+        "home",
+        "planning",
+        "shopping"
+      ],
+      "endpoint_families": [
+        "openai.chat_completions",
+        "openai.responses",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "travel-planning",
+          "name": "Travel planning",
+          "description": "Trips and outings involving destinations, routes, schedules, lodging, activities, reservations, packing, budgets, constraints, and backup options.",
+          "target_hint": "Best with a strong planning target."
+        },
+        {
+          "id": "purchase-decisions",
+          "name": "Purchase decisions",
+          "description": "Comparing products or services against requirements, budget, trade-offs, ownership costs, compatibility, condition, and a reasoned shortlist.",
+          "target_hint": "Best with a careful comparison target."
+        },
+        {
+          "id": "home-routines",
+          "name": "Home routines",
+          "description": "Recurring household work such as meal planning, cleaning, maintenance, organization, chores, supplies, and schedules shared across a home.",
+          "target_hint": "Best with a fast practical planning target."
+        },
+        {
+          "id": "events-occasions",
+          "name": "Events and occasions",
+          "description": "Planning gatherings, celebrations, and occasions through guest needs, invitations, venue, timeline, menu, activities, responsibilities, budget, and contingency plans.",
+          "target_hint": "Best with a creative planning target."
+        },
+        {
+          "id": "life-administration",
+          "name": "Life administration",
+          "description": "Coordinating forms, appointments, correspondence, deadlines, records, renewals, and multi-step personal tasks that do not fit travel, shopping, home, or events.",
+          "target_hint": "Best with a dependable structured-planning target."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable general planning target."
+      }
+    }
+  ]
+}
