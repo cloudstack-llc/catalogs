@@ -6,6 +6,7 @@ Model catalog data as JSON files, refreshed on a schedule.
 https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/prices.json
 https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/ollama-models.json
 https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/featured-models.json
+https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/smart-route-starters.json
 ```
 
 | File | Contents | Source | Cadence |
@@ -13,6 +14,7 @@ https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/featured-
 | `v1/prices.json` | Token pricing for hosted models | [models.dev](https://models.dev) | 6 hours |
 | `v1/ollama-models.json` | The Ollama library: models, tags, sizes, context windows | [ollama.com](https://ollama.com/library) | 12 hours |
 | `v1/featured-models.json` | Curated local models worth downloading, grouped into collections | Curated; resolved against Ollama and Hugging Face | On change |
+| `v1/smart-route-starters.json` | Model-neutral Smart Route starters, grouped by use | Curated | On change |
 
 # Token pricing
 
@@ -64,6 +66,27 @@ node scripts/generate.mjs        # fetch upstream and rewrite v1/prices.json
 ```
 
 No dependencies.
+
+# Smart Route starters
+
+`v1/smart-route-starters.json` gives Msty Nexus a model-neutral starting point
+for common routing jobs. A starter contains the route name, classifier lanes,
+target guidance, and the endpoint families it expects. It never contains a
+model or pool ID. Nexus asks the person adding it to choose those targets.
+
+Collections reference starters by ID, so one starter can appear in more than
+one part of the catalog without being copied. `revision` changes when the
+curated starter changes. Existing Smart Routes are independent copies and are
+never changed by a catalog update.
+
+All displayed descriptions use first-person copy. Lane descriptions are capped
+at 512 bytes because that is the classifier input limit.
+
+Validate a catalog edit before committing it:
+
+```bash
+node scripts/smart-route-starters-verify.mjs
+```
 
 Optional `REFRESH_TOKEN` secret: a fine-grained PAT with `contents: write` on this
 repository. GitHub disables scheduled workflows after 60 days without repository activity,
