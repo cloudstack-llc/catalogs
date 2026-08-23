@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 import { validateSmartRouteStarters } from "./smart-route-starters.mjs";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const path = resolve(repoRoot, process.argv[2] ?? "v1/smart-route-starters.json");
+const path = resolve(repoRoot, process.argv[2] ?? "v2/smart-route-starters.json");
 const text = await readFile(path, "utf8");
 const artifact = JSON.parse(text);
 const problems = validateSmartRouteStarters(artifact);
@@ -27,4 +27,3 @@ const lanes = artifact.starters.reduce((total, starter) => total + starter.lanes
 console.log(
   `ok: ${artifact.starters.length} Smart Route starters, ${artifact.collections.length} collections, ${lanes} lanes`,
 );
-

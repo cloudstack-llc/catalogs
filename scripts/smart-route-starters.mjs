@@ -95,9 +95,10 @@ export function validateSmartRouteStarters(artifact) {
     new Set(["schema_version", "generated_at", "locale", "collections", "starters"]),
   )) return problems;
 
-  if (artifact.schema_version !== 1) {
-    problems.push("schema_version must be 1");
+  if (artifact.schema_version !== 1 && artifact.schema_version !== 2) {
+    problems.push("schema_version must be 1 or 2");
   }
+  const directCopy = artifact.schema_version === 2;
   if (
     typeof artifact.generated_at !== "string" ||
     Number.isNaN(Date.parse(artifact.generated_at))
@@ -105,7 +106,7 @@ export function validateSmartRouteStarters(artifact) {
     problems.push("generated_at must be an RFC 3339 timestamp");
   }
   if (artifact.locale !== "en") {
-    problems.push("locale must be en for the v1 artifact");
+    problems.push("locale must be en for the published artifact");
   }
   if (!Array.isArray(artifact.starters) || artifact.starters.length === 0) {
     problems.push("starters must contain at least one starter");
@@ -141,9 +142,9 @@ export function validateSmartRouteStarters(artifact) {
       problems.push(`${label}.revision must be a positive integer`);
     }
     cleanText(problems, starter.name, `${label}.name`, 128);
-    cleanText(problems, starter.summary, `${label}.summary`, 256, true);
+    cleanText(problems, starter.summary, `${label}.summary`, 256, directCopy);
     if (starter.notice !== undefined) {
-      cleanText(problems, starter.notice, `${label}.notice`, 256, true);
+      cleanText(problems, starter.notice, `${label}.notice`, 256, directCopy);
     }
 
     if (!Array.isArray(starter.tags) || starter.tags.length === 0 || starter.tags.length > 12) {
@@ -192,8 +193,8 @@ export function validateSmartRouteStarters(artifact) {
         if (laneIDs.has(laneID)) problems.push(`${laneLabel}.id duplicates ${laneID}`);
         laneIDs.add(laneID);
         cleanText(problems, lane.name, `${laneLabel}.name`, 128);
-        cleanText(problems, lane.description, `${laneLabel}.description`, 512, true);
-        cleanText(problems, lane.target_hint, `${laneLabel}.target_hint`, 256, true);
+        cleanText(problems, lane.description, `${laneLabel}.description`, 512, directCopy);
+        cleanText(problems, lane.target_hint, `${laneLabel}.target_hint`, 256, directCopy);
       }
     }
 
@@ -203,7 +204,7 @@ export function validateSmartRouteStarters(artifact) {
         starter.fallback.target_hint,
         `${label}.fallback.target_hint`,
         256,
-        true,
+        directCopy,
       );
     }
   }
@@ -228,7 +229,7 @@ export function validateSmartRouteStarters(artifact) {
     if (collectionIDs.has(id)) problems.push(`${label}.id duplicates ${id}`);
     collectionIDs.add(id);
     cleanText(problems, collection.title, `${label}.title`, 128);
-    cleanText(problems, collection.description, `${label}.description`, 256, true);
+    cleanText(problems, collection.description, `${label}.description`, 256, directCopy);
     if (!Array.isArray(collection.starters) || collection.starters.length === 0) {
       problems.push(`${label}.starters must contain at least one starter id`);
       continue;
