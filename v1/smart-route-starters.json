@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T20:23:22Z",
+  "generated_at": "2026-08-23T20:32:54Z",
   "locale": "en",
   "collections": [
     {
@@ -82,7 +82,7 @@
   "starters": [
     {
       "id": "everyday-assistant",
-      "revision": 2,
+      "revision": 3,
       "name": "Everyday Assistant",
       "summary": "Routes everyday questions, writing, analysis, and documents.",
       "tags": [
@@ -100,31 +100,31 @@
         {
           "id": "quick-help",
           "name": "Quick help",
-          "description": "A direct answer, definition, short summary, or simple formatting.",
+          "description": "Brief, self-contained requests: definitions, factual questions, short summaries, formatting, and small text transformations. Excludes multi-step decisions and long source material.",
           "target_hint": "Best with a fast, low-cost target."
         },
         {
           "id": "deep-analysis",
           "name": "Deep analysis",
-          "description": "Multi-step reasoning, careful comparisons, and difficult trade-offs.",
+          "description": "Problems that require several reasoning steps, trade-off analysis, scenario comparison, root-cause thinking, or a recommendation backed by an explicit rationale.",
           "target_hint": "Best with a strong reasoning target."
         },
         {
           "id": "draft-rewrite",
           "name": "Draft and rewrite",
-          "description": "Draft, rewrite, proofread, or change the tone of a message or document.",
+          "description": "Creating or revising messages, emails, notes, and short documents. Includes tone changes, proofreading, clarity edits, and audience-specific rewrites.",
           "target_hint": "Best with a strong writing target."
         },
         {
           "id": "long-documents",
           "name": "Long documents",
-          "description": "Summarize, compare, or answer questions about long material.",
+          "description": "Requests centered on long reports, transcripts, manuals, or several supplied documents, including summarization, comparison, and question answering across the material.",
           "target_hint": "Best with a long-context target."
         },
         {
           "id": "structured-extraction",
           "name": "Structured extraction",
-          "description": "Turn text into a table, checklist, fields, or valid structured data.",
+          "description": "Extracting named fields, entities, dates, requirements, or action items from text and returning tables, checklists, schemas, or valid JSON.",
           "target_hint": "Best with reliable structured output."
         }
       ],
@@ -134,7 +134,7 @@
     },
     {
       "id": "writing-editing-studio",
-      "revision": 2,
+      "revision": 3,
       "name": "Writing and Editing Studio",
       "summary": "Routes editing, rewriting, long-form work, and persuasive copy.",
       "tags": [
@@ -152,31 +152,31 @@
         {
           "id": "correct-tighten",
           "name": "Correct and tighten",
-          "description": "Fix grammar, clarity, repetition, or awkward wording without changing the meaning.",
+          "description": "Line editing existing text for grammar, spelling, clarity, repetition, concision, and sentence flow while preserving the original voice and meaning.",
           "target_hint": "Best with a fast writing target."
         },
         {
           "id": "rewrite-voice",
           "name": "Rewrite voice",
-          "description": "Change the tone, reading level, audience, or format of existing writing.",
+          "description": "Recasting supplied text for a different tone, reading level, audience, point of view, or format without changing the underlying message.",
           "target_hint": "Best with strong voice and tone control."
         },
         {
           "id": "long-form",
           "name": "Long-form drafting",
-          "description": "Draft an article, guide, report, newsletter, or documentation from a brief.",
+          "description": "Developing new articles, reports, guides, newsletters, documentation, or other multi-section pieces from a brief, notes, or an outline.",
           "target_hint": "Best with a strong long-form writing target."
         },
         {
           "id": "persuasive-writing",
           "name": "Persuasive writing",
-          "description": "A proposal, landing page, call to action, argument, or other persuasive copy.",
+          "description": "Copy intended to influence a decision or action, such as proposals, opinion pieces, fundraising appeals, landing pages, and calls to action.",
           "target_hint": "Best with a persuasive writing target."
         },
         {
           "id": "summarize-adapt",
           "name": "Summarize and adapt",
-          "description": "Condense material or reshape it for another channel or audience.",
+          "description": "Condensing existing material or adapting it for another channel, length, or audience, such as turning a report into an executive brief or a talk into a post.",
           "target_hint": "Best with strong long-context handling."
         }
       ],
@@ -186,7 +186,7 @@
     },
     {
       "id": "research-evidence-desk",
-      "revision": 2,
+      "revision": 3,
       "name": "Research and Evidence Desk",
       "summary": "Routes orientation, evidence, criticism, methods, and source analysis.",
       "tags": [
@@ -204,31 +204,31 @@
         {
           "id": "quick-orientation",
           "name": "Quick orientation",
-          "description": "Defining a topic, explaining its main concepts, and finding useful starting questions.",
+          "description": "Early-stage research that needs definitions, key concepts, major viewpoints, search terms, or a map of questions before deeper investigation begins.",
           "target_hint": "Best with a fast general target."
         },
         {
           "id": "evidence-synthesis",
           "name": "Evidence synthesis",
-          "description": "Combining findings, identifying areas of agreement, and preserving uncertainty.",
+          "description": "Combining findings from multiple sources to identify consensus, disagreements, recurring themes, evidence strength, and unresolved uncertainty.",
           "target_hint": "Best with a strong research target."
         },
         {
           "id": "critical-review",
           "name": "Critical review",
-          "description": "Challenging claims, finding assumptions, and identifying missing evidence.",
+          "description": "Stress-testing a claim, argument, paper, or proposal for hidden assumptions, weak evidence, alternative explanations, contradictions, and missing perspectives.",
           "target_hint": "Best with a careful reasoning target."
         },
         {
           "id": "methods-numbers",
           "name": "Methods and numbers",
-          "description": "Help with research design, statistics, calculations, or interpretation.",
+          "description": "Research design and quantitative work: sampling, controls, measurement, statistical tests, calculations, uncertainty, and interpretation of numerical results.",
           "target_hint": "Best with a quantitative reasoning target."
         },
         {
           "id": "source-analysis",
           "name": "Source analysis",
-          "description": "Compare long papers, reports, transcripts, or a supplied set of sources.",
+          "description": "Close reading of supplied papers, reports, transcripts, or document sets to compare methods, claims, quotations, evidence, and conclusions across sources.",
           "target_hint": "Best with a long-context target."
         }
       ],
@@ -238,7 +238,7 @@
     },
     {
       "id": "software-delivery-copilot",
-      "revision": 2,
+      "revision": 3,
       "name": "Software Delivery Copilot",
       "summary": "Routes coding, debugging, design, review, tests, and documentation.",
       "tags": [
@@ -256,31 +256,31 @@
         {
           "id": "code-help",
           "name": "Code help",
-          "description": "Explaining code, answering API questions, and making small contained changes.",
+          "description": "Contained programming work such as generating a function, explaining a code block, using an API, translating between languages, or answering a focused implementation question.",
           "target_hint": "Best with a fast coding target."
         },
         {
           "id": "debugging",
           "name": "Debugging",
-          "description": "Diagnose an error, stack trace, failing test, or unexpected behavior.",
+          "description": "Broken or unexpected behavior: exceptions, stack traces, failing tests, regressions, incorrect output, environment conflicts, and requests to find and fix the cause.",
           "target_hint": "Best with a coding target with strong reasoning."
         },
         {
           "id": "architecture",
           "name": "Architecture",
-          "description": "Design a system, interface, migration, or change that crosses modules.",
+          "description": "System-level design involving components, interfaces, data flow, persistence, scaling, migrations, deployment boundaries, or trade-offs that span multiple modules.",
           "target_hint": "Best with a deep reasoning target."
         },
         {
           "id": "review-security",
           "name": "Review and security",
-          "description": "Code reviewed for correctness, reliability, performance, or security problems.",
+          "description": "Reviewing existing code or configuration for correctness, security flaws, performance risks, concurrency problems, unsafe assumptions, and maintainability issues.",
           "target_hint": "Best with a careful code review target."
         },
         {
           "id": "tests-docs",
           "name": "Tests and documentation",
-          "description": "Writing test cases, examples, comments, and technical documentation.",
+          "description": "Producing unit or integration tests, test plans, examples, API documentation, README content, code comments, release notes, and developer handoff material.",
           "target_hint": "Best with a dependable coding target."
         }
       ],
@@ -290,7 +290,7 @@
     },
     {
       "id": "data-spreadsheet-analyst",
-      "revision": 2,
+      "revision": 3,
       "name": "Data and Spreadsheet Analyst",
       "summary": "Routes spreadsheets, SQL, statistics, charts, and forecasts.",
       "tags": [
@@ -308,31 +308,31 @@
         {
           "id": "spreadsheet-work",
           "name": "Spreadsheet work",
-          "description": "Formulas, cleanup, joins, pivots, validation, or workbook organization.",
+          "description": "Workbook tasks involving formulas, lookups, pivots, sorting, cleanup, deduplication, validation, joins, and organizing data across sheets.",
           "target_hint": "Best with strong structured-data handling."
         },
         {
           "id": "sql-transformation",
           "name": "SQL and transformation",
-          "description": "A query, schema, data transformation, or validation rule.",
+          "description": "Database and pipeline work: writing SQL, shaping tables, defining schemas, joining datasets, building transformations, and checking data quality rules.",
           "target_hint": "Best with a coding and data target."
         },
         {
           "id": "statistical-analysis",
           "name": "Statistical analysis",
-          "description": "Help with experiments, distributions, confidence, significance, or interpretation.",
+          "description": "Questions about distributions, experiments, confidence intervals, significance, correlation, regression, sampling bias, and what results do or do not support.",
           "target_hint": "Best with a quantitative reasoning target."
         },
         {
           "id": "visualization",
           "name": "Visualization",
-          "description": "Choose a chart or explain patterns, anomalies, and limits in data.",
+          "description": "Choosing charts, designing dashboards, explaining trends and anomalies, and turning observed data into a clear visual or written narrative.",
           "target_hint": "Best with an analytical writing target."
         },
         {
           "id": "forecasting",
           "name": "Forecasting",
-          "description": "Scenarios, projections, sensitivity analysis, and assumption checks.",
+          "description": "Future-looking estimates based on assumptions, scenarios, trends, sensitivities, ranges, and uncertainty, including what changes under best- and worst-case conditions.",
           "target_hint": "Best with a strong reasoning target."
         }
       ],
@@ -342,7 +342,7 @@
     },
     {
       "id": "meetings-follow-ups",
-      "revision": 2,
+      "revision": 3,
       "name": "Meetings and Follow-ups",
       "summary": "Routes meeting preparation, notes, actions, and follow-up messages.",
       "tags": [
@@ -360,31 +360,31 @@
         {
           "id": "meeting-prep",
           "name": "Meeting preparation",
-          "description": "An agenda, briefing, questions, or talking points before a meeting.",
+          "description": "Work done before a meeting: agendas, objectives, participant briefs, discovery questions, decision points, pre-reads, and talking points.",
           "target_hint": "Best with a fast planning target."
         },
         {
           "id": "transcript-summary",
           "name": "Transcript summary",
-          "description": "Finding themes, decisions, disagreements, and open questions in meeting notes or transcripts.",
+          "description": "Turning meeting notes or transcripts into a faithful recap of themes, decisions, disagreements, open questions, and important context.",
           "target_hint": "Best with a long-context target."
         },
         {
           "id": "actions-owners",
           "name": "Actions and owners",
-          "description": "Extracting tasks, owners, dates, dependencies, and follow-ups.",
+          "description": "Pulling commitments from meeting material and listing each task with its owner, due date, dependency, status, and required follow-up.",
           "target_hint": "Best with reliable structured output."
         },
         {
           "id": "follow-up-writing",
           "name": "Follow-up writing",
-          "description": "A recap, email, announcement, or stakeholder update after a meeting.",
+          "description": "Post-meeting communication, including recap emails, stakeholder updates, announcements, decision confirmations, and requests for missing information.",
           "target_hint": "Best with a strong communication target."
         },
         {
           "id": "difficult-conversations",
           "name": "Difficult conversations",
-          "description": "A calm message for feedback, conflict, negotiation, or a sensitive discussion.",
+          "description": "Messages for conflict, corrective feedback, negotiation, refusal, apology, or other sensitive situations where wording and emotional tone matter.",
           "target_hint": "Best with a careful writing target."
         }
       ],
@@ -394,7 +394,7 @@
     },
     {
       "id": "marketing-campaign-studio",
-      "revision": 2,
+      "revision": 3,
       "name": "Marketing Campaign Studio",
       "summary": "Routes campaign planning, content, social posts, email, and conversion copy.",
       "tags": [
@@ -412,31 +412,31 @@
         {
           "id": "campaign-strategy",
           "name": "Campaign strategy",
-          "description": "An audience, position, channel plan, offer, or campaign structure.",
+          "description": "High-level campaign decisions about audience, positioning, offer, message, channels, sequence, budget, objectives, and how success will be measured.",
           "target_hint": "Best with a strong marketing reasoning target."
         },
         {
           "id": "content-seo",
           "name": "Content and SEO",
-          "description": "An article, brief, search-led outline, or educational content.",
+          "description": "Search-oriented content such as keyword briefs, article outlines, educational pages, topic clusters, metadata, and long-form pieces built around reader intent.",
           "target_hint": "Best with a long-form content target."
         },
         {
           "id": "social-content",
           "name": "Social content",
-          "description": "Platform-specific posts, threads, calendars, or variations.",
+          "description": "Platform-specific posts, threads, captions, content calendars, hooks, and short variations designed for social feeds and community engagement.",
           "target_hint": "Best with a fast creative writing target."
         },
         {
           "id": "email-lifecycle",
           "name": "Email lifecycle",
-          "description": "A welcome, nurture, launch, retention, or re-engagement email sequence.",
+          "description": "Email sequences tied to a customer stage or event: welcome, nurture, onboarding, launch, retention, renewal, win-back, and re-engagement.",
           "target_hint": "Best with a persuasive writing target."
         },
         {
           "id": "conversion-copy",
           "name": "Conversion copy",
-          "description": "An ad, landing page, headline, call to action, or copy test.",
+          "description": "Performance copy for ads, landing pages, product pages, headlines, offers, forms, and calls to action where the goal is a measurable response.",
           "target_hint": "Best with a concise persuasive target."
         }
       ],
@@ -446,7 +446,7 @@
     },
     {
       "id": "visual-content-studio",
-      "revision": 2,
+      "revision": 3,
       "name": "Visual Content Studio",
       "summary": "Routes photos, illustrations, mockups, diagrams, and image edits.",
       "tags": [
@@ -462,31 +462,31 @@
         {
           "id": "photography",
           "name": "Photography",
-          "description": "A realistic person, place, product, lighting setup, or editorial scene.",
+          "description": "Image requests seeking photographic realism, believable people or products, natural materials, camera-like composition, lighting, depth of field, and editorial scenes.",
           "target_hint": "Best with a strong photorealistic image target."
         },
         {
           "id": "illustration",
           "name": "Illustration",
-          "description": "Editorial art, a character, poster, icon, or stylized scene.",
+          "description": "Drawn or stylized artwork such as characters, posters, editorial graphics, icons, comics, storybook scenes, flat art, or painterly compositions.",
           "target_hint": "Best with a strong illustration target."
         },
         {
           "id": "product-mockups",
           "name": "Product mockups",
-          "description": "Packaging, a device screen, merchandise, or a product presentation scene.",
+          "description": "Presentation images for packaging, merchandise, devices, app screens, signage, and products placed in realistic branded or commercial settings.",
           "target_hint": "Best with an image target that handles product details well."
         },
         {
           "id": "diagrams-infographics",
           "name": "Diagrams and infographics",
-          "description": "A visual explanation, labeled system, process, or data story.",
+          "description": "Visual explanations that depend on labeled structure: processes, systems, timelines, comparisons, maps, charts, technical diagrams, and infographics.",
           "target_hint": "Best with an image target that handles text and layout well."
         },
         {
           "id": "edits-variations",
           "name": "Edits and variations",
-          "description": "Restyling, extending, cleaning up, or creating variations of an image.",
+          "description": "Changes to an existing image, including removing or replacing elements, extending the canvas, restyling, recoloring, cleanup, and generating close alternatives.",
           "target_hint": "Best with an image target that supports editing."
         }
       ],
@@ -496,7 +496,7 @@
     },
     {
       "id": "translation-localization-desk",
-      "revision": 2,
+      "revision": 3,
       "name": "Translation and Localization Desk",
       "summary": "Routes translation, product localization, transcreation, terminology, and language review.",
       "tags": [
@@ -514,31 +514,31 @@
         {
           "id": "direct-translation",
           "name": "Direct translation",
-          "description": "Meaning, facts, structure, and terminology preserved in another language.",
+          "description": "Faithful translation between named languages with meaning, facts, structure, and established terminology preserved as closely as the target language allows.",
           "target_hint": "Best with a strong multilingual target."
         },
         {
           "id": "product-localization",
           "name": "Product localization",
-          "description": "Interface copy, help content, or product messages adapted for a locale.",
+          "description": "Adapting interface copy, help text, notifications, onboarding, and product messages to local conventions, space limits, and expected terminology.",
           "target_hint": "Best with a multilingual product-writing target."
         },
         {
           "id": "transcreation",
           "name": "Transcreation",
-          "description": "Marketing intent, emotion, and persuasion recreated for another locale.",
+          "description": "Recreating slogans, campaign copy, humor, emotion, and persuasive intent for another culture when a literal translation would lose the effect.",
           "target_hint": "Best with a creative multilingual target."
         },
         {
           "id": "terminology",
           "name": "Terminology work",
-          "description": "A glossary built or approved terms applied consistently.",
+          "description": "Building, cleaning, or applying a glossary; resolving term choices; enforcing approved product, legal, or technical vocabulary across content.",
           "target_hint": "Best with a precise multilingual target."
         },
         {
           "id": "language-qa",
           "name": "Language review",
-          "description": "Finding mistranslations, unnatural wording, formatting, and locale problems.",
+          "description": "Reviewing translated content for mistranslations, omissions, grammar, unnatural phrasing, inconsistent terms, locale formatting, and text left in the source language.",
           "target_hint": "Best with a careful multilingual review target."
         }
       ],
@@ -548,7 +548,7 @@
     },
     {
       "id": "presentation-builder",
-      "revision": 2,
+      "revision": 3,
       "name": "Presentation Builder",
       "summary": "Routes presentation structure, slide copy, data stories, notes, and rehearsal.",
       "tags": [
@@ -566,31 +566,31 @@
         {
           "id": "narrative-outline",
           "name": "Narrative and outline",
-          "description": "The audience journey, argument, or slide sequence shaped before I write slides.",
+          "description": "Shaping the presentation before slide writing: audience, objective, argument, story arc, section order, evidence, and the decision or action at the end.",
           "target_hint": "Best with a strong planning target."
         },
         {
           "id": "slide-copy",
           "name": "Slide copy",
-          "description": "Concise titles, supporting points, labels, or calls to action for slides.",
+          "description": "Writing concise slide titles, bullets, labels, captions, and calls to action that can be understood quickly without dense paragraph text.",
           "target_hint": "Best with a concise writing target."
         },
         {
           "id": "data-storytelling",
           "name": "Data storytelling",
-          "description": "Turning findings and metrics into a clear presentation narrative.",
+          "description": "Selecting and sequencing findings, charts, and metrics so the audience understands what changed, why it matters, and what conclusion the data supports.",
           "target_hint": "Best with an analytical writing target."
         },
         {
           "id": "speaker-notes",
           "name": "Speaker notes",
-          "description": "Explanations, transitions, timing, or delivery cues for a presentation.",
+          "description": "Expanding slides into spoken explanations, transitions, examples, timing cues, and reminders that support delivery without duplicating the slide text.",
           "target_hint": "Best with a natural long-form writing target."
         },
         {
           "id": "review-rehearsal",
           "name": "Review and rehearsal",
-          "description": "Critiquing a deck and preparing likely audience questions and answers.",
+          "description": "Critiquing a deck for logic, clarity, pacing, evidence, and visual overload, then preparing likely audience questions, objections, and concise answers.",
           "target_hint": "Best with a critical reasoning target."
         }
       ],
@@ -600,7 +600,7 @@
     },
     {
       "id": "customer-support-triage",
-      "revision": 2,
+      "revision": 3,
       "name": "Customer Support Triage",
       "summary": "Routes quick answers, troubleshooting, billing, complaints, and escalations.",
       "tags": [
@@ -618,31 +618,31 @@
         {
           "id": "quick-answers",
           "name": "Quick answers",
-          "description": "FAQs, product guidance, and routine how-to responses.",
+          "description": "Routine product questions, known FAQs, setup guidance, feature explanations, and simple how-to requests that have a direct documented answer.",
           "target_hint": "Best with a fast, low-cost support target."
         },
         {
           "id": "technical-troubleshooting",
           "name": "Technical troubleshooting",
-          "description": "Reproduction steps, diagnostics, or recovery instructions for a technical problem.",
+          "description": "Reports of errors, broken behavior, failed integrations, connectivity problems, or incorrect results that require diagnostic questions and recovery steps.",
           "target_hint": "Best with a technical reasoning target."
         },
         {
           "id": "account-billing",
           "name": "Account and billing",
-          "description": "Help with a plan, invoice, access issue, refund, or account question.",
+          "description": "Requests about login access, plans, subscriptions, invoices, charges, refunds, account ownership, entitlements, and changes to customer records.",
           "target_hint": "Best with a precise support target."
         },
         {
           "id": "complaints-recovery",
           "name": "Complaints and recovery",
-          "description": "A calm response to frustration, a complaint, or a service failure.",
+          "description": "Frustrated or dissatisfied customer messages that call for acknowledgment, de-escalation, ownership, apology, and a clear path to resolution.",
           "target_hint": "Best with a careful communication target."
         },
         {
           "id": "escalation-handoff",
           "name": "Escalation handoff",
-          "description": "Summarizing context, evidence, attempts, impact, and the next owner for escalation.",
+          "description": "Preparing an internal escalation with customer impact, timeline, evidence, reproduction steps, attempted fixes, current status, urgency, and the next responsible team.",
           "target_hint": "Best with reliable structured output."
         }
       ],
@@ -652,7 +652,7 @@
     },
     {
       "id": "sales-proposal-desk",
-      "revision": 2,
+      "revision": 3,
       "name": "Sales and Proposal Desk",
       "summary": "Routes account research, outreach, discovery, objections, and proposals.",
       "tags": [
@@ -670,31 +670,31 @@
         {
           "id": "account-research",
           "name": "Account research",
-          "description": "Summarizing organizations, roles, needs, and likely priorities from supplied information.",
+          "description": "Building an account brief from supplied material: organization, market, people, current tools, likely priorities, recent changes, and relevant risks or opportunities.",
           "target_hint": "Best with a strong research target."
         },
         {
           "id": "outreach",
           "name": "Outreach",
-          "description": "A personalized email, follow-up, or connection message.",
+          "description": "Writing personalized prospecting emails, connection notes, follow-ups, and meeting requests intended to start or reopen a sales conversation.",
           "target_hint": "Best with a concise persuasive writing target."
         },
         {
           "id": "discovery",
           "name": "Discovery",
-          "description": "Discovery questions, call preparation, pain points, or qualification help.",
+          "description": "Preparing discovery calls, qualification questions, pain-point hypotheses, stakeholder maps, and notes that uncover needs, authority, urgency, and decision criteria.",
           "target_hint": "Best with a thoughtful sales target."
         },
         {
           "id": "objection-handling",
           "name": "Objection handling",
-          "description": "A clear response to concerns about price, timing, trust, or competitors.",
+          "description": "Responding to concerns about price, timing, implementation, trust, competition, procurement, or fit without turning the answer into a full proposal.",
           "target_hint": "Best with a persuasive reasoning target."
         },
         {
           "id": "proposals-rfps",
           "name": "Proposals and RFPs",
-          "description": "A structured response, scope, value case, or executive summary.",
+          "description": "Longer formal sales documents such as proposals, scopes, value cases, executive summaries, security responses, and structured RFP or RFI answers.",
           "target_hint": "Best with a long-context target."
         }
       ],
@@ -704,7 +704,7 @@
     },
     {
       "id": "product-management-hub",
-      "revision": 2,
+      "revision": 3,
       "name": "Product Management Hub",
       "summary": "Routes feedback, product definition, priorities, experiments, and launches.",
       "tags": [
@@ -722,31 +722,31 @@
         {
           "id": "feedback-synthesis",
           "name": "Feedback synthesis",
-          "description": "Grouping requests, complaints, themes, and unmet needs from supplied feedback.",
+          "description": "Clustering interviews, tickets, reviews, and requests into themes, user problems, frequency, severity, unmet needs, and supporting evidence.",
           "target_hint": "Best with a long-context target."
         },
         {
           "id": "product-definition",
           "name": "Product definition",
-          "description": "A problem statement, requirement, user story, or acceptance criteria.",
+          "description": "Defining a problem and intended behavior through briefs, requirements, user stories, flows, constraints, edge cases, and acceptance criteria.",
           "target_hint": "Best with a precise product-writing target."
         },
         {
           "id": "prioritization",
           "name": "Prioritization",
-          "description": "Impact, cost, risk, confidence, and dependencies compared.",
+          "description": "Comparing candidate work by user impact, strategic fit, effort, risk, confidence, urgency, dependencies, and the cost of delay.",
           "target_hint": "Best with a strong reasoning target."
         },
         {
           "id": "metrics-experiments",
           "name": "Metrics and experiments",
-          "description": "Defining success measures, hypotheses, events, and experiments.",
+          "description": "Designing hypotheses, success metrics, event definitions, baselines, experiments, guardrails, sample considerations, and decision rules.",
           "target_hint": "Best with an analytical reasoning target."
         },
         {
           "id": "launch-release",
           "name": "Launch and release",
-          "description": "A rollout plan, release note, enablement material, or feedback loop.",
+          "description": "Planning rollout stages, readiness checks, release notes, enablement, communication, monitoring, feedback collection, and rollback conditions.",
           "target_hint": "Best with a structured planning target."
         }
       ],
@@ -756,7 +756,7 @@
     },
     {
       "id": "project-delivery-office",
-      "revision": 2,
+      "revision": 3,
       "name": "Project Delivery Office",
       "summary": "Routes plans, status, risks, decisions, and retrospectives.",
       "tags": [
@@ -774,31 +774,31 @@
         {
           "id": "planning",
           "name": "Planning",
-          "description": "Defining scope, milestones, work breakdowns, estimates, and responsibilities.",
+          "description": "Turning an objective into scope, milestones, work packages, estimates, owners, sequencing, dependencies, and a delivery schedule.",
           "target_hint": "Best with a strong planning target."
         },
         {
           "id": "status-reporting",
           "name": "Status reporting",
-          "description": "Summarizing progress, changes, blockers, decisions, and next steps.",
+          "description": "Communicating current progress, completed work, changes, blockers, decisions, confidence, and the next reporting period in a concise update.",
           "target_hint": "Best with a concise structured writing target."
         },
         {
           "id": "risks-dependencies",
           "name": "Risks and dependencies",
-          "description": "Identifying exposure, triggers, mitigations, dependencies, and owners.",
+          "description": "Identifying what could derail delivery, including probability, impact, warning signs, mitigations, dependencies, contingencies, and accountable owners.",
           "target_hint": "Best with a careful reasoning target."
         },
         {
           "id": "decision-support",
           "name": "Decision support",
-          "description": "Options, trade-offs, a decision record, or a recommendation.",
+          "description": "Framing a project decision with options, constraints, trade-offs, evidence, recommendation, dissent, and a record of what was decided.",
           "target_hint": "Best with a strong reasoning target."
         },
         {
           "id": "retrospectives",
           "name": "Retrospectives",
-          "description": "Capturing outcomes, contributing factors, lessons, and follow-up actions.",
+          "description": "Looking back on delivery outcomes to separate symptoms from contributing factors, capture lessons, and assign concrete improvement actions.",
           "target_hint": "Best with an analytical writing target."
         }
       ],
@@ -808,7 +808,7 @@
     },
     {
       "id": "people-operations-assistant",
-      "revision": 2,
+      "revision": 3,
       "name": "People Operations Assistant",
       "summary": "Routes policies, hiring, interviews, onboarding, and development.",
       "notice": "Review decisions about people before acting on them.",
@@ -827,31 +827,31 @@
         {
           "id": "policies-guidance",
           "name": "Policies and guidance",
-          "description": "Explaining supplied workplace policies and processes.",
+          "description": "Explaining supplied workplace policies, benefits, leave rules, procedures, and employee processes in plain language without inventing policy.",
           "target_hint": "Best with a careful business-writing target."
         },
         {
           "id": "roles-hiring",
           "name": "Roles and hiring",
-          "description": "A job description, scorecard, or candidate message.",
+          "description": "Creating job descriptions, role expectations, hiring scorecards, candidate messages, and structured criteria for an open position.",
           "target_hint": "Best with a clear people-writing target."
         },
         {
           "id": "interview-prep",
           "name": "Interview preparation",
-          "description": "Structured questions, evaluation criteria, or a debrief format.",
+          "description": "Designing interview plans, behavioral and technical questions, evaluation rubrics, interviewer assignments, and evidence-based debrief prompts.",
           "target_hint": "Best with a structured reasoning target."
         },
         {
           "id": "onboarding",
           "name": "Onboarding",
-          "description": "An onboarding plan, checklist, training material, or manager guide.",
+          "description": "Building first-day, first-week, and role ramp-up plans with access, training, introductions, checkpoints, responsibilities, and manager follow-through.",
           "target_hint": "Best with a planning and writing target."
         },
         {
           "id": "feedback-development",
           "name": "Feedback and development",
-          "description": "A review, goal, coaching note, or difficult feedback message.",
+          "description": "Writing performance feedback, goals, coaching notes, growth plans, recognition, and clear messages for difficult employee conversations.",
           "target_hint": "Best with a careful communication target."
         }
       ],
@@ -861,7 +861,7 @@
     },
     {
       "id": "it-help-desk",
-      "revision": 2,
+      "revision": 3,
       "name": "IT Help Desk",
       "summary": "Routes user help, devices, networks, access, automation, and documentation.",
       "tags": [
@@ -879,31 +879,31 @@
         {
           "id": "user-assistance",
           "name": "User assistance",
-          "description": "Application setup, a common error fixed, or clear step-by-step guidance.",
+          "description": "Everyday application help: installation, configuration, feature use, common error messages, passwordless setup, and step-by-step instructions for end users.",
           "target_hint": "Best with a fast technical support target."
         },
         {
           "id": "device-network",
           "name": "Device and network troubleshooting",
-          "description": "Help with connectivity, an operating system, a device, or a peripheral.",
+          "description": "Troubleshooting computers, operating systems, peripherals, Wi-Fi, DNS, VPN, local networks, drivers, and connectivity between devices or services.",
           "target_hint": "Best with a technical reasoning target."
         },
         {
           "id": "identity-access",
           "name": "Identity and access",
-          "description": "Help with accounts, permissions, authentication, or an access review.",
+          "description": "Account provisioning, authentication, permissions, group membership, role changes, access reviews, sign-in failures, and least-privilege questions.",
           "target_hint": "Best with a precise security-aware target."
         },
         {
           "id": "automation",
           "name": "Automation",
-          "description": "A shell command, script, repetitive task, or administrative workflow.",
+          "description": "Creating shell commands, scripts, scheduled tasks, bulk administration, and repeatable workflows for operating systems or IT tools.",
           "target_hint": "Best with a coding target."
         },
         {
           "id": "change-documentation",
           "name": "Change documentation",
-          "description": "A runbook, maintenance notice, inventory, or technical handoff.",
+          "description": "Writing runbooks, maintenance notices, asset inventories, change records, rollback steps, support handoffs, and operational procedures.",
           "target_hint": "Best with a clear technical writing target."
         }
       ],
@@ -913,7 +913,7 @@
     },
     {
       "id": "security-operations-desk",
-      "revision": 2,
+      "revision": 3,
       "name": "Security Operations Desk",
       "summary": "Routes alerts, threats, secure review, incidents, and compliance evidence.",
       "notice": "Verify security advice before applying it.",
@@ -932,31 +932,31 @@
         {
           "id": "alert-triage",
           "name": "Alert triage",
-          "description": "Logs, alerts, indicators, or suspicious behavior interpreted.",
+          "description": "Assessing alerts, logs, indicators, suspicious events, and detections to determine likely cause, affected assets, severity, confidence, and immediate next checks.",
           "target_hint": "Best with a fast security analysis target."
         },
         {
           "id": "threat-modeling",
           "name": "Threat modeling",
-          "description": "Identifying assets, boundaries, attack paths, controls, and abuse cases.",
+          "description": "Mapping assets, trust boundaries, actors, entry points, abuse cases, attack paths, existing controls, and recommended mitigations before an incident occurs.",
           "target_hint": "Best with a strong security reasoning target."
         },
         {
           "id": "secure-review",
           "name": "Secure review",
-          "description": "Code, configuration, permissions, or a deployment plan reviewed for security problems.",
+          "description": "Inspecting code, infrastructure, permissions, configurations, and deployment plans for vulnerabilities, unsafe defaults, secret exposure, and control gaps.",
           "target_hint": "Best with a careful code and configuration target."
         },
         {
           "id": "incident-response",
           "name": "Incident response",
-          "description": "Containment steps, an investigation plan, a timeline, or an incident update.",
+          "description": "Active security events that need containment, evidence preservation, investigation steps, timeline reconstruction, stakeholder updates, recovery, and lessons learned.",
           "target_hint": "Best with a strong incident reasoning target."
         },
         {
           "id": "compliance-evidence",
           "name": "Compliance evidence",
-          "description": "Mapping and summarizing supplied controls, policies, findings, and remediation work.",
+          "description": "Mapping supplied policies, controls, tests, findings, owners, and remediation records to an audit, certification, or governance requirement.",
           "target_hint": "Best with a precise long-context target."
         }
       ],
@@ -966,7 +966,7 @@
     },
     {
       "id": "devops-reliability",
-      "revision": 2,
+      "revision": 3,
       "name": "DevOps and Reliability",
       "summary": "Routes builds, infrastructure, observability, incidents, and performance.",
       "tags": [
@@ -984,31 +984,31 @@
         {
           "id": "build-ci",
           "name": "Build and CI failures",
-          "description": "A pipeline, dependency, test, build, or release failure diagnosed.",
+          "description": "Failures in builds, tests, dependencies, package resolution, CI jobs, artifacts, signing, or release pipelines where the goal is to restore a passing delivery path.",
           "target_hint": "Best with a coding target with strong debugging."
         },
         {
           "id": "infrastructure",
           "name": "Infrastructure",
-          "description": "Help with containers, Kubernetes, cloud resources, networking, or infrastructure as code.",
+          "description": "Designing or changing containers, Kubernetes, cloud resources, networking, service discovery, infrastructure as code, and deployment topology.",
           "target_hint": "Best with a strong infrastructure target."
         },
         {
           "id": "observability",
           "name": "Observability",
-          "description": "Working through logs, metrics, traces, alerts, dashboards, and service objectives.",
+          "description": "Working with logs, metrics, traces, dashboards, alert rules, service objectives, error budgets, and instrumentation needed to understand system behavior.",
           "target_hint": "Best with an analytical operations target."
         },
         {
           "id": "incident-mitigation",
           "name": "Incident mitigation",
-          "description": "Production behavior diagnosed and safe recovery steps developed.",
+          "description": "Live service degradation or outages that require rapid diagnosis, safe mitigation, rollback, traffic control, communication, and recovery verification.",
           "target_hint": "Best with a careful operations reasoning target."
         },
         {
           "id": "capacity-performance",
           "name": "Capacity and performance",
-          "description": "Analyzing bottlenecks, scaling plans, load issues, costs, and resilience.",
+          "description": "Analyzing latency, throughput, saturation, resource use, scaling limits, load tests, capacity forecasts, resilience, and infrastructure cost efficiency.",
           "target_hint": "Best with a deep technical reasoning target."
         }
       ],
@@ -1018,7 +1018,7 @@
     },
     {
       "id": "finance-business-analysis",
-      "revision": 2,
+      "revision": 3,
       "name": "Finance and Business Analysis",
       "summary": "Routes reconciliation, budgets, forecasts, pricing, and reports.",
       "notice": "Review financial work before relying on it.",
@@ -1037,31 +1037,31 @@
         {
           "id": "transactions-reconciliation",
           "name": "Transactions and reconciliation",
-          "description": "Categorizing transactions, matching records, finding exceptions, and checking controls.",
+          "description": "Operational accounting work involving transaction classification, account matching, discrepancies, missing records, exception queues, and reconciliation controls.",
           "target_hint": "Best with a precise structured-data target."
         },
         {
           "id": "budget-variance",
           "name": "Budget and variance",
-          "description": "Comparing plans with actuals and explaining material differences.",
+          "description": "Comparing budget or plan with actual results, quantifying material differences, tracing their drivers, and explaining favorable or unfavorable variance.",
           "target_hint": "Best with a quantitative analysis target."
         },
         {
           "id": "forecast-scenarios",
           "name": "Forecast and scenarios",
-          "description": "Modeling assumptions, ranges, sensitivities, and cash needs.",
+          "description": "Projecting revenue, cost, cash, demand, or runway under explicit assumptions, ranges, sensitivities, and best-, base-, and worst-case scenarios.",
           "target_hint": "Best with a strong quantitative reasoning target."
         },
         {
           "id": "pricing-economics",
           "name": "Pricing and unit economics",
-          "description": "Analyzing margins, acquisition cost, retention, pricing, and break-even.",
+          "description": "Unit economics and commercial decisions involving price, margin, discounts, acquisition cost, retention, contribution, payback, and break-even.",
           "target_hint": "Best with a business reasoning target."
         },
         {
           "id": "management-reporting",
           "name": "Management reporting",
-          "description": "A decision-ready summary, commentary, table, or financial finding.",
+          "description": "Turning financial or operating results into decision-ready tables, commentary, trends, exceptions, and an executive summary for a reporting period.",
           "target_hint": "Best with a clear analytical writing target."
         }
       ],
@@ -1071,7 +1071,7 @@
     },
     {
       "id": "contract-policy-review",
-      "revision": 2,
+      "revision": 3,
       "name": "Contract and Policy Review",
       "summary": "Routes summaries, clauses, comparisons, drafts, and risk checks.",
       "notice": "Have a qualified person review legal decisions.",
@@ -1090,31 +1090,31 @@
         {
           "id": "plain-summary",
           "name": "Plain-language summary",
-          "description": "Explaining supplied contracts and policies without changing their meaning.",
+          "description": "Explaining a supplied contract or policy in plain language, organized around purpose, parties, obligations, dates, money, termination, and practical consequences.",
           "target_hint": "Best with a careful long-context target."
         },
         {
           "id": "clause-extraction",
           "name": "Clause extraction",
-          "description": "Finding duties, dates, renewals, limits, remedies, and exceptions.",
+          "description": "Locating and listing specific terms such as duties, renewal, notice, payment, confidentiality, liability, data use, remedies, exceptions, and governing law.",
           "target_hint": "Best with a precise extraction target."
         },
         {
           "id": "version-comparison",
           "name": "Version comparison",
-          "description": "Identifying material additions, removals, and changed obligations across versions.",
+          "description": "Comparing drafts or policy versions to identify added, removed, or changed language and explain which obligations or rights materially moved.",
           "target_hint": "Best with a long-context target."
         },
         {
           "id": "routine-drafting",
           "name": "Routine drafting",
-          "description": "A clause, policy, notice, or revision suggestion drafted from my instructions.",
+          "description": "Drafting or revising a clause, notice, internal policy, amendment, or standard agreement language from supplied business instructions.",
           "target_hint": "Best with a careful drafting target."
         },
         {
           "id": "risk-checklist",
           "name": "Risk checklist",
-          "description": "Ambiguity, unusual terms, missing protections, or questions for review surfaced.",
+          "description": "Issue spotting for ambiguity, one-sided terms, missing protections, unusual obligations, conflicting clauses, operational burden, and questions for qualified review.",
           "target_hint": "Best with a critical reasoning target."
         }
       ],
@@ -1124,7 +1124,7 @@
     },
     {
       "id": "learning-tutor",
-      "revision": 2,
+      "revision": 3,
       "name": "Learning Tutor",
       "summary": "Routes explanations, worked problems, practice, feedback, and study plans.",
       "tags": [
@@ -1142,31 +1142,31 @@
         {
           "id": "explain-concept",
           "name": "Explain a concept",
-          "description": "A clear explanation matched to what I already know.",
+          "description": "Teaching a topic at the learner's stated level through definitions, intuition, examples, analogies, and checks for understanding rather than solving an assigned problem.",
           "target_hint": "Best with a clear teaching target."
         },
         {
           "id": "work-problem",
           "name": "Work through a problem",
-          "description": "Guided steps, hints, calculations, or reasoning for a problem.",
+          "description": "Guiding a specific exercise or calculation with hints, intermediate steps, reasoning, and error correction while keeping the learner engaged in the solution.",
           "target_hint": "Best with a strong reasoning target."
         },
         {
           "id": "practice-quiz",
           "name": "Practice and quiz",
-          "description": "Questions, exercises, flashcards, or an answer check.",
+          "description": "Generating practice questions, quizzes, flashcards, drills, answer keys, and spaced review prompts for a named topic or exam.",
           "target_hint": "Best with a fast interactive teaching target."
         },
         {
           "id": "review-work",
           "name": "Review my work",
-          "description": "Specific feedback, corrections, and ways to improve my work.",
+          "description": "Evaluating the learner's submitted answer, essay, code, or reasoning against criteria and giving specific corrections and next improvements.",
           "target_hint": "Best with a careful review target."
         },
         {
           "id": "study-planning",
           "name": "Study planning",
-          "description": "Goals, a learning sequence, a schedule, or review intervals.",
+          "description": "Building a learning plan around goals, current level, available time, topic sequence, practice mix, review intervals, milestones, and progress checks.",
           "target_hint": "Best with a dependable planning target."
         }
       ],
@@ -1176,7 +1176,7 @@
     },
     {
       "id": "course-training-designer",
-      "revision": 2,
+      "revision": 3,
       "name": "Course and Training Designer",
       "summary": "Routes curricula, lessons, assessments, rubrics, and learner needs.",
       "tags": [
@@ -1194,31 +1194,31 @@
         {
           "id": "curriculum-design",
           "name": "Curriculum design",
-          "description": "Designing outcomes, modules, prerequisites, and learning progressions.",
+          "description": "Structuring a full course or training program through audience needs, outcomes, prerequisites, modules, sequencing, duration, and evidence of mastery.",
           "target_hint": "Best with a strong instructional planning target."
         },
         {
           "id": "lesson-creation",
           "name": "Lesson creation",
-          "description": "Activities, examples, explanations, or facilitator guidance for a lesson.",
+          "description": "Creating one lesson or session with an opening, explanation, examples, activities, discussion prompts, timing, materials, and facilitator guidance.",
           "target_hint": "Best with a clear teaching and writing target."
         },
         {
           "id": "assessments",
           "name": "Assessments",
-          "description": "Questions, projects, practical exercises, or answer keys.",
+          "description": "Designing quizzes, exams, practical tasks, projects, simulations, answer keys, and scoring plans that measure stated learning outcomes.",
           "target_hint": "Best with a precise teaching target."
         },
         {
           "id": "rubrics-feedback",
           "name": "Rubrics and feedback",
-          "description": "Evaluation criteria or useful feedback for learners.",
+          "description": "Defining observable evaluation criteria, performance levels, scoring guidance, and reusable feedback tied to the work being assessed.",
           "target_hint": "Best with a structured review target."
         },
         {
           "id": "adaptation",
           "name": "Adaptation",
-          "description": "Material adapted for different skill levels, needs, formats, or accessibility.",
+          "description": "Adjusting learning material for different skill levels, accessibility needs, languages, delivery formats, time limits, or individual support requirements.",
           "target_hint": "Best with a flexible instructional target."
         }
       ],
@@ -1228,7 +1228,7 @@
     },
     {
       "id": "healthcare-operations-assistant",
-      "revision": 2,
+      "revision": 3,
       "name": "Healthcare Operations Assistant",
       "summary": "Routes patient administration, approved materials, documentation, policy, and operations.",
       "notice": "Do not use this route for diagnosis or treatment decisions.",
@@ -1247,31 +1247,31 @@
         {
           "id": "patient-administration",
           "name": "Patient administration",
-          "description": "Help with scheduling, intake, reminders, or non-clinical instructions.",
+          "description": "Non-clinical patient operations such as scheduling, intake, reminders, referrals, registration, forms, contact instructions, and service navigation.",
           "target_hint": "Best with a clear administrative writing target."
         },
         {
           "id": "patient-materials",
           "name": "Patient-friendly materials",
-          "description": "Rewriting approved information in clear, accessible language.",
+          "description": "Rewriting approved health information for patients using plain language, accessible structure, appropriate reading level, and no new clinical claims.",
           "target_hint": "Best with a careful plain-language target."
         },
         {
           "id": "documentation-formatting",
           "name": "Documentation formatting",
-          "description": "Organizing supplied notes without adding new medical claims.",
+          "description": "Organizing supplied notes into a requested structure, template, or summary while preserving facts and avoiding diagnosis, treatment, or invented details.",
           "target_hint": "Best with a precise structured-writing target."
         },
         {
           "id": "policy-compliance",
           "name": "Policy and compliance",
-          "description": "Summarizing supplied procedures, requirements, and checklists.",
+          "description": "Summarizing supplied healthcare procedures, privacy requirements, checklists, roles, controls, and evidence needed for operational compliance.",
           "target_hint": "Best with a careful long-context target."
         },
         {
           "id": "operations-analysis",
           "name": "Operations analysis",
-          "description": "Analyzing staffing, workflows, wait times, handoffs, and service quality.",
+          "description": "Analyzing staffing, appointments, wait times, throughput, handoffs, capacity, service quality, and workflow bottlenecks in healthcare delivery operations.",
           "target_hint": "Best with an analytical reasoning target."
         }
       ],
@@ -1281,7 +1281,7 @@
     },
     {
       "id": "ecommerce-operations",
-      "revision": 2,
+      "revision": 3,
       "name": "E-commerce Operations",
       "summary": "Routes catalog data, product content, merchandising, customers, and reviews.",
       "tags": [
@@ -1299,31 +1299,31 @@
         {
           "id": "catalog-cleanup",
           "name": "Catalog cleanup",
-          "description": "Normalizing titles, attributes, categories, and structured product fields.",
+          "description": "Normalizing product titles, categories, variants, attributes, units, identifiers, and structured fields so catalog records are consistent and complete.",
           "target_hint": "Best with a precise structured-data target."
         },
         {
           "id": "product-content",
           "name": "Product content",
-          "description": "A product description, benefit list, comparison table, or FAQ.",
+          "description": "Writing product descriptions, feature and benefit copy, specifications, comparison tables, buying guidance, and product-specific FAQs.",
           "target_hint": "Best with a clear product-writing target."
         },
         {
           "id": "merchandising",
           "name": "Merchandising",
-          "description": "Collections, bundles, promotions, or a seasonal campaign planned.",
+          "description": "Planning collections, bundles, cross-sells, promotions, seasonal assortments, placement, and offer structure to improve product discovery and sales.",
           "target_hint": "Best with a creative commerce target."
         },
         {
           "id": "customer-messages",
           "name": "Customer messages",
-          "description": "A response about a product, shipment, return, or review.",
+          "description": "Customer-facing replies about products, orders, shipping, delivery, returns, exchanges, stock, and post-purchase concerns.",
           "target_hint": "Best with a fast customer communication target."
         },
         {
           "id": "review-analysis",
           "name": "Review analysis",
-          "description": "Extracting themes, defects, objections, and product opportunities from reviews.",
+          "description": "Mining customer reviews for repeated praise, objections, defects, unmet expectations, language customers use, and opportunities for product or content changes.",
           "target_hint": "Best with a long-context target."
         }
       ],
@@ -1333,7 +1333,7 @@
     },
     {
       "id": "home-travel-life-planner",
-      "revision": 2,
+      "revision": 3,
       "name": "Home, Travel, and Life Planner",
       "summary": "Routes trips, purchases, home routines, events, and life administration.",
       "tags": [
@@ -1351,31 +1351,31 @@
         {
           "id": "travel-planning",
           "name": "Travel planning",
-          "description": "An itinerary, packing list, schedule, budget, or travel alternative.",
+          "description": "Trips and outings involving destinations, routes, schedules, lodging, activities, reservations, packing, budgets, constraints, and backup options.",
           "target_hint": "Best with a strong planning target."
         },
         {
           "id": "purchase-decisions",
           "name": "Purchase decisions",
-          "description": "Requirements, comparison criteria, trade-offs, or a shortlist.",
+          "description": "Comparing products or services against requirements, budget, trade-offs, ownership costs, compatibility, condition, and a reasoned shortlist.",
           "target_hint": "Best with a careful comparison target."
         },
         {
           "id": "home-routines",
           "name": "Home routines",
-          "description": "Help with meals, maintenance, organization, or a recurring home plan.",
+          "description": "Recurring household work such as meal planning, cleaning, maintenance, organization, chores, supplies, and schedules shared across a home.",
           "target_hint": "Best with a fast practical planning target."
         },
         {
           "id": "events-occasions",
           "name": "Events and occasions",
-          "description": "A timeline, invitation, menu, activity plan, or checklist for an event.",
+          "description": "Planning gatherings, celebrations, and occasions through guest needs, invitations, venue, timeline, menu, activities, responsibilities, budget, and contingency plans.",
           "target_hint": "Best with a creative planning target."
         },
         {
           "id": "life-administration",
           "name": "Life administration",
-          "description": "Help organizing forms, correspondence, appointments, or a complex task list.",
+          "description": "Coordinating forms, appointments, correspondence, deadlines, records, renewals, and multi-step personal tasks that do not fit travel, shopping, home, or events.",
           "target_hint": "Best with a dependable structured-planning target."
         }
       ],
