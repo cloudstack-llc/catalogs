@@ -1,0 +1,115 @@
+name: refresh-runtime-feed
+
+# Runtime catalogs evolve independently from Nexus app releases. Direct
+# upstream assets are cataloged from GitHub's digest metadata; only split
+# Windows CUDA archives are assembled and retained as GitHub Release assets.
+on:
+  schedule:
+    - cron: "23 */4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-runtime-feed
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          token: ${{ secrets.REFRESH_TOKEN || github.token }}
+          fetch-depth: 0
+
+      - name: Test the publisher
+        run: |
+          node --test scripts/*.test.mjs
+          python3 -m unittest discover -s scripts -p '*_test.py'
+
+      - name: Generate candidate feeds
+        env:
+          GITHUB_TOKEN: ${{ secrets.REFRESH_TOKEN || github.token }}
+        run: |
+          for channel in stable dev; do
+            node scripts/runtime-feed-generate.mjs \
+              --channel "$channel" \
+              --previous "v2/runtime/${channel}/runtime-release-feed.signed.json" \
+              --out ".runtime-feed/${channel}.candidate.json" \
+              --bundles-out ".runtime-feed/${channel}.bundles.json" \
+              --bundle-dir ".runtime-feed/bundles"
+          done
+
+      - name: Publish new immutable bundles
+        env:
+          GH_TOKEN: ${{ secrets.REFRESH_TOKEN || github.token }}
+        run: scripts/runtime-feed-publish-bundles.sh .runtime-feed/*.bundles.json
+
+      - name: Sign and verify changed feeds
+        env:
+          MSTY_NEXUS_RUNTIME_RELEASE_FEED_PRIVATE_KEY: ${{ secrets.MSTY_NEXUS_RUNTIME_RELEASE_FEED_PRIVATE_KEY }}
+          MSTY_NEXUS_RUNTIME_RELEASE_FEED_KEY_ID: ${{ vars.MSTY_NEXUS_RUNTIME_RELEASE_FEED_KEY_ID || 'msty-runtime-feed-1' }}
+        run: |
+          test -n "$MSTY_NEXUS_RUNTIME_RELEASE_FEED_PRIVATE_KEY"
+          for channel in stable dev; do
+            candidate=".runtime-feed/${channel}.candidate.json"
+            if [[ ! -f "$candidate" ]]; then
+              continue
+            fi
+            output="v2/runtime/${channel}/runtime-release-feed.signed.json"
+            mkdir -p "$(dirname "$output")"
+            node scripts/runtime-feed-sign.mjs \
+              --input "$candidate" \
+              --out "$output" \
+              --key-id "$MSTY_NEXUS_RUNTIME_RELEASE_FEED_KEY_ID"
+            node scripts/runtime-feed-verify.mjs "$output" "$channel"
+          done
+
+      - name: Check out the Nexus consumer verifier
+        if: ${{ hashFiles('.runtime-feed/*.candidate.json') != '' }}
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: cloudstack-llc/msty-nexus
+          ref: rel/0.5.0
+          path: .runtime-feed/nexus-contract
+
+      - name: Set up Go for consumer verification
+        if: ${{ hashFiles('.runtime-feed/*.candidate.json') != '' }}
+        uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
+        with:
+          go-version-file: .runtime-feed/nexus-contract/go.mod
+          cache: true
+
+      - name: Verify changed feeds with Nexus
+        if: ${{ hashFiles('.runtime-feed/*.candidate.json') != '' }}
+        env:
+          TRUSTED_KEYS: msty-runtime-feed-1=5rZcCrp9d0WhHcuQk+rk9GDJtKizYK0LufQ551FltdA=
+        run: |
+          for channel in stable dev; do
+            feed="$GITHUB_WORKSPACE/v2/runtime/${channel}/runtime-release-feed.signed.json"
+            if [[ ! -f ".runtime-feed/${channel}.candidate.json" ]]; then
+              continue
+            fi
+            (
+              cd .runtime-feed/nexus-contract
+              go run ./cmd/msty-nexusctl -- runtime-release-feeds verify \
+                --trusted-keys "$TRUSTED_KEYS" \
+                --file "$feed"
+            )
+          done
+
+      - name: Commit changed feeds
+        run: |
+          if [[ -z "$(git status --porcelain -- v2/runtime)" ]]; then
+            echo "nothing to publish"
+            exit 0
+          fi
+          git config user.name "runtime-catalog[bot]"
+          git config user.email "noreply@cloudstack.llc"
+          git add v2/runtime
+          git commit -m "chore: refresh runtime release feeds"
+          git push

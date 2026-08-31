@@ -15,6 +15,7 @@ https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/smart-rou
 | `v1/ollama-models.json` | The Ollama library: models, tags, sizes, context windows | [ollama.com](https://ollama.com/library) | 12 hours |
 | `v1/featured-models.json` | Curated local models worth downloading, grouped into collections | Curated; resolved against Ollama and Hugging Face | On change |
 | `v1/smart-route-starters.json` | Model-neutral Smart Route starters, grouped by use | Curated | On change |
+| `v2/runtime/{stable,dev}/runtime-release-feed.signed.json` | Signed Msty Nexus Runtime releases | Ollama, llama.cpp, and Msty MLX metadata | 4 hours |
 
 # Token pricing
 
@@ -66,6 +67,51 @@ node scripts/generate.mjs        # fetch upstream and rewrite v1/prices.json
 ```
 
 No dependencies.
+
+# Runtime release feeds
+
+The runtime catalog lets Msty Nexus update managed runtimes independently from
+Nexus app releases. Every four hours, the publisher checks stable Ollama and
+llama.cpp releases plus the latest reviewed Msty MLX runtime. It writes only
+when a runtime version or immutable artifact identity changes.
+
+The signed schema-2 feeds are served directly from this public repository:
+
+```text
+https://raw.githubusercontent.com/cloudstack-llc/catalogs/main/v2/runtime/stable/runtime-release-feed.signed.json
+https://raw.githubusercontent.com/cloudstack-llc/catalogs/main/v2/runtime/dev/runtime-release-feed.signed.json
+```
+
+They are not mirrored to R2. The signature is the trust boundary; the hosting
+origin supplies bytes but cannot authorize a runtime artifact.
+
+Direct GitHub release assets are not downloaded by the publisher. GitHub's
+SHA-256 digest and byte size enter the signed feed, and Nexus verifies the
+download against that signed digest during installation. The Msty MLX archive
+uses its published `checksums.txt` and an HTTP metadata request for size.
+
+Upstream llama.cpp currently splits the Windows CUDA package into the server
+and CUDA runtime ZIPs. For that variant only, the publisher downloads both
+digest-pinned components, rejects unsafe or duplicate paths, merges them once,
+and publishes the result as an immutable GitHub Release asset. Later refreshes
+reuse that asset.
+
+The feed uses the existing backend-aware Nexus schema and Ed25519 trust anchor.
+The signing seed is stored only in the
+`MSTY_NEXUS_RUNTIME_RELEASE_FEED_PRIVATE_KEY` repository secret. Pull requests
+never receive it. `REFRESH_TOKEN` remains the repository-scoped token used by
+the other scheduled catalogs; the default Actions token is a functional
+fallback.
+
+Whenever a feed changes, the workflow also checks out the current Nexus release
+branch and runs its real feed verifier against the signed bytes. Publisher-side
+validation therefore cannot silently drift from the consumer contract.
+
+```bash
+node --test scripts/runtime-feed.test.mjs
+python3 -m unittest discover -s scripts -p '*_test.py'
+node scripts/runtime-feed-verify-all.mjs
+```
 
 # Smart Route starters
 
