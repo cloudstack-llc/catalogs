@@ -18,3 +18,5 @@ jobs:
         run: |
           node scripts/verify.mjs
           node scripts/ollama-verify.mjs
+          node scripts/runtime-feed-verify-all.mjs
+          python3 -m unittest discover -s scripts -p '*_test.py'
