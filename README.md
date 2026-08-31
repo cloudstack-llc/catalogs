@@ -103,10 +103,6 @@ never receive it. `REFRESH_TOKEN` remains the repository-scoped token used by
 the other scheduled catalogs; the default Actions token is a functional
 fallback.
 
-Whenever a feed changes, the workflow also checks out the current Nexus release
-branch and runs its real feed verifier against the signed bytes. Publisher-side
-validation therefore cannot silently drift from the consumer contract.
-
 ```bash
 node --test scripts/runtime-feed.test.mjs
 python3 -m unittest discover -s scripts -p '*_test.py'

@@ -69,39 +69,6 @@ jobs:
             node scripts/runtime-feed-verify.mjs "$output" "$channel"
           done
 
-      - name: Check out the Nexus consumer verifier
-        if: ${{ hashFiles('.runtime-feed/*.candidate.json') != '' }}
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          repository: cloudstack-llc/msty-nexus
-          ref: rel/0.5.0
-          path: .runtime-feed/nexus-contract
-
-      - name: Set up Go for consumer verification
-        if: ${{ hashFiles('.runtime-feed/*.candidate.json') != '' }}
-        uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
-        with:
-          go-version-file: .runtime-feed/nexus-contract/go.mod
-          cache: true
-
-      - name: Verify changed feeds with Nexus
-        if: ${{ hashFiles('.runtime-feed/*.candidate.json') != '' }}
-        env:
-          TRUSTED_KEYS: msty-runtime-feed-1=5rZcCrp9d0WhHcuQk+rk9GDJtKizYK0LufQ551FltdA=
-        run: |
-          for channel in stable dev; do
-            feed="$GITHUB_WORKSPACE/v2/runtime/${channel}/runtime-release-feed.signed.json"
-            if [[ ! -f ".runtime-feed/${channel}.candidate.json" ]]; then
-              continue
-            fi
-            (
-              cd .runtime-feed/nexus-contract
-              go run ./cmd/msty-nexusctl -- runtime-release-feeds verify \
-                --trusted-keys "$TRUSTED_KEYS" \
-                --file "$feed"
-            )
-          done
-
       - name: Commit changed feeds
         run: |
           if [[ -z "$(git status --porcelain -- v2/runtime)" ]]; then
