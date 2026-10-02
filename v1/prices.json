@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-02T05:40:46Z",
+  "generated_at": "2026-10-02T12:38:56Z",
   "cost_unit": "usd_per_million_tokens",
-  "source": {"url":"https://models.dev/api.json","etag":"W/\"7c07a5b59344957df62049b8908f5d05\"","sha256":"7c07a5b59344957df62049b8908f5d05154a3412527979d14bf8c802e4bf2d17","bytes":5293414},
-  "counts": {"providers":215,"models":7923,"dropped":0},
+  "source": {"url":"https://models.dev/api.json","etag":"W/\"8ae0dd218ee9bb564ac5725bd57424f0\"","sha256":"8ae0dd218ee9bb564ac5725bd57424f0e06b1beeed23030b23951637824da194","bytes":5294320},
+  "counts": {"providers":215,"models":7924,"dropped":0},
   "providers": {
     "302ai": {
       "MiniMax-M1": {"input":0.132,"output":1.254,"context":1000000,"max_output":128000},
@@ -1521,6 +1521,7 @@
       "openai/gpt-6-astra": {"input":10,"output":50,"cache_read":1,"cache_write":12.5,"context":1050000,"max_output":128000,"tiers":[{"input":20,"output":75,"cache_read":2,"cache_write":25,"above_context":272000}]},
       "openai/gpt-6-luna": {"input":0.1,"output":0.5,"cache_read":0.01,"cache_write":0.125,"context":1050000,"max_output":128000,"tiers":[{"input":0.2,"output":0.75,"cache_read":0.02,"cache_write":0.25,"above_context":272000}]},
       "openai/gpt-6-sol": {"input":2,"output":10,"cache_read":0.2,"cache_write":2.5,"context":1050000,"max_output":128000,"tiers":[{"input":4,"output":15,"cache_read":0.4,"cache_write":5,"above_context":272000}]},
+      "openai/gpt-6.1-sol": {"input":2,"output":10,"cache_read":0.1,"cache_write":2.5,"context":1050000,"max_output":128000,"tiers":[{"input":4,"output":15,"cache_read":0.2,"cache_write":5,"above_context":272000}]},
       "qwen/qwen3.6-flash": {"input":0.19,"output":1.13,"cache_read":0.019,"cache_write":0.24,"context":1000000,"max_output":65536,"tiers":[{"input":0.75,"output":4.5,"cache_read":0.075,"cache_write":0.94,"above_context":256000}]},
       "qwen/qwen3.6-plus": {"input":0.32,"output":1.88,"cache_read":0.032,"cache_write":0.4,"context":1000000,"max_output":65536,"tiers":[{"input":1.25,"output":7.5,"cache_read":0.124,"cache_write":1.57,"above_context":256000}]},
       "qwen/qwen3.7-flash": {"input":0.04,"output":0.13,"cache_read":0.01,"cache_write":0.04,"context":1000000,"max_output":65536,"tiers":[{"input":0.1,"output":0.37,"cache_read":0.02,"cache_write":0.12,"above_context":32000},{"input":0.19,"output":0.74,"cache_read":0.04,"cache_write":0.24,"above_context":256000}]},
@@ -1624,7 +1625,7 @@
       "Qwen/Qwen3.5-397B-A17B": {"input":0.45,"output":3,"cache_read":0.22,"context":262144,"max_output":81920},
       "Qwen/Qwen3.5-9B": {"input":0.1,"output":0.15,"context":262144,"max_output":65536},
       "Qwen/Qwen3.6-27B": {"input":0.32,"output":3.2,"context":262144,"max_output":65536},
-      "Qwen/Qwen3.6-35B-A3B": {"input":0.1,"output":0.95,"context":262144,"max_output":81920},
+      "Qwen/Qwen3.6-35B-A3B": {"input":0.1,"output":0.95,"cache_read":0.1,"context":262144,"max_output":81920},
       "Qwen/Qwen3.7-Max": {"input":2.5,"output":7.5,"cache_read":0.5,"context":256000,"max_output":65536,"tiers":[{"input":5,"output":15,"cache_read":1,"above_context":32000},{"input":6.25,"output":18.5,"cache_read":1.25,"above_context":128000}]},
       "Qwen/Qwen3.8-2.4T-A95B": {"input":2,"output":6,"cache_read":0.2,"context":262144,"max_output":131072},
       "Qwen/Qwen3.8-27B": {"input":0.2,"output":2.5,"cache_read":0.05,"context":262144,"max_output":32768},
@@ -3347,7 +3348,7 @@
       "qwen/qwen3-235b-a22b-2507": {"input":0.1495,"output":0.598,"context":262144,"max_output":235929},
       "qwen/qwen3-235b-a22b-thinking-2507": {"input":0.23,"output":2.3,"context":131072,"max_output":117964},
       "qwen/qwen3-30b-a3b": {"input":0.13,"output":0.52,"context":40960,"max_output":16384},
-      "qwen/qwen3-30b-a3b-instruct-2507": {"input":0.13,"output":0.52,"context":262144,"max_output":235929},
+      "qwen/qwen3-30b-a3b-instruct-2507": {"input":0.13,"output":0.52,"context":128000,"max_output":32000},
       "qwen/qwen3-30b-a3b-thinking-2507": {"input":0.2,"output":2.4,"context":81920,"max_output":32768},
       "qwen/qwen3-32b": {"input":0.08,"output":0.28,"context":40960,"max_output":16384},
       "qwen/qwen3-8b": {"input":0.117,"output":0.455,"context":131072,"max_output":8192},
@@ -3462,7 +3463,7 @@
       "~anthropic/claude-haiku-latest": {"input":1,"output":5,"cache_read":0.1,"cache_write":1.25,"context":200000,"max_output":64000},
       "~anthropic/claude-opus-latest": {"input":4,"output":20,"cache_read":0.2,"cache_write":5,"context":1000000,"max_output":128000},
       "~anthropic/claude-sonnet-latest": {"input":2,"output":10,"cache_read":0.2,"cache_write":2.5,"context":1000000,"max_output":128000},
-      "~deepseek/deepseek-flash-latest": {"input":0.03,"output":0.75,"cache_read":0.00375,"context":1048576,"max_output":943718},
+      "~deepseek/deepseek-flash-latest": {"input":0.002025,"output":1.2,"cache_read":0.002025,"context":1048576,"max_output":943718},
       "~deepseek/deepseek-pro-latest": {"input":0.132,"output":0.396,"cache_read":0.0042,"context":1048576,"max_output":393216},
       "~deepseek/deepseek-v4-flash-latest": {"input":0.003825,"output":1.6,"cache_read":0.003825,"context":1048576,"max_output":943718},
       "~google/gemini-flash-latest": {"input":0.75,"output":3.75,"cache_read":0.075,"cache_write":0.041667,"reasoning":3.75,"context":1048576,"max_output":65536},
@@ -3474,8 +3475,8 @@
       "~openai/gpt-sol-latest": {"input":2,"output":10,"cache_read":0.1,"cache_write":2.5,"context":1050000,"max_output":128000},
       "~openai/gpt-terra-latest": {"input":2,"output":12,"cache_read":0.2,"cache_write":2.5,"context":1050000,"max_output":128000},
       "~x-ai/grok-latest": {"input":2,"output":6,"cache_read":0.5,"context":500000,"max_output":450000},
-      "~z-ai/glm-flash-latest": {"input":0.02625,"output":0.625,"cache_read":0.02625,"context":1048576,"max_output":943718},
-      "~z-ai/glm-latest": {"input":0.12,"output":4,"cache_read":0.06,"context":1048576,"max_output":131072}
+      "~z-ai/glm-flash-latest": {"input":0.02625,"output":0.9,"cache_read":0.01125,"context":1048576,"max_output":943718},
+      "~z-ai/glm-latest": {"input":0.12,"output":4,"cache_read":0.08,"context":1048576,"max_output":131072}
     },
     "kimi-code-plan-cn": {
       "k3": {"input":0,"output":0,"cache_read":0,"cache_write":0,"context":1048576,"max_output":131072},
@@ -6007,7 +6008,7 @@
       "deepseek/deepseek-v4-flash-vision-exp": {"input":0.2156,"output":0.6468,"cache_read":0.00686,"context":1048576,"max_output":262144},
       "deepseek/deepseek-v4-pro": {"input":0.2088,"output":0.4176,"cache_read":0.0174,"context":1048576,"max_output":384000},
       "deepseek/deepseek-v4-pro-0813": {"input":0.66,"output":1.98,"cache_read":0.022,"context":1048576,"max_output":393216},
-      "deepseek/deepseek-v4.1-flash": {"input":0.03,"output":0.75,"cache_read":0.00375,"context":1048576,"max_output":943718},
+      "deepseek/deepseek-v4.1-flash": {"input":0.3,"output":1.2,"cache_read":0.006,"context":1048576,"max_output":943718},
       "dots-studio/dots-3-note-preview:free": {"input":0,"output":0,"context":512000,"max_output":460800},
       "fireworks/ember-1": {"input":3,"output":15,"cache_read":0.3,"context":1048576,"max_output":943718},
       "google/gemini-2.5-flash": {"input":0.3,"output":2.5,"cache_read":0.03,"cache_write":0.083333,"reasoning":2.5,"context":1048576,"max_output":65535},
@@ -6034,7 +6035,7 @@
       "google/gemma-3-12b-it": {"input":0.05,"output":0.15,"context":131072,"max_output":16384},
       "google/gemma-3-27b-it": {"input":0.08,"output":0.45,"cache_read":0.04,"context":131072,"max_output":117964},
       "google/gemma-3-4b-it": {"input":0.05,"output":0.1,"context":131072,"max_output":16384},
-      "google/gemma-4-26b-a4b-it": {"input":0.0765,"output":0.255,"cache_read":0.0425,"context":262144,"max_output":235929},
+      "google/gemma-4-26b-a4b-it": {"input":0.09,"output":0.3,"cache_read":0.05,"context":262144,"max_output":235929},
       "google/gemma-4-26b-a4b-it:free": {"input":0,"output":0,"context":262144,"max_output":32768},
       "google/gemma-4-31b-it": {"input":0.09,"output":0.34,"cache_read":0.05,"context":262144,"max_output":16384},
       "google/gemma-4-31b-it:free": {"input":0,"output":0,"context":262144,"max_output":32768},
@@ -6321,7 +6322,7 @@
       "~anthropic/claude-haiku-latest": {"input":1,"output":5,"cache_read":0.1,"cache_write":1.25,"context":200000,"max_output":64000},
       "~anthropic/claude-opus-latest": {"input":4,"output":20,"cache_read":0.2,"cache_write":5,"context":1000000,"max_output":128000},
       "~anthropic/claude-sonnet-latest": {"input":2,"output":10,"cache_read":0.2,"cache_write":2.5,"context":1000000,"max_output":128000},
-      "~deepseek/deepseek-flash-latest": {"input":0.03,"output":0.75,"cache_read":0.00375,"context":1048576,"max_output":943718},
+      "~deepseek/deepseek-flash-latest": {"input":0.002025,"output":1.2,"cache_read":0.002025,"context":1048576,"max_output":943718},
       "~deepseek/deepseek-pro-latest": {"input":0.132,"output":0.396,"cache_read":0.0042,"context":1048576,"max_output":393216},
       "~deepseek/deepseek-v4-flash-latest": {"input":0.003825,"output":1.6,"cache_read":0.003825,"context":1048576,"max_output":943718},
       "~google/gemini-flash-latest": {"input":0.75,"output":3.75,"cache_read":0.075,"cache_write":0.041667,"reasoning":3.75,"context":1048576,"max_output":65536},
@@ -6333,8 +6334,8 @@
       "~openai/gpt-sol-latest": {"input":2,"output":10,"cache_read":0.1,"cache_write":2.5,"context":1050000,"max_output":128000,"tiers":[{"input":4,"output":15,"cache_read":0.2,"cache_write":5,"above_context":272000}]},
       "~openai/gpt-terra-latest": {"input":2,"output":12,"cache_read":0.2,"cache_write":2.5,"context":1050000,"max_output":128000,"tiers":[{"input":4,"output":18,"cache_read":0.4,"cache_write":5,"above_context":272000}]},
       "~x-ai/grok-latest": {"input":2,"output":6,"cache_read":0.5,"context":500000,"max_output":450000,"tiers":[{"input":4,"output":12,"cache_read":1,"above_context":200000}]},
-      "~z-ai/glm-flash-latest": {"input":0.02625,"output":0.625,"cache_read":0.02625,"context":1048576,"max_output":943718},
-      "~z-ai/glm-latest": {"input":0.12,"output":4,"cache_read":0.06,"context":1048576,"max_output":131072}
+      "~z-ai/glm-flash-latest": {"input":0.02625,"output":0.9,"cache_read":0.01125,"context":1048576,"max_output":943718},
+      "~z-ai/glm-latest": {"input":0.12,"output":4,"cache_read":0.08,"context":1048576,"max_output":131072}
     },
     "opper": {
       "claude-fable-5": {"input":10,"output":50,"cache_read":1,"cache_write":12.5,"context":1000000,"max_output":128000},
