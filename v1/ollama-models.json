@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-09T18:29:21Z",
+  "generated_at": "2026-10-10T06:20:00Z",
   "source": {"url":"https://ollama.com/library"},
   "counts": {"models":245,"tags":7418,"missing_model_info":136},
   "models": [
@@ -149,8 +149,8 @@
         {"tag":"671b-fp16","size":"1.3TB","digest":"3f9ee65b4e69","model_info":{"contextWindow":"160K","parameters":"671b","quantization":"F16","arch":"deepseek2"}}
       ],
       "params": ["tools","thinking","1.5b","7b","8b","14b","32b","70b","671b"],
-      "pulls": "93.5M",
-      "pulls_approx": 93500000,
+      "pulls": "93.6M",
+      "pulls_approx": 93600000,
       "updated": "1 year ago",
       "updated_at": "2025-07-02T06:09:00Z"
     },
@@ -163,8 +163,8 @@
         {"tag":"137m-v1.5-fp16","size":"274MB","digest":"0a109f422b47","model_info":{"contextWindow":"2K","parameters":"137m","quantization":"F16","arch":"nomic-bert"}}
       ],
       "params": ["embedding"],
-      "pulls": "88.6M",
-      "pulls_approx": 88600000,
+      "pulls": "88.7M",
+      "pulls_approx": 88700000,
       "updated": "2 years ago",
       "updated_at": "2024-02-21T17:26:00Z"
     },
@@ -237,8 +237,8 @@
         {"tag":"3b-text-fp16","size":"6.4GB","digest":"b9cec48fca20","model_info":{"contextWindow":"128K","parameters":"3.21b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["tools","1b","3b"],
-      "pulls": "85.1M",
-      "pulls_approx": 85100000,
+      "pulls": "85.2M",
+      "pulls_approx": 85200000,
       "updated": "2 years ago",
       "updated_at": "2024-09-25T21:09:00Z"
     },
@@ -381,8 +381,8 @@
         {"tag":"72b-instruct-fp16","size":"145GB","digest":"754bbe314ad4","model_info":{"contextWindow":"32K","parameters":"72.7b","quantization":"F16","arch":"qwen2"}}
       ],
       "params": ["tools","0.5b","1.5b","3b","7b","14b","32b","72b"],
-      "pulls": "42M",
-      "pulls_approx": 42000000,
+      "pulls": "42.1M",
+      "pulls_approx": 42100000,
       "updated": "2 years ago",
       "updated_at": "2024-09-19T16:42:00Z"
     },
@@ -423,7 +423,7 @@
       "params": ["vision","270m","1b","4b","12b","27b"],
       "pulls": "41M",
       "pulls_approx": 41000000,
-      "updated": "3 hours ago",
+      "updated": "15 hours ago",
       "updated_at": "2026-10-09T15:09:00Z"
     },
     {
@@ -752,7 +752,7 @@
       "params": ["vision","tools","thinking","audio","cloud","e2b","e4b","12b","26b","31b"],
       "pulls": "26.7M",
       "pulls_approx": 26700000,
-      "updated": "2 hours ago",
+      "updated": "14 hours ago",
       "updated_at": "2026-10-09T16:45:00Z",
       "cloud": true,
       "cloud_tags": ["cloud","31b-cloud"]
@@ -1126,7 +1126,7 @@
       "params": ["vision","tools","thinking","0.8b","2b","4b","9b","27b","35b","122b"],
       "pulls": "21.9M",
       "pulls_approx": 21900000,
-      "updated": "4 days ago",
+      "updated": "5 days ago",
       "updated_at": "2026-10-04T20:59:00Z"
     },
     {
@@ -1347,7 +1347,7 @@
       "params": ["tools","thinking","cloud","20b","120b"],
       "pulls": "13.6M",
       "pulls_approx": 13600000,
-      "updated": "3 hours ago",
+      "updated": "15 hours ago",
       "updated_at": "2026-10-09T15:23:00Z",
       "cloud": true,
       "cloud_tags": ["20b-cloud","120b-cloud"]
@@ -1367,8 +1367,8 @@
         {"tag":"480b-a35b-fp16","size":"960GB","digest":"23af91755def","model_info":{"contextWindow":"256K","parameters":"480b","quantization":"F16","arch":"qwen3moe"}}
       ],
       "params": ["tools","30b","480b"],
-      "pulls": "9.8M",
-      "pulls_approx": 9800000,
+      "pulls": "9.9M",
+      "pulls_approx": 9900000,
       "updated": "1 year ago",
       "updated_at": "2025-09-23T19:14:00Z"
     },
@@ -1906,6 +1906,20 @@
       "updated_at": "2025-01-08T18:08:00Z"
     },
     {
+      "name": "bge-m3",
+      "description": "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-Functionality, Multi-Linguality, and Multi-Granularity.",
+      "tags": [
+        {"tag":"latest","size":"1.2GB","digest":"790764642607","model_info":{"contextWindow":"8K","parameters":"567m","quantization":"F16","arch":"bert"}},
+        {"tag":"567m","size":"1.2GB","digest":"790764642607","model_info":{"contextWindow":"8K","parameters":"567m","quantization":"F16","arch":"bert"}},
+        {"tag":"567m-fp16","size":"1.2GB","digest":"790764642607","model_info":{"contextWindow":"8K","parameters":"567m","quantization":"F16","arch":"bert"}}
+      ],
+      "params": ["embedding","567m"],
+      "pulls": "7.6M",
+      "pulls_approx": 7600000,
+      "updated": "2 years ago",
+      "updated_at": "2024-08-07T00:07:00Z"
+    },
+    {
       "name": "llama2",
       "description": "Llama 2 is a collection of foundation language models ranging from 7B to 70B parameters.",
       "tags": [
@@ -2017,20 +2031,6 @@
       "pulls_approx": 7600000,
       "updated": "2 years ago",
       "updated_at": "2023-12-27T21:21:00Z"
-    },
-    {
-      "name": "bge-m3",
-      "description": "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-Functionality, Multi-Linguality, and Multi-Granularity.",
-      "tags": [
-        {"tag":"latest","size":"1.2GB","digest":"790764642607","model_info":{"contextWindow":"8K","parameters":"567m","quantization":"F16","arch":"bert"}},
-        {"tag":"567m","size":"1.2GB","digest":"790764642607","model_info":{"contextWindow":"8K","parameters":"567m","quantization":"F16","arch":"bert"}},
-        {"tag":"567m-fp16","size":"1.2GB","digest":"790764642607","model_info":{"contextWindow":"8K","parameters":"567m","quantization":"F16","arch":"bert"}}
-      ],
-      "params": ["embedding","567m"],
-      "pulls": "7.5M",
-      "pulls_approx": 7500000,
-      "updated": "2 years ago",
-      "updated_at": "2024-08-07T00:07:00Z"
     },
     {
       "name": "qwen3.6",
@@ -4368,8 +4368,8 @@
         {"tag":"24b-instruct-2512-fp16","size":"48GB","digest":"15c77ff5438a","model_info":{"contextWindow":"384K","parameters":"24b","quantization":"F16","arch":"mistral3"}}
       ],
       "params": ["vision","tools","24b"],
-      "pulls": "1.6M",
-      "pulls_approx": 1600000,
+      "pulls": "1.7M",
+      "pulls_approx": 1700000,
       "updated": "10 months ago",
       "updated_at": "2025-12-13T06:47:00Z",
       "cloud": true,
@@ -6135,50 +6135,6 @@
       "updated_at": "2025-04-16T14:49:00Z"
     },
     {
-      "name": "nous-hermes2",
-      "description": "The powerful family of models by Nous Research that excels at scientific discussion and coding tasks.",
-      "tags": [
-        {"tag":"latest","size":"6.1GB","digest":"d50977d0b36a","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_0","arch":"llama"}},
-        {"tag":"10.7b","size":"6.1GB","digest":"d50977d0b36a","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_0","arch":"llama"}},
-        {"tag":"34b","size":"19GB","digest":"1fbb49caabbd","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q4_0","arch":"llama"}},
-        {"tag":"10.7b-solar-q2_K","size":"4.5GB","digest":"2931d5c846b2","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q2_K","arch":"llama"}},
-        {"tag":"10.7b-solar-q3_K_S","size":"4.7GB","digest":"5b55664515d5","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q3_K_S","arch":"llama"}},
-        {"tag":"10.7b-solar-q3_K_M","size":"5.2GB","digest":"20bed3473bc5","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q3_K_M","arch":"llama"}},
-        {"tag":"10.7b-solar-q3_K_L","size":"5.7GB","digest":"36b57986a223","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q3_K_L","arch":"llama"}},
-        {"tag":"10.7b-solar-q4_0","size":"6.1GB","digest":"d50977d0b36a","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_0","arch":"llama"}},
-        {"tag":"10.7b-solar-q4_1","size":"6.7GB","digest":"7486b76cccbc","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_1","arch":"llama"}},
-        {"tag":"10.7b-solar-q4_K_S","size":"6.1GB","digest":"674107bfb50e","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_K_S","arch":"llama"}},
-        {"tag":"10.7b-solar-q4_K_M","size":"6.5GB","digest":"3901698f9529","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_K_M","arch":"llama"}},
-        {"tag":"10.7b-solar-q5_0","size":"7.4GB","digest":"9b7a0ddf5539","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q5_0","arch":"llama"}},
-        {"tag":"10.7b-solar-q5_1","size":"8.1GB","digest":"ade17e89ce44","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q5_1","arch":"llama"}},
-        {"tag":"10.7b-solar-q5_K_S","size":"7.4GB","digest":"b0a593650c5a","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q5_K_S","arch":"llama"}},
-        {"tag":"10.7b-solar-q5_K_M","size":"7.6GB","digest":"c21ad0ffb1e8","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q5_K_M","arch":"llama"}},
-        {"tag":"10.7b-solar-q6_K","size":"8.8GB","digest":"46a4c005c00c","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q6_K","arch":"llama"}},
-        {"tag":"10.7b-solar-q8_0","size":"11GB","digest":"04509546373b","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q8_0","arch":"llama"}},
-        {"tag":"10.7b-solar-fp16","size":"21GB","digest":"d1a6005a734e","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"F16","arch":"llama"}},
-        {"tag":"34b-yi-q2_K","size":"15GB","digest":"5880153d6216","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q2_K","arch":"llama"}},
-        {"tag":"34b-yi-q3_K_S","size":"15GB","digest":"0bc80f2f5fd8","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q3_K_S","arch":"llama"}},
-        {"tag":"34b-yi-q3_K_M","size":"17GB","digest":"f2531c88caf1","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q3_K_M","arch":"llama"}},
-        {"tag":"34b-yi-q3_K_L","size":"18GB","digest":"d9e569fe62f4","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q3_K_L","arch":"llama"}},
-        {"tag":"34b-yi-q4_0","size":"19GB","digest":"1fbb49caabbd","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q4_0","arch":"llama"}},
-        {"tag":"34b-yi-q4_1","size":"22GB","digest":"692a7d97562c","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q4_1","arch":"llama"}},
-        {"tag":"34b-yi-q4_K_S","size":"20GB","digest":"83c068cc2a03","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q4_K_S","arch":"llama"}},
-        {"tag":"34b-yi-q4_K_M","size":"21GB","digest":"d0e1b2a20bbd","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q4_K_M","arch":"llama"}},
-        {"tag":"34b-yi-q5_0","size":"24GB","digest":"b3a3236a26f1","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q5_0","arch":"llama"}},
-        {"tag":"34b-yi-q5_1","size":"26GB","digest":"9a77070e0a87","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q5_1","arch":"llama"}},
-        {"tag":"34b-yi-q5_K_S","size":"24GB","digest":"8f6909b8327b","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q5_K_S","arch":"llama"}},
-        {"tag":"34b-yi-q5_K_M","size":"24GB","digest":"9f0dea62722f","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q5_K_M","arch":"llama"}},
-        {"tag":"34b-yi-q6_K","size":"28GB","digest":"2e9855cc9f21","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q6_K","arch":"llama"}},
-        {"tag":"34b-yi-q8_0","size":"37GB","digest":"a1e70aa6a163","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q8_0","arch":"llama"}},
-        {"tag":"34b-yi-fp16","size":"69GB","digest":"ba6742bba2e3","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"F16","arch":"llama"}}
-      ],
-      "params": ["10.7b","34b"],
-      "pulls": "1.1M",
-      "pulls_approx": 1100000,
-      "updated": "2 years ago",
-      "updated_at": "2024-01-02T14:26:00Z"
-    },
-    {
       "name": "stablelm2",
       "description": "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model trained on multilingual data in English, Spanish, German, Italian, French, Portuguese, and Dutch.",
       "tags": [
@@ -6272,6 +6228,50 @@
       "pulls_approx": 1100000,
       "updated": "2 years ago",
       "updated_at": "2024-05-07T02:11:00Z"
+    },
+    {
+      "name": "nous-hermes2",
+      "description": "The powerful family of models by Nous Research that excels at scientific discussion and coding tasks.",
+      "tags": [
+        {"tag":"latest","size":"6.1GB","digest":"d50977d0b36a","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_0","arch":"llama"}},
+        {"tag":"10.7b","size":"6.1GB","digest":"d50977d0b36a","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_0","arch":"llama"}},
+        {"tag":"34b","size":"19GB","digest":"1fbb49caabbd","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q4_0","arch":"llama"}},
+        {"tag":"10.7b-solar-q2_K","size":"4.5GB","digest":"2931d5c846b2","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q2_K","arch":"llama"}},
+        {"tag":"10.7b-solar-q3_K_S","size":"4.7GB","digest":"5b55664515d5","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q3_K_S","arch":"llama"}},
+        {"tag":"10.7b-solar-q3_K_M","size":"5.2GB","digest":"20bed3473bc5","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q3_K_M","arch":"llama"}},
+        {"tag":"10.7b-solar-q3_K_L","size":"5.7GB","digest":"36b57986a223","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q3_K_L","arch":"llama"}},
+        {"tag":"10.7b-solar-q4_0","size":"6.1GB","digest":"d50977d0b36a","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_0","arch":"llama"}},
+        {"tag":"10.7b-solar-q4_1","size":"6.7GB","digest":"7486b76cccbc","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_1","arch":"llama"}},
+        {"tag":"10.7b-solar-q4_K_S","size":"6.1GB","digest":"674107bfb50e","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_K_S","arch":"llama"}},
+        {"tag":"10.7b-solar-q4_K_M","size":"6.5GB","digest":"3901698f9529","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q4_K_M","arch":"llama"}},
+        {"tag":"10.7b-solar-q5_0","size":"7.4GB","digest":"9b7a0ddf5539","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q5_0","arch":"llama"}},
+        {"tag":"10.7b-solar-q5_1","size":"8.1GB","digest":"ade17e89ce44","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q5_1","arch":"llama"}},
+        {"tag":"10.7b-solar-q5_K_S","size":"7.4GB","digest":"b0a593650c5a","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q5_K_S","arch":"llama"}},
+        {"tag":"10.7b-solar-q5_K_M","size":"7.6GB","digest":"c21ad0ffb1e8","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q5_K_M","arch":"llama"}},
+        {"tag":"10.7b-solar-q6_K","size":"8.8GB","digest":"46a4c005c00c","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q6_K","arch":"llama"}},
+        {"tag":"10.7b-solar-q8_0","size":"11GB","digest":"04509546373b","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"Q8_0","arch":"llama"}},
+        {"tag":"10.7b-solar-fp16","size":"21GB","digest":"d1a6005a734e","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"F16","arch":"llama"}},
+        {"tag":"34b-yi-q2_K","size":"15GB","digest":"5880153d6216","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q2_K","arch":"llama"}},
+        {"tag":"34b-yi-q3_K_S","size":"15GB","digest":"0bc80f2f5fd8","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q3_K_S","arch":"llama"}},
+        {"tag":"34b-yi-q3_K_M","size":"17GB","digest":"f2531c88caf1","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q3_K_M","arch":"llama"}},
+        {"tag":"34b-yi-q3_K_L","size":"18GB","digest":"d9e569fe62f4","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q3_K_L","arch":"llama"}},
+        {"tag":"34b-yi-q4_0","size":"19GB","digest":"1fbb49caabbd","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q4_0","arch":"llama"}},
+        {"tag":"34b-yi-q4_1","size":"22GB","digest":"692a7d97562c","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q4_1","arch":"llama"}},
+        {"tag":"34b-yi-q4_K_S","size":"20GB","digest":"83c068cc2a03","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q4_K_S","arch":"llama"}},
+        {"tag":"34b-yi-q4_K_M","size":"21GB","digest":"d0e1b2a20bbd","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q4_K_M","arch":"llama"}},
+        {"tag":"34b-yi-q5_0","size":"24GB","digest":"b3a3236a26f1","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q5_0","arch":"llama"}},
+        {"tag":"34b-yi-q5_1","size":"26GB","digest":"9a77070e0a87","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q5_1","arch":"llama"}},
+        {"tag":"34b-yi-q5_K_S","size":"24GB","digest":"8f6909b8327b","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q5_K_S","arch":"llama"}},
+        {"tag":"34b-yi-q5_K_M","size":"24GB","digest":"9f0dea62722f","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q5_K_M","arch":"llama"}},
+        {"tag":"34b-yi-q6_K","size":"28GB","digest":"2e9855cc9f21","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q6_K","arch":"llama"}},
+        {"tag":"34b-yi-q8_0","size":"37GB","digest":"a1e70aa6a163","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"Q8_0","arch":"llama"}},
+        {"tag":"34b-yi-fp16","size":"69GB","digest":"ba6742bba2e3","model_info":{"contextWindow":"4K","parameters":"34.4b","quantization":"F16","arch":"llama"}}
+      ],
+      "params": ["10.7b","34b"],
+      "pulls": "1.1M",
+      "pulls_approx": 1100000,
+      "updated": "2 years ago",
+      "updated_at": "2024-01-02T14:26:00Z"
     },
     {
       "name": "aya",
@@ -7397,8 +7397,8 @@
         {"tag":"10.7b-text-v1-fp16","size":"21GB","digest":"45ac489b4ee5","model_info":{"contextWindow":"4K","parameters":"10.7b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["10.7b"],
-      "pulls": "986.4K",
-      "pulls_approx": 986400,
+      "pulls": "986.7K",
+      "pulls_approx": 986700,
       "updated": "2 years ago",
       "updated_at": "2023-12-18T03:00:00Z"
     },
@@ -7441,8 +7441,8 @@
         {"tag":"3b-instruct-fp16","size":"6.8GB","digest":"9433d98bf426","model_info":{"contextWindow":"4K","parameters":"3.37b","quantization":"F16","arch":"granitemoe"}}
       ],
       "params": ["tools","1b","3b"],
-      "pulls": "975.7K",
-      "pulls_approx": 975700,
+      "pulls": "976K",
+      "pulls_approx": 976000,
       "updated": "1 year ago",
       "updated_at": "2024-11-19T22:33:00Z"
     },
@@ -7501,8 +7501,8 @@
         {"tag":"70b-fp16","size":"138GB","digest":"6efd37ee83ff","model_info":{"contextWindow":"4K","parameters":"69b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["7b","13b","70b"],
-      "pulls": "971.5K",
-      "pulls_approx": 971500,
+      "pulls": "971.8K",
+      "pulls_approx": 971800,
       "updated": "2 years ago",
       "updated_at": "2023-10-29T21:57:00Z"
     },
@@ -7561,8 +7561,8 @@
         {"tag":"27b-fp16","size":"54GB","digest":"3e774e7b4545","model_info":{"contextWindow":"8K","parameters":"27.2b","quantization":"F16","arch":"gemma2"}}
       ],
       "params": ["2b","9b","27b"],
-      "pulls": "961.9K",
-      "pulls_approx": 961900,
+      "pulls": "962.2K",
+      "pulls_approx": 962200,
       "updated": "1 year ago",
       "updated_at": "2024-10-11T05:58:00Z"
     },
@@ -7581,8 +7581,8 @@
         {"tag":"14b-preview-fp16","size":"30GB","digest":"94795ede1f7b","model_info":{"contextWindow":"128K","parameters":"14.8b","quantization":"F16","arch":"qwen2"}}
       ],
       "params": ["1.5b","14b"],
-      "pulls": "961.3K",
-      "pulls_approx": 961300,
+      "pulls": "961.5K",
+      "pulls_approx": 961500,
       "updated": "1 year ago",
       "updated_at": "2025-04-08T22:53:00Z"
     },
@@ -7625,8 +7625,8 @@
         {"tag":"13b-fp16","size":"26GB","digest":"05c18f850182","model_info":{"contextWindow":"4K","parameters":"13b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["7b","13b"],
-      "pulls": "958.6K",
-      "pulls_approx": 958600,
+      "pulls": "958.9K",
+      "pulls_approx": 958900,
       "updated": "2 years ago",
       "updated_at": "2023-11-22T22:13:00Z"
     },
@@ -7669,8 +7669,8 @@
         {"tag":"1.5b-fp16","size":"3.1GB","digest":"a099cb640088","model_info":{"contextWindow":"250K","parameters":"1.54b","quantization":"F16","arch":"qwen2"}}
       ],
       "params": ["0.5b","1.5b"],
-      "pulls": "949.8K",
-      "pulls_approx": 949800,
+      "pulls": "950.1K",
+      "pulls_approx": 950100,
       "updated": "2 years ago",
       "updated_at": "2024-09-11T19:13:00Z"
     },
@@ -7753,8 +7753,8 @@
         {"tag":"70b-llama2-q8_0","size":"73GB","digest":"7b59877a048f","model_info":{"contextWindow":"4K","parameters":"69b","quantization":"Q8_0","arch":"llama"}}
       ],
       "params": [],
-      "pulls": "948.2K",
-      "pulls_approx": 948200,
+      "pulls": "948.5K",
+      "pulls_approx": 948500,
       "updated": "2 years ago",
       "updated_at": "2023-10-30T02:54:00Z"
     },
@@ -7767,8 +7767,8 @@
         {"tag":"278m-mpnet-base-v2-fp16","size":"563MB","digest":"ba13c2e06707","model_info":{"contextWindow":"512","parameters":"277m","quantization":"F16","arch":"bert"}}
       ],
       "params": ["embedding","278m"],
-      "pulls": "946.6K",
-      "pulls_approx": 946600,
+      "pulls": "946.8K",
+      "pulls_approx": 946800,
       "updated": "2 years ago",
       "updated_at": "2024-08-07T00:05:00Z"
     },
@@ -7811,8 +7811,8 @@
         {"tag":"8b-text-fp16","size":"17GB","digest":"9b790fecf7f8","model_info":{"contextWindow":"4K","parameters":"8.36b","quantization":"F16","arch":"llama"}}
       ],
       "params": [],
-      "pulls": "932.2K",
-      "pulls_approx": 932200,
+      "pulls": "932.5K",
+      "pulls_approx": 932500,
       "updated": "2 years ago",
       "updated_at": "2024-01-09T03:30:00Z"
     },
@@ -7855,8 +7855,8 @@
         {"tag":"7b-64k-q8_0","size":"7.7GB","digest":"236ce568b73c","model_info":{"contextWindow":"32K","parameters":"7.24b","quantization":"Q8_0","arch":"llama"}}
       ],
       "params": ["7b"],
-      "pulls": "922.3K",
-      "pulls_approx": 922300,
+      "pulls": "922.6K",
+      "pulls_approx": 922600,
       "updated": "2 years ago",
       "updated_at": "2023-11-04T04:20:00Z"
     },
@@ -7883,8 +7883,8 @@
         {"tag":"7b-fp16","size":"14GB","digest":"c3544390282f","model_info":{"contextWindow":"32K","parameters":"7.24b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["7b"],
-      "pulls": "916.3K",
-      "pulls_approx": 916300,
+      "pulls": "920.2K",
+      "pulls_approx": 920200,
       "updated": "2 years ago",
       "updated_at": "2023-10-11T22:00:00Z"
     },
@@ -7926,8 +7926,8 @@
         {"tag":"13b-fp16","size":"26GB","digest":"038c3ee38ca3","model_info":{"contextWindow":"16K","parameters":"13b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["13b"],
-      "pulls": "916K",
-      "pulls_approx": 916000,
+      "pulls": "916.2K",
+      "pulls_approx": 916200,
       "updated": "2 years ago",
       "updated_at": "2024-01-17T19:53:00Z"
     },
@@ -7959,8 +7959,8 @@
         {"tag":"70b-q5_1","size":"52GB","digest":"b12076361e76","model_info":{"contextWindow":"4K","parameters":"69b","quantization":"Q5_1","arch":"llama"}}
       ],
       "params": ["7b","70b"],
-      "pulls": "911.3K",
-      "pulls_approx": 911300,
+      "pulls": "911.5K",
+      "pulls_approx": 911500,
       "updated": "2 years ago",
       "updated_at": "2023-12-05T18:31:00Z"
     },
@@ -7987,8 +7987,8 @@
         {"tag":"7b-v1-fp16","size":"15GB","digest":"ad44fb2047c1","model_info":{"contextWindow":"32K","parameters":"7.24b","quantization":"F16","arch":"llama","projector":{"arch":"clip","parameters":"312m","quantization":"F16"}}}
       ],
       "params": ["vision","7b"],
-      "pulls": "900.2K",
-      "pulls_approx": 900200,
+      "pulls": "900.4K",
+      "pulls_approx": 900400,
       "updated": "2 years ago",
       "updated_at": "2023-12-13T19:04:00Z"
     },
@@ -8006,8 +8006,8 @@
         {"tag":"30b-a3b-fp16","size":"63GB","digest":"69eb03c51301","model_info":{"contextWindow":"1M","parameters":"31.6b","quantization":"F16","arch":"nemotron_h_moe"}}
       ],
       "params": ["tools","thinking","cloud","4b","30b"],
-      "pulls": "894.1K",
-      "pulls_approx": 894100,
+      "pulls": "895.3K",
+      "pulls_approx": 895300,
       "updated": "6 months ago",
       "updated_at": "2026-03-16T15:34:00Z",
       "cloud": true,
@@ -8040,8 +8040,8 @@
         {"tag":"104b-fp16","size":"208GB","digest":"2e7483530ced","model_info":{"contextWindow":"128K","parameters":"104b","quantization":"F16","arch":"command-r"}}
       ],
       "params": ["tools","104b"],
-      "pulls": "816.3K",
-      "pulls_approx": 816300,
+      "pulls": "816.5K",
+      "pulls_approx": 816500,
       "updated": "2 years ago",
       "updated_at": "2024-08-31T07:16:00Z"
     },
@@ -8056,8 +8056,8 @@
         {"tag":"24b-instruct-2503-fp16","size":"48GB","digest":"5b05d65a969a","model_info":{"contextWindow":"128K","parameters":"24b","quantization":"F16","arch":"mistral3"}}
       ],
       "params": ["vision","tools","24b"],
-      "pulls": "797.1K",
-      "pulls_approx": 797100,
+      "pulls": "797.3K",
+      "pulls_approx": 797300,
       "updated": "1 year ago",
       "updated_at": "2025-04-07T16:59:00Z"
     },
@@ -8080,8 +8080,8 @@
         {"tag":"32b-fp16","size":"64GB","digest":"3c652371e959","model_info":{"contextWindow":"32K","parameters":"32b","quantization":"F16","arch":"exaone"}}
       ],
       "params": ["2.4b","7.8b","32b"],
-      "pulls": "776.9K",
-      "pulls_approx": 776900,
+      "pulls": "777.1K",
+      "pulls_approx": 777100,
       "updated": "1 year ago",
       "updated_at": "2025-03-19T17:04:00Z"
     },
@@ -8108,8 +8108,8 @@
         {"tag":"7b-fp16","size":"13GB","digest":"6f397a061510","model_info":{"contextWindow":"4K","parameters":"6.74b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["7b"],
-      "pulls": "740.1K",
-      "pulls_approx": 740100,
+      "pulls": "740.3K",
+      "pulls_approx": 740300,
       "updated": "2 years ago",
       "updated_at": "2023-10-29T06:00:00Z"
     },
@@ -8137,8 +8137,8 @@
         {"tag":"1.1b-v2.8-fp16","size":"2.2GB","digest":"adb3e462abb8","model_info":{"contextWindow":"4K","parameters":"1.1b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["1.1b"],
-      "pulls": "739.3K",
-      "pulls_approx": 739300,
+      "pulls": "739.4K",
+      "pulls_approx": 739400,
       "updated": "2 years ago",
       "updated_at": "2024-01-30T09:39:00Z"
     },
@@ -8155,8 +8155,8 @@
         {"tag":"671b-fp16","size":"1.3TB","digest":"d8237c306c16","model_info":{"contextWindow":"160K","parameters":"671b","quantization":"F16","arch":"deepseek2"}}
       ],
       "params": ["tools","thinking","671b"],
-      "pulls": "733.3K",
-      "pulls_approx": 733300,
+      "pulls": "733.4K",
+      "pulls_approx": 733400,
       "updated": "1 year ago",
       "updated_at": "2025-09-27T00:46:00Z"
     },
@@ -8183,8 +8183,8 @@
         {"tag":"4b-instruct-fp16","size":"8.4GB","digest":"d0d806e9853c","model_info":{"contextWindow":"4K","parameters":"4.19b","quantization":"F16","arch":"nemotron"}}
       ],
       "params": ["tools","4b"],
-      "pulls": "725.8K",
-      "pulls_approx": 725800,
+      "pulls": "726.1K",
+      "pulls_approx": 726100,
       "updated": "2 years ago",
       "updated_at": "2024-09-18T20:21:00Z"
     },
@@ -8211,8 +8211,8 @@
         {"tag":"9b-all-fp16","size":"19GB","digest":"c3cd6eb1916f","model_info":{"contextWindow":"128K","parameters":"9.4b","quantization":"F16","arch":"chatglm"}}
       ],
       "params": ["9b"],
-      "pulls": "702.9K",
-      "pulls_approx": 702900,
+      "pulls": "703.1K",
+      "pulls_approx": 703100,
       "updated": "2 years ago",
       "updated_at": "2024-07-09T01:33:00Z"
     },
@@ -8226,8 +8226,8 @@
         {"tag":"33b-bf16","size":"66GB","digest":"b318f0929784","model_info":{"contextWindow":"128K","parameters":"33b","quantization":"F16","arch":"nemotron_h_omni"}}
       ],
       "params": ["vision","tools","thinking","33b"],
-      "pulls": "675.9K",
-      "pulls_approx": 675900,
+      "pulls": "676K",
+      "pulls_approx": 676000,
       "updated": "5 months ago",
       "updated_at": "2026-04-27T20:26:00Z"
     },
@@ -8246,8 +8246,8 @@
         {"tag":"8b-instruct-fp16","size":"16GB","digest":"51ed11a37a94","model_info":{"contextWindow":"8K","parameters":"7.77b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["1.5b","8b"],
-      "pulls": "663.1K",
-      "pulls_approx": 663100,
+      "pulls": "663.4K",
+      "pulls_approx": 663400,
       "updated": "1 year ago",
       "updated_at": "2024-11-18T07:31:00Z"
     },
@@ -8275,8 +8275,8 @@
         {"tag":"13b-llama2-fp16","size":"26GB","digest":"b972b4fcf399","model_info":{"contextWindow":"4K","parameters":"13b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["13b"],
-      "pulls": "658.3K",
-      "pulls_approx": 658300,
+      "pulls": "658.5K",
+      "pulls_approx": 658500,
       "updated": "2 years ago",
       "updated_at": "2023-10-28T15:29:00Z"
     },
@@ -8303,8 +8303,8 @@
         {"tag":"70b-instruct-fp16","size":"141GB","digest":"e02a46ff1109","model_info":{"contextWindow":"128K","parameters":"70.6b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["tools","70b"],
-      "pulls": "636.6K",
-      "pulls_approx": 636600,
+      "pulls": "636.8K",
+      "pulls_approx": 636800,
       "updated": "1 year ago",
       "updated_at": "2024-10-16T23:10:00Z"
     },
@@ -8331,8 +8331,8 @@
         {"tag":"70b-fp16","size":"141GB","digest":"e04ae4d96458","model_info":{"contextWindow":"128K","parameters":"70.6b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["70b"],
-      "pulls": "627.7K",
-      "pulls_approx": 627700,
+      "pulls": "627.8K",
+      "pulls_approx": 627800,
       "updated": "2 years ago",
       "updated_at": "2024-09-09T05:16:00Z"
     },
@@ -8361,8 +8361,8 @@
         {"tag":"13b-llama2-chat-fp16","size":"26GB","digest":"601feec09706","model_info":{"contextWindow":"4K","parameters":"13b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["13b"],
-      "pulls": "607.3K",
-      "pulls_approx": 607300,
+      "pulls": "607.5K",
+      "pulls_approx": 607500,
       "updated": "2 years ago",
       "updated_at": "2023-10-29T06:38:00Z"
     },
@@ -8390,8 +8390,8 @@
         {"tag":"8x7b-dpo-fp16","size":"93GB","digest":"42c40087888d","model_info":{"contextWindow":"32K","parameters":"46.7b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["8x7b"],
-      "pulls": "602.5K",
-      "pulls_approx": 602500,
+      "pulls": "602.6K",
+      "pulls_approx": 602600,
       "updated": "1 year ago",
       "updated_at": "2024-12-20T01:05:00Z"
     },
@@ -8418,8 +8418,8 @@
         {"tag":"72b-fp16","size":"145GB","digest":"1efa8264c375","model_info":{"contextWindow":"32K","parameters":"72.7b","quantization":"F16","arch":"qwen2"}}
       ],
       "params": ["tools","72b"],
-      "pulls": "601.2K",
-      "pulls_approx": 601200,
+      "pulls": "601.4K",
+      "pulls_approx": 601400,
       "updated": "1 year ago",
       "updated_at": "2024-11-15T23:37:00Z"
     },
@@ -8438,8 +8438,8 @@
         {"tag":"80b-a3b-thinking-fp16","size":"159GB","digest":"e98f2371bd81","model_info":{"contextWindow":"256K","parameters":"79.7b","quantization":"F16","arch":"qwen3next"}}
       ],
       "params": ["tools","thinking","80b"],
-      "pulls": "596.9K",
-      "pulls_approx": 596900,
+      "pulls": "597.2K",
+      "pulls_approx": 597200,
       "updated": "10 months ago",
       "updated_at": "2025-12-05T04:37:00Z"
     },
@@ -8458,8 +8458,8 @@
         {"tag":"35b-bf16","size":"69GB","digest":"cfc852542826","model_info":{"contextWindow":"256K","parameters":"34.7b","quantization":"BF16","arch":"qwen35moe"}}
       ],
       "params": ["tools","thinking","9b","35b"],
-      "pulls": "595K",
-      "pulls_approx": 595000,
+      "pulls": "596.6K",
+      "pulls_approx": 596600,
       "updated": "3 months ago",
       "updated_at": "2026-06-27T20:45:00Z"
     },
@@ -8473,8 +8473,8 @@
         {"tag":"3.8b-mini-fp16","size":"8.3GB","digest":"39ed50ad5b22","model_info":{"contextWindow":"4K","parameters":"3.82b","quantization":"F16","arch":"llama","projector":{"arch":"clip","parameters":"303m","quantization":"F16"}}}
       ],
       "params": ["vision","3.8b"],
-      "pulls": "584.1K",
-      "pulls_approx": 584100,
+      "pulls": "588.3K",
+      "pulls_approx": 588300,
       "updated": "2 years ago",
       "updated_at": "2024-05-07T21:20:00Z"
     },
@@ -8503,8 +8503,8 @@
         {"tag":"120b-v2.2-fp16","size":"241GB","digest":"cf54e31cfdd8","model_info":{"contextWindow":"4K","parameters":"120b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["120b"],
-      "pulls": "580.7K",
-      "pulls_approx": 580700,
+      "pulls": "580.9K",
+      "pulls_approx": 580900,
       "updated": "2 years ago",
       "updated_at": "2024-01-11T01:25:00Z"
     },
@@ -8532,8 +8532,8 @@
         {"tag":"13b-16k-fp16","size":"26GB","digest":"9751b8872dce","model_info":{"contextWindow":"16K","parameters":"13b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["13b"],
-      "pulls": "578.1K",
-      "pulls_approx": 578100,
+      "pulls": "578.3K",
+      "pulls_approx": 578300,
       "updated": "2 years ago",
       "updated_at": "2023-12-27T20:51:00Z"
     },
@@ -8556,8 +8556,8 @@
         {"tag":"32b-instruct-fp16","size":"64GB","digest":"323957e0b2cf","model_info":{"contextWindow":"32K","parameters":"32b","quantization":"F16","arch":"exaone"}}
       ],
       "params": ["2.4b","7.8b","32b"],
-      "pulls": "572.5K",
-      "pulls_approx": 572500,
+      "pulls": "572.9K",
+      "pulls_approx": 572900,
       "updated": "1 year ago",
       "updated_at": "2024-12-10T08:03:00Z"
     },
@@ -8585,8 +8585,8 @@
         {"tag":"22b-preview-instruct-fp16","size":"44GB","digest":"7f6010e2ba0f","model_info":{"contextWindow":"4K","parameters":"22.1b","quantization":"F16","arch":"solar"}}
       ],
       "params": ["22b"],
-      "pulls": "570.7K",
-      "pulls_approx": 570700,
+      "pulls": "570.9K",
+      "pulls_approx": 570900,
       "updated": "2 years ago",
       "updated_at": "2024-09-18T22:27:00Z"
     },
@@ -8614,8 +8614,8 @@
         {"tag":"7b-s-cl-fp16","size":"13GB","digest":"859e1ae4f566","model_info":{"contextWindow":"16K","parameters":"6.74b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["7b"],
-      "pulls": "567.5K",
-      "pulls_approx": 567500,
+      "pulls": "567.7K",
+      "pulls_approx": 567700,
       "updated": "2 years ago",
       "updated_at": "2023-12-05T23:59:00Z"
     },
@@ -8642,8 +8642,8 @@
         {"tag":"3.8b-fp16","size":"7.6GB","digest":"d8bc760a64ed","model_info":{"contextWindow":"4K","parameters":"3.82b","quantization":"F16","arch":"phi3"}}
       ],
       "params": ["3.8b"],
-      "pulls": "564.2K",
-      "pulls_approx": 564200,
+      "pulls": "564.5K",
+      "pulls_approx": 564500,
       "updated": "2 years ago",
       "updated_at": "2024-07-22T23:54:00Z"
     },
@@ -8670,8 +8670,8 @@
         {"tag":"7b-v0.1-fp16","size":"14GB","digest":"ce1616d5e8c6","model_info":{"contextWindow":"32K","parameters":"7.25b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["7b"],
-      "pulls": "561.5K",
-      "pulls_approx": 561500,
+      "pulls": "561.6K",
+      "pulls_approx": 561600,
       "updated": "2 years ago",
       "updated_at": "2024-07-16T17:04:00Z"
     },
@@ -8698,8 +8698,8 @@
         {"tag":"11b-fp16","size":"22GB","digest":"1f71755ad500","model_info":{"contextWindow":"2K","parameters":"11.1b","quantization":"F16","arch":"falcon"}}
       ],
       "params": ["11b"],
-      "pulls": "551.6K",
-      "pulls_approx": 551600,
+      "pulls": "551.8K",
+      "pulls_approx": 551800,
       "updated": "2 years ago",
       "updated_at": "2024-05-14T01:46:00Z"
     },
@@ -8727,8 +8727,8 @@
         {"tag":"7b-v1-fp16","size":"14GB","digest":"2da08fbc17f3","model_info":{"contextWindow":"32K","parameters":"7.24b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["7b"],
-      "pulls": "551.5K",
-      "pulls_approx": 551500,
+      "pulls": "551.7K",
+      "pulls_approx": 551700,
       "updated": "2 years ago",
       "updated_at": "2023-12-29T22:06:00Z"
     },
@@ -8756,8 +8756,8 @@
         {"tag":"8x7b-v1-fp16","size":"93GB","digest":"2fcdc0b6a3a1","model_info":{"contextWindow":"32K","parameters":"46.7b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["8x7b"],
-      "pulls": "550.1K",
-      "pulls_approx": 550100,
+      "pulls": "550.3K",
+      "pulls_approx": 550300,
       "updated": "2 years ago",
       "updated_at": "2023-12-29T03:35:00Z"
     },
@@ -8770,8 +8770,8 @@
         {"tag":"3b-bf16","size":"6.7GB","digest":"0e7b018b8a22","model_info":{"contextWindow":"8K","parameters":"3.34b","quantization":"F16","arch":"deepseekocr"}}
       ],
       "params": ["vision","3b"],
-      "pulls": "548.2K",
-      "pulls_approx": 548200,
+      "pulls": "548.5K",
+      "pulls_approx": 548500,
       "updated": "10 months ago",
       "updated_at": "2025-11-19T20:26:00Z"
     },
@@ -8798,8 +8798,8 @@
         {"tag":"3b-fp16","size":"5.6GB","digest":"2d27f99af6a5","model_info":{"contextWindow":"4K","parameters":"2.8b","quantization":"F32","arch":"stablelm"}}
       ],
       "params": ["3b"],
-      "pulls": "544.1K",
-      "pulls_approx": 544100,
+      "pulls": "544.3K",
+      "pulls_approx": 544300,
       "updated": "2 years ago",
       "updated_at": "2023-12-27T20:51:00Z"
     },
@@ -8826,8 +8826,8 @@
         {"tag":"7b-fp16","size":"15GB","digest":"3fa94947d3bb","model_info":{"contextWindow":"32K","parameters":"7.74b","quantization":"F16","arch":"internlm2"}}
       ],
       "params": ["7b"],
-      "pulls": "541.4K",
-      "pulls_approx": 541400,
+      "pulls": "541.6K",
+      "pulls_approx": 541600,
       "updated": "2 years ago",
       "updated_at": "2024-09-18T18:29:00Z"
     },
@@ -8854,8 +8854,8 @@
         {"tag":"7b-fp16","size":"13GB","digest":"542d129a0ebd","model_info":{"contextWindow":"16K","parameters":"6.74b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["7b"],
-      "pulls": "538.8K",
-      "pulls_approx": 538800,
+      "pulls": "539K",
+      "pulls_approx": 539000,
       "updated": "2 years ago",
       "updated_at": "2024-01-29T23:52:00Z"
     },
@@ -8882,8 +8882,8 @@
         {"tag":"70b-fp16","size":"141GB","digest":"060676f6564d","model_info":{"contextWindow":"8K","parameters":"70.6b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["tools","70b"],
-      "pulls": "535.1K",
-      "pulls_approx": 535100,
+      "pulls": "535.3K",
+      "pulls_approx": 535300,
       "updated": "2 years ago",
       "updated_at": "2024-07-18T16:39:00Z"
     },
@@ -8910,8 +8910,8 @@
         {"tag":"7b-v0.1-fp16","size":"14GB","digest":"a6c59d49e2a9","model_info":{"contextWindow":"32K","parameters":"7.24b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["7b"],
-      "pulls": "534.9K",
-      "pulls_approx": 534900,
+      "pulls": "535.1K",
+      "pulls_approx": 535100,
       "updated": "2 years ago",
       "updated_at": "2023-11-02T22:27:00Z"
     },
@@ -8938,23 +8938,10 @@
         {"tag":"13b-fp16","size":"26GB","digest":"cc8594c08ee8","model_info":{"contextWindow":"2K","parameters":"13b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["13b"],
-      "pulls": "528.8K",
-      "pulls_approx": 528800,
+      "pulls": "529K",
+      "pulls_approx": 529000,
       "updated": "2 years ago",
       "updated_at": "2023-10-28T19:41:00Z"
-    },
-    {
-      "name": "minimax-m3",
-      "description": "MiniMax M3: Coding & Agentic Frontier. 1M context window. Native Multimodality.",
-      "tags": [
-      ],
-      "params": ["vision","tools","thinking","cloud"],
-      "pulls": "521.4K",
-      "pulls_approx": 521400,
-      "updated": "4 months ago",
-      "updated_at": "2026-06-01T01:34:00Z",
-      "cloud": true,
-      "cloud_tags": ["cloud"]
     },
     {
       "name": "granite4.1",
@@ -9010,10 +8997,23 @@
         {"tag":"30b-bf16","size":"58GB","digest":"e2e7d6de1890","model_info":{"contextWindow":"128K","parameters":"28.9b","quantization":"BF16","arch":"granite"}}
       ],
       "params": ["tools","3b","8b","30b"],
-      "pulls": "520.9K",
-      "pulls_approx": 520900,
+      "pulls": "522.1K",
+      "pulls_approx": 522100,
       "updated": "4 months ago",
       "updated_at": "2026-05-19T21:58:00Z"
+    },
+    {
+      "name": "minimax-m3",
+      "description": "MiniMax M3: Coding & Agentic Frontier. 1M context window. Native Multimodality.",
+      "tags": [
+      ],
+      "params": ["vision","tools","thinking","cloud"],
+      "pulls": "521.6K",
+      "pulls_approx": 521600,
+      "updated": "4 months ago",
+      "updated_at": "2026-06-01T01:34:00Z",
+      "cloud": true,
+      "cloud_tags": ["cloud"]
     },
     {
       "name": "open-orca-platypus2",
@@ -9038,8 +9038,8 @@
         {"tag":"13b-fp16","size":"26GB","digest":"950e73357fe8","model_info":{"contextWindow":"4K","parameters":"13b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["13b"],
-      "pulls": "520.8K",
-      "pulls_approx": 520800,
+      "pulls": "521K",
+      "pulls_approx": 521000,
       "updated": "2 years ago",
       "updated_at": "2023-10-29T07:52:00Z"
     },
@@ -9054,8 +9054,8 @@
         {"tag":"8b-instruct-fp16","size":"17GB","digest":"cf0061bce5f2","model_info":{"contextWindow":"32K","parameters":"8.31b","quantization":"F16","arch":"gemma3"}}
       ],
       "params": ["tools","8b"],
-      "pulls": "514.3K",
-      "pulls_approx": 514300,
+      "pulls": "514.5K",
+      "pulls_approx": 514500,
       "updated": "10 months ago",
       "updated_at": "2025-12-09T07:48:00Z"
     },
@@ -9081,8 +9081,8 @@
         {"tag":"34b-v0.1-fp16","size":"67GB","digest":"1500811547ff","model_info":{"contextWindow":"16K","parameters":"33.7b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["34b"],
-      "pulls": "510.7K",
-      "pulls_approx": 510700,
+      "pulls": "510.9K",
+      "pulls_approx": 510900,
       "updated": "2 years ago",
       "updated_at": "2023-10-29T10:48:00Z"
     },
@@ -9108,8 +9108,8 @@
         {"tag":"120b-fp16","size":"236GB","digest":"f228bd4ec83c","model_info":{"contextWindow":"4K","parameters":"118b","quantization":"F16","arch":"llama"}}
       ],
       "params": [],
-      "pulls": "489.8K",
-      "pulls_approx": 489800,
+      "pulls": "490K",
+      "pulls_approx": 490000,
       "updated": "2 years ago",
       "updated_at": "2023-11-17T21:54:00Z"
     },
@@ -9119,8 +9119,8 @@
       "tags": [
       ],
       "params": ["vision","tools","thinking","cloud"],
-      "pulls": "488.7K",
-      "pulls_approx": 488700,
+      "pulls": "488.9K",
+      "pulls_approx": 488900,
       "updated": "5 months ago",
       "updated_at": "2026-04-20T20:09:00Z",
       "cloud": true,
@@ -9147,8 +9147,8 @@
         {"tag":"32b-think-fp16","size":"64GB","digest":"19507f95f179","model_info":{"contextWindow":"64K","parameters":"32.2b","quantization":"F16","arch":"olmo3"}}
       ],
       "params": ["tools","thinking","7b","32b"],
-      "pulls": "467.1K",
-      "pulls_approx": 467100,
+      "pulls": "467.3K",
+      "pulls_approx": 467300,
       "updated": "9 months ago",
       "updated_at": "2025-12-16T05:55:00Z"
     },
@@ -9161,8 +9161,8 @@
         {"tag":"568m-l-fp16","size":"1.2GB","digest":"5de93a84837d","model_info":{"contextWindow":"8K","parameters":"567m","quantization":"F16","arch":"bert"}}
       ],
       "params": ["embedding","568m"],
-      "pulls": "464.4K",
-      "pulls_approx": 464400,
+      "pulls": "464.7K",
+      "pulls_approx": 464700,
       "updated": "1 year ago",
       "updated_at": "2024-12-04T23:57:00Z"
     },
@@ -9181,8 +9181,8 @@
         {"tag":"8b-instruct-fp16","size":"16GB","digest":"b9679f6ae759","model_info":{"contextWindow":"128K","parameters":"8.17b","quantization":"F16","arch":"granite"}}
       ],
       "params": ["tools","2b","8b"],
-      "pulls": "464.2K",
-      "pulls_approx": 464200,
+      "pulls": "464.4K",
+      "pulls_approx": 464400,
       "updated": "1 year ago",
       "updated_at": "2025-02-26T05:48:00Z"
     },
@@ -9192,8 +9192,8 @@
       "tags": [
       ],
       "params": ["tools","thinking","cloud"],
-      "pulls": "447.7K",
-      "pulls_approx": 447700,
+      "pulls": "448.4K",
+      "pulls_approx": 448400,
       "updated": "1 month ago",
       "updated_at": "2026-08-13T15:00:00Z",
       "cloud": true,
@@ -9214,8 +9214,8 @@
         {"tag":"27b-it-bf16","size":"55GB","digest":"8b473b4cb2df","model_info":{"contextWindow":"128K","parameters":"27.4b","quantization":"F16","arch":"gemma3"}}
       ],
       "params": ["vision","4b","27b"],
-      "pulls": "446.3K",
-      "pulls_approx": 446300,
+      "pulls": "446.7K",
+      "pulls_approx": 446700,
       "updated": "5 months ago",
       "updated_at": "2026-04-16T00:08:00Z"
     },
@@ -9234,8 +9234,8 @@
         {"tag":"671b-fp16","size":"1.3TB","digest":"eef5438a1488","model_info":{"contextWindow":"4K","parameters":"671b","quantization":"F16","arch":"deepseek2"}}
       ],
       "params": ["70b","671b"],
-      "pulls": "428.5K",
-      "pulls_approx": 428500,
+      "pulls": "428.6K",
+      "pulls_approx": 428600,
       "updated": "1 year ago",
       "updated_at": "2025-02-21T15:28:00Z"
     },
@@ -9258,8 +9258,8 @@
         {"tag":"20b-chat-fp16","size":"38GB","digest":"d1455f557fbd","model_info":{"contextWindow":"32K","parameters":"19.2b","quantization":"F16","arch":"qwen2"}}
       ],
       "params": ["1b","8b","20b"],
-      "pulls": "423.7K",
-      "pulls_approx": 423700,
+      "pulls": "423.9K",
+      "pulls_approx": 423900,
       "updated": "1 year ago",
       "updated_at": "2024-12-04T08:10:00Z"
     },
@@ -9274,8 +9274,8 @@
         {"tag":"128b-bf16","size":"255GB","digest":"03b1ca2260f6","model_info":{"contextWindow":"256K","parameters":"128b","quantization":"F16","arch":"mistral3"}}
       ],
       "params": ["vision","tools","thinking","128b"],
-      "pulls": "422.5K",
-      "pulls_approx": 422500,
+      "pulls": "422.6K",
+      "pulls_approx": 422600,
       "updated": "5 months ago",
       "updated_at": "2026-05-05T23:14:00Z"
     },
@@ -9294,8 +9294,8 @@
         {"tag":"70b-fp16","size":"141GB","digest":"662b84aaedbb","model_info":{"contextWindow":"128K","parameters":"70.6b","quantization":"F16","arch":"llama"}}
       ],
       "params": ["8b","70b"],
-      "pulls": "408.2K",
-      "pulls_approx": 408200,
+      "pulls": "408.5K",
+      "pulls_approx": 408500,
       "updated": "1 year ago",
       "updated_at": "2024-12-21T03:58:00Z"
     },
@@ -9311,8 +9311,8 @@
         {"tag":"278m-fp16","size":"563MB","digest":"1a37926bf842","model_info":{"contextWindow":"512","parameters":"277m","quantization":"F16","arch":"bert"}}
       ],
       "params": ["embedding","30m","278m"],
-      "pulls": "383K",
-      "pulls_approx": 383000,
+      "pulls": "383.2K",
+      "pulls_approx": 383200,
       "updated": "1 year ago",
       "updated_at": "2024-12-18T04:11:00Z"
     },
@@ -9325,8 +9325,8 @@
         {"tag":"397b","size":"242GB","digest":"337c6db6be12","model_info":{"contextWindow":"256K","parameters":"396b","quantization":"Q4_K_M","arch":"qwen35moe","projector":{"arch":"clip","parameters":"456m","quantization":"BF16"}}}
       ],
       "params": ["vision","9b","35b","397b"],
-      "pulls": "374.9K",
-      "pulls_approx": 374900,
+      "pulls": "375.6K",
+      "pulls_approx": 375600,
       "updated": "1 month ago",
       "updated_at": "2026-08-19T18:06:00Z"
     },
@@ -9336,8 +9336,8 @@
       "tags": [
       ],
       "params": ["tools","thinking","cloud"],
-      "pulls": "372.1K",
-      "pulls_approx": 372100,
+      "pulls": "372.2K",
+      "pulls_approx": 372200,
       "updated": "3 months ago",
       "updated_at": "2026-06-16T17:39:00Z",
       "cloud": true,
@@ -9356,8 +9356,8 @@
         {"tag":"132b-instruct-fp16","size":"263GB","digest":"2bacc27fc29a","model_info":{"contextWindow":"32K","parameters":"132b","quantization":"F16","arch":"dbrx"}}
       ],
       "params": ["132b"],
-      "pulls": "371.8K",
-      "pulls_approx": 371800,
+      "pulls": "371.9K",
+      "pulls_approx": 371900,
       "updated": "2 years ago",
       "updated_at": "2024-04-16T04:18:00Z"
     },
@@ -9372,8 +9372,8 @@
         {"tag":"123b-instruct-2512-fp16","size":"250GB","digest":"cf00a0f4d980","model_info":{"contextWindow":"256K","parameters":"125b","quantization":"F16","arch":"mistral3"}}
       ],
       "params": ["tools","123b"],
-      "pulls": "361.2K",
-      "pulls_approx": 361200,
+      "pulls": "361.3K",
+      "pulls_approx": 361300,
       "updated": "10 months ago",
       "updated_at": "2025-12-12T01:21:00Z"
     },
@@ -9393,8 +9393,8 @@
         {"tag":"8b-fp16","size":"16GB","digest":"d9ecead6310d","model_info":{"contextWindow":"8K","parameters":"8.17b","quantization":"F16","arch":"granite"}}
       ],
       "params": ["2b","8b"],
-      "pulls": "344.6K",
-      "pulls_approx": 344600,
+      "pulls": "344.7K",
+      "pulls_approx": 344700,
       "updated": "1 year ago",
       "updated_at": "2024-11-19T23:33:00Z"
     },
@@ -9409,8 +9409,8 @@
         {"tag":"7b-12-2024-fp16","size":"16GB","digest":"3a3e860e0901","model_info":{"contextWindow":"8K","parameters":"8.03b","quantization":"F16","arch":"cohere2"}}
       ],
       "params": ["tools","7b"],
-      "pulls": "335.2K",
-      "pulls_approx": 335200,
+      "pulls": "335.5K",
+      "pulls_approx": 335500,
       "updated": "1 year ago",
       "updated_at": "2025-01-16T22:27:00Z"
     },
@@ -9425,8 +9425,8 @@
         {"tag":"3.8b-fp16","size":"7.7GB","digest":"591788476176","model_info":{"contextWindow":"4K","parameters":"3.84b","quantization":"F16","arch":"phi3"}}
       ],
       "params": ["3.8b"],
-      "pulls": "317.8K",
-      "pulls_approx": 317800,
+      "pulls": "317.9K",
+      "pulls_approx": 317900,
       "updated": "1 year ago",
       "updated_at": "2025-05-01T03:53:00Z"
     },
@@ -9446,8 +9446,8 @@
         {"tag":"32b-think-fp16","size":"64GB","digest":"3ce9adcd167e","model_info":{"contextWindow":"64K","parameters":"32.2b","quantization":"F16","arch":"olmo3"}}
       ],
       "params": ["tools","thinking","32b"],
-      "pulls": "296.3K",
-      "pulls_approx": 296300,
+      "pulls": "296.5K",
+      "pulls_approx": 296500,
       "updated": "9 months ago",
       "updated_at": "2025-12-16T05:56:00Z"
     },
@@ -9464,8 +9464,8 @@
         {"tag":"236b-q8_0","size":"251GB","digest":"481aed89b609","model_info":{"contextWindow":"4K","parameters":"236b","quantization":"Q8_0","arch":"deepseek2"}}
       ],
       "params": ["236b"],
-      "pulls": "294.6K",
-      "pulls_approx": 294600,
+      "pulls": "294.7K",
+      "pulls_approx": 294700,
       "updated": "2 years ago",
       "updated_at": "2024-09-11T19:31:00Z"
     },
@@ -9496,8 +9496,8 @@
         {"tag":"40b-1023-q8_0","size":"44GB","digest":"d811415ed9a6","model_info":{"contextWindow":"2K","parameters":"41.8b","quantization":"Q8_0","arch":"falcon"}}
       ],
       "params": ["40b"],
-      "pulls": "287.6K",
-      "pulls_approx": 287600,
+      "pulls": "288.1K",
+      "pulls_approx": 288100,
       "updated": "2 years ago",
       "updated_at": "2023-11-19T13:58:00Z"
     },
@@ -9522,8 +9522,8 @@
         {"tag":"30b-bf16","size":"57GB","digest":"318fb1b9b816","model_info":{"contextWindow":"128K","parameters":"27.9b","quantization":"BF16","arch":"muse-glimmer","projector":{"arch":"clip","parameters":"1.92b","quantization":"Q4_K_M"}}}
       ],
       "params": ["vision","tools","thinking","30b"],
-      "pulls": "273.9K",
-      "pulls_approx": 273900,
+      "pulls": "275K",
+      "pulls_approx": 275000,
       "updated": "1 month ago",
       "updated_at": "2026-08-28T19:09:00Z"
     },
@@ -9538,8 +9538,8 @@
         {"tag":"3b-preview-fp16","size":"6.8GB","digest":"71cf19d4f87a","model_info":{"contextWindow":"32K","parameters":"3.4b","quantization":"F16","arch":"qwen2"}}
       ],
       "params": ["3b"],
-      "pulls": "264.4K",
-      "pulls_approx": 264400,
+      "pulls": "264.5K",
+      "pulls_approx": 264500,
       "updated": "1 year ago",
       "updated_at": "2024-12-30T21:33:00Z"
     },
@@ -9549,8 +9549,8 @@
       "tags": [
       ],
       "params": ["vision","tools","thinking","cloud"],
-      "pulls": "248.6K",
-      "pulls_approx": 248600,
+      "pulls": "248.8K",
+      "pulls_approx": 248800,
       "updated": "3 months ago",
       "updated_at": "2026-06-13T00:26:00Z",
       "cloud": true,
@@ -9567,8 +9567,8 @@
         {"tag":"111b-03-2025-fp16","size":"222GB","digest":"5d5425f22323","model_info":{"contextWindow":"16K","parameters":"111b","quantization":"F16","arch":"cohere2"}}
       ],
       "params": ["tools","111b"],
-      "pulls": "232.7K",
-      "pulls_approx": 232700,
+      "pulls": "232.9K",
+      "pulls_approx": 232900,
       "updated": "1 year ago",
       "updated_at": "2025-03-13T12:39:00Z"
     },
@@ -9583,8 +9583,8 @@
         {"tag":"671b-fp16","size":"1.3TB","digest":"743a587e4577","model_info":{"contextWindow":"160K","parameters":"671b","quantization":"F16","arch":"deepseek2"}}
       ],
       "params": ["671b"],
-      "pulls": "225.8K",
-      "pulls_approx": 225800,
+      "pulls": "225.9K",
+      "pulls_approx": 225900,
       "updated": "10 months ago",
       "updated_at": "2025-11-19T18:22:00Z"
     },
@@ -9605,8 +9605,8 @@
         {"tag":"30b-mlx","size":"23GB","digest":"8b1474be6e54","model_info":{"contextWindow":"256K","parameters":"","quantization":""}}
       ],
       "params": ["tools","thinking","30b"],
-      "pulls": "219.5K",
-      "pulls_approx": 219500,
+      "pulls": "220.4K",
+      "pulls_approx": 220400,
       "updated": "1 month ago",
       "updated_at": "2026-08-31T21:05:00Z"
     },
@@ -9621,8 +9621,8 @@
         {"tag":"7b-fp16","size":"15GB","digest":"c911a6aaee29","model_info":{"contextWindow":"32K","parameters":"7.62b","quantization":"F16","arch":"qwen2"}}
       ],
       "params": ["7b"],
-      "pulls": "217.4K",
-      "pulls_approx": 217400,
+      "pulls": "217.5K",
+      "pulls_approx": 217500,
       "updated": "1 year ago",
       "updated_at": "2024-12-04T08:14:00Z"
     },
@@ -9637,8 +9637,8 @@
         {"tag":"4b-it-bf16","size":"8.6GB","digest":"32f17fbd85fe","model_info":{"contextWindow":"128K","parameters":"4.3b","quantization":"F16","arch":"gemma3"}}
       ],
       "params": ["vision","4b"],
-      "pulls": "210.2K",
-      "pulls_approx": 210200,
+      "pulls": "210.4K",
+      "pulls_approx": 210400,
       "updated": "5 months ago",
       "updated_at": "2026-04-16T00:04:00Z"
     },
@@ -9653,8 +9653,8 @@
         {"tag":"7b-02-2025-fp16","size":"16GB","digest":"23f512f126d9","model_info":{"contextWindow":"16K","parameters":"8.03b","quantization":"F16","arch":"cohere2"}}
       ],
       "params": ["tools","7b"],
-      "pulls": "208.2K",
-      "pulls_approx": 208200,
+      "pulls": "208.3K",
+      "pulls_approx": 208300,
       "updated": "1 year ago",
       "updated_at": "2025-02-28T21:28:00Z"
     },
@@ -9668,8 +9668,8 @@
         {"tag":"270m-it-fp16","size":"552MB","digest":"ce6e8a1097cd","model_info":{"contextWindow":"32K","parameters":"268m","quantization":"F16","arch":"gemma3"}}
       ],
       "params": ["tools","270m"],
-      "pulls": "198.3K",
-      "pulls_approx": 198300,
+      "pulls": "198.5K",
+      "pulls_approx": 198500,
       "updated": "9 months ago",
       "updated_at": "2025-12-18T07:03:00Z"
     },
@@ -9684,8 +9684,8 @@
         {"tag":"8b-a1b-bf16","size":"17GB","digest":"c6d60dd0c9c3","model_info":{"contextWindow":"125K","parameters":"8.47b","quantization":"F16","arch":"lfm2moe"}}
       ],
       "params": ["tools","thinking","8b"],
-      "pulls": "191.3K",
-      "pulls_approx": 191300,
+      "pulls": "192.2K",
+      "pulls_approx": 192200,
       "updated": "4 months ago",
       "updated_at": "2026-05-31T04:16:00Z"
     },
@@ -9701,8 +9701,8 @@
         {"tag":"125b-mlx","size":"105GB","digest":"c7b96ffe21af","model_info":{"contextWindow":"256K","parameters":"","quantization":""}}
       ],
       "params": ["vision","tools","thinking"],
-      "pulls": "180.3K",
-      "pulls_approx": 180300,
+      "pulls": "180.9K",
+      "pulls_approx": 180900,
       "updated": "1 month ago",
       "updated_at": "2026-09-05T17:55:00Z"
     },
@@ -9712,8 +9712,8 @@
       "tags": [
       ],
       "params": ["vision","tools","thinking","cloud"],
-      "pulls": "178.2K",
-      "pulls_approx": 178200,
+      "pulls": "178.8K",
+      "pulls_approx": 178800,
       "updated": "1 month ago",
       "updated_at": "2026-08-26T14:00:00Z",
       "cloud": true,
@@ -9733,8 +9733,8 @@
         {"tag":"mlx-bf16","size":"237GB","digest":"b5f23d44f7ed","model_info":{"contextWindow":"1M","parameters":"","quantization":""}}
       ],
       "params": ["tools","thinking"],
-      "pulls": "171.5K",
-      "pulls_approx": 171500,
+      "pulls": "171.7K",
+      "pulls_approx": 171700,
       "updated": "1 month ago",
       "updated_at": "2026-08-28T18:53:00Z"
     },
@@ -9747,8 +9747,8 @@
         {"tag":"120b","size":"65GB","digest":"45be44f7918a","model_info":{"contextWindow":"128K","parameters":"117b","quantization":"MXFP4","arch":"gptoss"}}
       ],
       "params": ["tools","thinking","20b","120b"],
-      "pulls": "161.1K",
-      "pulls_approx": 161100,
+      "pulls": "161.3K",
+      "pulls_approx": 161300,
       "updated": "11 months ago",
       "updated_at": "2025-10-29T02:04:00Z"
     },
@@ -9761,8 +9761,8 @@
         {"tag":"30b-a3b-q4_K_M","size":"24GB","digest":"e0705e3fe8f7","model_info":{"contextWindow":"256K","parameters":"31.6b","quantization":"Q4_K_M","arch":"nemotron_h_moe"}}
       ],
       "params": ["tools","thinking","30b"],
-      "pulls": "152.4K",
-      "pulls_approx": 152400,
+      "pulls": "152.5K",
+      "pulls_approx": 152500,
       "updated": "6 months ago",
       "updated_at": "2026-03-20T20:10:00Z"
     },
@@ -9772,8 +9772,8 @@
       "tags": [
       ],
       "params": ["vision","tools","cloud"],
-      "pulls": "132.2K",
-      "pulls_approx": 132200,
+      "pulls": "132.7K",
+      "pulls_approx": 132700,
       "updated": "10 months ago",
       "updated_at": "2025-12-02T23:19:00Z",
       "cloud": true,
@@ -9792,8 +9792,8 @@
         {"tag":"mlx-bf16","size":"68GB","digest":"989474a733e8","model_info":{"contextWindow":"256K","parameters":"","quantization":""}}
       ],
       "params": ["tools","thinking"],
-      "pulls": "126.1K",
-      "pulls_approx": 126100,
+      "pulls": "126.4K",
+      "pulls_approx": 126400,
       "updated": "1 month ago",
       "updated_at": "2026-08-31T20:58:00Z"
     },
@@ -9852,8 +9852,8 @@
         {"tag":"30b-bf16","size":"45GB","digest":"cdffb12cc8f4","model_info":{"contextWindow":"128K","parameters":"22.4b","quantization":"BF16","arch":"granite"}}
       ],
       "params": ["3b","8b","30b"],
-      "pulls": "121.7K",
-      "pulls_approx": 121700,
+      "pulls": "122.7K",
+      "pulls_approx": 122700,
       "updated": "1 month ago",
       "updated_at": "2026-08-27T21:41:00Z"
     },
@@ -9863,8 +9863,8 @@
       "tags": [
       ],
       "params": ["tools","thinking","cloud"],
-      "pulls": "120.2K",
-      "pulls_approx": 120200,
+      "pulls": "120.6K",
+      "pulls_approx": 120600,
       "updated": "4 months ago",
       "updated_at": "2026-06-04T00:00:00Z",
       "cloud": true,
@@ -9876,8 +9876,8 @@
       "tags": [
       ],
       "params": ["vision","tools","thinking","cloud"],
-      "pulls": "100.4K",
-      "pulls_approx": 100400,
+      "pulls": "100.6K",
+      "pulls_approx": 100600,
       "updated": "2 months ago",
       "updated_at": "2026-07-27T15:53:00Z",
       "cloud": true,
@@ -9889,8 +9889,8 @@
       "tags": [
       ],
       "params": ["tools","thinking","cloud"],
-      "pulls": "86.8K",
-      "pulls_approx": 86800,
+      "pulls": "87.5K",
+      "pulls_approx": 87500,
       "updated": "1 month ago",
       "updated_at": "2026-08-28T15:00:00Z",
       "cloud": true,
@@ -9915,8 +9915,8 @@
         {"tag":"4b-bf16","size":"8.4GB","digest":"4a7714fab59e","model_info":{"contextWindow":"256K","parameters":"4.21b","quantization":"BF16","arch":"qwen35"}}
       ],
       "params": ["tools","decision","thinking","0.8b","4b"],
-      "pulls": "78.5K",
-      "pulls_approx": 78500,
+      "pulls": "79.4K",
+      "pulls_approx": 79400,
       "updated": "1 week ago",
       "updated_at": "2026-10-01T19:39:00Z"
     },
@@ -9926,9 +9926,9 @@
       "tags": [
       ],
       "params": ["vision","tools","thinking","cloud"],
-      "pulls": "76.5K",
-      "pulls_approx": 76500,
-      "updated": "4 weeks ago",
+      "pulls": "77.1K",
+      "pulls_approx": 77100,
+      "updated": "1 month ago",
       "updated_at": "2026-09-10T03:00:00Z",
       "cloud": true,
       "cloud_tags": ["cloud"]
@@ -9946,8 +9946,8 @@
         {"tag":"mlx-bf16","size":"61GB","digest":"70520154ae45","model_info":{"contextWindow":"488K","parameters":"","quantization":""}}
       ],
       "params": ["tools","thinking"],
-      "pulls": "65.8K",
-      "pulls_approx": 65800,
+      "pulls": "66.1K",
+      "pulls_approx": 66100,
       "updated": "3 months ago",
       "updated_at": "2026-06-18T01:39:00Z"
     },
@@ -9970,8 +9970,8 @@
         {"tag":"f16","size":"2.6GB","digest":"82520258dab3","model_info":{"contextWindow":"256K","parameters":"752m","quantization":"F16","arch":"qwen35","projector":{"arch":"clip","parameters":"548m","quantization":"F16"}}}
       ],
       "params": ["vision","1b"],
-      "pulls": "63.4K",
-      "pulls_approx": 63400,
+      "pulls": "63.7K",
+      "pulls_approx": 63700,
       "updated": "4 months ago",
       "updated_at": "2026-06-02T07:54:00Z"
     },
@@ -9994,28 +9994,10 @@
         {"tag":"f16","size":"17GB","digest":"e8c96bb677b7","model_info":{"contextWindow":"40K","parameters":"8.19b","quantization":"F16","arch":"qwen3","projector":{"arch":"clip","parameters":"527m","quantization":"F16"}}}
       ],
       "params": ["vision","8b"],
-      "pulls": "51.3K",
-      "pulls_approx": 51300,
+      "pulls": "51.6K",
+      "pulls_approx": 51600,
       "updated": "4 months ago",
       "updated_at": "2026-06-02T08:02:00Z"
-    },
-    {
-      "name": "laguna-xs.2",
-      "description": "Laguna XS.2 is a 33B total parameter Mixture-of-Experts model with 3B activated parameters per token designed for agentic coding and long-horizon work on a local machine.",
-      "tags": [
-        {"tag":"latest","size":"23GB","digest":"ba9ecde43b0e","model_info":{"contextWindow":"128K","parameters":"33.4b","quantization":"Q4_K_M","arch":"laguna"}},
-        {"tag":"mxfp8","size":"39GB","digest":"573baf5fcf0c","model_info":{"contextWindow":"256K","parameters":"","quantization":""}},
-        {"tag":"nvfp4","size":"19GB","digest":"5bc4c3edeb0c","model_info":{"contextWindow":"256K","parameters":"","quantization":""}},
-        {"tag":"q4_K_M","size":"23GB","digest":"ba9ecde43b0e","model_info":{"contextWindow":"128K","parameters":"33.4b","quantization":"Q4_K_M","arch":"laguna"}},
-        {"tag":"q8_0","size":"37GB","digest":"de0c566abd07","model_info":{"contextWindow":"128K","parameters":"33.4b","quantization":"Q8_0","arch":"laguna"}},
-        {"tag":"bf16","size":"67GB","digest":"cb0fe684dd63","model_info":{"contextWindow":"128K","parameters":"33.4b","quantization":"F16","arch":"laguna"}},
-        {"tag":"mlx-bf16","size":"67GB","digest":"77c0711e5d46","model_info":{"contextWindow":"256K","parameters":"","quantization":""}}
-      ],
-      "params": ["tools","thinking"],
-      "pulls": "34.1K",
-      "pulls_approx": 34100,
-      "updated": "2 months ago",
-      "updated_at": "2026-07-25T18:19:00Z"
     },
     {
       "name": "nimble",
@@ -10031,10 +10013,28 @@
         {"tag":"9b-bf16","size":"18GB","digest":"adfcdbb4070d","model_info":{"contextWindow":"256K","parameters":"8.95b","quantization":"BF16","arch":"qwen35"}}
       ],
       "params": ["tools","decision","thinking","9b"],
-      "pulls": "33.7K",
-      "pulls_approx": 33700,
+      "pulls": "34.4K",
+      "pulls_approx": 34400,
       "updated": "1 week ago",
       "updated_at": "2026-10-01T19:41:00Z"
+    },
+    {
+      "name": "laguna-xs.2",
+      "description": "Laguna XS.2 is a 33B total parameter Mixture-of-Experts model with 3B activated parameters per token designed for agentic coding and long-horizon work on a local machine.",
+      "tags": [
+        {"tag":"latest","size":"23GB","digest":"ba9ecde43b0e","model_info":{"contextWindow":"128K","parameters":"33.4b","quantization":"Q4_K_M","arch":"laguna"}},
+        {"tag":"mxfp8","size":"39GB","digest":"573baf5fcf0c","model_info":{"contextWindow":"256K","parameters":"","quantization":""}},
+        {"tag":"nvfp4","size":"19GB","digest":"5bc4c3edeb0c","model_info":{"contextWindow":"256K","parameters":"","quantization":""}},
+        {"tag":"q4_K_M","size":"23GB","digest":"ba9ecde43b0e","model_info":{"contextWindow":"128K","parameters":"33.4b","quantization":"Q4_K_M","arch":"laguna"}},
+        {"tag":"q8_0","size":"37GB","digest":"de0c566abd07","model_info":{"contextWindow":"128K","parameters":"33.4b","quantization":"Q8_0","arch":"laguna"}},
+        {"tag":"bf16","size":"67GB","digest":"cb0fe684dd63","model_info":{"contextWindow":"128K","parameters":"33.4b","quantization":"F16","arch":"laguna"}},
+        {"tag":"mlx-bf16","size":"67GB","digest":"77c0711e5d46","model_info":{"contextWindow":"256K","parameters":"","quantization":""}}
+      ],
+      "params": ["tools","thinking"],
+      "pulls": "34.2K",
+      "pulls_approx": 34200,
+      "updated": "2 months ago",
+      "updated_at": "2026-07-25T18:19:00Z"
     },
     {
       "name": "granite4.1-guardian",
@@ -10058,8 +10058,8 @@
         {"tag":"8b-bf16","size":"17GB","digest":"554b81f96395","model_info":{"contextWindow":"128K","parameters":"8.38b","quantization":"BF16","arch":"granite"}}
       ],
       "params": ["tools","thinking","8b"],
-      "pulls": "31.5K",
-      "pulls_approx": 31500,
+      "pulls": "31.6K",
+      "pulls_approx": 31600,
       "updated": "4 months ago",
       "updated_at": "2026-06-10T21:07:00Z"
     },
@@ -10086,9 +10086,9 @@
         {"tag":"740m-bf16","size":"1.5GB","digest":"54d809644cd8","model_info":{"contextWindow":"256K","parameters":"","quantization":""}}
       ],
       "params": ["vision","embedding","audio","270m","440m","570m","740m"],
-      "pulls": "20.7K",
-      "pulls_approx": 20700,
-      "updated": "3 days ago",
+      "pulls": "22.4K",
+      "pulls_approx": 22400,
+      "updated": "4 days ago",
       "updated_at": "2026-10-06T04:10:00Z"
     },
     {
@@ -10102,9 +10102,9 @@
         {"tag":"9b-q8_0","size":"11GB","digest":"2aa4d39fd93b","model_info":{"contextWindow":"256K","parameters":"9.08b","quantization":"Q8_0","arch":"qwen35","projector":{"arch":"clip","parameters":"456m","quantization":"F16"}}}
       ],
       "params": ["vision","decision","9b"],
-      "pulls": "14.6K",
-      "pulls_approx": 14600,
-      "updated": "4 days ago",
+      "pulls": "15.1K",
+      "pulls_approx": 15100,
+      "updated": "5 days ago",
       "updated_at": "2026-10-04T23:27:00Z"
     },
     {
@@ -10120,9 +10120,9 @@
         {"tag":"27b-q8_0","size":"30GB","digest":"c3af69876636","model_info":{"contextWindow":"256K","parameters":"27b","quantization":"Q8_0","arch":"qwen35","projector":{"arch":"clip","parameters":"461m","quantization":"F16"}}}
       ],
       "params": ["vision","decision","27b"],
-      "pulls": "9,251",
-      "pulls_approx": 9251,
-      "updated": "4 days ago",
+      "pulls": "9,647",
+      "pulls_approx": 9647,
+      "updated": "5 days ago",
       "updated_at": "2026-10-04T23:22:00Z"
     },
     {
@@ -10131,8 +10131,8 @@
       "tags": [
       ],
       "params": ["vision","tools","thinking","cloud"],
-      "pulls": "3,459",
-      "pulls_approx": 3459,
+      "pulls": "3,842",
+      "pulls_approx": 3842,
       "updated": "3 days ago",
       "updated_at": "2026-10-06T13:00:00Z",
       "cloud": true,
@@ -10148,8 +10148,8 @@
         {"tag":"421m-typed-decisions-mlx-fp16","size":"846MB","digest":"c62bc110244c","model_info":{"contextWindow":"1K","parameters":"","quantization":""}}
       ],
       "params": ["decision"],
-      "pulls": "3,114",
-      "pulls_approx": 3114,
+      "pulls": "3,503",
+      "pulls_approx": 3503,
       "updated": "1 week ago",
       "updated_at": "2026-09-30T23:35:00Z"
     }
