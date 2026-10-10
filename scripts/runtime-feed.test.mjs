@@ -72,8 +72,18 @@ function fixtureGitHub() {
   };
 }
 
-function fixtureFetch() {
+function fixtureFetch({ foundationModelsPublished = false } = {}) {
   return async (url, options = {}) => {
+    if (url.includes("/foundationmodels/")) {
+      if (!foundationModelsPublished) return new Response(null, { status: 404 });
+      if (url.endsWith("runtime-manifest.json")) {
+        return new Response(options.method === "HEAD" ? null : JSON.stringify({ object: "msty.nexus.foundationmodels_runtime", runtimeId: "foundationmodels", runtimeVersion: "0.1.0" }));
+      }
+      if (url.endsWith("checksums.txt")) return new Response(`${sha("e")}  msty-nexus-afm.tgz\n`);
+      if (options.method === "HEAD" && url.endsWith("msty-nexus-afm.tgz")) {
+        return new Response(null, { headers: { "content-length": "265000" } });
+      }
+    }
     if (url.endsWith("runtime-manifest.json")) {
       return new Response(JSON.stringify({ object: "msty.nexus.mlx_runtime", runtimeId: "mlx", runtimeVersion: "0.6.2" }));
     }
@@ -156,4 +166,39 @@ test("signs the exact feed payload and rejects tampering", async () => {
   assert.throws(() => verifySignedRuntimeFeed(tampered, publicRaw, "stable"), /does not verify/);
   const reformatted = JSON.stringify(JSON.parse(signed), null, 2);
   assert.throws(() => verifySignedRuntimeFeed(reformatted, publicRaw, "stable"), /canonical serialization/);
+});
+
+const bundle = async () => ({
+  url: "https://github.com/cloudstack-llc/catalogs/releases/download/runtime-bundle-b1234/cuda.zip",
+  sha256: sha("d"),
+  sizeBytes: 123,
+  archiveFormat: "zip",
+});
+
+test("lists Apple Foundation Models only on enabled channels once published", async () => {
+  const dev = await buildRuntimeFeed({
+    github: fixtureGitHub(),
+    fetchImpl: fixtureFetch({ foundationModelsPublished: true }),
+    resolveBundle: bundle,
+    channel: "dev",
+  });
+  const afm = dev.releases.find((release) => release.runtimeId === "foundationmodels");
+  // The dev channel lists the dev publish, pinned by SHA-256.
+  assert.equal(afm.artifacts[0].url, "https://nexus-assets.msty.ai/msty-nexus/runtime/foundationmodels/latest/dev/msty-nexus-afm.tgz");
+  assert.equal(afm.artifacts[0].executablePath, "msty-nexus-afm_0.1.0_darwin_arm64/msty-nexus-afm");
+  assert.equal(afm.artifacts[0].backend, "automatic");
+
+  const unpublished = await buildRuntimeFeed({ github: fixtureGitHub(), fetchImpl: fixtureFetch(), resolveBundle: bundle, channel: "dev" });
+  assert.equal(unpublished.releases.length, 3);
+
+  const stable = await buildRuntimeFeed({
+    github: fixtureGitHub(),
+    fetchImpl: fixtureFetch({ foundationModelsPublished: true }),
+    resolveBundle: bundle,
+    channel: "stable",
+  });
+  assert.equal(stable.releases.some((release) => release.runtimeId === "foundationmodels"), false);
+  const tampered = structuredClone(dev);
+  for (const release of tampered.releases) release.channel = "stable";
+  assert.throws(() => validateRuntimeFeed(tampered, "stable"), /not enabled for the stable channel/);
 });

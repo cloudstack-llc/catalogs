@@ -14,6 +14,12 @@ export const DEFAULT_PUBLIC_KEY =
   "5rZcCrp9d0WhHcuQk+rk9GDJtKizYK0LufQ551FltdA=";
 export const DEFAULT_MLX_ASSET_URL =
   "https://nexus-assets.msty.ai/msty-nexus/runtime/mlx/latest/msty-nexus-mlx.tgz";
+export const DEFAULT_FOUNDATIONMODELS_ASSET_URL =
+  "https://nexus-assets.msty.ai/msty-nexus/runtime/foundationmodels/latest/msty-nexus-afm.tgz";
+// Channels that list Apple Foundation Models. Msty Nexus Runtime 0.5.x
+// rejects a whole feed that names a runtime it does not know, and 0.5.x
+// still reads the stable feed. Add "stable" only after 0.5.x is retired.
+export const FOUNDATIONMODELS_CHANNELS = new Set(["dev"]);
 
 const GITHUB_API = "https://api.github.com";
 const GITHUB_DIGEST = /^sha256:([0-9a-f]{64})$/;
@@ -359,6 +365,57 @@ function mlxMetadataPrefix(assetURL) {
   return assetURL.slice(0, -"msty-nexus-mlx.tgz".length);
 }
 
+// Apple Foundation Models follows the MLX asset contract: latest/ holds
+// runtime-manifest.json, checksums.txt, and msty-nexus-afm.tgz, and
+// <version>/ holds the immutable copy the feed points at. Returns null until
+// the first publish so the feed refresh keeps working before then.
+async function buildFoundationModelsRelease(fetchImpl, channel, publishedAt, assetURL) {
+  const parsed = new URL(assetURL);
+  invariant(parsed.protocol === "https:" && parsed.search === "" && parsed.hash === "", "Foundation Models asset URL must be immutable HTTPS metadata input");
+  invariant(parsed.pathname.endsWith("/foundationmodels/latest/msty-nexus-afm.tgz"), "Foundation Models asset URL must be the latest msty-nexus-afm.tgz alias");
+  // The dev channel reads the dev publish (latest/dev/), which has no
+  // immutable versioned copy; the feed pins it by SHA-256 instead.
+  const dev = channel === "dev";
+  if (dev) assetURL = assetURL.replace("/foundationmodels/latest/", "/foundationmodels/latest/dev/");
+  const prefix = assetURL.slice(0, -"msty-nexus-afm.tgz".length);
+  const probe = await fetchImpl(`${prefix}runtime-manifest.json`, { method: "HEAD", redirect: "follow" });
+  if (probe.status === 404) return null;
+  const manifestResponse = await fetchWithRetry(`${prefix}runtime-manifest.json`, { fetchImpl });
+  const manifest = object(await manifestResponse.json(), "Foundation Models runtime manifest");
+  invariant(
+    manifest.object === "msty.nexus.foundationmodels_runtime" && manifest.runtimeId === "foundationmodels",
+    "Foundation Models runtime manifest identity is invalid",
+  );
+  const version = string(manifest.runtimeVersion, "Foundation Models runtime version");
+  invariant(SEMVER.test(version), "Foundation Models runtime version must be semantic");
+  const checksumResponse = await fetchWithRetry(`${prefix}checksums.txt`, { fetchImpl });
+  const checksumText = await checksumResponse.text();
+  const checksumLine = checksumText.split(/\r?\n/).find((line) => line.trim().endsWith("msty-nexus-afm.tgz"));
+  const sha256 = String(checksumLine ?? "").trim().split(/\s+/)[0]?.toLowerCase();
+  invariant(SHA256.test(sha256), "Foundation Models checksum file did not contain a valid archive SHA-256");
+  const versionedURL = dev ? assetURL : assetURL.replace("/foundationmodels/latest/", `/foundationmodels/${version}/`);
+  const head = await fetchWithRetry(versionedURL, { fetchImpl, method: "HEAD" });
+  const sizeBytes = Number(head.headers.get("content-length"));
+  integer(sizeBytes, "Foundation Models artifact content-length");
+  return {
+    runtimeId: "foundationmodels",
+    channel,
+    runtimeVersion: version,
+    publishedAt,
+    source: { type: "msty_asset", url: versionedURL },
+    artifacts: [{
+      os: "darwin",
+      arch: "arm64",
+      backend: "automatic",
+      url: versionedURL,
+      sha256,
+      sizeBytes,
+      archiveFormat: "tar.gz",
+      executablePath: `msty-nexus-afm_${version}_darwin_arm64/msty-nexus-afm`,
+    }],
+  };
+}
+
 async function buildMLXRelease(fetchImpl, channel, publishedAt, mlxAssetURL) {
   const prefix = mlxMetadataPrefix(mlxAssetURL);
   const manifestResponse = await fetchWithRetry(`${prefix}runtime-manifest.json`, { fetchImpl });
@@ -402,6 +459,8 @@ export async function buildRuntimeFeed({
   now = () => new Date(),
   fetchImpl = fetch,
   mlxAssetURL = DEFAULT_MLX_ASSET_URL,
+  foundationModelsAssetURL = DEFAULT_FOUNDATIONMODELS_ASSET_URL,
+  foundationModelsChannels = FOUNDATIONMODELS_CHANNELS,
 }) {
   invariant(channel === "stable" || channel === "dev", "runtime feed channel must be stable or dev");
   invariant(typeof github === "function", "GitHub client is required");
@@ -411,6 +470,10 @@ export async function buildRuntimeFeed({
   releases.push(await buildOllamaRelease(github, channel, publishedAt));
   releases.push(await buildLlamaRelease(github, resolveBundle, channel, publishedAt));
   releases.push(await buildMLXRelease(fetchImpl, channel, publishedAt, mlxAssetURL));
+  if (foundationModelsChannels.has(channel)) {
+    const foundationModels = await buildFoundationModelsRelease(fetchImpl, channel, publishedAt, foundationModelsAssetURL);
+    if (foundationModels) releases.push(foundationModels);
+  }
   const feed = { schemaVersion: FEED_SCHEMA_VERSION, generatedAt: publishedAt, releases };
   validateRuntimeFeed(feed, channel);
   return feed;
@@ -419,12 +482,19 @@ export async function buildRuntimeFeed({
 export function validateRuntimeFeed(feed, expectedChannel) {
   object(feed, "feed");
   invariant(feed.schemaVersion === FEED_SCHEMA_VERSION, `feed.schemaVersion must be ${FEED_SCHEMA_VERSION}`);
-  invariant(Array.isArray(feed.releases) && feed.releases.length === 3, "feed must contain exactly three runtime releases");
+  invariant(
+    Array.isArray(feed.releases) && (feed.releases.length === 3 || feed.releases.length === 4),
+    "feed must contain the three required runtime releases and at most Apple Foundation Models",
+  );
   const byID = new Map();
   for (const [releaseIndex, releaseValue] of feed.releases.entries()) {
     const release = object(releaseValue, `feed.releases[${releaseIndex}]`);
     const runtimeId = string(release.runtimeId, `feed.releases[${releaseIndex}].runtimeId`);
-    invariant(["ollama", "llamacpp", "mlx"].includes(runtimeId), `unsupported runtime ${runtimeId}`);
+    invariant(["ollama", "llamacpp", "mlx", "foundationmodels"].includes(runtimeId), `unsupported runtime ${runtimeId}`);
+    invariant(
+      runtimeId !== "foundationmodels" || FOUNDATIONMODELS_CHANNELS.has(expectedChannel),
+      `foundationmodels is not enabled for the ${expectedChannel} channel`,
+    );
     invariant(!byID.has(runtimeId), `duplicate runtime ${runtimeId}`);
     byID.set(runtimeId, release);
     invariant(release.channel === expectedChannel, `${runtimeId}.channel must be ${expectedChannel}`);
