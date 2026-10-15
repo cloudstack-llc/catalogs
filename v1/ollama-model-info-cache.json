@@ -34286,6 +34286,165 @@
     "parameters": "983m",
     "quantization": "F16"
    }
+  },
+  "lfm2.5@00a755688d0f": {
+   "parameters": "24b",
+   "quantization": "Q4_K_M",
+   "arch": "lfm2moe"
+  },
+  "lfm2.5@ce54a54c2ce7": {
+   "parameters": "24b",
+   "quantization": "Q4_0",
+   "arch": "lfm2moe"
+  },
+  "lfm2.5@26bdb85d5401": {
+   "parameters": "24b",
+   "quantization": "Q8_0",
+   "arch": "lfm2moe"
+  },
+  "lfm2.5@92403fbc4a1f": {
+   "parameters": "24b",
+   "quantization": "BF16",
+   "arch": "lfm2moe"
+  },
+  "embeddinggemma-2@1f30cabe5af7": {
+   "parameters": "271m",
+   "quantization": "Q8_0",
+   "arch": "gemma-embedding2",
+   "projector": {
+    "arch": "clip",
+    "parameters": "473m",
+    "quantization": "F16"
+   }
+  },
+  "embeddinggemma-2@ff630aa67948": {
+   "parameters": "271m",
+   "quantization": "Q8_0",
+   "arch": "gemma-embedding2"
+  },
+  "embeddinggemma-2@b750e83c282e": {
+   "parameters": "271m",
+   "quantization": "Q8_0",
+   "arch": "gemma-embedding2",
+   "projector": {
+    "arch": "clip",
+    "parameters": "168m",
+    "quantization": "F16"
+   }
+  },
+  "embeddinggemma-2@74f652944b2b": {
+   "parameters": "271m",
+   "quantization": "Q8_0",
+   "arch": "gemma-embedding2",
+   "projector": {
+    "arch": "clip",
+    "parameters": "306m",
+    "quantization": "F16"
+   }
+  },
+  "embeddinggemma-2@c21dd30c1e38": {
+   "parameters": "271m",
+   "quantization": "Q8_0",
+   "arch": "gemma-embedding2"
+  },
+  "embeddinggemma-2@7d8dc01c0a05": {
+   "parameters": "271m",
+   "quantization": "Q8_0",
+   "arch": "gemma-embedding2",
+   "projector": {
+    "arch": "clip",
+    "parameters": "168m",
+    "quantization": "F16"
+   }
+  },
+  "embeddinggemma-2@899c39804f83": {
+   "parameters": "271m",
+   "quantization": "Q8_0",
+   "arch": "gemma-embedding2",
+   "projector": {
+    "arch": "clip",
+    "parameters": "306m",
+    "quantization": "F16"
+   }
+  },
+  "embeddinggemma-2@f4981a15b998": {
+   "parameters": "271m",
+   "quantization": "Q8_0",
+   "arch": "gemma-embedding2",
+   "projector": {
+    "arch": "clip",
+    "parameters": "473m",
+    "quantization": "F16"
+   }
+  },
+  "d1@8c2d9ddae441": {
+   "parameters": "2.7b",
+   "quantization": "Q8_0",
+   "arch": "lfm2",
+   "projector": {
+    "arch": "clip",
+    "parameters": "426m",
+    "quantization": "BF16"
+   }
+  },
+  "pplx-decider@f3950da72565": {
+   "parameters": "26.9b",
+   "quantization": "Q4_K_M",
+   "arch": "qwen35",
+   "projector": {
+    "arch": "clip",
+    "parameters": "461m",
+    "quantization": "F16"
+   }
+  },
+  "nemotron-3.5-bolt@d6d3deeca271": {
+   "parameters": "74b",
+   "quantization": "IQ2_XXS",
+   "arch": "nemotron_h_moe",
+   "projector": {
+    "arch": "clip",
+    "parameters": "842m",
+    "quantization": "(!unknown_file_type 39!)"
+   }
+  },
+  "nemotron-3.5-super@d84f81c512c4": {
+   "parameters": "124b",
+   "quantization": "Q4_K_M",
+   "arch": "nemotron_h_moe",
+   "projector": {
+    "arch": "clip",
+    "parameters": "842m",
+    "quantization": "BF16"
+   }
+  },
+  "nemotron-3.5-super@93aa29b11e26": {
+   "absent": true
+  },
+  "nemotron-3.5-super@dda000e80902": {
+   "absent": true
+  },
+  "nemotron-3.5-super@aba4cee1e75e": {
+   "absent": true
+  },
+  "nemotron-3.5-super@8a58f3e60082": {
+   "parameters": "124b",
+   "quantization": "Q4_K_M",
+   "arch": "nemotron_h_moe",
+   "projector": {
+    "arch": "clip",
+    "parameters": "842m",
+    "quantization": "BF16"
+   }
+  },
+  "nemotron-3.5-super@b8269ff2e3e0": {
+   "parameters": "124b",
+   "quantization": "Q8_0",
+   "arch": "nemotron_h_moe",
+   "projector": {
+    "arch": "clip",
+    "parameters": "842m",
+    "quantization": "BF16"
+   }
   }
  }
 }
