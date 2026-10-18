@@ -271,7 +271,8 @@ model can appear in two collections without being described twice.
 | Field | Meaning |
 | --- | --- |
 | `id`, `name` | Required. Everything else is optional. |
-| `publisher`, `summary`, `parameters`, `context`, `capabilities`, `tags` | Description, for display and filtering. |
+| `publisher`, `summary`, `parameters`, `context`, `capabilities`, `tags` | Description, for display and filtering. `"coding"` in `tags` marks a model that is good at writing code. |
+| `tier` | Quality tier: `frontier`, `excellent`, `strong`, or `good`. |
 | `installs[].runtime` | `ollama`, `llamacpp`, or `mlx`. |
 | `installs[].model` | The Ollama tag. Ollama installs are addressed by it; Hugging Face installs are not. |
 | `installs[].repository`, `file`, `revision` | The Hugging Face locator. `revision` defaults to `main`. |
@@ -291,6 +292,24 @@ model is multimodal, so those entries declare `vision`.
 **Only single-file GGUFs are featured.** A featured row promises one click, and a sharded
 download is a flow this format cannot describe. A repository publishing only shards gets
 no `llamacpp` entry.
+
+**`tier` is a curated quality rating.** Msty Nexus Cluster Advisor ranks by it. It rates
+general chat and reasoning quality against the open models available at the time:
+
+| Tier | Meaning |
+| --- | --- |
+| `frontier` | The best open models, close to hosted frontier models. |
+| `excellent` | One step below: the previous generation's flagships and the top coding models. |
+| `strong` | Capable mid-size models, roughly 20B to 130B. |
+| `good` | Small models, and models with one narrow job (OCR, embeddings). |
+
+Tiers are relative, so review them when a new generation of models is released. A client
+that finds no `tier` estimates one from the model's size and says so. The field is
+additive: older Nexus builds ignore it, so `schema_version` stays 1.
+
+**The `cluster` collection is a contract.** Cluster Advisor reads it by id. It holds MLX
+models too large for one Mac, from model families the cluster runtime can split across
+Macs.
 
 ## Refresh
 
