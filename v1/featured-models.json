@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-15T22:58:28Z",
+  "generated_at": "2026-10-18T22:26:43Z",
   "collections": [
     {
       "id": "start-here",
@@ -87,6 +87,23 @@
         "gpt-oss-120b",
         "qwen3.5-122b"
       ]
+    },
+    {
+      "id": "cluster",
+      "title": "For a Mac cluster",
+      "description": "Too large for one Mac. Split across a Thunderbolt-connected cluster.",
+      "models": [
+        "muse-spark-open",
+        "glm-5.3",
+        "deepseek-v3.2",
+        "qwen3-coder-480b",
+        "qwen3.5-397b",
+        "glm-4.7",
+        "minimax-m2.7",
+        "qwen3.5-122b",
+        "gpt-oss-120b",
+        "glm-4.5-air"
+      ]
     }
   ],
   "models": [
@@ -95,19 +112,22 @@
       "name": "Qwen3.5 9B",
       "publisher": "Qwen",
       "summary": "Strong all-round chat with a very long context. A good first model.",
-      "parameters": "9.7B",
+      "parameters": "8.9B",
       "context": 262144,
+      "downloads": 1287434,
+      "likes": 1006,
       "capabilities": [
         "chat",
         "tools",
         "reasoning",
         "vision"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
           "model": "qwen3.5:9b",
-          "size_bytes": 6600000000,
+          "size_bytes": 7600000000,
           "quantization": "Q4_K_M"
         },
         {
@@ -132,16 +152,19 @@
       "summary": "Frontier-level quality at a size a laptop can hold.",
       "parameters": "12B",
       "context": 262144,
+      "downloads": 1627970,
+      "likes": 918,
       "capabilities": [
         "chat",
         "tools",
         "vision"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
           "model": "gemma4:12b",
-          "size_bytes": 7600000000,
+          "size_bytes": 8000000000,
           "quantization": "Q4_K_M"
         },
         {
@@ -166,10 +189,13 @@
       "summary": "Built for fast, reliable tool calling on consumer hardware.",
       "parameters": "8.5B",
       "context": 128000,
+      "downloads": 184715,
+      "likes": 326,
       "capabilities": [
         "chat",
         "tools"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -198,10 +224,13 @@
       "summary": "Mistral's edge family, sized to run on a single machine.",
       "parameters": "8.9B",
       "context": 262144,
+      "downloads": 43089,
+      "likes": 100,
       "capabilities": [
         "chat",
         "tools"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -230,12 +259,18 @@
       "summary": "Qwen's flagship open model, strong on coding and research.",
       "parameters": "27B",
       "context": 262144,
+      "downloads": 2248115,
+      "likes": 213,
       "capabilities": [
         "chat",
         "tools",
         "reasoning",
         "vision"
       ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -248,7 +283,7 @@
           "repository": "ggml-org/Qwen3.8-27B-GGUF",
           "file": "Qwen3.8-27B-Q4_K_M.gguf",
           "quantization": "Q4_K_M",
-          "size_bytes": 19905016320,
+          "size_bytes": 19905016416,
           "projector": "mmproj-Qwen3.8-27B-BF16.gguf"
         },
         {
@@ -265,12 +300,18 @@
       "summary": "A mixture-of-experts model tuned for agentic coding and long thinking.",
       "parameters": "36B",
       "context": 262144,
+      "downloads": 1237002,
+      "likes": 1700,
       "capabilities": [
         "chat",
         "tools",
         "reasoning",
         "vision"
       ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -300,11 +341,17 @@
       "summary": "The strongest of the 30B class, with a 198K context window.",
       "parameters": "30B",
       "context": 202752,
+      "downloads": 29187,
+      "likes": 71,
       "capabilities": [
         "chat",
         "tools",
         "reasoning"
       ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -333,11 +380,14 @@
       "summary": "A 30B mixture-of-experts model with a one-million-token context.",
       "parameters": "33B",
       "context": 1048576,
+      "downloads": 182911,
+      "likes": 35,
       "capabilities": [
         "chat",
         "tools",
         "reasoning"
       ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -366,11 +416,14 @@
       "summary": "OpenAI's open-weight model for reasoning and agentic work.",
       "parameters": "21B",
       "context": 131072,
+      "downloads": 203101,
+      "likes": 182,
       "capabilities": [
         "chat",
         "tools",
         "reasoning"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -399,11 +452,14 @@
       "summary": "Meta's open model for always-on local agents.",
       "parameters": "28B",
       "context": 131072,
+      "downloads": 787379,
+      "likes": 376,
       "capabilities": [
         "chat",
         "tools",
         "vision"
       ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -433,11 +489,17 @@
       "summary": "A self-improving model for agentic coding, small enough for a laptop.",
       "parameters": "8.9B",
       "context": 262144,
+      "downloads": 2301496,
+      "likes": 692,
       "capabilities": [
         "chat",
         "code",
         "tools"
       ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -466,11 +528,17 @@
       "summary": "The larger Ornith, for coding work that needs the headroom.",
       "parameters": "35B",
       "context": 262144,
+      "downloads": 1494421,
+      "likes": 1061,
       "capabilities": [
         "chat",
         "code",
         "tools"
       ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -499,11 +567,17 @@
       "summary": "Cohere's developer model: 30B mixture-of-experts, 488K context.",
       "parameters": "30B",
       "context": 499712,
+      "downloads": 234778,
+      "likes": 147,
       "capabilities": [
         "chat",
         "code",
         "tools"
       ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -532,11 +606,17 @@
       "summary": "A 33B mixture-of-experts model with 3B active, built for long-horizon work.",
       "parameters": "33B",
       "context": 262144,
+      "downloads": 195280,
+      "likes": 99,
       "capabilities": [
         "chat",
         "code",
         "tools"
       ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -565,11 +645,17 @@
       "summary": "Qwen's coding-focused model for agentic editing across a codebase.",
       "parameters": "80B",
       "context": 262144,
+      "downloads": 142694,
+      "likes": 886,
       "capabilities": [
         "chat",
         "code",
         "tools"
       ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -598,10 +684,13 @@
       "summary": "Shows its working, and still fits in under a gigabyte.",
       "parameters": "1.2B",
       "context": 128000,
+      "downloads": 10355,
+      "likes": 119,
       "capabilities": [
         "chat",
         "reasoning"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -627,13 +716,16 @@
       "id": "olmo-3.1-think",
       "name": "Olmo 3.1 32B Think",
       "publisher": "Ai2",
-      "summary": "A fully open model \u2014 weights, data, and training \u2014 tuned to reason.",
+      "summary": "A fully open model — weights, data, and training — tuned to reason.",
       "parameters": "32B",
       "context": 65536,
+      "downloads": 4682,
+      "likes": 6,
       "capabilities": [
         "chat",
         "reasoning"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -662,11 +754,14 @@
       "summary": "Efficient agentic reasoning with a one-million-token context.",
       "parameters": "32B",
       "context": 1048576,
+      "downloads": 30908,
+      "likes": 333,
       "capabilities": [
         "chat",
         "reasoning",
         "tools"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -695,10 +790,13 @@
       "summary": "Reads screenshots, documents, and charts, and answers questions about them.",
       "parameters": "8.8B",
       "context": 262144,
+      "downloads": 202398,
+      "likes": 98,
       "capabilities": [
         "chat",
         "vision"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -728,10 +826,13 @@
       "summary": "A pocket-sized vision model for image and video understanding.",
       "parameters": "752M",
       "context": 262144,
+      "downloads": 20476,
+      "likes": 82,
       "capabilities": [
         "chat",
         "vision"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -759,16 +860,19 @@
       "name": "GLM-OCR",
       "publisher": "Z.ai",
       "summary": "Turns complex documents into text. Small enough to keep loaded.",
-      "parameters": "1.1B",
+      "parameters": "891M",
       "context": 131072,
+      "downloads": 38418,
+      "likes": 115,
       "capabilities": [
         "vision"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
           "model": "glm-ocr",
-          "size_bytes": 2200000000,
+          "size_bytes": 2700000000,
           "quantization": "F16"
         },
         {
@@ -793,9 +897,12 @@
       "summary": "Token-efficient OCR, for putting scanned pages into a pipeline.",
       "parameters": "3.3B",
       "context": 8192,
+      "downloads": 7449,
+      "likes": 38,
       "capabilities": [
         "vision"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -823,17 +930,20 @@
       "name": "Qwen3.5 0.8B",
       "publisher": "Qwen",
       "summary": "Under a gigabyte, and still holds a conversation.",
-      "parameters": "873M",
+      "parameters": "752M",
       "context": 262144,
+      "downloads": 242759,
+      "likes": 240,
       "capabilities": [
         "chat",
         "vision"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
           "model": "qwen3.5:0.8b",
-          "size_bytes": 1000000000,
+          "size_bytes": 1300000000,
           "quantization": "Q8_0"
         },
         {
@@ -856,18 +966,21 @@
       "name": "Qwen3.5 2B",
       "publisher": "Qwen",
       "summary": "The smallest Qwen3.5 that still does tool calling well.",
-      "parameters": "2.3B",
+      "parameters": "1.9B",
       "context": 262144,
+      "downloads": 46528,
+      "likes": 28,
       "capabilities": [
         "chat",
         "tools",
         "vision"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
           "model": "qwen3.5:2b",
-          "size_bytes": 2700000000,
+          "size_bytes": 3100000000,
           "quantization": "Q8_0"
         },
         {
@@ -892,10 +1005,13 @@
       "summary": "An enterprise-ready small model with a 128K context.",
       "parameters": "3.4B",
       "context": 131072,
+      "downloads": 7068,
+      "likes": 14,
       "capabilities": [
         "chat",
         "tools"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -924,9 +1040,12 @@
       "summary": "Turns text into vectors for search. Small enough to run beside a chat model.",
       "parameters": "596M",
       "context": 32768,
+      "downloads": 154024,
+      "likes": 584,
       "capabilities": [
         "embeddings"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -955,9 +1074,12 @@
       "summary": "A 300M embedding model, quantization-aware trained.",
       "parameters": "308M",
       "context": 2048,
+      "downloads": 377967,
+      "likes": 52,
       "capabilities": [
         "embeddings"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -986,9 +1108,12 @@
       "summary": "Multilingual embeddings for search across many languages at once.",
       "parameters": "567M",
       "context": 8192,
+      "downloads": 52324,
+      "likes": 58,
       "capabilities": [
         "embeddings"
       ],
+      "tier": "good",
       "installs": [
         {
           "runtime": "ollama",
@@ -1017,11 +1142,14 @@
       "summary": "The larger open-weight OpenAI model, for workstations with real memory.",
       "parameters": "117B",
       "context": 131072,
+      "downloads": 168072,
+      "likes": 79,
       "capabilities": [
         "chat",
         "tools",
         "reasoning"
       ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -1050,12 +1178,15 @@
       "summary": "The full Qwen3.5. Needs a workstation, and rewards one.",
       "parameters": "125B",
       "context": 262144,
+      "downloads": 51706,
+      "likes": 299,
       "capabilities": [
         "chat",
         "tools",
         "reasoning",
         "vision"
       ],
+      "tier": "strong",
       "installs": [
         {
           "runtime": "ollama",
@@ -1075,6 +1206,217 @@
           "runtime": "mlx",
           "repository": "mlx-community/Qwen3.5-122B-A10B-4bit",
           "size_bytes": 69620619709
+        }
+      ]
+    },
+    {
+      "id": "muse-spark-open",
+      "name": "Muse Spark Open 816B",
+      "publisher": "Meta",
+      "summary": "Meta's largest open model, with a one-million-token context.",
+      "parameters": "816B",
+      "context": 1048576,
+      "downloads": 1244,
+      "likes": 4,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "tier": "frontier",
+      "installs": [
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Muse-Spark-Open-816B-A42B-4bit",
+          "size_bytes": 532809372094
+        }
+      ]
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "publisher": "Z.ai",
+      "summary": "Z.ai's flagship, strong at agentic coding, with a one-million-token context.",
+      "parameters": "753B",
+      "context": 1048576,
+      "downloads": 1639,
+      "likes": 1,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "frontier",
+      "installs": [
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/GLM-5.3-4bit",
+          "size_bytes": 418341881358
+        }
+      ]
+    },
+    {
+      "id": "deepseek-v3.2",
+      "name": "DeepSeek V3.2",
+      "publisher": "DeepSeek",
+      "summary": "DeepSeek's flagship, with sparse attention for long inputs.",
+      "parameters": "685B",
+      "context": 163840,
+      "downloads": 493,
+      "likes": 7,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "excellent",
+      "installs": [
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/DeepSeek-V3.2-4bit",
+          "size_bytes": 378096490376
+        }
+      ]
+    },
+    {
+      "id": "qwen3-coder-480b",
+      "name": "Qwen3 Coder 480B",
+      "publisher": "Qwen",
+      "summary": "Qwen's largest coding model, for agentic work across a repository.",
+      "parameters": "480B",
+      "context": 262144,
+      "downloads": 801,
+      "likes": 19,
+      "capabilities": [
+        "chat",
+        "code",
+        "tools"
+      ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "excellent",
+      "installs": [
+        {
+          "runtime": "ollama",
+          "model": "qwen3-coder:480b",
+          "size_bytes": 290000000000,
+          "quantization": "Q4_K_M"
+        },
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3-Coder-480B-A35B-Instruct-4bit",
+          "size_bytes": 270104520199
+        }
+      ]
+    },
+    {
+      "id": "qwen3.5-397b",
+      "name": "Qwen3.5 397B",
+      "publisher": "Qwen",
+      "summary": "The largest Qwen3.5, for chat, research, and code.",
+      "parameters": "397B",
+      "context": 262144,
+      "downloads": 404,
+      "likes": 11,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "excellent",
+      "installs": [
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/Qwen3.5-397B-A17B-4bit",
+          "size_bytes": 223888201461
+        }
+      ]
+    },
+    {
+      "id": "glm-4.7",
+      "name": "GLM-4.7",
+      "publisher": "Z.ai",
+      "summary": "Z.ai's previous flagship, strong at coding and tool use, at half the size of GLM-5.3.",
+      "parameters": "358B",
+      "context": 202752,
+      "downloads": 696,
+      "likes": 5,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "excellent",
+      "installs": [
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/GLM-4.7-4bit",
+          "size_bytes": 198577656712
+        }
+      ]
+    },
+    {
+      "id": "minimax-m2.7",
+      "name": "MiniMax M2.7",
+      "publisher": "MiniMax",
+      "summary": "A compact mixture-of-experts model built for coding and agent work.",
+      "parameters": "229B",
+      "context": 196608,
+      "downloads": 322,
+      "likes": 2,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "excellent",
+      "installs": [
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/MiniMax-M2.7-4bit",
+          "size_bytes": 128682648831
+        }
+      ]
+    },
+    {
+      "id": "glm-4.5-air",
+      "name": "GLM-4.5 Air",
+      "publisher": "Z.ai",
+      "summary": "A lighter GLM that two smaller Macs can share.",
+      "parameters": "110B",
+      "context": 131072,
+      "downloads": 1118,
+      "likes": 30,
+      "capabilities": [
+        "chat",
+        "tools",
+        "reasoning"
+      ],
+      "tags": [
+        "coding"
+      ],
+      "tier": "strong",
+      "installs": [
+        {
+          "runtime": "mlx",
+          "repository": "mlx-community/GLM-4.5-Air-4bit",
+          "size_bytes": 60160167177
         }
       ]
     }

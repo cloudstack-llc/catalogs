@@ -5,8 +5,9 @@
   "license": "MIT",
   "scripts": {
     "test": "node --test scripts/*.test.mjs",
-    "verify": "node scripts/verify.mjs && node scripts/ollama-verify.mjs && node scripts/smart-route-starters-verify.mjs && node scripts/runtime-feed-verify-all.mjs",
+    "verify": "node scripts/verify.mjs && node scripts/ollama-verify.mjs && node scripts/featured-verify.mjs && node scripts/smart-route-starters-verify.mjs && node scripts/runtime-feed-verify-all.mjs",
     "generate": "node scripts/generate.mjs",
-    "generate:ollama": "node scripts/ollama-generate.mjs"
+    "generate:ollama": "node scripts/ollama-generate.mjs",
+    "generate:featured": "node scripts/featured-generate.mjs"
   }
 }

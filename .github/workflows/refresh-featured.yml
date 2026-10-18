@@ -1,0 +1,63 @@
+name: refresh-featured
+
+# Refreshes the curated featured models list: files, sizes, parameters, and
+# context from v1/ollama-models.json and the Hugging Face API. Which models
+# appear is decided only by scripts/featured-curation.mjs, which this job never
+# edits. It also reports possible newer versions for a maintainer to review.
+on:
+  schedule:
+    # Daily, after the Ollama refresh has had a chance to land. GitHub runs
+    # scheduled workflows on a best-effort basis; the minute does not matter.
+    - cron: "53 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-featured
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # See refresh.yml: pushes made with the default token do not reset
+          # GitHub's 60-day scheduled-workflow cutoff.
+          token: ${{ secrets.REFRESH_TOKEN || github.token }}
+          fetch-depth: 0
+
+      - name: Show tool versions
+        run: node --version
+
+      - name: Test the builder
+        run: node --test scripts/featured.test.mjs
+
+      # Fails without writing when any reference cannot be confirmed, so the
+      # published file stands until a maintainer fixes the curation.
+      - name: Generate
+        run: node scripts/featured-generate.mjs
+
+      - name: Verify the artifact
+        run: node scripts/featured-verify.mjs
+
+      - name: Commit
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "nothing to publish"
+            exit 0
+          fi
+          git config user.name "model-catalog[bot]"
+          git config user.email "noreply@cloudstack.llc"
+          git add v1/featured-models.json
+          git commit -m "chore: refresh the featured models"
+          git push
+
+      # Leads only: a report failure never fails the refresh.
+      - name: Report possible newer versions
+        continue-on-error: true
+        run: node scripts/featured-report.mjs >> "$GITHUB_STEP_SUMMARY"
