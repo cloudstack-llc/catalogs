@@ -83,3 +83,51 @@ test("rejects missing references and duplicate lane ids", () => {
   assert.ok(problems.some((problem) => problem.includes("missing starter missing")));
   assert.ok(problems.some((problem) => problem.includes("duplicates quick-help")));
 });
+
+function ruleStarter() {
+  const starter = structuredClone(artifact().starters[0]);
+  starter.id = "budget";
+  starter.name = "Budget";
+  starter.rules = [
+    {
+      id: "over-budget",
+      name: "Over 80% of the budget",
+      when: [{ fact: "route.spend.monthPercent", op: "gte", value: 80 }],
+      then: { target_hint: "Best with a model on this Mac." },
+    },
+  ];
+  starter.budget = { month_usd: 100 };
+  return starter;
+}
+
+test("accepts a rule starter that names no model", () => {
+  const input = artifact();
+  input.rule_starters = [ruleStarter()];
+  input.collections[0].starters.push("budget");
+  assert.deepEqual(validateSmartRouteStarters(input), []);
+});
+
+test("rejects rules on a plain starter, a model target, and an unknown fact", () => {
+  const input = artifact();
+  input.starters[0].rules = ruleStarter().rules;
+  const named = ruleStarter();
+  named.rules[0].then = { target: "openai/gpt-5" };
+  named.rules[0].when[0].fact = "machine.memory";
+  input.rule_starters = [named];
+  input.collections[0].starters.push("budget");
+  const problems = validateSmartRouteStarters(input);
+  assert.ok(problems.some((problem) => problem.includes("starters[0] has unsupported field rules")));
+  assert.ok(problems.some((problem) => problem.includes("target must be fallback or router")));
+  assert.ok(problems.some((problem) => problem.includes("is not a rule fact")));
+});
+
+test("a rule names exactly one of target and target_hint", () => {
+  const input = artifact();
+  const both = ruleStarter();
+  both.rules[0].then = { target: "fallback", target_hint: "A model." };
+  input.rule_starters = [both];
+  input.collections[0].starters.push("budget");
+  assert.ok(
+    validateSmartRouteStarters(input).some((problem) => problem.includes("exactly one of target and target_hint")),
+  );
+});
