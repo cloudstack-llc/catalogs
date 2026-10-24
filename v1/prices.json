@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-24T11:04:45Z",
+  "generated_at": "2026-10-24T15:59:11Z",
   "cost_unit": "usd_per_million_tokens",
-  "source": {"url":"https://models.dev/api.json","etag":"W/\"7eee49eadb719214b018b6b2726da352\"","sha256":"7eee49eadb719214b018b6b2726da3528487b70831c1881c63ed73337d4f2c16","bytes":5911989},
-  "counts": {"providers":221,"models":8500,"dropped":0},
+  "source": {"url":"https://models.dev/api.json","etag":"W/\"28a029b0922f297af9be73d13ffcf637\"","sha256":"28a029b0922f297af9be73d13ffcf6371b08bfa8ebb0f4316cfa2e87af14663d","bytes":5912818},
+  "counts": {"providers":221,"models":8501,"dropped":0},
   "providers": {
     "302ai": {
       "MiniMax-M1": {"input":0.132,"output":1.254,"context":1000000,"max_output":128000},
@@ -3126,7 +3126,7 @@
     "hyper": {
       "deepseek-v4-flash-0731": {"input":0.44,"output":1.32,"cache_read":0.044,"context":1000000,"max_output":384000},
       "deepseek-v4-pro-0813": {"input":1.437216,"output":4.311648,"cache_read":0.047907,"context":1000000,"max_output":262144},
-      "deepseek-v4.1-flash": {"input":0.33,"output":1.31,"cache_read":0.03,"context":1048576,"max_output":262144},
+      "deepseek-v4.1-flash": {"input":0.33,"output":1.31,"cache_read":0.03,"context":1000000,"max_output":262144},
       "deepseek-v4.1-flash-1017": {"input":0.33,"output":1.31,"cache_read":0.03,"context":1000000,"max_output":262144},
       "gemma-4-26b-a4b-it": {"input":0.098,"output":0.334,"cache_read":0.049,"context":256000,"max_output":25600},
       "glm-5.2": {"input":1.52432,"output":4.79072,"cache_read":0.152432,"context":1000000,"max_output":32768},
@@ -3590,7 +3590,7 @@
       "minimax/minimax-m2.5": {"input":0.27,"output":0.95,"cache_read":0.03,"context":204800,"max_output":131072},
       "minimax/minimax-m2.7": {"input":0.3,"output":1.2,"cache_read":0.06,"context":204800,"max_output":131072},
       "minimax/minimax-m3": {"input":0.224,"output":0.88,"cache_read":0.0448,"context":524288,"max_output":512000},
-      "minimax/minimax-m3.1-flash": {"input":0.1,"output":0.55,"cache_read":0.01,"context":1048576,"max_output":524288},
+      "minimax/minimax-m3.1-flash": {"input":0.09,"output":0.5,"cache_read":0.01,"context":1048576,"max_output":524288},
       "mistralai/codestral-2508": {"input":0.3,"output":0.9,"cache_read":0.03,"context":256000,"max_output":204800},
       "mistralai/devstral-2512": {"input":0.4,"output":2,"cache_read":0.04,"context":262144,"max_output":209715},
       "mistralai/ministral-14b-2512": {"input":0.2,"output":0.2,"cache_read":0.02,"context":262144,"max_output":209715},
@@ -3841,7 +3841,7 @@
       "~anthropic/claude-sonnet-latest": {"input":2,"output":10,"cache_read":0.1,"cache_write":2.5,"context":1000000,"max_output":128000},
       "~deepseek/deepseek-flash-latest": {"input":0.02,"output":1,"cache_read":0.015,"context":1048576,"max_output":943718},
       "~deepseek/deepseek-pro-latest": {"input":0.1188,"output":8,"cache_read":0.12,"context":1048576,"max_output":393216},
-      "~deepseek/deepseek-v4-flash-latest": {"input":0.0422,"output":0.1694,"cache_read":0.028,"context":1048576,"max_output":943718},
+      "~deepseek/deepseek-v4-flash-latest": {"input":0.0422,"output":0.1763,"cache_read":0.027,"context":1048576,"max_output":943718},
       "~google/gemini-flash-latest": {"input":0.75,"output":3.75,"cache_read":0.075,"cache_write":0.041667,"reasoning":3.75,"context":1048576,"max_output":65536},
       "~google/gemini-pro-latest": {"input":2,"output":10,"cache_read":0.1,"cache_write":0.1875,"reasoning":10,"context":1048576,"max_output":943718},
       "~moonshotai/kimi-latest": {"input":0.19,"output":8.94,"cache_read":0.19,"context":1048576,"max_output":943718},
@@ -3852,7 +3852,7 @@
       "~openai/gpt-terra-latest": {"input":2,"output":12,"cache_read":0.2,"cache_write":2.5,"context":1050000,"max_output":128000},
       "~unbiased/pareto-latest": {"input":0.8,"output":3.2,"cache_read":0.03,"context":1048576,"max_output":131072},
       "~x-ai/grok-latest": {"input":2,"output":6,"cache_read":0.5,"context":500000,"max_output":450000},
-      "~z-ai/glm-flash-latest": {"input":0.0175,"output":0.1425,"cache_read":0.0175,"context":1048576,"max_output":131072},
+      "~z-ai/glm-flash-latest": {"input":0.0511,"output":0.0702,"cache_read":0.03,"context":1048576,"max_output":131072},
       "~z-ai/glm-latest": {"input":0.075,"output":4.295,"cache_read":0.075,"context":1048576,"max_output":131072}
     },
     "kimi-code-plan-cn": {
@@ -6342,6 +6342,7 @@
       "claude-haiku-5-5": {"input":0.1,"output":0.5,"cache_read":0.01,"cache_write":0.125,"context":1000000,"max_output":128000,"tiers":[{"input":0.5,"output":2.5,"cache_read":0.05,"cache_write":0.625,"above_context":100000}]},
       "deepseek-v4-pro": {"input":0.66,"output":1.98,"cache_read":0.022,"context":1000000,"max_output":384000},
       "deepseek-v4.1-flash": {"input":0.15,"output":0.6,"cache_read":0.003,"context":1000000,"max_output":384000},
+      "gemini-4-argon": {"input":2,"output":10,"cache_read":0.1,"input_audio":2,"context":1048576,"max_output":65536},
       "gemini-4-argon-contributor": {"input":4,"output":20,"cache_read":0.2,"input_audio":4,"context":1048576,"max_output":65536},
       "glm-5.2": {"input":1.4,"output":4.4,"cache_read":0.26,"context":1000000,"max_output":131072},
       "glm-5.3": {"input":1.4,"output":4.4,"cache_read":0.26,"context":1000000,"max_output":131072},
@@ -6431,7 +6432,7 @@
       "deepseek/deepseek-v4-flash": {"input":0.091,"output":0.182,"cache_read":0.0182,"context":1048576,"max_output":943717},
       "deepseek/deepseek-v4-flash-0731": {"input":0.04444,"output":0.13332,"cache_read":0.001414,"context":1048576,"max_output":131072},
       "deepseek/deepseek-v4-flash-vision-exp": {"input":0.2156,"output":0.6468,"cache_read":0.00686,"context":1048576,"max_output":262144},
-      "deepseek/deepseek-v4-pro": {"input":0.358092,"output":0.716184,"cache_read":0.029841,"context":1048576,"max_output":384000},
+      "deepseek/deepseek-v4-pro": {"input":0.2088,"output":0.4176,"cache_read":0.0174,"context":1048576,"max_output":384000},
       "deepseek/deepseek-v4-pro-0813": {"input":0.66,"output":1.98,"cache_read":0.022,"context":1048576,"max_output":393216},
       "deepseek/deepseek-v4.1-flash": {"input":0.02,"output":1,"cache_read":0.015,"context":1048576,"max_output":943718},
       "deepseek/deepseek-v4.1-flash-1017": {"input":0.15,"output":0.6,"cache_read":0.003,"context":1048576,"max_output":393216},
@@ -6753,7 +6754,7 @@
       "~anthropic/claude-sonnet-latest": {"input":2,"output":10,"cache_read":0.1,"cache_write":2.5,"context":1000000,"max_output":128000},
       "~deepseek/deepseek-flash-latest": {"input":0.02,"output":1,"cache_read":0.015,"context":1048576,"max_output":943718},
       "~deepseek/deepseek-pro-latest": {"input":0.1188,"output":8,"cache_read":0.12,"context":1048576,"max_output":393216},
-      "~deepseek/deepseek-v4-flash-latest": {"input":0.0422,"output":0.1694,"cache_read":0.028,"context":1048576,"max_output":943718},
+      "~deepseek/deepseek-v4-flash-latest": {"input":0.0422,"output":0.1763,"cache_read":0.027,"context":1048576,"max_output":943718},
       "~google/gemini-flash-latest": {"input":0.75,"output":3.75,"cache_read":0.075,"cache_write":0.041667,"reasoning":3.75,"input_audio":0.75,"context":1048576,"max_output":65536},
       "~google/gemini-pro-latest": {"input":2,"output":10,"cache_read":0.1,"cache_write":0.1875,"reasoning":10,"input_audio":2,"context":1048576,"max_output":943718,"tiers":[{"input":4,"output":18,"cache_read":0.4,"above_context":200000}]},
       "~moonshotai/kimi-latest": {"input":0.19,"output":8.94,"cache_read":0.19,"context":1048576,"max_output":943718},
@@ -6764,7 +6765,7 @@
       "~openai/gpt-terra-latest": {"input":2,"output":12,"cache_read":0.2,"cache_write":2.5,"context":1050000,"max_output":128000,"tiers":[{"input":4,"output":18,"cache_read":0.4,"cache_write":5,"above_context":272000}]},
       "~unbiased/pareto-latest": {"input":0.8,"output":3.2,"cache_read":0.03,"context":1048576,"max_output":131072},
       "~x-ai/grok-latest": {"input":2,"output":6,"cache_read":0.5,"context":500000,"max_output":450000,"tiers":[{"input":4,"output":12,"cache_read":1,"above_context":200000}]},
-      "~z-ai/glm-flash-latest": {"input":0.0175,"output":0.1425,"cache_read":0.0175,"context":1048576,"max_output":131072},
+      "~z-ai/glm-flash-latest": {"input":0.0511,"output":0.0702,"cache_read":0.03,"context":1048576,"max_output":131072},
       "~z-ai/glm-latest": {"input":0.075,"output":4.295,"cache_read":0.075,"context":1048576,"max_output":131072}
     },
     "opper": {
