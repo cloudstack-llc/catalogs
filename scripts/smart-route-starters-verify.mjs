@@ -23,7 +23,8 @@ if (problems.length > 0) {
   process.exit(1);
 }
 
-const lanes = artifact.starters.reduce((total, starter) => total + starter.lanes.length, 0);
+const all = [...artifact.starters, ...(artifact.rule_starters ?? [])];
+const lanes = all.reduce((total, starter) => total + starter.lanes.length, 0);
 console.log(
-  `ok: ${artifact.starters.length} Smart Route starters, ${artifact.collections.length} collections, ${lanes} lanes`,
+  `ok: ${artifact.starters.length} Smart Route starters, ${artifact.rule_starters?.length ?? 0} with rules, ${artifact.collections.length} collections, ${lanes} lanes`,
 );
