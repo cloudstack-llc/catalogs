@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-25T11:34:22Z",
+  "generated_at": "2026-10-25T16:24:50Z",
   "cost_unit": "usd_per_million_tokens",
-  "source": {"url":"https://models.dev/api.json","etag":"W/\"34c6751862ca34af12992d77c74eb73d\"","sha256":"34c6751862ca34af12992d77c74eb73db74e83b424242215a61aa55a5fc8e655","bytes":5937242},
+  "source": {"url":"https://models.dev/api.json","etag":"W/\"9ee57c10c7666927a6179a7fee9a6217\"","sha256":"9ee57c10c7666927a6179a7fee9a621702d56f2e559048abb0e32c92a42ad006","bytes":5937250},
   "counts": {"providers":223,"models":8534,"dropped":0},
   "providers": {
     "302ai": {
@@ -3128,7 +3128,7 @@
     "hyper": {
       "deepseek-v4-flash-0731": {"input":0.44,"output":1.32,"cache_read":0.044,"context":1000000,"max_output":384000},
       "deepseek-v4-pro-0813": {"input":1.437216,"output":4.311648,"cache_read":0.047907,"context":1000000,"max_output":262144},
-      "deepseek-v4.1-flash": {"input":0.33,"output":1.31,"cache_read":0.03,"context":1048576,"max_output":262144},
+      "deepseek-v4.1-flash": {"input":0.33,"output":1.31,"cache_read":0.03,"context":1000000,"max_output":262144},
       "deepseek-v4.1-flash-1017": {"input":0.33,"output":1.31,"cache_read":0.03,"context":1000000,"max_output":262144},
       "gemma-4-26b-a4b-it": {"input":0.098,"output":0.334,"cache_read":0.049,"context":256000,"max_output":25600},
       "glm-5.2": {"input":1.52432,"output":4.79072,"cache_read":0.152432,"context":1000000,"max_output":32768},
@@ -3236,11 +3236,11 @@
     },
     "inceptron": {
       "deepseek-ai/DeepSeek-V4-Flash-0731": {"input":0.11,"output":0.3666,"cache_read":0.027,"cache_write":0,"context":1048576,"max_output":1048576},
-      "moonshotai/Kimi-K2.6": {"input":0.603,"output":3.2,"cache_read":0.126,"cache_write":0,"context":262144,"max_output":262144},
+      "moonshotai/Kimi-K2.6": {"input":0.6026,"output":3.2,"cache_read":0.169,"cache_write":0,"context":262144,"max_output":262144},
       "moonshotai/Kimi-K2.7-Code": {"input":0.6712,"output":3.35,"cache_read":0.15,"cache_write":0,"context":262144,"max_output":262144},
       "zai-org/GLM-5.2": {"input":0.99,"output":1.188,"cache_read":0.16,"cache_write":0,"context":1048576,"max_output":1048576},
-      "zai-org/GLM-5.3": {"input":0.6,"output":2.8,"cache_read":0.12,"cache_write":0,"context":1048576,"max_output":1048576},
-      "zai-org/GLM-5.3-Flash": {"input":0.2,"output":0.75,"cache_read":0.075,"cache_write":0,"context":1048576,"max_output":1048576}
+      "zai-org/GLM-5.3": {"input":0.6,"output":3.7664,"cache_read":0.12,"cache_write":0,"context":1048576,"max_output":1048576},
+      "zai-org/GLM-5.3-Flash": {"input":0.15,"output":0.55,"cache_read":0.05,"cache_write":0,"context":1048576,"max_output":1048576}
     },
     "inco": {
       "deepseek-v4.1-flash:fast": {"input":0.6,"output":2.4,"cache_read":0.012,"context":1000000,"max_output":384000},
@@ -3842,10 +3842,10 @@
       "~anthropic/claude-sonnet-latest": {"input":2,"output":10,"cache_read":0.1,"cache_write":2.5,"context":1000000,"max_output":128000},
       "~deepseek/deepseek-flash-latest": {"input":0.02,"output":1,"cache_read":0.015,"context":1048576,"max_output":943718},
       "~deepseek/deepseek-pro-latest": {"input":0.1188,"output":8,"cache_read":0.12,"context":1048576,"max_output":393216},
-      "~deepseek/deepseek-v4-flash-latest": {"input":0.0422,"output":0.1694,"cache_read":0.028,"context":1048576,"max_output":943718},
+      "~deepseek/deepseek-v4-flash-latest": {"input":0.0422,"output":0.1763,"cache_read":0.027,"context":1048576,"max_output":943718},
       "~google/gemini-flash-latest": {"input":0.75,"output":3.75,"cache_read":0.075,"cache_write":0.041667,"reasoning":3.75,"context":1048576,"max_output":65536},
       "~google/gemini-pro-latest": {"input":2,"output":10,"cache_read":0.1,"cache_write":0.1875,"reasoning":10,"context":1048576,"max_output":943718},
-      "~moonshotai/kimi-latest": {"input":0.18,"output":16,"cache_read":0.17,"context":1048576,"max_output":943718},
+      "~moonshotai/kimi-latest": {"input":0.214,"output":16,"cache_read":0.204,"context":1048576,"max_output":943718},
       "~openai/gpt-astra-latest": {"input":10,"output":50,"cache_read":1,"cache_write":12.5,"context":1050000,"max_output":128000},
       "~openai/gpt-luna-latest": {"input":0.1,"output":0.5,"cache_read":0.01,"cache_write":0.125,"context":1050000,"max_output":128000},
       "~openai/gpt-mini-latest": {"input":0.75,"output":4.5,"cache_read":0.075,"context":400000,"max_output":128000},
@@ -6791,10 +6791,10 @@
       "~anthropic/claude-sonnet-latest": {"input":2,"output":10,"cache_read":0.1,"cache_write":2.5,"context":1000000,"max_output":128000},
       "~deepseek/deepseek-flash-latest": {"input":0.02,"output":1,"cache_read":0.015,"context":1048576,"max_output":943718},
       "~deepseek/deepseek-pro-latest": {"input":0.1188,"output":8,"cache_read":0.12,"context":1048576,"max_output":393216},
-      "~deepseek/deepseek-v4-flash-latest": {"input":0.0422,"output":0.1694,"cache_read":0.028,"context":1048576,"max_output":943718},
+      "~deepseek/deepseek-v4-flash-latest": {"input":0.0422,"output":0.1763,"cache_read":0.027,"context":1048576,"max_output":943718},
       "~google/gemini-flash-latest": {"input":0.75,"output":3.75,"cache_read":0.075,"cache_write":0.041667,"reasoning":3.75,"input_audio":0.75,"context":1048576,"max_output":65536},
       "~google/gemini-pro-latest": {"input":2,"output":10,"cache_read":0.1,"cache_write":0.1875,"reasoning":10,"input_audio":2,"context":1048576,"max_output":943718,"tiers":[{"input":4,"output":18,"cache_read":0.4,"above_context":200000}]},
-      "~moonshotai/kimi-latest": {"input":0.18,"output":16,"cache_read":0.17,"context":1048576,"max_output":943718},
+      "~moonshotai/kimi-latest": {"input":0.214,"output":16,"cache_read":0.204,"context":1048576,"max_output":943718},
       "~openai/gpt-astra-latest": {"input":10,"output":50,"cache_read":1,"cache_write":12.5,"context":1050000,"max_output":128000,"tiers":[{"input":20,"output":75,"cache_read":2,"cache_write":25,"above_context":272000}]},
       "~openai/gpt-luna-latest": {"input":0.1,"output":0.5,"cache_read":0.01,"cache_write":0.125,"context":1050000,"max_output":128000,"tiers":[{"input":0.2,"output":0.75,"cache_read":0.02,"cache_write":0.25,"above_context":272000}]},
       "~openai/gpt-mini-latest": {"input":0.75,"output":4.5,"cache_read":0.075,"context":400000,"max_output":128000},
