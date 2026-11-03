@@ -5,6 +5,28 @@ const ENDPOINT_FAMILIES = new Set([
   "openai.images",
   "openai.responses",
 ]);
+// Rule facts and operators a starter rule may use. They match the Msty Nexus
+// Runtime that reads rule_starters; a Runtime drops a starter whose rule it
+// cannot read, so a new fact needs that Runtime first.
+const RULE_FACTS = new Set([
+  "request.promptTokens",
+  "request.reasoningEffort",
+  "request.hasImages",
+  "request.hasTools",
+  "protection.categories",
+  "caller.dailyTokens",
+  "caller.monthlyTokens",
+  "caller.tokenLabels",
+  "conversation.turns",
+  "conversation.tokensSoFar",
+  "time.hour",
+  "time.weekday",
+  "time.businessHours",
+  "route.spend.monthPercent",
+  "random.percent",
+]);
+const RULE_OPS = new Set(["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin", "has"]);
+const RULE_TARGETS = new Set(["fallback", "router"]);
 const BANNED_WORDS = new Set([
   "delve",
   "empower",
@@ -86,13 +108,63 @@ function findForbiddenTargetFields(value, path, problems) {
   }
 }
 
+// validateRules checks a rule starter's rules. A rule names no model: it
+// sends to "fallback" or "router", or gives a target_hint the person picks a
+// model for, as they do for each lane.
+function validateRules(problems, rules, label) {
+  if (!Array.isArray(rules) || rules.length === 0 || rules.length > 8) {
+    problems.push(`${label} must contain 1 to 8 rules`);
+    return;
+  }
+  const ruleIDs = new Set();
+  for (const [ruleIndex, rule] of rules.entries()) {
+    const ruleLabel = `${label}[${ruleIndex}]`;
+    if (!exactKeys(problems, rule, ruleLabel, new Set(["id", "name", "when", "then"]))) continue;
+    const ruleID = validID(problems, rule.id, `${ruleLabel}.id`);
+    if (ruleIDs.has(ruleID)) problems.push(`${ruleLabel}.id duplicates ${ruleID}`);
+    ruleIDs.add(ruleID);
+    cleanText(problems, rule.name, `${ruleLabel}.name`, 120);
+    if (!Array.isArray(rule.when) || rule.when.length === 0 || rule.when.length > 8) {
+      problems.push(`${ruleLabel}.when must contain 1 to 8 conditions`);
+    } else {
+      for (const [conditionIndex, condition] of rule.when.entries()) {
+        const conditionLabel = `${ruleLabel}.when[${conditionIndex}]`;
+        if (!exactKeys(problems, condition, conditionLabel, new Set(["fact", "op", "value"]))) continue;
+        if (!RULE_FACTS.has(condition.fact)) {
+          problems.push(`${conditionLabel}.fact is not a rule fact`);
+        }
+        if (!RULE_OPS.has(condition.op)) {
+          problems.push(`${conditionLabel}.op is not a rule operator`);
+        }
+        const value = condition.value;
+        const valid =
+          (typeof value === "number" && Number.isFinite(value)) ||
+          typeof value === "boolean" ||
+          (typeof value === "string" && value !== "") ||
+          (Array.isArray(value) && value.length > 0 && value.every((word) => typeof word === "string" && word !== ""));
+        if (!valid) problems.push(`${conditionLabel}.value must be a number, true or false, a word, or a list of words`);
+      }
+    }
+    if (!exactKeys(problems, rule.then, `${ruleLabel}.then`, new Set(["target", "target_hint"]))) continue;
+    const hasTarget = rule.then.target !== undefined;
+    const hasHint = rule.then.target_hint !== undefined;
+    if (hasTarget === hasHint) {
+      problems.push(`${ruleLabel}.then must name exactly one of target and target_hint`);
+    } else if (hasTarget && !RULE_TARGETS.has(rule.then.target)) {
+      problems.push(`${ruleLabel}.then.target must be fallback or router`);
+    } else if (hasHint) {
+      cleanText(problems, rule.then.target_hint, `${ruleLabel}.then.target_hint`, 256, true);
+    }
+  }
+}
+
 export function validateSmartRouteStarters(artifact) {
   const problems = [];
   if (!exactKeys(
     problems,
     artifact,
     "artifact",
-    new Set(["schema_version", "generated_at", "locale", "collections", "starters"]),
+    new Set(["schema_version", "generated_at", "locale", "collections", "starters", "rule_starters"]),
   )) return problems;
 
   if (artifact.schema_version !== 1) {
@@ -111,29 +183,48 @@ export function validateSmartRouteStarters(artifact) {
   if (!Array.isArray(artifact.starters) || artifact.starters.length === 0) {
     problems.push("starters must contain at least one starter");
   }
-  if ((artifact.starters?.length ?? 0) > 100) {
-    problems.push("starters must contain at most 100 starters");
+  if (artifact.rule_starters !== undefined && !Array.isArray(artifact.rule_starters)) {
+    problems.push("rule_starters must be a list");
+  }
+  if ((artifact.starters?.length ?? 0) + (artifact.rule_starters?.length ?? 0) > 100) {
+    problems.push("starters and rule_starters must contain at most 100 starters together");
   }
 
+  // Rule starters live apart from starters: a Runtime that predates starter
+  // rules reads starters only, so it never offers one without its rules.
   const starterIDs = new Set();
-  for (const [starterIndex, starter] of (artifact.starters ?? []).entries()) {
-    const label = `starters[${starterIndex}]`;
+  const entries = [
+    ...(artifact.starters ?? []).map((starter, index) => [starter, `starters[${index}]`, false]),
+    ...(Array.isArray(artifact.rule_starters) ? artifact.rule_starters : []).map((starter, index) => [starter, `rule_starters[${index}]`, true]),
+  ];
+  for (const [starter, label, withRules] of entries) {
+    const fields = [
+      "id",
+      "revision",
+      "name",
+      "summary",
+      "notice",
+      "tags",
+      "endpoint_families",
+      "lanes",
+      "fallback",
+    ];
     if (!exactKeys(
       problems,
       starter,
       label,
-      new Set([
-        "id",
-        "revision",
-        "name",
-        "summary",
-        "notice",
-        "tags",
-        "endpoint_families",
-        "lanes",
-        "fallback",
-      ]),
+      new Set(withRules ? [...fields, "rules", "budget"] : fields),
     )) continue;
+    if (withRules) {
+      validateRules(problems, starter.rules, `${label}.rules`);
+      if (
+        starter.budget !== undefined &&
+        exactKeys(problems, starter.budget, `${label}.budget`, new Set(["month_usd"])) &&
+        !(typeof starter.budget.month_usd === "number" && starter.budget.month_usd > 0 && starter.budget.month_usd <= 10_000_000)
+      ) {
+        problems.push(`${label}.budget.month_usd must be more than 0 and at most 10,000,000`);
+      }
+    }
 
     const id = validID(problems, starter.id, `${label}.id`);
     if (starterIDs.has(id)) problems.push(`${label}.id duplicates ${id}`);

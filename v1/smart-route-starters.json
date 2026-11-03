@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T20:32:54Z",
+  "generated_at": "2026-10-23T00:00:00Z",
   "locale": "en",
   "collections": [
     {
@@ -76,6 +76,16 @@
         "healthcare-operations-assistant",
         "ecommerce-operations",
         "home-travel-life-planner"
+      ]
+    },
+    {
+      "id": "with-rules",
+      "title": "Starters with rules",
+      "description": "Starting points that come with rules you can read and change.",
+      "starters": [
+        "budget-aware",
+        "private-by-default",
+        "try-a-new-model"
       ]
     }
   ],
@@ -1382,6 +1392,164 @@
       "fallback": {
         "target_hint": "Best with a dependable general planning target."
       }
+    }
+  ],
+  "rule_starters": [
+    {
+      "id": "budget-aware",
+      "revision": 1,
+      "name": "Budget-aware",
+      "summary": "Routes by task until most of the monthly budget is spent, then keeps requests on a model on this Mac.",
+      "tags": [
+        "budget",
+        "cost",
+        "general"
+      ],
+      "endpoint_families": [
+        "openai.responses",
+        "openai.chat_completions",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "quick-help",
+          "name": "Quick help",
+          "description": "Short questions, simple explanations, and quick rewrites.",
+          "target_hint": "Best with a fast, low-cost model."
+        },
+        {
+          "id": "deep-work",
+          "name": "Deep work",
+          "description": "Research, planning, analysis, and multi-step reasoning.",
+          "target_hint": "Best with a capable reasoning model."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable general-purpose target."
+      },
+      "rules": [
+        {
+          "id": "over-budget",
+          "name": "Over 80% of the budget",
+          "when": [
+            {
+              "fact": "route.spend.monthPercent",
+              "op": "gte",
+              "value": 80
+            }
+          ],
+          "then": {
+            "target_hint": "Best with a model on this Mac, which costs nothing."
+          }
+        }
+      ],
+      "budget": {
+        "month_usd": 100
+      }
+    },
+    {
+      "id": "private-by-default",
+      "revision": 1,
+      "name": "Private by default",
+      "summary": "Keeps requests with health, payment, ID, or password details on this Mac, and routes the rest by task.",
+      "notice": "Turn on Data Protection for a choice or the fallback. Without it, nothing is found and the private data rule never runs.",
+      "tags": [
+        "privacy",
+        "data-protection",
+        "general"
+      ],
+      "endpoint_families": [
+        "openai.responses",
+        "openai.chat_completions",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "everyday",
+          "name": "Everyday",
+          "description": "Questions, writing, and everyday help.",
+          "target_hint": "Best with a strong general model."
+        },
+        {
+          "id": "deep-work",
+          "name": "Deep work",
+          "description": "Research, planning, analysis, and multi-step reasoning.",
+          "target_hint": "Best with a capable reasoning model."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable general-purpose target."
+      },
+      "rules": [
+        {
+          "id": "private-data",
+          "name": "Private data stays on this Mac",
+          "when": [
+            {
+              "fact": "protection.categories",
+              "op": "in",
+              "value": [
+                "health",
+                "payment",
+                "government-id",
+                "credentials"
+              ]
+            }
+          ],
+          "then": {
+            "target_hint": "Best with a model on this Mac."
+          }
+        }
+      ]
+    },
+    {
+      "id": "try-a-new-model",
+      "revision": 1,
+      "name": "Try a new model",
+      "summary": "Sends one chat in ten to a model you want to try, and routes the rest by task as usual.",
+      "tags": [
+        "rollout",
+        "testing",
+        "general"
+      ],
+      "endpoint_families": [
+        "openai.responses",
+        "openai.chat_completions",
+        "anthropic.messages"
+      ],
+      "lanes": [
+        {
+          "id": "everyday",
+          "name": "Everyday",
+          "description": "Questions, writing, and everyday help.",
+          "target_hint": "Best with the model you use today."
+        },
+        {
+          "id": "coding",
+          "name": "Coding",
+          "description": "Programming, debugging, code review, and technical implementation.",
+          "target_hint": "Best with a code-capable model."
+        }
+      ],
+      "fallback": {
+        "target_hint": "Best with a dependable general-purpose target."
+      },
+      "rules": [
+        {
+          "id": "trial",
+          "name": "One chat in ten tries the new model",
+          "when": [
+            {
+              "fact": "random.percent",
+              "op": "lt",
+              "value": 10
+            }
+          ],
+          "then": {
+            "target_hint": "The model you want to try."
+          }
+        }
+      ]
     }
   ]
 }
