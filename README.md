@@ -12,7 +12,7 @@ https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/smart-rou
 | File | Contents | Source | Cadence |
 | --- | --- | --- | --- |
 | `v1/prices.json` | Token pricing for hosted models | [models.dev](https://models.dev) | 6 hours |
-| `v1/ollama-models.json` | The Ollama library: models, tags, sizes, context windows | [ollama.com](https://ollama.com/library) | 12 hours |
+| `v1/ollama-models.json` | The Ollama library: models, tags, sizes, context windows, and model shapes for memory fit | [ollama.com](https://ollama.com/library) and its registry | 12 hours |
 | `v1/featured-models.json` | Curated local models worth downloading, grouped into collections | Curated; resolved against Ollama and Hugging Face | Daily |
 | `v1/smart-route-starters.json` | Model-neutral Smart Route starters, grouped by use | Curated | On change |
 | `v2/runtime/{stable,dev}/runtime-release-feed.signed.json` | Signed Msty Nexus Runtime releases | Ollama, llama.cpp, and Msty MLX metadata | 4 hours |
@@ -217,6 +217,14 @@ appear nowhere else.
 Parameter counts and quantization are immutable for a layer digest, so they are cached in
 `v1/ollama-model-info-cache.json`. A cold run is ~6,500 requests; a warm one is a few
 hundred. The crawl runs 8 concurrent with a truthful, contactable user agent.
+
+**Model shapes come from the registry, not the site.** `model_info.shape` holds the
+numbers Msty Nexus needs to judge whether a model fits in memory: the GGUF architecture
+and counts such as `block_count` and `attention.head_count_kv`. For each digest the job
+reads the tag's manifest from `registry.ollama.ai`, then only the first 256 KiB of its
+GGUF weights file (4 MiB if the header is longer), and caches the result in
+`v1/ollama-shape-cache.json`. MLX-format tags ship no GGUF file and have no shape. Tags
+that have details but no shape count toward the same 95% coverage floor.
 
 Because this rests on presentation markup, the generator refuses to publish when a field
 drops below 95% coverage, when the catalog shrinks by more than 10%, or when tag names

@@ -12,6 +12,7 @@ import {
   checkGates,
   derivationMismatches,
   parseDetail,
+  parseGGUFShape,
   parseLibrary,
   parseTags,
   parseUpdatedAt,
@@ -157,7 +158,11 @@ function sampleArtifact() {
     ["gpt-oss@aaa111", { parameters: "20.9b", quantization: "MXFP4", arch: "gptoss" }],
     ["llava@ccc333", { parameters: "13b", quantization: "Q4_0", arch: "llama", projector: { arch: "clip", parameters: "312m", quantization: "F16" } }],
   ]);
-  return buildArtifact({ models, tagsByModel, detail, generatedAt: "2026-08-15T00:00:00Z" });
+  const shapes = new Map([
+    ["gpt-oss@aaa111", { arch: "gptoss", shape: { block_count: 24, "attention.head_count": 64 } }],
+    ["llava@ccc333", { arch: "llama", shape: { "attention.head_count": 40, block_count: 40 } }],
+  ]);
+  return buildArtifact({ models, tagsByModel, detail, shapes, generatedAt: "2026-08-15T00:00:00Z" });
 }
 
 test("builds an artifact in the published shape", () => {
@@ -175,7 +180,9 @@ test("builds an artifact in the published shape", () => {
   }
   assert.deepEqual(gptOss.tags[0].model_info, {
     contextWindow: "128K", parameters: "20.9b", quantization: "MXFP4", arch: "gptoss",
+    shape: { arch: "gptoss", block_count: 24, "attention.head_count": 64 },
   });
+  assert.equal(artifact.counts.shapes, 2);
   // The cloud tag is recorded on the model, not mixed into tags[].
   assert.equal(gptOss.tags.length, 1);
   assert.equal(gptOss.cloud, true);
@@ -314,4 +321,66 @@ test("a context window that goes wholesale unknown is caught", () => {
     checkGates({ candidate: mostly, minContext: 0.4 }).some((problem) => problem.startsWith("contextWindow")),
     false,
   );
+});
+
+// A GGUF header as llama.cpp and Ollama write it: general keys, then the
+// architecture's own, then the tokenizer's long tables.
+function ggufHeader(entries, { keyCount = entries.length } = {}) {
+  const parts = [Buffer.from("GGUF"), u32(3), u64(0), u64(keyCount)];
+  for (const [key, type, value] of entries) {
+    parts.push(str(key), u32(type));
+    if (type === 8) parts.push(str(value));
+    else if (type === 4) parts.push(u32(value));
+    else if (type === 9) {
+      parts.push(u32(8), u64(value.length), ...value.map(str));
+    }
+  }
+  return new Uint8Array(Buffer.concat(parts));
+}
+function u32(value) {
+  const buffer = Buffer.alloc(4);
+  buffer.writeUInt32LE(value);
+  return buffer;
+}
+function u64(value) {
+  const buffer = Buffer.alloc(8);
+  buffer.writeBigUInt64LE(BigInt(value));
+  return buffer;
+}
+function str(value) {
+  return Buffer.concat([u64(Buffer.byteLength(value)), Buffer.from(value)]);
+}
+
+const qwenHeader = ggufHeader([
+  ["general.architecture", 8, "qwen35"],
+  ["general.name", 8, "Qwen3.5 9B"],
+  ["qwen35.attention.head_count", 4, 16],
+  ["qwen35.attention.head_count_kv", 4, 4],
+  ["qwen35.block_count", 4, 32],
+  ["qwen35.context_length", 4, 262144],
+  ["qwen35.expert_count", 4, 0],
+  ["tokenizer.ggml.tokens", 9, ["a", "b", "c"]],
+]);
+
+test("reads a model's shape from its GGUF header and stops at the tokenizer", () => {
+  assert.deepEqual(parseGGUFShape(qwenHeader), {
+    arch: "qwen35",
+    shape: { block_count: 32, context_length: 262144, "attention.head_count": 16, "attention.head_count_kv": 4 },
+  });
+});
+
+test("a header cut short asks for more bytes instead of guessing", () => {
+  // 120 bytes ends before the layer count: the shape is not complete yet.
+  assert.equal(parseGGUFShape(qwenHeader.subarray(0, 120)), undefined);
+});
+
+test("a file that is not GGUF, or names no shape, is refused", () => {
+  assert.throws(() => parseGGUFShape(new Uint8Array(Buffer.from("{\"safetensors\":1}"))));
+  assert.throws(() => parseGGUFShape(ggufHeader([["general.architecture", 8, "qwen35"]])));
+});
+
+test("a tag with details but no shape fails the gate", () => {
+  const artifact = sampleArtifact();
+  delete artifact.models[1].tags[0].model_info.shape;
+  assert.equal(checkGates({ candidate: artifact }).some((p) => p.startsWith("shape")), true);
 });

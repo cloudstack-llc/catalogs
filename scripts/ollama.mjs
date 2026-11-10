@@ -15,6 +15,178 @@ export const LIBRARY_URL = "https://ollama.com/library";
 export const USER_AGENT =
   "msty-model-catalog/1.0 (+https://github.com/cloudstack-llc/model-catalog)";
 
+// The registry `ollama pull` reads. A tag's manifest names its weights blob,
+// and the blob is a GGUF file whose header holds the model's shape.
+export const REGISTRY_URL = "https://registry.ollama.ai";
+export const MANIFEST_ACCEPT = "application/vnd.docker.distribution.manifest.v2+json";
+export const MODEL_LAYER = "application/vnd.ollama.image.model";
+
+// The GGUF keys Msty Nexus's memory-fit estimate reads, without the "{arch}."
+// prefix (msty-nexus internal/fitmeta FromGGUF). Only these are published: a
+// shape is a few numbers, and the whole file must stay small enough for every
+// Runtime to download. Adding a key means bumping SHAPE_CACHE_VERSION in
+// ollama-generate.mjs so cached shapes are read again.
+export const SHAPE_KEYS = [
+  "block_count",
+  "layers",
+  "embedding_length",
+  "context_length",
+  "attention.head_count",
+  "attention.head_count_kv",
+  "attention.key_length",
+  "attention.key_length_mla",
+  "attention.kv_lora_rank",
+  "attention.qk_rope_head_dim",
+  "rope.dimension_count",
+  "attention.sliding_window",
+];
+
+const GGUF_INTEGER_BYTES = { 0: 1, 1: 1, 2: 2, 3: 2, 4: 4, 5: 4, 10: 8, 11: 8 };
+const GGUF_FIXED_BYTES = { ...GGUF_INTEGER_BYTES, 6: 4, 7: 1, 12: 8 };
+const GGUF_STRING = 8;
+const GGUF_ARRAY = 9;
+
+class Truncated extends Error {}
+
+/**
+ * Reads a model's shape from the opening bytes of a GGUF file.
+ *
+ * Returns { arch, shape } once the header has named the architecture and its
+ * layer and head counts and the reader has passed every key that could still
+ * add to the shape: the end of the key list, or the tokenizer keys, which
+ * writers put after the architecture's own (the Runtime's reader stops there
+ * too). Returns undefined when the bytes ran out first, so the caller can read
+ * further. Throws for a file that is not GGUF or names no shape.
+ */
+export function parseGGUFShape(bytes) {
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const decoder = new TextDecoder();
+  let offset = 0;
+  const need = (count) => {
+    if (offset + count > view.byteLength) {
+      throw new Truncated();
+    }
+  };
+  const u32 = () => {
+    need(4);
+    const value = view.getUint32(offset, true);
+    offset += 4;
+    return value;
+  };
+  const u64 = () => {
+    need(8);
+    const value = view.getBigUint64(offset, true);
+    offset += 8;
+    if (value > BigInt(Number.MAX_SAFE_INTEGER)) {
+      throw new Error("gguf length out of range");
+    }
+    return Number(value);
+  };
+  const string = () => {
+    const length = u64();
+    need(length);
+    const value = decoder.decode(bytes.subarray(offset, offset + length));
+    offset += length;
+    return value;
+  };
+  const integer = (type) => {
+    need(GGUF_INTEGER_BYTES[type]);
+    let value;
+    switch (type) {
+      case 0: value = view.getUint8(offset); break;
+      case 1: value = view.getInt8(offset); break;
+      case 2: value = view.getUint16(offset, true); break;
+      case 3: value = view.getInt16(offset, true); break;
+      case 4: value = view.getUint32(offset, true); break;
+      case 5: value = view.getInt32(offset, true); break;
+      case 10: value = Number(view.getBigUint64(offset, true)); break;
+      default: value = Number(view.getBigInt64(offset, true));
+    }
+    offset += GGUF_INTEGER_BYTES[type];
+    return value;
+  };
+  const skip = (type) => {
+    if (type === GGUF_STRING) {
+      const length = u64();
+      need(length);
+      offset += length;
+    } else if (type === GGUF_ARRAY) {
+      const itemType = u32();
+      const count = u64();
+      if (itemType in GGUF_FIXED_BYTES) {
+        need(count * GGUF_FIXED_BYTES[itemType]);
+        offset += count * GGUF_FIXED_BYTES[itemType];
+      } else {
+        for (let index = 0; index < count; index += 1) {
+          skip(itemType);
+        }
+      }
+    } else if (type in GGUF_FIXED_BYTES) {
+      need(GGUF_FIXED_BYTES[type]);
+      offset += GGUF_FIXED_BYTES[type];
+    } else {
+      throw new Error(`unknown gguf value type ${type}`);
+    }
+  };
+
+  if (bytes.byteLength < 4 || decoder.decode(bytes.subarray(0, 4)) !== "GGUF") {
+    throw new Error("not a gguf file");
+  }
+  offset = 4;
+  let arch = "";
+  const values = new Map();
+  const has = (name) => values.has(`${arch}.${name}`);
+  const complete = () =>
+    arch !== "" && (has("block_count") || has("layers")) && has("attention.head_count");
+  const result = () => {
+    const shape = {};
+    for (const key of SHAPE_KEYS) {
+      if (has(key)) {
+        shape[key] = values.get(`${arch}.${key}`);
+      }
+    }
+    return { arch, shape };
+  };
+  try {
+    const version = u32();
+    if (version < 2) {
+      throw new Error(`gguf version ${version} is not supported`);
+    }
+    u64(); // tensor count
+    const keyCount = u64();
+    for (let index = 0; index < keyCount; index += 1) {
+      const key = string();
+      if (key.startsWith("tokenizer.") && complete()) {
+        return result();
+      }
+      const type = u32();
+      if (key === "general.architecture" && type === GGUF_STRING) {
+        arch = string();
+        continue;
+      }
+      // Kept by full key: the architecture may be named after its own keys.
+      const dot = key.indexOf(".");
+      if (dot > 0 && type in GGUF_INTEGER_BYTES && SHAPE_KEYS.includes(key.slice(dot + 1))) {
+        const value = integer(type);
+        if (Number.isSafeInteger(value)) {
+          values.set(key, value);
+        }
+        continue;
+      }
+      skip(type);
+    }
+  } catch (error) {
+    if (error instanceof Truncated) {
+      return undefined;
+    }
+    throw error;
+  }
+  if (!complete()) {
+    throw new Error("gguf header names no model shape");
+  }
+  return result();
+}
+
 const LIBRARY_ENTRY =
   /<li\s+class="flex items-baseline border-b border-neutral-200 py-6">\s*<a href="\/library\/([^"]+)"([\s\S]*?)<\/li>/g;
 const DESCRIPTION =
@@ -221,12 +393,14 @@ export const UNKNOWN_CONTEXT = "N/A";
  * Assembles the published artifact.
  *
  * detail maps `${model}@${digest}` to a parseDetail result, so tags sharing a
- * digest are fetched once.
+ * digest are fetched once. shapes maps the same keys to a parseGGUFShape
+ * result; a tag without one (an MLX-format tag has no GGUF) simply has none.
  */
-export function buildArtifact({ models, tagsByModel, detail, generatedAt }) {
+export function buildArtifact({ models, tagsByModel, detail, shapes = new Map(), generatedAt }) {
   const built = [];
   let tagCount = 0;
   let missingInfo = 0;
+  let shapeCount = 0;
   for (const model of models) {
     const parsed = tagsByModel.get(model.name) ?? { tags: [], cloudTags: [] };
     const tags = parsed.tags.map((entry) => {
@@ -245,6 +419,11 @@ export function buildArtifact({ models, tagsByModel, detail, generatedAt }) {
       }
       if (info?.projector !== undefined) {
         modelInfo.projector = info.projector;
+      }
+      const shape = shapes.get(`${model.name}@${entry.digest}`);
+      if (shape !== undefined) {
+        shapeCount += 1;
+        modelInfo.shape = { arch: shape.arch, ...shape.shape };
       }
       return { tag: entry.tag, size: entry.size, digest: entry.digest, model_info: modelInfo };
     });
@@ -272,7 +451,7 @@ export function buildArtifact({ models, tagsByModel, detail, generatedAt }) {
     schema_version: SCHEMA_VERSION,
     generated_at: generatedAt,
     source: { url: LIBRARY_URL },
-    counts: { models: built.length, tags: tagCount, missing_model_info: missingInfo },
+    counts: { models: built.length, tags: tagCount, missing_model_info: missingInfo, shapes: shapeCount },
     models: built,
   };
 }
@@ -357,6 +536,9 @@ export function checkGates({
       // one, so the floor here is loose enough for real gaps and tight enough
       // to catch a wholesale failure.
       ["contextWindow", (tag) => tag.model_info.contextWindow !== UNKNOWN_CONTEXT],
+      // Scored only on tags with details: MLX-format tags have neither details
+      // nor a GGUF to read a shape from. A shape is how Nexus judges memory fit.
+      ["shape", (tag) => tag.model_info.parameters === "" || tag.model_info.shape !== undefined],
     ];
     for (const [name, predicate] of coverage) {
       const floor = name === "contextWindow" ? minContext : minPopulated;
@@ -439,6 +621,16 @@ function serializeModelInfo(info) {
   }
   if (info.projector !== undefined) {
     parts.push(`"projector":${JSON.stringify(info.projector)}`);
+  }
+  if (info.shape !== undefined) {
+    // Fixed key order, so a re-read that finds the same shape is not a diff.
+    const ordered = { arch: info.shape.arch };
+    for (const key of SHAPE_KEYS) {
+      if (key in info.shape) {
+        ordered[key] = info.shape[key];
+      }
+    }
+    parts.push(`"shape":${JSON.stringify(ordered)}`);
   }
   return `{${parts.join(",")}}`;
 }

@@ -7,7 +7,7 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { SCHEMA_VERSION, UNKNOWN_CONTEXT, checkGates, serialize } from "./ollama.mjs";
+import { SCHEMA_VERSION, SHAPE_KEYS, UNKNOWN_CONTEXT, checkGates, serialize } from "./ollama.mjs";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const path = resolve(repoRoot, process.argv[2] ?? "v1/ollama-models.json");
@@ -55,6 +55,18 @@ for (const model of artifact.models ?? []) {
     if (typeof tag.size !== "string" || tag.size === "") {
       problems.push(`${model.name}:${tag.tag} has no size`);
     }
+    // Nexus feeds these straight into its memory estimate, so each must be a
+    // whole number it knows how to read.
+    if (info.shape !== undefined) {
+      if (typeof info.shape.arch !== "string" || info.shape.arch === "") {
+        problems.push(`${model.name}:${tag.tag} shape has no arch`);
+      }
+      for (const [key, value] of Object.entries(info.shape)) {
+        if (key !== "arch" && (!SHAPE_KEYS.includes(key) || !Number.isSafeInteger(value) || value < 0)) {
+          problems.push(`${model.name}:${tag.tag} shape.${key} is not a known whole number`);
+        }
+      }
+    }
   }
 }
 
@@ -68,6 +80,13 @@ if (missing !== artifact.counts?.missing_model_info) {
   problems.push(
     `counts claim ${artifact.counts?.missing_model_info} tags without model_info but ${missing} are empty`,
   );
+}
+
+const shaped = (artifact.models ?? [])
+  .flatMap((model) => model.tags ?? [])
+  .filter((tag) => tag.model_info?.shape !== undefined).length;
+if (shaped !== artifact.counts?.shapes) {
+  problems.push(`counts claim ${artifact.counts?.shapes} shapes but ${shaped} tags have one`);
 }
 
 if (tagCount !== artifact.counts?.tags || names.size !== artifact.counts?.models) {

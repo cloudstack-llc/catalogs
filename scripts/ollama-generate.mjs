@@ -12,11 +12,15 @@ import { fileURLToPath } from "node:url";
 
 import {
   LIBRARY_URL,
+  MANIFEST_ACCEPT,
+  MODEL_LAYER,
+  REGISTRY_URL,
   USER_AGENT,
   buildArtifact,
   checkGates,
   derivationMismatches,
   parseDetail,
+  parseGGUFShape,
   parseLibrary,
   parseTags,
   serialize,
@@ -29,6 +33,15 @@ const CACHE_VERSION = 1;
 // Marks a page that genuinely renders no metadata block, so it is not refetched
 // on every run and is never mistaken for a fetch failure.
 const ABSENT = Symbol("absent");
+
+// Shapes come from the registry `ollama pull` uses, not from ollama.com pages.
+// A shape is fixed for a digest, so each is read once and kept here. The
+// version is bumped when SHAPE_KEYS or the GGUF reader changes.
+const SHAPE_CACHE_PATH = resolve(repoRoot, "v1/ollama-shape-cache.json");
+const SHAPE_CACHE_VERSION = 1;
+// The shape sits near the start of the header. A few files put long tables
+// before it, so a short read that ends too soon is tried once more, longer.
+const SHAPE_READ_BYTES = [256 * 1024, 4 * 1024 * 1024];
 
 // ollama.com publishes no robots.txt and no crawl policy. Absence of a policy
 // is not permission, so the crawl stays deliberately gentle: the job has twelve
@@ -45,11 +58,11 @@ let rateLimited = 0;
 // A fetch has three outcomes, and collapsing them is how a failed crawl gets
 // published as a smaller catalog: "ok" has a body, "missing" means the server
 // said it does not exist, and "failed" means we never found out.
-async function fetchText(url) {
+async function fetchText(url, { headers = { Accept: "text/html" }, read = (response) => response.text() } = {}) {
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
     try {
       const response = await fetch(url, {
-        headers: { "User-Agent": USER_AGENT, Accept: "text/html" },
+        headers: { "User-Agent": USER_AGENT, ...headers },
         signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       });
       if (response.status === 429 || response.status >= 500) {
@@ -70,7 +83,7 @@ async function fetchText(url) {
       if (!response.ok) {
         throw new Error(`${url} responded ${response.status}`);
       }
-      return { status: "ok", body: await response.text() };
+      return { status: "ok", body: await read(response) };
     } catch (error) {
       if (String(error).includes("aborting the run")) {
         throw error;
@@ -82,6 +95,73 @@ async function fetchText(url) {
     }
   }
   return { status: "failed", error: `${url} did not respond after ${MAX_ATTEMPTS} attempts` };
+}
+
+/**
+ * Reads at most limit bytes of a response body, then stops the download. A
+ * server that ignores the Range header answers with the whole multi-gigabyte
+ * file; this keeps that from mattering.
+ */
+async function readPrefix(response, limit) {
+  const reader = response.body.getReader();
+  const chunks = [];
+  let total = 0;
+  while (total < limit) {
+    const { done, value } = await reader.read();
+    if (done) {
+      break;
+    }
+    chunks.push(value);
+    total += value.byteLength;
+  }
+  await reader.cancel();
+  const bytes = new Uint8Array(Math.min(total, limit));
+  let offset = 0;
+  for (const chunk of chunks) {
+    const part = chunk.subarray(0, bytes.byteLength - offset);
+    bytes.set(part, offset);
+    offset += part.byteLength;
+  }
+  return bytes;
+}
+
+/**
+ * Reads one tag's shape: its manifest names the GGUF weights blob, and the
+ * blob's opening bytes hold the shape. Returns ABSENT when the tag has no GGUF
+ * (MLX-format tags ship tensors instead) or its header names no shape, and
+ * undefined when the registry could not be read, which is retried next run.
+ */
+async function readShape(model, tag) {
+  const base = `${REGISTRY_URL}/v2/library/${encodeURIComponent(model)}`;
+  const manifest = await fetchText(`${base}/manifests/${encodeURIComponent(tag)}`, {
+    headers: { Accept: MANIFEST_ACCEPT },
+    read: (response) => response.json(),
+  });
+  if (manifest.status !== "ok") {
+    return manifest.status === "missing" ? ABSENT : undefined;
+  }
+  const layer = manifest.body.layers?.find((entry) => entry.mediaType === MODEL_LAYER);
+  if (layer === undefined || !/^sha256:[0-9a-f]{64}$/.test(layer.digest ?? "")) {
+    return ABSENT;
+  }
+  for (const size of SHAPE_READ_BYTES) {
+    const blob = await fetchText(`${base}/blobs/${layer.digest}`, {
+      headers: { Range: `bytes=0-${size - 1}` },
+      read: (response) => readPrefix(response, size),
+    });
+    if (blob.status !== "ok") {
+      return blob.status === "missing" ? ABSENT : undefined;
+    }
+    try {
+      const shape = parseGGUFShape(blob.body);
+      if (shape !== undefined) {
+        return shape;
+      }
+    } catch {
+      return ABSENT;
+    }
+  }
+  return ABSENT;
 }
 
 /** Runs tasks with a fixed number of workers, preserving input order. */
@@ -233,8 +313,47 @@ async function main() {
     process.exit(1);
   }
 
+  const storedShapes = await readJSON(SHAPE_CACHE_PATH);
+  const shapeCache =
+    storedShapes?.version === SHAPE_CACHE_VERSION
+      ? storedShapes
+      : { version: SHAPE_CACHE_VERSION, entries: {} };
+  const shapes = new Map();
+  const unshaped = [];
+  for (const [key, tag] of wanted) {
+    const cached = shapeCache.entries[key];
+    if (cached === undefined) {
+      unshaped.push([key, tag]);
+    } else if (cached.absent !== true) {
+      shapes.set(key, cached);
+    }
+  }
+  console.log(`shapes: ${shapes.size} cached, ${unshaped.length} to read`);
+  let shapesFailed = 0;
+  const read = await mapLimited(unshaped, async ([key, tag]) => [key, await readShape(tag.model, tag.tag)]);
+  for (const [key, shape] of read) {
+    if (shape === undefined) {
+      shapesFailed += 1;
+    } else if (shape === ABSENT) {
+      shapeCache.entries[key] = { absent: true };
+    } else {
+      shapeCache.entries[key] = shape;
+      shapes.set(key, shape);
+    }
+  }
+  // Saved before any gate: each entry is a fact about one digest, true
+  // whether or not this run publishes, and a cold read is the slow part.
+  await writeFile(SHAPE_CACHE_PATH, `${JSON.stringify(shapeCache, null, 1)}\n`, "utf8");
+  if (shapesFailed > 0) {
+    console.error(`shapes: ${shapesFailed} could not be read`);
+  }
+  if (shapesFailed > Math.max(5, unshaped.length * 0.01)) {
+    console.error("refusing to publish: too many shapes could not be read");
+    process.exit(1);
+  }
+
   const generatedAt = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
-  const artifact = buildArtifact({ models, tagsByModel, detail, generatedAt });
+  const artifact = buildArtifact({ models, tagsByModel, detail, shapes, generatedAt });
 
   const problems = checkGates({ candidate: artifact, previous });
   if (problems.length > 0) {
