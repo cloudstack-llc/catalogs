@@ -20,6 +20,28 @@ export const DEFAULT_FOUNDATIONMODELS_ASSET_URL =
 // rejects a whole feed that names a runtime it does not know, and 0.5.x
 // still reads the stable feed. Add "stable" only after 0.5.x is retired.
 export const FOUNDATIONMODELS_CHANNELS = new Set(["dev"]);
+export const DEFAULT_IMAGES_ASSET_URL =
+  "https://nexus-assets.msty.ai/msty-nexus/runtime/images/latest/msty-nexus-images.tgz";
+
+// The feed is published at two paths with the same schema and signing key.
+// v2 is read by Msty Nexus Runtime 0.9.1 and earlier, which reject the whole
+// feed for a runtime, a field, a backend or an archive format they do not
+// know. So v2 is frozen: only new versions of the runtimes below go there.
+// v3 is read by Runtime 0.10 and later, which skip entries they do not know.
+// New runtimes, fields and artifact kinds go to v3 only.
+export const FEED_VERSIONS = [2, 3];
+const V2_RUNTIME_IDS = ["ollama", "llamacpp", "mlx", "foundationmodels"];
+const V3_ONLY_RUNTIME_IDS = ["images"];
+
+export function parseFeedVersion(value) {
+  const version = Number(value);
+  invariant(FEED_VERSIONS.includes(version), `runtime feed version must be one of ${FEED_VERSIONS.join(", ")}`);
+  return version;
+}
+
+function allowedRuntimeIds(feedVersion) {
+  return parseFeedVersion(feedVersion) === 2 ? V2_RUNTIME_IDS : [...V2_RUNTIME_IDS, ...V3_ONLY_RUNTIME_IDS];
+}
 
 const GITHUB_API = "https://api.github.com";
 const GITHUB_DIGEST = /^sha256:([0-9a-f]{64})$/;
@@ -416,6 +438,57 @@ async function buildFoundationModelsRelease(fetchImpl, channel, publishedAt, ass
   };
 }
 
+// The image runtime follows the Foundation Models asset contract, because MLX
+// itself has no dev lane in the feed: the stable channel reads latest/ and
+// points at the immutable <version>/ copy, and the dev channel reads the dev
+// publish (latest/dev/), which has no versioned copy and is pinned by SHA-256.
+// Returns null only when the manifest is not published yet (HTTP 404). Any
+// other problem fails the refresh.
+async function buildImagesRelease(fetchImpl, channel, publishedAt, assetURL) {
+  const parsed = new URL(assetURL);
+  invariant(parsed.protocol === "https:" && parsed.search === "" && parsed.hash === "", "Image runtime asset URL must be immutable HTTPS metadata input");
+  invariant(parsed.pathname.endsWith("/images/latest/msty-nexus-images.tgz"), "Image runtime asset URL must be the latest msty-nexus-images.tgz alias");
+  const dev = channel === "dev";
+  if (dev) assetURL = assetURL.replace("/images/latest/", "/images/latest/dev/");
+  const prefix = assetURL.slice(0, -"msty-nexus-images.tgz".length);
+  const probe = await fetchImpl(`${prefix}runtime-manifest.json`, { method: "HEAD", redirect: "follow" });
+  if (probe.status === 404) return null;
+  const manifestResponse = await fetchWithRetry(`${prefix}runtime-manifest.json`, { fetchImpl });
+  const manifest = object(await manifestResponse.json(), "Image runtime manifest");
+  invariant(
+    manifest.object === "msty.nexus.images_runtime" && manifest.runtimeId === "images",
+    "Image runtime manifest identity is invalid",
+  );
+  const version = string(manifest.runtimeVersion, "Image runtime version");
+  invariant(SEMVER.test(version), "Image runtime version must be semantic");
+  const checksumResponse = await fetchWithRetry(`${prefix}checksums.txt`, { fetchImpl });
+  const checksumText = await checksumResponse.text();
+  const checksumLine = checksumText.split(/\r?\n/).find((line) => line.trim().endsWith("msty-nexus-images.tgz"));
+  const sha256 = String(checksumLine ?? "").trim().split(/\s+/)[0]?.toLowerCase();
+  invariant(SHA256.test(sha256), "Image runtime checksum file did not contain a valid archive SHA-256");
+  const versionedURL = dev ? assetURL : assetURL.replace("/images/latest/", `/images/${version}/`);
+  const head = await fetchWithRetry(versionedURL, { fetchImpl, method: "HEAD" });
+  const sizeBytes = Number(head.headers.get("content-length"));
+  integer(sizeBytes, "Image runtime artifact content-length");
+  return {
+    runtimeId: "images",
+    channel,
+    runtimeVersion: version,
+    publishedAt,
+    source: { type: "msty_asset", url: versionedURL },
+    artifacts: [{
+      os: "darwin",
+      arch: "arm64",
+      backend: "metal",
+      url: versionedURL,
+      sha256,
+      sizeBytes,
+      archiveFormat: "tar.gz",
+      executablePath: `msty-nexus-images_${version}_darwin_arm64/msty-nexus-images`,
+    }],
+  };
+}
+
 async function buildMLXRelease(fetchImpl, channel, publishedAt, mlxAssetURL) {
   const prefix = mlxMetadataPrefix(mlxAssetURL);
   const manifestResponse = await fetchWithRetry(`${prefix}runtime-manifest.json`, { fetchImpl });
@@ -461,7 +534,10 @@ export async function buildRuntimeFeed({
   mlxAssetURL = DEFAULT_MLX_ASSET_URL,
   foundationModelsAssetURL = DEFAULT_FOUNDATIONMODELS_ASSET_URL,
   foundationModelsChannels = FOUNDATIONMODELS_CHANNELS,
+  feedVersion = 2,
+  imagesAssetURL = DEFAULT_IMAGES_ASSET_URL,
 }) {
+  feedVersion = parseFeedVersion(feedVersion);
   invariant(channel === "stable" || channel === "dev", "runtime feed channel must be stable or dev");
   invariant(typeof github === "function", "GitHub client is required");
   invariant(typeof resolveBundle === "function", "runtime bundle resolver is required");
@@ -474,23 +550,29 @@ export async function buildRuntimeFeed({
     const foundationModels = await buildFoundationModelsRelease(fetchImpl, channel, publishedAt, foundationModelsAssetURL);
     if (foundationModels) releases.push(foundationModels);
   }
+  // v2 never asks for the image runtime, so it cannot enter that feed.
+  if (feedVersion >= 3) {
+    const images = await buildImagesRelease(fetchImpl, channel, publishedAt, imagesAssetURL);
+    if (images) releases.push(images);
+  }
   const feed = { schemaVersion: FEED_SCHEMA_VERSION, generatedAt: publishedAt, releases };
-  validateRuntimeFeed(feed, channel);
+  validateRuntimeFeed(feed, channel, { feedVersion });
   return feed;
 }
 
-export function validateRuntimeFeed(feed, expectedChannel) {
+export function validateRuntimeFeed(feed, expectedChannel, { feedVersion = 2 } = {}) {
+  const allowed = allowedRuntimeIds(feedVersion);
   object(feed, "feed");
   invariant(feed.schemaVersion === FEED_SCHEMA_VERSION, `feed.schemaVersion must be ${FEED_SCHEMA_VERSION}`);
   invariant(
-    Array.isArray(feed.releases) && (feed.releases.length === 3 || feed.releases.length === 4),
-    "feed must contain the three required runtime releases and at most Apple Foundation Models",
+    Array.isArray(feed.releases) && feed.releases.length >= 3 && feed.releases.length <= allowed.length,
+    `v${feedVersion} feed must contain the three required runtime releases and at most ${allowed.length - 3} optional ones`,
   );
   const byID = new Map();
   for (const [releaseIndex, releaseValue] of feed.releases.entries()) {
     const release = object(releaseValue, `feed.releases[${releaseIndex}]`);
     const runtimeId = string(release.runtimeId, `feed.releases[${releaseIndex}].runtimeId`);
-    invariant(["ollama", "llamacpp", "mlx", "foundationmodels"].includes(runtimeId), `unsupported runtime ${runtimeId}`);
+    invariant(allowed.includes(runtimeId), `unsupported runtime ${runtimeId} in a v${feedVersion} feed`);
     invariant(
       runtimeId !== "foundationmodels" || FOUNDATIONMODELS_CHANNELS.has(expectedChannel),
       `foundationmodels is not enabled for the ${expectedChannel} channel`,
@@ -562,9 +644,9 @@ function publicKeyFromRaw(value) {
   return createPublicKey({ key: Buffer.concat([SPKI_ED25519_PREFIX, raw]), format: "der", type: "spki" });
 }
 
-export function signRuntimeFeed(feed, privateKeyBase64, keyId = DEFAULT_KEY_ID) {
+export function signRuntimeFeed(feed, privateKeyBase64, keyId = DEFAULT_KEY_ID, { feedVersion = 2 } = {}) {
   invariant(KEY_ID.test(keyId), "runtime feed signing key ID is invalid");
-  validateRuntimeFeed(feed, feed.releases?.[0]?.channel);
+  validateRuntimeFeed(feed, feed.releases?.[0]?.channel, { feedVersion });
   const feedJSON = serializeFeed(feed);
   const signature = {
     algorithm: SIGNATURE_ALGORITHM,
@@ -574,12 +656,12 @@ export function signRuntimeFeed(feed, privateKeyBase64, keyId = DEFAULT_KEY_ID) 
   return `{"schemaVersion":${SIGNED_FEED_SCHEMA_VERSION},"feed":${feedJSON},"signature":${JSON.stringify(signature)}}\n`;
 }
 
-export function verifySignedRuntimeFeed(text, publicKeyBase64 = DEFAULT_PUBLIC_KEY, expectedChannel) {
+export function verifySignedRuntimeFeed(text, publicKeyBase64 = DEFAULT_PUBLIC_KEY, expectedChannel, { feedVersion = 2 } = {}) {
   const envelope = object(JSON.parse(text), "signed feed");
   invariant(envelope.schemaVersion === SIGNED_FEED_SCHEMA_VERSION, `signed feed schemaVersion must be ${SIGNED_FEED_SCHEMA_VERSION}`);
   invariant(envelope.signature?.algorithm === SIGNATURE_ALGORITHM, "signed feed algorithm must be ed25519");
   invariant(KEY_ID.test(String(envelope.signature?.keyId ?? "")), "signed feed key ID is invalid");
-  validateRuntimeFeed(envelope.feed, expectedChannel ?? envelope.feed?.releases?.[0]?.channel);
+  validateRuntimeFeed(envelope.feed, expectedChannel ?? envelope.feed?.releases?.[0]?.channel, { feedVersion });
   const signature = Buffer.from(String(envelope.signature?.value ?? ""), "base64");
   invariant(signature.length === 64, "signed feed signature must decode to 64 bytes");
   const canonical = `{"schemaVersion":${SIGNED_FEED_SCHEMA_VERSION},"feed":${serializeFeed(envelope.feed)},"signature":${JSON.stringify(envelope.signature)}}`;

@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 import {
   DEFAULT_KEY_ID,
+  parseFeedVersion,
   signRuntimeFeed,
 } from "./runtime-feed-lib.mjs";
 
@@ -28,6 +29,7 @@ const keyEnvironment = required(
 );
 const key = required(process.env[keyEnvironment], keyEnvironment);
 const keyId = required(option(argv, "--key-id", DEFAULT_KEY_ID), "--key-id");
+const feedVersion = parseFeedVersion(required(option(argv, "--feed-version", "2"), "--feed-version"));
 const feed = JSON.parse(await readFile(input, "utf8"));
-await writeFile(out, signRuntimeFeed(feed, key, keyId), "utf8");
+await writeFile(out, signRuntimeFeed(feed, key, keyId, { feedVersion }), "utf8");
 console.log(`signed ${input} as ${out}`);

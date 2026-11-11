@@ -72,8 +72,24 @@ function fixtureGitHub() {
   };
 }
 
-function fixtureFetch({ foundationModelsPublished = false } = {}) {
+function fixtureFetch({ foundationModelsPublished = false, images = "missing", imagesStatus = 500 } = {}) {
   return async (url, options = {}) => {
+    if (url.includes("/images/")) {
+      if (images === "missing") return new Response(null, { status: 404 });
+      if (images === "error") return new Response(null, { status: imagesStatus });
+      if (url.endsWith("runtime-manifest.json")) {
+        const manifest = images === "malformed"
+          ? { object: "msty.nexus.mlx_runtime", runtimeId: "images", runtimeVersion: "0.1.0" }
+          : { object: "msty.nexus.images_runtime", runtimeId: "images", runtimeVersion: "0.1.0" };
+        return new Response(options.method === "HEAD" ? null : JSON.stringify(manifest));
+      }
+      if (url.endsWith("checksums.txt")) {
+        return new Response(images === "no-checksum" ? `${sha("f")}  other.tgz\n` : `${sha("f")}  msty-nexus-images.tgz\n`);
+      }
+      if (options.method === "HEAD" && url.endsWith("msty-nexus-images.tgz")) {
+        return new Response(null, { headers: { "content-length": "41000000" } });
+      }
+    }
     if (url.includes("/foundationmodels/")) {
       if (!foundationModelsPublished) return new Response(null, { status: 404 });
       if (url.endsWith("runtime-manifest.json")) {
@@ -201,4 +217,93 @@ test("lists Apple Foundation Models only on enabled channels once published", as
   const tampered = structuredClone(dev);
   for (const release of tampered.releases) release.channel = "stable";
   assert.throws(() => validateRuntimeFeed(tampered, "stable"), /not enabled for the stable channel/);
+});
+
+const build = (options) => buildRuntimeFeed({
+  github: fixtureGitHub(),
+  resolveBundle: bundle,
+  ...options,
+});
+const runtimeIds = (feed) => feed.releases.map((release) => release.runtimeId);
+
+test("v2 never lists the image runtime, even when it is published", async () => {
+  for (const channel of ["stable", "dev"]) {
+    const published = fixtureFetch({ foundationModelsPublished: true, images: "published" });
+    const fetchImpl = async (url, options) => {
+      assert.equal(url.includes("/images/"), false, "v2 must not ask for the image runtime");
+      return published(url, options);
+    };
+    const v2 = await build({ fetchImpl, channel });
+    assert.equal(runtimeIds(v2).includes("images"), false);
+
+    // Without the image runtime, v3 has the same entries as v2.
+    const v3 = await build({ fetchImpl: fixtureFetch({ foundationModelsPublished: true }), channel, feedVersion: 3 });
+    assert.deepEqual(v3.releases.map(({ publishedAt: _, ...rest }) => rest), v2.releases.map(({ publishedAt: _, ...rest }) => rest));
+  }
+});
+
+test("the v2 validator refuses a feed that lists the image runtime", async () => {
+  const { privateKey, publicKey } = generateKeyPairSync("ed25519");
+  const seed = privateKey.export({ format: "der", type: "pkcs8" }).subarray(-32).toString("base64");
+  const publicRaw = publicKey.export({ format: "der", type: "spki" }).subarray(-32).toString("base64");
+  const v3 = await build({ fetchImpl: fixtureFetch({ images: "published" }), feedVersion: 3 });
+
+  assert.throws(() => validateRuntimeFeed(v3, "stable"), /unsupported runtime images in a v2 feed/);
+  assert.throws(() => signRuntimeFeed(v3, seed, "test-key"), /unsupported runtime images in a v2 feed/);
+  const signed = signRuntimeFeed(v3, seed, "test-key", { feedVersion: 3 });
+  assert.throws(() => verifySignedRuntimeFeed(signed, publicRaw, "stable"), /unsupported runtime images in a v2 feed/);
+  assert.equal(verifySignedRuntimeFeed(signed, publicRaw, "stable", { feedVersion: 3 }).feed.releases.length, 4);
+
+  const unknown = structuredClone(v3);
+  unknown.releases[3].runtimeId = "whisper";
+  assert.throws(() => validateRuntimeFeed(unknown, "stable", { feedVersion: 3 }), /unsupported runtime whisper/);
+  await assert.rejects(build({ fetchImpl: fixtureFetch(), feedVersion: 4 }), /runtime feed version/);
+});
+
+test("v3 lists the image runtime when its manifest exists", async () => {
+  const stable = await build({ fetchImpl: fixtureFetch({ images: "published" }), feedVersion: 3 });
+  assert.deepEqual(runtimeIds(stable), ["ollama", "llamacpp", "mlx", "images"]);
+  // The stable channel points at the immutable versioned copy.
+  const url = "https://nexus-assets.msty.ai/msty-nexus/runtime/images/0.1.0/msty-nexus-images.tgz";
+  assert.deepEqual(stable.releases[3], {
+    runtimeId: "images",
+    channel: "stable",
+    runtimeVersion: "0.1.0",
+    publishedAt: stable.generatedAt,
+    source: { type: "msty_asset", url },
+    artifacts: [{
+      os: "darwin",
+      arch: "arm64",
+      backend: "metal",
+      url,
+      sha256: sha("f"),
+      sizeBytes: 41000000,
+      archiveFormat: "tar.gz",
+      executablePath: "msty-nexus-images_0.1.0_darwin_arm64/msty-nexus-images",
+    }],
+  });
+
+  // The dev channel lists the dev publish, pinned by SHA-256.
+  const dev = await build({ fetchImpl: fixtureFetch({ images: "published" }), channel: "dev", feedVersion: 3 });
+  const images = dev.releases.find((release) => release.runtimeId === "images");
+  assert.equal(images.artifacts[0].url, "https://nexus-assets.msty.ai/msty-nexus/runtime/images/latest/dev/msty-nexus-images.tgz");
+  assert.equal(images.source.url, images.artifacts[0].url);
+});
+
+test("v3 leaves the image runtime out only when its manifest is missing", async () => {
+  const missing = await build({ fetchImpl: fixtureFetch(), feedVersion: 3 });
+  assert.deepEqual(runtimeIds(missing), ["ollama", "llamacpp", "mlx"]);
+
+  // Published to the dev prefix only: dev lists it, stable does not.
+  const published = fixtureFetch({ images: "published" });
+  const devOnly = async (url, options) =>
+    url.includes("/images/") && !url.includes("/images/latest/dev/")
+      ? new Response(null, { status: 404 })
+      : published(url, options);
+  assert.equal(runtimeIds(await build({ fetchImpl: devOnly, channel: "dev", feedVersion: 3 })).includes("images"), true);
+  assert.equal(runtimeIds(await build({ fetchImpl: devOnly, channel: "stable", feedVersion: 3 })).includes("images"), false);
+
+  await assert.rejects(build({ fetchImpl: fixtureFetch({ images: "malformed" }), feedVersion: 3 }), /Image runtime manifest identity is invalid/);
+  await assert.rejects(build({ fetchImpl: fixtureFetch({ images: "no-checksum" }), feedVersion: 3 }), /Image runtime checksum file/);
+  await assert.rejects(build({ fetchImpl: fixtureFetch({ images: "error", imagesStatus: 403 }), feedVersion: 3 }), /HTTP 403/);
 });
