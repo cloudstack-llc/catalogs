@@ -16,6 +16,7 @@ https://raw.githubusercontent.com/cloudstack-llc/model-catalog/main/v1/smart-rou
 | `v1/featured-models.json` | Curated local models worth downloading, grouped into collections | Curated; resolved against Ollama and Hugging Face | Daily |
 | `v1/smart-route-starters.json` | Model-neutral Smart Route starters, grouped by use | Curated | On change |
 | `v2/runtime/{stable,dev}/runtime-release-feed.signed.json` | Signed Msty Nexus Runtime releases | Ollama, llama.cpp, and Msty MLX metadata | 4 hours |
+| `v3/runtime/{stable,dev}/runtime-release-feed.signed.json` | The same feed for Runtime 0.10 and later, plus newer runtimes | Same as `v2`, plus the Msty image runtime | 4 hours |
 
 # Token pricing
 
@@ -81,6 +82,19 @@ The signed schema-2 feeds are served directly from this public repository:
 https://raw.githubusercontent.com/cloudstack-llc/catalogs/main/v2/runtime/stable/runtime-release-feed.signed.json
 https://raw.githubusercontent.com/cloudstack-llc/catalogs/main/v2/runtime/dev/runtime-release-feed.signed.json
 ```
+
+The same feed is published at two paths, `v2/runtime` and `v3/runtime`, with
+the same schema and signing key.
+
+- `v2` is read by Msty Nexus Runtime 0.9.1 and earlier. Those versions reject
+  the whole feed when it has a runtime, a field, a backend or an archive
+  format they do not know. So `v2` never changes shape. It gets only new
+  versions of the runtimes it lists today.
+- `v3` is read by Runtime 0.10 and later, which skip entries they do not
+  know. It has everything in `v2`, plus the Msty image runtime (`images`)
+  once that runtime is published.
+- Rule: new runtimes, fields and artifact kinds go to `v3` only. The `v2`
+  generator and verifier refuse any other runtime.
 
 They are not mirrored to R2. The signature is the trust boundary; the hosting
 origin supplies bytes but cannot authorize a runtime artifact.

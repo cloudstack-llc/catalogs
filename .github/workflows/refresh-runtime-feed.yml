@@ -35,13 +35,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.REFRESH_TOKEN || github.token }}
         run: |
-          for channel in stable dev; do
-            node scripts/runtime-feed-generate.mjs \
-              --channel "$channel" \
-              --previous "v2/runtime/${channel}/runtime-release-feed.signed.json" \
-              --out ".runtime-feed/${channel}.candidate.json" \
-              --bundles-out ".runtime-feed/${channel}.bundles.json" \
-              --bundle-dir ".runtime-feed/bundles"
+          # v2 is frozen for Runtime 0.9.1 and earlier. v3 is the same feed
+          # plus runtimes that only Runtime 0.10 and later understand.
+          for version in 2 3; do
+            for channel in stable dev; do
+              node scripts/runtime-feed-generate.mjs \
+                --feed-version "$version" \
+                --channel "$channel" \
+                --previous "v${version}/runtime/${channel}/runtime-release-feed.signed.json" \
+                --out ".runtime-feed/v${version}-${channel}.candidate.json" \
+                --bundles-out ".runtime-feed/v${version}-${channel}.bundles.json" \
+                --bundle-dir ".runtime-feed/bundles"
+            done
           done
 
       - name: Publish new immutable bundles
@@ -55,28 +60,34 @@ jobs:
           MSTY_NEXUS_RUNTIME_RELEASE_FEED_KEY_ID: ${{ vars.MSTY_NEXUS_RUNTIME_RELEASE_FEED_KEY_ID || 'msty-runtime-feed-1' }}
         run: |
           test -n "$MSTY_NEXUS_RUNTIME_RELEASE_FEED_PRIVATE_KEY"
-          for channel in stable dev; do
-            candidate=".runtime-feed/${channel}.candidate.json"
-            if [[ ! -f "$candidate" ]]; then
-              continue
-            fi
-            output="v2/runtime/${channel}/runtime-release-feed.signed.json"
-            mkdir -p "$(dirname "$output")"
-            node scripts/runtime-feed-sign.mjs \
-              --input "$candidate" \
-              --out "$output" \
-              --key-id "$MSTY_NEXUS_RUNTIME_RELEASE_FEED_KEY_ID"
-            node scripts/runtime-feed-verify.mjs "$output" "$channel"
+          for version in 2 3; do
+            for channel in stable dev; do
+              candidate=".runtime-feed/v${version}-${channel}.candidate.json"
+              if [[ ! -f "$candidate" ]]; then
+                continue
+              fi
+              output="v${version}/runtime/${channel}/runtime-release-feed.signed.json"
+              mkdir -p "$(dirname "$output")"
+              node scripts/runtime-feed-sign.mjs \
+                --feed-version "$version" \
+                --input "$candidate" \
+                --out "$output" \
+                --key-id "$MSTY_NEXUS_RUNTIME_RELEASE_FEED_KEY_ID"
+              node scripts/runtime-feed-verify.mjs "$output" "$channel" "$version"
+            done
           done
 
       - name: Commit changed feeds
         run: |
-          if [[ -z "$(git status --porcelain -- v2/runtime)" ]]; then
+          if [[ -z "$(git status --porcelain -- v2/runtime v3/runtime)" ]]; then
             echo "nothing to publish"
             exit 0
           fi
           git config user.name "runtime-catalog[bot]"
           git config user.email "noreply@cloudstack.llc"
           git add v2/runtime
+          if [[ -d v3/runtime ]]; then
+            git add v3/runtime
+          fi
           git commit -m "chore: refresh runtime release feeds"
           git push

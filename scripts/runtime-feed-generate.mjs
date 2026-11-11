@@ -12,6 +12,7 @@ import { fileURLToPath } from "node:url";
 import {
   buildRuntimeFeed,
   createGitHubClient,
+  parseFeedVersion,
   serializeFeed,
 } from "./runtime-feed-lib.mjs";
 
@@ -112,6 +113,9 @@ async function previousFeed(path) {
 async function main() {
   const argv = process.argv.slice(2);
   const channel = required(option(argv, "--channel", "stable"), "--channel");
+  // 2 (default) is the frozen feed for Runtime 0.9.1 and earlier; 3 may also
+  // list newer runtimes. See FEED_VERSIONS in runtime-feed-lib.mjs.
+  const feedVersion = parseFeedVersion(required(option(argv, "--feed-version", "2"), "--feed-version"));
   const out = resolve(repoRoot, required(option(argv, "--out"), "--out"));
   const bundlesOut = resolve(repoRoot, required(option(argv, "--bundles-out"), "--bundles-out"));
   const bundleDir = resolve(repoRoot, required(option(argv, "--bundle-dir"), "--bundle-dir"));
@@ -166,13 +170,13 @@ async function main() {
     };
   };
 
-  const feed = await buildRuntimeFeed({ github, resolveBundle, channel });
+  const feed = await buildRuntimeFeed({ github, resolveBundle, channel, feedVersion });
   const previous = await previousFeed(previousPath);
   if (
     previous !== undefined &&
     JSON.stringify(materialReleases(previous)) === JSON.stringify(materialReleases(feed))
   ) {
-    console.log(`unchanged: runtime feed ${channel}`);
+    console.log(`unchanged: runtime feed v${feedVersion} ${channel}`);
     return;
   }
 
