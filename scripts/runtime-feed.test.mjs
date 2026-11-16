@@ -72,8 +72,20 @@ function fixtureGitHub() {
   };
 }
 
-function fixtureFetch({ foundationModelsPublished = false, images = "missing", imagesStatus = 500 } = {}) {
+function fixtureFetch({ foundationModelsPublished = false, images = "missing", imagesStatus = 500, mlxDev } = {} = {}) {
   return async (url, options = {}) => {
+    // mlxDev: undefined serves the production manifest on latest/dev/ too,
+    // "missing" serves 404, and a version string serves a dev build.
+    if (url.includes("/mlx/latest/dev/") && mlxDev !== undefined) {
+      if (mlxDev === "missing") return new Response(null, { status: 404 });
+      if (url.endsWith("runtime-manifest.json")) {
+        return new Response(options.method === "HEAD" ? null : JSON.stringify({ object: "msty.nexus.mlx_runtime", runtimeId: "mlx", runtimeVersion: mlxDev }));
+      }
+      if (url.endsWith("checksums.txt")) return new Response(`${sha("b")}  msty-nexus-mlx.tgz\n`);
+      if (options.method === "HEAD" && url.endsWith("msty-nexus-mlx.tgz")) {
+        return new Response(null, { headers: { "content-length": "568506877" } });
+      }
+    }
     if (url.includes("/images/")) {
       if (images === "missing") return new Response(null, { status: 404 });
       if (images === "error") return new Response(null, { status: imagesStatus });
@@ -217,6 +229,31 @@ test("lists Apple Foundation Models only on enabled channels once published", as
   const tampered = structuredClone(dev);
   for (const release of tampered.releases) release.channel = "stable";
   assert.throws(() => validateRuntimeFeed(tampered, "stable"), /not enabled for the stable channel/);
+});
+
+test("staging takes the MLX dev publish only while it is newer than production", async () => {
+  const mlx = async (channel, mlxDev) => {
+    const feed = await buildRuntimeFeed({ github: fixtureGitHub(), fetchImpl: fixtureFetch({ mlxDev }), resolveBundle: bundle, channel });
+    return feed.releases.find((release) => release.runtimeId === "mlx");
+  };
+  const prodURL = "https://nexus-assets.msty.ai/msty-nexus/runtime/mlx/0.6.2/msty-nexus-mlx.tgz";
+
+  const newer = await mlx("dev", "0.6.3");
+  assert.equal(newer.runtimeVersion, "0.6.3");
+  assert.equal(newer.artifacts[0].url, "https://nexus-assets.msty.ai/msty-nexus/runtime/mlx/latest/dev/msty-nexus-mlx.tgz");
+  assert.equal(newer.artifacts[0].sha256, sha("b"));
+  assert.equal(newer.artifacts[0].executablePath, "msty-nexus-mlx_0.6.3_darwin_arm64/msty-nexus-mlx");
+
+  // A dev upload at or below production, or none at all, leaves production.
+  for (const mlxDev of ["0.6.2", "0.6.1", "0.6.2-rc.1", "missing"]) {
+    const kept = await mlx("dev", mlxDev);
+    assert.equal(kept.runtimeVersion, "0.6.2", mlxDev);
+    assert.equal(kept.artifacts[0].url, prodURL, mlxDev);
+  }
+
+  // Production Macs never see the dev publish.
+  const stable = await mlx("stable", "0.6.3");
+  assert.equal(stable.artifacts[0].url, prodURL);
 });
 
 const build = (options) => buildRuntimeFeed({
