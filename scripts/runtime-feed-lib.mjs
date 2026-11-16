@@ -489,8 +489,7 @@ async function buildImagesRelease(fetchImpl, channel, publishedAt, assetURL) {
   };
 }
 
-async function buildMLXRelease(fetchImpl, channel, publishedAt, mlxAssetURL) {
-  const prefix = mlxMetadataPrefix(mlxAssetURL);
+async function readMLXMetadata(fetchImpl, prefix) {
   const manifestResponse = await fetchWithRetry(`${prefix}runtime-manifest.json`, { fetchImpl });
   const manifest = object(await manifestResponse.json(), "MLX runtime manifest");
   invariant(manifest.object === "msty.nexus.mlx_runtime" && manifest.runtimeId === "mlx", "MLX runtime manifest identity is invalid");
@@ -501,8 +500,42 @@ async function buildMLXRelease(fetchImpl, channel, publishedAt, mlxAssetURL) {
   const checksumLine = checksumText.split(/\r?\n/).find((line) => line.trim().endsWith("msty-nexus-mlx.tgz"));
   const sha256 = String(checksumLine ?? "").trim().split(/\s+/)[0]?.toLowerCase();
   invariant(SHA256.test(sha256), "MLX checksum file did not contain a valid archive SHA-256");
-  const versionedURL = mlxAssetURL.replace("/mlx/latest/", `/mlx/${version}/`);
+  return { version, sha256 };
+}
+
+// Compares major.minor.patch only. A prerelease of the same core version
+// counts as equal, so it never displaces the published build.
+function newerCoreVersion(candidate, current) {
+  const core = (version) => version.split(/[-+]/)[0].split(".").map(Number);
+  const a = core(candidate);
+  const b = core(current);
+  for (let index = 0; index < 3; index += 1) {
+    if (a[index] !== b[index]) return a[index] > b[index];
+  }
+  return false;
+}
+
+async function buildMLXRelease(fetchImpl, channel, publishedAt, mlxAssetURL) {
+  let { version, sha256 } = await readMLXMetadata(fetchImpl, mlxMetadataPrefix(mlxAssetURL));
+  let versionedURL = mlxAssetURL.replace("/mlx/latest/", `/mlx/${version}/`);
   invariant(versionedURL !== mlxAssetURL, "MLX latest URL could not be made immutable");
+  // Staging test lane. The dev channel takes the dev publish (latest/dev/)
+  // only while its version is newer than the production build, so a stale
+  // dev upload never replaces or downgrades production on staging Macs. The
+  // dev publish has no versioned copy; the feed pins it by SHA-256, so each
+  // dev publish needs a new version for Runtimes to pick it up.
+  if (channel === "dev") {
+    const devURL = mlxAssetURL.replace("/mlx/latest/", "/mlx/latest/dev/");
+    const devPrefix = mlxMetadataPrefix(devURL);
+    const probe = await fetchImpl(`${devPrefix}runtime-manifest.json`, { method: "HEAD", redirect: "follow" });
+    if (probe.status !== 404) {
+      const dev = await readMLXMetadata(fetchImpl, devPrefix);
+      if (newerCoreVersion(dev.version, version)) {
+        ({ version, sha256 } = dev);
+        versionedURL = devURL;
+      }
+    }
+  }
   const head = await fetchWithRetry(versionedURL, { fetchImpl, method: "HEAD" });
   const sizeBytes = Number(head.headers.get("content-length"));
   integer(sizeBytes, "MLX artifact content-length");
