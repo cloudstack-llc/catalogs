@@ -72,8 +72,21 @@ function fixtureGitHub() {
   };
 }
 
-function fixtureFetch({ foundationModelsPublished = false, images = "missing", imagesStatus = 500, mlxDev } = {} = {}) {
+function fixtureFetch({ foundationModelsPublished = false, images = "missing", imagesStatus = 500, mlxDev, trainer = "missing" } = {} = {}) {
   return async (url, options = {}) => {
+    if (url.includes("/trainer/")) {
+      if (trainer === "missing") return new Response(null, { status: 404 });
+      if (url.endsWith("runtime-manifest.json")) {
+        const manifest = trainer === "malformed"
+          ? { object: "msty.nexus.mlx_runtime", runtimeId: "trainer", runtimeVersion: "0.2.0-dev.1" }
+          : { object: "msty.nexus.trainer_runtime", runtimeId: "trainer", runtimeVersion: "0.2.0-dev.1" };
+        return new Response(options.method === "HEAD" ? null : JSON.stringify(manifest));
+      }
+      if (url.endsWith("checksums.txt")) return new Response(`${sha("c")}  msty-nexus-trainer.tgz\n`);
+      if (options.method === "HEAD" && url.endsWith("msty-nexus-trainer.tgz")) {
+        return new Response(null, { headers: { "content-length": "126000000" } });
+      }
+    }
     // mlxDev: undefined serves the production manifest on latest/dev/ too,
     // "missing" serves 404, and a version string serves a dev build.
     if (url.includes("/mlx/latest/dev/") && mlxDev !== undefined) {
@@ -343,4 +356,38 @@ test("v3 leaves the image runtime out only when its manifest is missing", async 
   await assert.rejects(build({ fetchImpl: fixtureFetch({ images: "malformed" }), feedVersion: 3 }), /Image runtime manifest identity is invalid/);
   await assert.rejects(build({ fetchImpl: fixtureFetch({ images: "no-checksum" }), feedVersion: 3 }), /Image runtime checksum file/);
   await assert.rejects(build({ fetchImpl: fixtureFetch({ images: "error", imagesStatus: 403 }), feedVersion: 3 }), /HTTP 403/);
+});
+
+test("v3 dev lists the trainer from its dev publish; stable and v2 never ask", async () => {
+  const published = fixtureFetch({ trainer: "published" });
+  const dev = await build({ fetchImpl: published, channel: "dev", feedVersion: 3 });
+  const trainer = dev.releases.find((release) => release.runtimeId === "trainer");
+  const url = "https://nexus-assets.msty.ai/msty-nexus/runtime/trainer/latest/dev/msty-nexus-trainer.tgz";
+  assert.deepEqual(trainer.artifacts, [{
+    os: "darwin",
+    arch: "arm64",
+    backend: "metal",
+    url,
+    sha256: sha("c"),
+    sizeBytes: 126000000,
+    archiveFormat: "tar.gz",
+    executablePath: "bin/msty-nexus-trainer",
+  }]);
+  assert.equal(trainer.runtimeVersion, "0.2.0-dev.1");
+
+  for (const [channel, feedVersion] of [["stable", 3], ["dev", 2], ["stable", 2]]) {
+    const fetchImpl = async (target, options) => {
+      assert.equal(target.includes("/trainer/"), false, `${channel} v${feedVersion} must not ask for the trainer`);
+      return published(target, options);
+    };
+    assert.equal(runtimeIds(await build({ fetchImpl, channel, feedVersion })).includes("trainer"), false);
+  }
+
+  assert.equal(runtimeIds(await build({ fetchImpl: fixtureFetch(), channel: "dev", feedVersion: 3 })).includes("trainer"), false);
+  await assert.rejects(build({ fetchImpl: fixtureFetch({ trainer: "malformed" }), channel: "dev", feedVersion: 3 }), /Trainer runtime manifest identity is invalid/);
+  assert.throws(() => validateRuntimeFeed(dev, "dev"), /unsupported runtime trainer in a v2 feed/);
+  const stable = structuredClone(dev);
+  for (const release of stable.releases) release.channel = "stable";
+  stable.releases = stable.releases.filter((release) => release.runtimeId !== "foundationmodels");
+  assert.throws(() => validateRuntimeFeed(stable, "stable", { feedVersion: 3 }), /trainer is not enabled for the stable channel/);
 });
