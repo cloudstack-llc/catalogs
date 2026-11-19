@@ -22,6 +22,11 @@ export const DEFAULT_FOUNDATIONMODELS_ASSET_URL =
 export const FOUNDATIONMODELS_CHANNELS = new Set(["dev"]);
 export const DEFAULT_IMAGES_ASSET_URL =
   "https://nexus-assets.msty.ai/msty-nexus/runtime/images/latest/msty-nexus-images.tgz";
+// The fine-tuning worker has a dev test lane only (latest/dev/). Add "stable"
+// once it has a production publish.
+export const TRAINER_CHANNELS = new Set(["dev"]);
+export const DEFAULT_TRAINER_ASSET_URL =
+  "https://nexus-assets.msty.ai/msty-nexus/runtime/trainer/latest/msty-nexus-trainer.tgz";
 
 // The feed is published at two paths with the same schema and signing key.
 // v2 is read by Msty Nexus Runtime 0.9.1 and earlier, which reject the whole
@@ -31,7 +36,7 @@ export const DEFAULT_IMAGES_ASSET_URL =
 // New runtimes, fields and artifact kinds go to v3 only.
 export const FEED_VERSIONS = [2, 3];
 const V2_RUNTIME_IDS = ["ollama", "llamacpp", "mlx", "foundationmodels"];
-const V3_ONLY_RUNTIME_IDS = ["images"];
+const V3_ONLY_RUNTIME_IDS = ["images", "trainer"];
 
 export function parseFeedVersion(value) {
   const version = Number(value);
@@ -489,6 +494,55 @@ async function buildImagesRelease(fetchImpl, channel, publishedAt, assetURL) {
   };
 }
 
+// The fine-tuning worker (msty-nexus-trainer) is read from its dev test
+// publish (latest/dev/), which has no versioned copy and is pinned by
+// SHA-256. Its archive has no top folder: the Runtime launches
+// <version dir>/bin/msty-nexus-trainer. Returns null only when the manifest
+// is not published yet (HTTP 404). Any other problem fails the refresh.
+async function buildTrainerRelease(fetchImpl, channel, publishedAt, assetURL) {
+  const parsed = new URL(assetURL);
+  invariant(parsed.protocol === "https:" && parsed.search === "" && parsed.hash === "", "Trainer runtime asset URL must be immutable HTTPS metadata input");
+  invariant(parsed.pathname.endsWith("/trainer/latest/msty-nexus-trainer.tgz"), "Trainer runtime asset URL must be the latest msty-nexus-trainer.tgz alias");
+  invariant(channel === "dev", "The trainer runtime has a dev lane only");
+  const devURL = assetURL.replace("/trainer/latest/", "/trainer/latest/dev/");
+  const prefix = devURL.slice(0, -"msty-nexus-trainer.tgz".length);
+  const probe = await fetchImpl(`${prefix}runtime-manifest.json`, { method: "HEAD", redirect: "follow" });
+  if (probe.status === 404) return null;
+  const manifestResponse = await fetchWithRetry(`${prefix}runtime-manifest.json`, { fetchImpl });
+  const manifest = object(await manifestResponse.json(), "Trainer runtime manifest");
+  invariant(
+    manifest.object === "msty.nexus.trainer_runtime" && manifest.runtimeId === "trainer",
+    "Trainer runtime manifest identity is invalid",
+  );
+  const version = string(manifest.runtimeVersion, "Trainer runtime version");
+  invariant(SEMVER.test(version), "Trainer runtime version must be semantic");
+  const checksumResponse = await fetchWithRetry(`${prefix}checksums.txt`, { fetchImpl });
+  const checksumText = await checksumResponse.text();
+  const checksumLine = checksumText.split(/\r?\n/).find((line) => line.trim().endsWith("msty-nexus-trainer.tgz"));
+  const sha256 = String(checksumLine ?? "").trim().split(/\s+/)[0]?.toLowerCase();
+  invariant(SHA256.test(sha256), "Trainer runtime checksum file did not contain a valid archive SHA-256");
+  const head = await fetchWithRetry(devURL, { fetchImpl, method: "HEAD" });
+  const sizeBytes = Number(head.headers.get("content-length"));
+  integer(sizeBytes, "Trainer runtime artifact content-length");
+  return {
+    runtimeId: "trainer",
+    channel,
+    runtimeVersion: version,
+    publishedAt,
+    source: { type: "msty_asset", url: devURL },
+    artifacts: [{
+      os: "darwin",
+      arch: "arm64",
+      backend: "metal",
+      url: devURL,
+      sha256,
+      sizeBytes,
+      archiveFormat: "tar.gz",
+      executablePath: "bin/msty-nexus-trainer",
+    }],
+  };
+}
+
 async function readMLXMetadata(fetchImpl, prefix) {
   const manifestResponse = await fetchWithRetry(`${prefix}runtime-manifest.json`, { fetchImpl });
   const manifest = object(await manifestResponse.json(), "MLX runtime manifest");
@@ -569,6 +623,8 @@ export async function buildRuntimeFeed({
   foundationModelsChannels = FOUNDATIONMODELS_CHANNELS,
   feedVersion = 2,
   imagesAssetURL = DEFAULT_IMAGES_ASSET_URL,
+  trainerAssetURL = DEFAULT_TRAINER_ASSET_URL,
+  trainerChannels = TRAINER_CHANNELS,
 }) {
   feedVersion = parseFeedVersion(feedVersion);
   invariant(channel === "stable" || channel === "dev", "runtime feed channel must be stable or dev");
@@ -587,6 +643,11 @@ export async function buildRuntimeFeed({
   if (feedVersion >= 3) {
     const images = await buildImagesRelease(fetchImpl, channel, publishedAt, imagesAssetURL);
     if (images) releases.push(images);
+  }
+  // Like images, the trainer is v3 only; it also has a dev lane only.
+  if (feedVersion >= 3 && trainerChannels.has(channel)) {
+    const trainer = await buildTrainerRelease(fetchImpl, channel, publishedAt, trainerAssetURL);
+    if (trainer) releases.push(trainer);
   }
   const feed = { schemaVersion: FEED_SCHEMA_VERSION, generatedAt: publishedAt, releases };
   validateRuntimeFeed(feed, channel, { feedVersion });
@@ -609,6 +670,10 @@ export function validateRuntimeFeed(feed, expectedChannel, { feedVersion = 2 } =
     invariant(
       runtimeId !== "foundationmodels" || FOUNDATIONMODELS_CHANNELS.has(expectedChannel),
       `foundationmodels is not enabled for the ${expectedChannel} channel`,
+    );
+    invariant(
+      runtimeId !== "trainer" || TRAINER_CHANNELS.has(expectedChannel),
+      `trainer is not enabled for the ${expectedChannel} channel`,
     );
     invariant(!byID.has(runtimeId), `duplicate runtime ${runtimeId}`);
     byID.set(runtimeId, release);
